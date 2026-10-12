@@ -1,0 +1,2 @@
+# Keep the published static site byte-for-byte: no line-ending conversion in browser/dist.
+browser/dist/** -text

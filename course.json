@@ -1,0 +1,548 @@
+{
+  "title": "Second-Order Linear Differential Equations",
+  "subtitle": "An interactive first-course study guide",
+  "version": "1.0.0",
+  "notation": "Text uses $...$ for inline math. Math blocks are single display formulas (no & or line breaks) so the same strings work in KaTeX and in ManimGL Tex.",
+  "lessons": [
+    {
+      "id": "order-linearity",
+      "nav": "Order and linearity",
+      "number": 1,
+      "title": "Order and linearity",
+      "summary": "What makes an equation second order and linear, and why it needs two initial conditions.",
+      "pages": [
+        {
+          "heading": "The shape of a second-order linear equation",
+          "blocks": [
+            {"type": "p", "text": "The order of a differential equation is the highest derivative of the unknown function that appears. A second-order equation for $y(t)$ involves $y''$ and possibly $y'$ and $y$, but nothing higher."},
+            {"type": "p", "text": "The equation is linear when $y$, $y'$ and $y''$ each appear only to the first power, are never multiplied together, and never sit inside another function such as $\\sin y$ or $e^{y}$. Every second-order linear equation can be written as"},
+            {"type": "math", "tex": "a(t)\\,y'' + b(t)\\,y' + c(t)\\,y = g(t)"},
+            {"type": "p", "text": "The coefficients $a$, $b$, $c$ and the right-hand side $g$ may depend on $t$, but never on $y$. We always work on an interval where $a(t) \\neq 0$."}
+          ]
+        },
+        {
+          "heading": "Normalized form and a quick linearity check",
+          "blocks": [
+            {"type": "p", "text": "Because $a(t)$ is nonzero on our interval, we may divide by it. This gives the normalized form used by the existence theorem and by variation of parameters:"},
+            {"type": "math", "tex": "y'' + p(t)\\,y' + q(t)\\,y = f(t)"},
+            {"type": "math", "tex": "p = \\frac{b}{a}, \\qquad q = \\frac{c}{a}, \\qquad f = \\frac{g}{a}"},
+            {"type": "list", "items": [
+              "$t^2 y'' + t y' - y = e^{t}$ is second order and linear (coefficients depend only on $t$).",
+              "$y'' + \\sin y = 0$ (the full pendulum) is nonlinear, because $y$ sits inside a sine.",
+              "$y'' + y\\,y' = 0$ is nonlinear, because it multiplies $y$ by $y'$.",
+              "$y''' + y = 0$ is linear but third order, so it is outside this guide."
+            ]}
+          ]
+        },
+        {
+          "heading": "Homogeneous equations and superposition",
+          "blocks": [
+            {"type": "p", "text": "The equation is homogeneous when $g(t) = 0$ for every $t$, and nonhomogeneous otherwise. Write $L[y] = a y'' + b y' + c y$ for the left-hand side. Differentiation is linear, so for any constants $C_1$ and $C_2$"},
+            {"type": "math", "tex": "L[C_1 y_1 + C_2 y_2] = C_1 L[y_1] + C_2 L[y_2]"},
+            {"type": "p", "text": "So if $y_1$ and $y_2$ both solve $L[y] = 0$, every combination $C_1 y_1 + C_2 y_2$ solves it too. This is the superposition principle."},
+            {"type": "note", "text": "When $y_1$ and $y_2$ are linearly independent (neither is a constant multiple of the other), $C_1 y_1 + C_2 y_2$ is the general solution: every solution of the homogeneous equation has this form."}
+          ]
+        },
+        {
+          "heading": "Two initial conditions pin down one solution",
+          "blocks": [
+            {"type": "p", "text": "The general solution has two free constants, so we need two pieces of data. An initial value problem gives the value and the slope at one starting time $t_0$:"},
+            {"type": "math", "tex": "y(t_0) = y_0, \\qquad y'(t_0) = v_0"},
+            {"type": "p", "text": "Existence and uniqueness: if $p$, $q$ and $f$ are continuous on an open interval containing $t_0$, then exactly one solution satisfies both conditions, and it exists on that whole interval."},
+            {"type": "p", "text": "For a moving mass this is natural: knowing where it starts and how fast it is moving determines all of its later motion. One condition alone leaves a whole family of possible curves."}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "constant-coefficients",
+      "nav": "Constant coefficients",
+      "number": 2,
+      "title": "Constant-coefficient homogeneous equations",
+      "summary": "Guess an exponential, solve a quadratic, and read off one of three solution shapes.",
+      "pages": [
+        {
+          "heading": "The exponential guess",
+          "blocks": [
+            {"type": "p", "text": "Now let $a$, $b$, $c$ be constants with $a \\neq 0$ and solve $a y'' + b y' + c y = 0$. Exponentials keep their shape when differentiated, so try $y = e^{rt}$. Then $y' = r e^{rt}$ and $y'' = r^2 e^{rt}$, and substituting gives"},
+            {"type": "math", "tex": "(a r^2 + b r + c)\\, e^{rt} = 0"},
+            {"type": "p", "text": "Since $e^{rt}$ is never zero, $y = e^{rt}$ is a solution exactly when $r$ solves the characteristic equation"},
+            {"type": "math", "tex": "a r^2 + b r + c = 0"},
+            {"type": "math", "tex": "r = \\frac{-b \\pm \\sqrt{\\Delta}}{2a}, \\qquad \\Delta = b^2 - 4ac"},
+            {"type": "video", "src": "media/CharacteristicEquation.mp4", "caption": "ManimGL animation: substituting $e^{rt}$ and factoring out the exponential."}
+          ]
+        },
+        {
+          "heading": "Case 1: two distinct real roots",
+          "blocks": [
+            {"type": "p", "text": "If $\\Delta > 0$ the roots $r_1 \\neq r_2$ are real. Then $e^{r_1 t}$ and $e^{r_2 t}$ are two independent solutions, and"},
+            {"type": "math", "tex": "y = C_1 e^{r_1 t} + C_2 e^{r_2 t}"},
+            {"type": "p", "text": "Example: $y'' - 3y' + 2y = 0$ has $r^2 - 3r + 2 = (r-1)(r-2)$, so $y = C_1 e^{t} + C_2 e^{2t}$. Graphs in this case cross zero at most once."}
+          ]
+        },
+        {
+          "heading": "Case 2: a repeated real root",
+          "blocks": [
+            {"type": "p", "text": "If $\\Delta = 0$ there is only one root, $r = -b/(2a)$, so the guess gives only one exponential. The missing second solution is $t e^{rt}$. Substituting it into $L[y] = a y'' + b y' + c y$ gives"},
+            {"type": "math", "tex": "L[t e^{rt}] = (a r^2 + b r + c)\\, t e^{rt} + (2ar + b)\\, e^{rt}"},
+            {"type": "p", "text": "Both brackets vanish at a double root: the first because $r$ is a root, the second because $r = -b/(2a)$. So the general solution is"},
+            {"type": "math", "tex": "y = (C_1 + C_2 t)\\, e^{rt}"},
+            {"type": "note", "text": "Writing $C_1 e^{rt} + C_2 e^{rt}$ is a common mistake. It is really one constant times $e^{rt}$ and cannot match two initial conditions."}
+          ]
+        },
+        {
+          "heading": "Case 3: complex conjugate roots",
+          "blocks": [
+            {"type": "p", "text": "If $\\Delta < 0$ the roots are $r = \\alpha \\pm i\\omega$ with $\\alpha = -b/(2a)$ and $\\omega = \\sqrt{4ac - b^2}/(2|a|)$. Dividing by $|a|$ keeps $\\omega > 0$ even when $a < 0$. Euler's formula gives"},
+            {"type": "math", "tex": "e^{(\\alpha + i\\omega)t} = e^{\\alpha t}(\\cos \\omega t + i \\sin \\omega t)"},
+            {"type": "p", "text": "Because the coefficients are real, the real and imaginary parts are each real solutions. They are independent, so"},
+            {"type": "math", "tex": "y = e^{\\alpha t}\\,(C_1 \\cos \\omega t + C_2 \\sin \\omega t)"},
+            {"type": "p", "text": "The factor $e^{\\alpha t}$ is an envelope, and $\\omega$ is the angular frequency of the oscillation inside it."}
+          ]
+        },
+        {
+          "heading": "The three cases side by side",
+          "blocks": [
+            {"type": "list", "items": [
+              "$\\Delta > 0$, real roots $r_1 \\neq r_2$: $\\; y = C_1 e^{r_1 t} + C_2 e^{r_2 t}$.",
+              "$\\Delta = 0$, repeated root $r$: $\\; y = (C_1 + C_2 t) e^{rt}$.",
+              "$\\Delta < 0$, roots $\\alpha \\pm i\\omega$: $\\; y = e^{\\alpha t}(C_1 \\cos \\omega t + C_2 \\sin \\omega t)$."
+            ]},
+            {"type": "p", "text": "In every case, all solutions decay to zero exactly when every root has negative real part. A single solution (for example $y = 0$) can still decay when some other mode grows. Lesson 5 connects these cases to damping."},
+            {"type": "video", "src": "media/ThreeRootCases.mp4", "caption": "ManimGL animation: where the roots sit in the complex plane and the curve each case produces."}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "worked-ivps",
+      "nav": "Worked IVPs",
+      "number": 3,
+      "title": "Worked initial value problems",
+      "summary": "Apply y(0) = y0 and y'(0) = v0 in each root case, one revealed step at a time.",
+      "pages": [
+        {
+          "heading": "A recipe for initial value problems",
+          "blocks": [
+            {"type": "list", "items": [
+              "Write the characteristic equation $a r^2 + b r + c = 0$ and find its roots.",
+              "Write the general solution for that root case, with constants $C_1$ and $C_2$.",
+              "Differentiate the general solution.",
+              "Set $t = 0$ in $y$ and in $y'$ to get two linear equations for $C_1$ and $C_2$.",
+              "Solve, substitute back, and check $y(0)$ and $y'(0)$."
+            ]},
+            {"type": "note", "text": "Apply initial conditions only after the general solution is complete. In nonhomogeneous problems that means after adding $y_p$."},
+            {"type": "p", "text": "The next three pages work one example from each root case. Reveal the steps one at a time and try to predict each step before you show it."}
+          ]
+        },
+        {"heading": "Distinct real roots", "blocks": [{"type": "example", "id": "ex-distinct"}]},
+        {"heading": "Repeated root", "blocks": [{"type": "example", "id": "ex-repeated"}]},
+        {"heading": "Complex roots", "blocks": [{"type": "example", "id": "ex-complex"}]}
+      ]
+    },
+    {
+      "id": "nonhomogeneous",
+      "nav": "Nonhomogeneous equations",
+      "number": 4,
+      "title": "Nonhomogeneous equations",
+      "summary": "y = yc + yp, undetermined coefficients, and what to do when the trial overlaps yc.",
+      "pages": [
+        {
+          "heading": "Complementary plus particular",
+          "blocks": [
+            {"type": "p", "text": "To solve $L[y] = g$, find one particular solution $y_p$ and the general solution $y_c$ of the homogeneous equation $L[y] = 0$. Then every solution is"},
+            {"type": "math", "tex": "y = y_c + y_p = C_1 y_1 + C_2 y_2 + y_p"},
+            {"type": "p", "text": "Why: if $Y$ is any solution, then $L[Y - y_p] = g - g = 0$, so $Y - y_p$ belongs to the homogeneous family."},
+            {"type": "note", "text": "Find $C_1$ and $C_2$ from the initial conditions using the full $y_c + y_p$, never $y_c$ alone."}
+          ]
+        },
+        {
+          "heading": "Undetermined coefficients",
+          "blocks": [
+            {"type": "p", "text": "For constant coefficients, and a forcing $g$ built from polynomials, exponentials, sines and cosines, guess a $y_p$ of the same family with unknown coefficients. Substitute it and match terms."},
+            {"type": "list", "items": [
+              "$g$ a polynomial of degree $n$: try $A_n t^n + \\dots + A_1 t + A_0$.",
+              "$g = e^{kt}$: try $A e^{kt}$.",
+              "$g = \\cos \\omega t$ or $\\sin \\omega t$: try $A \\cos \\omega t + B \\sin \\omega t$, always with both terms.",
+              "$g = e^{kt}\\cos \\omega t$: try $e^{kt}(A \\cos \\omega t + B \\sin \\omega t)$.",
+              "A sum of such terms: treat each term separately and add the results (superposition)."
+            ]},
+            {"type": "example", "id": "ex-forced-exp"}
+          ]
+        },
+        {
+          "heading": "Overlap: multiply the trial by t^s",
+          "blocks": [
+            {"type": "p", "text": "If any term of the trial already solves the homogeneous equation, substituting it gives zero and no coefficient can be found. Fix this by multiplying the whole trial by $t^s$. Here $s \\in \\{0, 1, 2\\}$ is the multiplicity of the matching characteristic root ($k$ for $e^{kt}$, or $k \\pm i\\omega$ for oscillating terms)."},
+            {"type": "p", "text": "Example: $y'' - 2y' + y = e^{t}$. The characteristic root $r = 1$ is double, so $A e^{t}$ and $A t e^{t}$ both fail. The trial must be $A t^2 e^{t}$. Substituting gives $2A e^{t} = e^{t}$, so $y_p = \\tfrac{1}{2} t^2 e^{t}$."},
+            {"type": "math", "tex": "y_p = t^s \\times (\\text{usual trial})"},
+            {"type": "math", "tex": "s = \\text{multiplicity of the matching root}"}
+          ]
+        },
+        {
+          "heading": "Resonance",
+          "blocks": [
+            {"type": "p", "text": "The undamped oscillator $y'' + y = 0$ has natural angular frequency $1$. Forcing it with $\\sin t$, exactly at that frequency, makes the usual trial overlap with $y_c$. The particular solution then picks up a factor of $t$:"},
+            {"type": "example", "id": "ex-resonance"},
+            {"type": "video", "src": "media/Resonance.mp4", "caption": "ManimGL animation: the resonant response grows between the lines $\\pm t/2$."}
+          ]
+        },
+        {
+          "heading": "Where undetermined coefficients stops",
+          "blocks": [
+            {"type": "p", "text": "The method relies on derivatives of $g$ staying in a finite family. Forcings such as $\\tan t$, $\\sec t$, $1/t$ or $\\ln t$ produce endless new terms, so no finite trial works. Variable coefficients break the method too."},
+            {"type": "p", "text": "For those cases use variation of parameters (Lesson 6), which works for any continuous forcing once two independent homogeneous solutions are known."}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "spring-damper",
+      "nav": "Springs and damping",
+      "number": 5,
+      "title": "Springs, dampers and damping",
+      "summary": "Read the root cases as underdamped, critically damped and overdamped motion.",
+      "pages": [
+        {
+          "heading": "The mass-spring-damper model",
+          "blocks": [
+            {"type": "p", "text": "A mass $m > 0$ on a spring of stiffness $k > 0$, with a damper of coefficient $b \\ge 0$, feels a restoring force $-kx$ and a drag force $-bx'$. Newton's second law gives"},
+            {"type": "math", "tex": "m x'' + b x' + k x = F(t)"},
+            {"type": "p", "text": "With no external force ($F = 0$) this is the constant-coefficient homogeneous equation from Lesson 2, with $a = m$ and $c = k$. The explorer uses the letters $a$, $b$, $c$."},
+            {"type": "p", "text": "Since the roots have sum $-b/m$ and product $k/m > 0$, any $b > 0$ makes every root have negative real part. Damped motion therefore always dies out."}
+          ]
+        },
+        {
+          "heading": "Three kinds of damping",
+          "blocks": [
+            {"type": "p", "text": "Compare $b^2$ with $4mk$, the discriminant test from Lesson 2:"},
+            {"type": "list", "items": [
+              "Underdamped, $0 < b^2 < 4mk$: roots $\\alpha \\pm i\\omega$ with $\\alpha = -b/(2m)$. The mass oscillates inside a shrinking envelope $e^{\\alpha t}$.",
+              "Critically damped, $b^2 = 4mk$: repeated root $-b/(2m)$. The motion is $(C_1 + C_2 t)e^{-bt/(2m)}$. This is the boundary between oscillating and creeping back. For a given mass and stiffness, a mass pulled aside and released from rest returns fastest without overshooting at critical damping.",
+              "Overdamped, $b^2 > 4mk$: two distinct negative roots. Released from rest, the mass creeps back more slowly than at critical damping.",
+              "With a nonzero starting velocity, critically damped and overdamped motion can cross equilibrium once, but never more than once."
+            ]},
+            {"type": "math", "tex": "b_{\\text{crit}} = 2\\sqrt{mk}"}
+          ]
+        },
+        {
+          "heading": "The undamped case b = 0",
+          "blocks": [
+            {"type": "p", "text": "With no damping the roots are purely imaginary, $\\pm i\\omega_0$ with $\\omega_0 = \\sqrt{k/m}$, and nothing decays:"},
+            {"type": "math", "tex": "x(t) = C_1 \\cos \\omega_0 t + C_2 \\sin \\omega_0 t"},
+            {"type": "math", "tex": "x(t) = R \\cos(\\omega_0 t - \\varphi), \\quad R =\\sqrt{C_1^2 + C_2^2}"},
+            {"type": "p", "text": "The energy $\\tfrac{1}{2} m (x')^2 + \\tfrac{1}{2} k x^2$ stays constant, so the amplitude $R$ never changes. Undamped motion is the limit of underdamping as $b \\to 0$. It is the only case here that never settles, and it is the case where resonance (Lesson 4) can occur."}
+          ]
+        },
+        {
+          "heading": "Using the explorer",
+          "blocks": [
+            {"type": "p", "text": "The explorer plots the exact solution of $a y'' + b y' + c y = 0$ for $0 \\le t \\le 8$, with $a > 0$, $c > 0$ and $b \\ge 0$. Try these:"},
+            {"type": "list", "items": [
+              "Start at Underdamped and slowly raise $b$ to $4$. The oscillation disappears exactly at critical damping.",
+              "Keep $v_0 = 0$ and raise $b$ further. Started from rest, overdamped curves return more slowly than the critical one.",
+              "Set $b = 0$. The envelope disappears, and changing $a$ or $c$ changes the period $2\\pi\\sqrt{a/c}$.",
+              "Set $y_0 = v_0 = 0$. The only solution is $y = 0$, as uniqueness says it must be."
+            ]}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scope-next",
+      "nav": "Scope and next steps",
+      "number": 6,
+      "title": "Scope and next steps",
+      "summary": "Why the shortcut needs constant coefficients, a Cauchy-Euler example, and variation of parameters.",
+      "pages": [
+        {
+          "heading": "The shortcut needs constant coefficients",
+          "blocks": [
+            {"type": "p", "text": "Substituting $y = e^{rt}$ into an equation with variable coefficients gives $(a(t) r^2 + b(t) r + c(t))\\, e^{rt} = 0$. A single constant $r$ would have to make the bracket vanish at every $t$, which generally cannot happen."},
+            {"type": "p", "text": "The characteristic polynomial, and with it the explorer, applies only to constant coefficients. Variable-coefficient equations need other ideas. One family with a clean answer is the Cauchy-Euler equation $a t^2 y'' + b t y' + c y = 0$ on $t > 0$, where the natural guess is a power $y = t^m$."}
+          ]
+        },
+        {"heading": "A Cauchy-Euler example", "blocks": [{"type": "example", "id": "ex-euler"}]},
+        {
+          "heading": "Variation of parameters (reference)",
+          "blocks": [
+            {"type": "p", "text": "For the normalized equation $y'' + p(t) y' + q(t) y = f(t)$, suppose $y_1$ and $y_2$ are independent solutions of the homogeneous equation, with Wronskian"},
+            {"type": "math", "tex": "W = y_1 y_2' - y_1' y_2 \\neq 0"},
+            {"type": "p", "text": "Then a particular solution is"},
+            {"type": "math", "tex": "y_p = -y_1 \\int \\frac{y_2 f}{W}\\, dt + y_2 \\int \\frac{y_1 f}{W}\\, dt"},
+            {"type": "p", "text": "Example: for $y'' + y = \\sec t$ on $-\\pi/2 < t < \\pi/2$, take $y_1 = \\cos t$ and $y_2 = \\sin t$, so $W = 1$. This gives $y_p = \\cos t \\ln(\\cos t) + t \\sin t$."},
+            {"type": "note", "text": "This is a reference formula, not something the explorer does. Remember to normalize first, because $f$ here is $g/a$."}
+          ]
+        },
+        {
+          "heading": "Where to go next",
+          "blocks": [
+            {"type": "list", "items": [
+              "Laplace transforms handle discontinuous or impulsive forcing in constant-coefficient problems.",
+              "Rewriting $y'' + p y' + q y = f$ as a first-order system leads to phase planes and eigenvalues.",
+              "Power-series methods treat variable-coefficient equations such as Airy's equation $y'' - t y = 0$.",
+              "Numerical methods (Runge-Kutta) handle problems with no closed form."
+            ]},
+            {"type": "p", "text": "The MIT OpenCourseWare materials under Further reading give more differential-equations background, and you can look up the topics above in any standard text. The explorer is a good place to build intuition for the constant-coefficient case first."}
+          ]
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "ex-distinct",
+      "title": "Distinct real roots",
+      "problem": "Solve $y'' - 3y' + 2y = 0$ with $y(0) = 1$, $y'(0) = 0$.",
+      "steps": [
+        {"text": "Characteristic equation, which factors:", "tex": "r^2 - 3r + 2 = (r - 1)(r - 2) = 0 \\;\\Rightarrow\\; r = 1,\\; 2"},
+        {"text": "Distinct real roots, so the general solution and its derivative are:", "tex": "y = C_1 e^{t} + C_2 e^{2t}, \\qquad y' = C_1 e^{t} + 2 C_2 e^{2t}"},
+        {"text": "Set $t = 0$ and use both initial conditions:", "tex": "C_1 + C_2 = 1, \\qquad C_1 + 2 C_2 = 0"},
+        {"text": "Subtract the equations to get $C_2 = -1$, then $C_1 = 2$:", "tex": "y(t) = 2e^{t} - e^{2t}"},
+        {"text": "Check: $y(0) = 2 - 1 = 1$ and $y'(0) = 2 - 2 = 0$.", "tex": ""}
+      ],
+      "answer": "y(t) = 2e^{t} - e^{2t}"
+    },
+    {
+      "id": "ex-repeated",
+      "title": "Repeated root",
+      "problem": "Solve $y'' + 2y' + y = 0$ with $y(0) = 1$, $y'(0) = 0$.",
+      "steps": [
+        {"text": "Characteristic equation, a perfect square:", "tex": "r^2 + 2r + 1 = (r + 1)^2 = 0 \\;\\Rightarrow\\; r = -1 \\text{ (double)}"},
+        {"text": "Repeated root, so include the $t e^{rt}$ term:", "tex": "y = (C_1 + C_2 t)\\, e^{-t}"},
+        {"text": "Differentiate with the product rule:", "tex": "y' = (C_2 - C_1 - C_2 t)\\, e^{-t}"},
+        {"text": "Apply the initial conditions: $y(0) = C_1 = 1$ and $y'(0) = C_2 - C_1 = 0$, so $C_2 = 1$:", "tex": "y(t) = (1 + t)\\, e^{-t}"},
+        {"text": "Check: $y(0) = 1$, and $y' = -t e^{-t}$ gives $y'(0) = 0$.", "tex": ""}
+      ],
+      "answer": "y(t) = (1 + t)\\, e^{-t}"
+    },
+    {
+      "id": "ex-complex",
+      "title": "Complex roots",
+      "problem": "Solve $y'' + 2y' + 5y = 0$ with $y(0) = 1$, $y'(0) = 0$.",
+      "steps": [
+        {"text": "Characteristic equation and the quadratic formula:", "tex": "r^2 + 2r + 5 = 0 \\;\\Rightarrow\\; r = \\frac{-2 \\pm \\sqrt{4 - 20}}{2} = -1 \\pm 2i"},
+        {"text": "So $\\alpha = -1$ and $\\omega = 2$:", "tex": "y = e^{-t}(C_1 \\cos 2t + C_2 \\sin 2t)"},
+        {"text": "Differentiate:", "tex": "y' = e^{-t}\\big((2C_2 - C_1)\\cos 2t - (2C_1 + C_2)\\sin 2t\\big)"},
+        {"text": "Apply the initial conditions: $y(0) = C_1 = 1$ and $y'(0) = 2C_2 - C_1 = 0$, so $C_2 = \\tfrac{1}{2}$:", "tex": "y(t) = e^{-t}\\left(\\cos 2t + \\tfrac{1}{2}\\sin 2t\\right)"},
+        {"text": "Check: $y(0) = 1$, and $y'(0) = 2 \\cdot \\tfrac{1}{2} - 1 = 0$.", "tex": ""}
+      ],
+      "answer": "y(t) = e^{-t}\\left(\\cos 2t + \\tfrac{1}{2}\\sin 2t\\right)"
+    },
+    {
+      "id": "ex-forced-exp",
+      "title": "Exponential forcing, no overlap",
+      "problem": "Find the general solution of $y'' - y' - 2y = 4e^{3t}$.",
+      "steps": [
+        {"text": "Homogeneous part: $r^2 - r - 2 = (r - 2)(r + 1)$, so", "tex": "y_c = C_1 e^{2t} + C_2 e^{-t}"},
+        {"text": "$3$ is not a root, so try $y_p = A e^{3t}$. Substituting:", "tex": "9A e^{3t} - 3A e^{3t} - 2A e^{3t} = 4A e^{3t} = 4e^{3t}"},
+        {"text": "So $A = 1$, and the general solution is", "tex": "y = C_1 e^{2t} + C_2 e^{-t} + e^{3t}"}
+      ],
+      "answer": "y = C_1 e^{2t} + C_2 e^{-t} + e^{3t}"
+    },
+    {
+      "id": "ex-resonance",
+      "title": "Resonant forcing",
+      "problem": "Find a particular solution of $y'' + y = \\sin t$.",
+      "steps": [
+        {"text": "Homogeneous part: $r^2 + 1 = 0$ gives $r = \\pm i$, so", "tex": "y_c = C_1 \\cos t + C_2 \\sin t"},
+        {"text": "The usual trial $A\\cos t + B\\sin t$ lies in $y_c$, and $\\pm i$ are simple roots. Multiply by $t$:", "tex": "y_p = t\\,u, \\qquad u = A \\cos t + B \\sin t, \\qquad u'' = -u"},
+        {"text": "Then $y_p'' = t u'' + 2u' = -t u + 2u'$, so", "tex": "y_p'' + y_p = 2u' = -2A \\sin t + 2B \\cos t"},
+        {"text": "Match with $\\sin t$: $-2A = 1$ and $2B = 0$, so", "tex": "y_p = -\\frac{t}{2} \\cos t"},
+        {"text": "The general solution is $C_1 \\cos t + C_2 \\sin t - \\tfrac{t}{2}\\cos t$. Its amplitude grows like $t/2$ without bound. This is resonance.", "tex": ""}
+      ],
+      "answer": "y_p = -\\frac{t}{2}\\cos t"
+    },
+    {
+      "id": "ex-euler",
+      "title": "Cauchy-Euler, repeated exponent",
+      "problem": "Solve $t^2 y'' + 3t y' + y = 0$ on $t > 0$.",
+      "steps": [
+        {"text": "Try $y = t^m$, so $y' = m t^{m-1}$ and $y'' = m(m-1) t^{m-2}$. Every term becomes a multiple of $t^m$:", "tex": "\\big(m(m-1) + 3m + 1\\big)\\, t^m = (m + 1)^2\\, t^m = 0"},
+        {"text": "So $m = -1$ is a double root, which gives only $y_1 = t^{-1}$. For Cauchy-Euler the repeated case adds a factor of $\\ln t$:", "tex": "y_2 = t^{-1} \\ln t"},
+        {"text": "Check $y_2$: $y_2' = (1 - \\ln t)/t^2$ and $y_2'' = (2\\ln t - 3)/t^3$, so", "tex": "\\frac{2\\ln t - 3}{t} + \\frac{3(1 - \\ln t)}{t} + \\frac{\\ln t}{t} = 0"},
+        {"text": "The general solution on $t > 0$ is", "tex": "y = \\frac{C_1 + C_2 \\ln t}{t}"}
+      ],
+      "answer": "y = \\frac{C_1 + C_2 \\ln t}{t}"
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q-linear",
+      "topic": "Order and linearity",
+      "prompt": "Which equation is second order and linear?",
+      "choices": ["$y'' + t^2 y' + e^{t} y = \\cos t$", "$y'' + y^2 = 0$", "$y'' + \\sin y = 0$", "$y''' + y = 0$"],
+      "answer": 0,
+      "feedback": [
+        "Correct. The coefficients $t^2$ and $e^{t}$ depend only on $t$, and $y$, $y'$, $y''$ appear to the first power.",
+        "Not linear: $y^2$ is the unknown raised to the second power.",
+        "Not linear: $y$ sits inside the sine function.",
+        "This one is linear, but $y'''$ makes it third order."
+      ]
+    },
+    {
+      "id": "q-ics",
+      "topic": "Initial conditions",
+      "prompt": "Why does a second-order initial value problem give both $y(t_0)$ and $y'(t_0)$?",
+      "choices": [
+        "The general solution has two arbitrary constants, and two conditions fix them uniquely.",
+        "Because $y'(t_0)$ can be computed from $y(t_0)$.",
+        "One condition is enough; the second is only a check.",
+        "Because the characteristic equation has two roots that must be equal."
+      ],
+      "answer": 0,
+      "feedback": [
+        "Correct. Two independent conditions determine $C_1$ and $C_2$, and the existence and uniqueness theorem then gives exactly one solution.",
+        "No. Many solutions share the same $y(t_0)$ but have different slopes. The slope is extra information.",
+        "No. With one condition a whole one-parameter family of solutions remains.",
+        "No. The roots can be distinct, repeated or complex. The two conditions are unrelated to whether the roots are equal."
+      ]
+    },
+    {
+      "id": "q-repeated",
+      "topic": "Repeated roots",
+      "prompt": "What is the general solution of $y'' + 4y' + 4y = 0$?",
+      "choices": ["$C_1 e^{-2t} + C_2 e^{-2t}$", "$(C_1 + C_2 t)\\, e^{-2t}$", "$(C_1 + C_2 t)\\, e^{2t}$", "$e^{-2t}(C_1 \\cos 2t + C_2 \\sin 2t)$"],
+      "answer": 1,
+      "feedback": [
+        "This is just $(C_1 + C_2)e^{-2t}$, one constant times one function. A repeated root needs the extra $t e^{rt}$ solution.",
+        "Correct. $r^2 + 4r + 4 = (r + 2)^2$ has the double root $-2$, so the basis is $e^{-2t}$ and $t e^{-2t}$.",
+        "Check the sign: $(r + 2)^2 = 0$ gives $r = -2$, not $+2$.",
+        "The discriminant is $16 - 16 = 0$, so the roots are real and repeated, not complex."
+      ]
+    },
+    {
+      "id": "q-complex-roots",
+      "topic": "Complex roots",
+      "prompt": "What are the characteristic roots of $y'' + 2y' + 5y = 0$?",
+      "choices": ["$r = 1 \\pm 2i$", "$r = -2 \\pm 4i$", "$r = -1 \\pm 2i$", "$r = -1$ and $r = -5$"],
+      "answer": 2,
+      "feedback": [
+        "The real part is $-b/(2a) = -2/2 = -1$, so it is negative.",
+        "This forgets to divide by $2a = 2$: $(-2 \\pm \\sqrt{-16})/2 = -1 \\pm 2i$.",
+        "Correct. $r = (-2 \\pm \\sqrt{4 - 20})/2 = -1 \\pm 2i$, so $\\alpha = -1$ and $\\omega = 2$.",
+        "$(r + 1)(r + 5) = r^2 + 6r + 5$, not $r^2 + 2r + 5$. The discriminant is negative, so the roots are complex."
+      ]
+    },
+    {
+      "id": "q-apply-ic",
+      "topic": "Applying initial conditions",
+      "prompt": "For $y = C_1 e^{t} + C_2 e^{2t}$ with $y(0) = 1$ and $y'(0) = 0$, what are the constants?",
+      "choices": ["$C_1 = 1,\\; C_2 = 0$", "$C_1 = 2,\\; C_2 = -1$", "$C_1 = -1,\\; C_2 = 2$", "$C_1 = 0,\\; C_2 = 1$"],
+      "answer": 1,
+      "feedback": [
+        "This satisfies $y(0) = 1$, but $y'(0) = C_1 + 2C_2 = 1 \\neq 0$.",
+        "Correct. $C_1 + C_2 = 1$ and $C_1 + 2C_2 = 0$ give $C_2 = -1$ and $C_1 = 2$, so $y = 2e^{t} - e^{2t}$.",
+        "This has $y(0) = 1$, but $y'(0) = -1 + 4 = 3$. The roles are swapped.",
+        "Then $y'(0) = 2C_2 = 2$, not $0$."
+      ]
+    },
+    {
+      "id": "q-trial-overlap",
+      "topic": "Undetermined coefficients",
+      "prompt": "Which trial particular solution should you use for $y'' - 3y' + 2y = e^{2t}$?",
+      "choices": ["$A e^{2t}$", "$A t e^{2t}$", "$A t^2 e^{2t}$", "$A e^{t}$"],
+      "answer": 1,
+      "feedback": [
+        "$e^{2t}$ already solves the homogeneous equation (roots $1$ and $2$), so this trial substitutes to zero.",
+        "Correct. $2$ is a simple root, so multiply by $t^1$. Substituting gives $A = 1$, so $y_p = t e^{2t}$.",
+        "Use $t^2$ only for a double root. Here $2$ is a simple root, so $t^1$ is enough.",
+        "$e^{t}$ solves the homogeneous equation and does not match the forcing $e^{2t}$."
+      ]
+    },
+    {
+      "id": "q-resonance",
+      "topic": "Resonance",
+      "prompt": "Which is a particular solution of $y'' + y = \\sin t$?",
+      "choices": ["$-\\tfrac{1}{2}\\sin t$", "$-\\tfrac{t}{2}\\cos t$", "$\\tfrac{t}{2}\\sin t$", "No particular solution exists"],
+      "answer": 1,
+      "feedback": [
+        "$\\sin t$ solves $y'' + y = 0$, so any multiple of it gives $0$, not $\\sin t$.",
+        "Correct. With $y_p = -\\tfrac{t}{2}\\cos t$ you get $y_p'' + y_p = \\sin t$. The factor $t$ comes from the overlap with $y_c$.",
+        "Substituting gives $y_p'' + y_p = \\cos t$, not $\\sin t$. You need the cosine term.",
+        "A solution always exists for continuous forcing. It just needs the trial multiplied by $t$."
+      ]
+    },
+    {
+      "id": "q-critical",
+      "topic": "Damping",
+      "prompt": "A mass $m = 1$ on a spring with $k = 4$. Which damping coefficient $b$ makes it critically damped?",
+      "choices": ["$b = 2$", "$b = 4$", "$b = 8$", "$b = 16$"],
+      "answer": 1,
+      "feedback": [
+        "With $b = 2$, $b^2 = 4 < 4mk = 16$, so the motion is underdamped.",
+        "Correct. Critical damping needs $b^2 = 4mk = 16$, so $b = 2\\sqrt{mk} = 4$.",
+        "With $b = 8$, $b^2 = 64 > 16$, so the motion is overdamped.",
+        "$16$ is $4mk$, the critical value of $b^2$, not of $b$."
+      ]
+    },
+    {
+      "id": "q-classify",
+      "topic": "Damping",
+      "prompt": "How does $x'' + 5x' + 4x = 0$ behave?",
+      "choices": ["Undamped", "Underdamped", "Critically damped", "Overdamped"],
+      "answer": 3,
+      "feedback": [
+        "Undamped requires $b = 0$, but here $b = 5$.",
+        "Underdamped needs $b^2 < 4mk$, but $25 > 16$.",
+        "Critical needs $b^2 = 4mk$, but $25 \\neq 16$.",
+        "Correct. $\\Delta = 25 - 16 = 9 > 0$ gives the roots $-1$ and $-4$, both real and negative, so there is no oscillation."
+      ]
+    },
+    {
+      "id": "q-euler",
+      "topic": "Scope",
+      "prompt": "Which statement about $t^2 y'' + 3t y' + y = 0$ on $t > 0$ is true?",
+      "choices": [
+        "Substituting $y = e^{rt}$ gives the characteristic equation $r^2 + 3r + 1 = 0$.",
+        "Its general solution is $y = (C_1 + C_2 \\ln t)/t$.",
+        "Its general solution is $y = (C_1 + C_2 t)\\, e^{-t}$.",
+        "It cannot be solved because the coefficients are not constant."
+      ],
+      "answer": 1,
+      "feedback": [
+        "The coefficients depend on $t$, so the exponential guess does not give a constant characteristic equation.",
+        "Correct. $y = t^m$ gives $(m + 1)^2 = 0$, a double exponent $m = -1$, so the basis is $t^{-1}$ and $t^{-1}\\ln t$.",
+        "That solves $y'' + 2y' + y = 0$, a constant-coefficient equation. It does not solve this one.",
+        "Variable coefficients rule out the shortcut, not solvability. This Cauchy-Euler equation has a closed form."
+      ]
+    },
+    {
+      "id": "q-wronskian",
+      "topic": "Variation of parameters",
+      "prompt": "In variation of parameters for $y'' + y = f(t)$ with $y_1 = \\cos t$ and $y_2 = \\sin t$, what is $W = y_1 y_2' - y_1' y_2$?",
+      "choices": ["$W = 0$", "$W = \\cos 2t$", "$W = -1$", "$W = 1$"],
+      "answer": 3,
+      "feedback": [
+        "$W = 0$ would mean the two solutions are dependent. Then the formula would divide by zero.",
+        "That is $\\cos^2 t - \\sin^2 t$. Check the sign of $y_1' = -\\sin t$.",
+        "Watch the sign: $-y_1' y_2 = -(-\\sin t)(\\sin t) = +\\sin^2 t$.",
+        "Correct. $W = \\cos t \\cdot \\cos t - (-\\sin t)\\sin t = \\cos^2 t + \\sin^2 t = 1$."
+      ]
+    }
+  ],
+  "explorer": {
+    "title": "Live explorer: damped spring lab",
+    "scope": "Constant-coefficient homogeneous mass-spring model $a y'' + b y' + c y = 0$ with $a > 0$, $c > 0$, $b \\ge 0$. This is one subset of the course: it does not cover forcing or variable coefficients.",
+    "t_max": 8,
+    "sliders": [
+      {"key": "a", "label": "a (mass)", "min": 0.5, "max": 3, "step": 0.05, "default": 1},
+      {"key": "b", "label": "b (damping)", "min": 0, "max": 8, "step": 0.05, "default": 2},
+      {"key": "c", "label": "c (stiffness)", "min": 0.5, "max": 9, "step": 0.05, "default": 4},
+      {"key": "y0", "label": "y0 = y(0)", "min": -3, "max": 3, "step": 0.05, "default": 1},
+      {"key": "v0", "label": "v0 = y'(0)", "min": -3, "max": 3, "step": 0.05, "default": 0}
+    ],
+    "presets": [
+      {"id": "undamped", "label": "Undamped", "a": 1, "b": 0, "c": 4},
+      {"id": "underdamped", "label": "Underdamped", "a": 1, "b": 2, "c": 4},
+      {"id": "critical", "label": "Critical", "a": 1, "b": 4, "c": 4},
+      {"id": "overdamped", "label": "Overdamped", "a": 1, "b": 5, "c": 4}
+    ],
+    "preset_policy": "Presets set a, b and c only and keep your current y0 and v0. Reset restores all five sliders to their defaults.",
+    "zero_note": "y0 = v0 = 0, so y(t) = 0 for every t. By uniqueness, the zero solution is the only one."
+  },
+  "references": [
+    {"title": "MIT 18.03 (ES.1803) Differential Equations, Spring 2024: full topic notes (PDF)", "url": "https://ocw.mit.edu/courses/es-1803-differential-equations-spring-2024/mites_1803_s24_topic_full.pdf"},
+    {"title": "MIT 18.03SC, Unit II: Damped harmonic oscillators", "url": "https://ocw.mit.edu/courses/18-03sc-differential-equations-fall-2011/pages/unit-ii-second-order-constant-coefficient-linear-equations/damped-harmonic-oscillators/"}
+  ]
+}

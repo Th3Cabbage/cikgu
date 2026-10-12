@@ -1,0 +1,9 @@
+{
+  "name": "second-order-ode-qa-tooling",
+  "private": true,
+  "description": "Scoped QA tooling for the browser guide (headless Chrome via playwright-core; no browser download).",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "playwright-core": "^1.64.0"
+  }
+}

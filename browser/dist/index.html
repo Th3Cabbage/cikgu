@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Second-Order Linear ODEs: Interactive Study Guide</title>
+  <meta name="description" content="A first-course study guide to second-order linear differential equations: step-by-step animated derivations, worked examples, a live damped-spring explorer and a quiz.">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0e131c">
+  <script>
+    // Apply the saved (or system) theme before the stylesheet paints, so there is no flash.
+    (function () {
+      var t = null;
+      try { t = window.localStorage.getItem("sode-theme"); } catch (e) { t = null; }
+      if (t !== "light" && t !== "dark") {
+        t = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="vendor/katex/katex.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="vendor/katex/katex.min.js"></script>
+  <script defer src="vendor/katex/contrib/auto-render.min.js"></script>
+  <script defer src="ode_math.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#watch">
+      <span class="brand-mark" aria-hidden="true">y&Prime;</span>
+      <span class="brand-text">Second-Order Linear ODEs<small>Animated study guide</small></span>
+    </a>
+    <div class="topbar-actions">
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="true">
+        <span class="switch" aria-hidden="true"><span class="knob"></span></span>
+        <span class="theme-label">Dark theme</span>
+      </button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="chapters">Chapters</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav id="chapters" class="chapters" aria-label="Chapters">
+      <ul class="chapter-list">
+        <li><a href="#watch" data-route="watch"><span class="num" aria-hidden="true">&#9654;</span>Animated derivations</a></li>
+      </ul>
+      <p class="chapters-heading">Lessons</p>
+      <ol id="lesson-links" class="chapter-list"></ol>
+      <p class="chapters-heading">Practice</p>
+      <ul class="chapter-list">
+        <li><a href="#explorer" data-route="explorer"><span class="num" aria-hidden="true">&#8767;</span>Live explorer</a></li>
+        <li><a href="#quiz" data-route="quiz"><span class="num" aria-hidden="true">?</span>Quiz</a></li>
+        <li><a href="#reading" data-route="reading"><span class="num" aria-hidden="true">&#8594;</span>Further reading</a></li>
+      </ul>
+    </nav>
+
+    <main id="main" tabindex="-1">
+      <div id="view">
+        <p class="loading">Loading the course&hellip;</p>
+      </div>
+      <noscript>
+        <p class="error">This guide needs JavaScript for the animations, explorer and quiz.</p>
+      </noscript>
+    </main>
+  </div>
+
+  <p id="app-status" class="sr-only" role="status" aria-live="polite"></p>
+  <footer class="site-footer">
+    <p>Original lesson text. Equations typeset locally with KaTeX 0.19.0 (MIT); animations rendered with 3Blue1Brown's ManimGL. No accounts, no tracking.</p>
+  </footer>
+</body>
+</html>

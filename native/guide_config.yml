@@ -1,0 +1,9 @@
+# ManimGL config for the native study guide (passed with --config_file by launch_native.ps1).
+# Merged over ManimGL's default_config.yml; only these keys change.
+window:
+  position_string: OO
+  size: "(1280, 720)"
+camera:
+  resolution: "(1280, 720)"
+  background_color: "#FBF7EE"
+  fps: 30
