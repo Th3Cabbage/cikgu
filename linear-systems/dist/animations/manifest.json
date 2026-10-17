@@ -1,0 +1,844 @@
+{
+ "version": 1,
+ "width": 1280,
+ "height": 720,
+ "fps": 30,
+ "relations": {
+  "define": "Definition / choice",
+  "model": "Modelling step",
+  "classify": "Classification",
+  "diagram": "Picture",
+  "substitute": "Substitution",
+  "identity": "Identity (=)",
+  "equivalent": "Equivalent equation (⇔)",
+  "solve": "Solve",
+  "compute": "Computation",
+  "implies": "Consequence (⇒)",
+  "compare": "Check",
+  "caution": "Caveat",
+  "recap": "Recap"
+ },
+ "sections": {
+  "1": [
+   "matrix-exponential"
+  ],
+  "2": [
+   "eigen-at-td"
+  ],
+  "3": [
+   "change-coordinates"
+  ],
+  "4": [
+   "decoupled"
+  ],
+  "5": [
+   "similarity-proof"
+  ],
+  "6": [
+   "map-evolve-map"
+  ]
+ },
+ "sequences": [
+  {
+   "id": "matrix-exponential",
+   "scene": "MatrixExponentialSequence",
+   "section": 1,
+   "title": "From $\\dot x = Ax$ to the matrix exponential",
+   "summary": "The solution of a linear system is a matrix exponential applied to the initial state, and the exponential of a matrix is defined by the same Taylor series as for a number.",
+   "initial": {
+    "title": "A linear system of ODEs",
+    "tex": "\\dot x = A x",
+    "explanation": "The whole lecture is about this one equation: the rate of change of the state is a fixed matrix times the state. It is the cornerstone for everything later in the bootcamp.",
+    "frame": "animations/matrix-exponential/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Sizes: a vector and a square matrix",
+     "relation": "define",
+     "relationLabel": "Definition / choice",
+     "tex": "\\dot x = A x, \\qquad x \\in \\mathbb{R}^n,\\quad A \\in \\mathbb{R}^{n\\times n}",
+     "explanation": "$x$ stacks $n$ state variables in a column. $A$ is $n \\times n$: entry $a_{ij}$ says how much variable $j$ pushes on the rate of change of variable $i$.",
+     "initialFrame": "animations/matrix-exponential/state-00.jpg",
+     "finalFrame": "animations/matrix-exponential/state-01.jpg",
+     "transition": {
+      "src": "animations/matrix-exponential/step-01.mp4",
+      "duration": 3.1,
+      "frames": 93,
+      "masterFrames": [
+       8,
+       101
+      ],
+      "bytes": 66527,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "The solution: a matrix exponential",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "x(t) = e^{At}\\,x(0)",
+     "explanation": "The state at time $t$ is the matrix $e^{At}$ times the initial state $x(0)$. Order matters: a matrix acting on a column vector, so $e^{At}$ is on the left.",
+     "initialFrame": "animations/matrix-exponential/state-01.jpg",
+     "finalFrame": "animations/matrix-exponential/state-02.jpg",
+     "transition": {
+      "src": "animations/matrix-exponential/step-02.mp4",
+      "duration": 2.9667,
+      "frames": 89,
+      "masterFrames": [
+       100,
+       189
+      ],
+      "bytes": 117521,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Recall the scalar Taylor series",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "e^{at} = 1 + at + \\frac{a^2t^2}{2!} + \\frac{a^3t^3}{3!} + \\cdots",
+     "explanation": "For a number $a$ the exponential is an infinite sum of powers. Only products and sums appear, and those also make sense for square matrices.",
+     "initialFrame": "animations/matrix-exponential/state-02.jpg",
+     "finalFrame": "animations/matrix-exponential/state-03.jpg",
+     "transition": {
+      "src": "animations/matrix-exponential/step-03.mp4",
+      "duration": 2.4,
+      "frames": 72,
+      "masterFrames": [
+       188,
+       260
+      ],
+      "bytes": 92153,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "Plug in the matrix $At$",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "e^{At} = I + At + \\frac{A^2t^2}{2!} + \\frac{A^3t^3}{3!} + \\cdots",
+     "explanation": "Replace $a$ by $A$. The $1$ becomes the identity matrix $I$ and every term is an $n\\times n$ matrix, so $e^{At}$ is an infinite sum of matrices. At $t = 0$ only $I$ survives, so $x(0) = I\\,x(0)$ as it must.",
+     "initialFrame": "animations/matrix-exponential/state-03.jpg",
+     "finalFrame": "animations/matrix-exponential/state-04.jpg",
+     "transition": {
+      "src": "animations/matrix-exponential/step-04.mp4",
+      "duration": 3.5333,
+      "frames": 106,
+      "masterFrames": [
+       259,
+       365
+      ],
+      "bytes": 103039,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 5,
+     "title": "Not the exponential of each entry",
+     "relation": "caution",
+     "relationLabel": "Caveat",
+     "tex": "e^{At} \\neq \\begin{bmatrix} e^{a_{11}t} & e^{a_{12}t} \\\\ e^{a_{21}t} & e^{a_{22}t} \\end{bmatrix}",
+     "explanation": "Powers $A^2, A^3, \\dots$ mix the entries, so the matrix exponential is not computed entry by entry (an off-diagonal $0$ in $A$ would wrongly give $e^0 = 1$). Summing the series by hand is impractical for a $5 \\times 5$ matrix, which motivates the eigenvector route.",
+     "initialFrame": "animations/matrix-exponential/state-04.jpg",
+     "finalFrame": "animations/matrix-exponential/state-05.jpg",
+     "transition": {
+      "src": "animations/matrix-exponential/step-05.mp4",
+      "duration": 2.6667,
+      "frames": 80,
+      "masterFrames": [
+       364,
+       444
+      ],
+      "bytes": 116596,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 14.667,
+   "masterFrames": 444,
+   "renderSeconds": 15.1
+  },
+  {
+   "id": "eigen-at-td",
+   "scene": "EigenSequence",
+   "section": 2,
+   "title": "Eigenvectors, eigenvalues and $AT = TD$",
+   "summary": "Eigenvectors are the directions that $A$ only stretches. Collecting them as the columns of $T$ and the eigenvalues on the diagonal of $D$ gives $AT = TD$.",
+   "initial": {
+    "title": "The eigenvalue equation",
+    "tex": "A c = \\lambda c, \\qquad c \\neq 0",
+    "explanation": "A nonzero vector $c$ is an eigenvector of $A$ if multiplying by $A$ only rescales it by the number $\\lambda$, its eigenvalue.",
+    "frame": "animations/eigen-at-td/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Most vectors turn, eigenvectors do not",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "A = \\begin{bmatrix} -1 & -1 \\\\ 0 & -2 \\end{bmatrix}:\\quad A c_1 = -1\\,c_1,\\quad A c_2 = -2\\,c_2",
+     "explanation": "For this example matrix a generic vector $v$ comes out pointing in a new direction. $c_1 = (1, 0)$ and $c_2 = (1, 1)$ stay on their own lines; a negative $\\lambda$ flips them to the opposite side and rescales.",
+     "initialFrame": "animations/eigen-at-td/state-00.jpg",
+     "finalFrame": "animations/eigen-at-td/state-01.jpg",
+     "transition": {
+      "src": "animations/eigen-at-td/step-01.mp4",
+      "duration": 6.4667,
+      "frames": 194,
+      "masterFrames": [
+       8,
+       202
+      ],
+      "bytes": 110444,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Collect eigenvectors and eigenvalues",
+     "relation": "define",
+     "relationLabel": "Definition / choice",
+     "tex": "T = \\begin{bmatrix} c_1 & c_2 & \\cdots & c_n \\end{bmatrix}, \\qquad D = \\begin{bmatrix} \\lambda_1 & 0 & 0 \\\\ 0 & \\ddots & 0 \\\\ 0 & 0 & \\lambda_n \\end{bmatrix}",
+     "explanation": "$T$ has the eigenvectors as columns. $D$ is diagonal with the matching eigenvalues in the same order and zeros everywhere else.",
+     "initialFrame": "animations/eigen-at-td/state-01.jpg",
+     "finalFrame": "animations/eigen-at-td/state-02.jpg",
+     "transition": {
+      "src": "animations/eigen-at-td/step-02.mp4",
+      "duration": 3.6333,
+      "frames": 109,
+      "masterFrames": [
+       201,
+       310
+      ],
+      "bytes": 112540,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "$A$ acts on each column of $T$",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "AT = \\begin{bmatrix} Ac_1 & Ac_2 & \\cdots & Ac_n \\end{bmatrix} = \\begin{bmatrix} \\lambda_1 c_1 & \\lambda_2 c_2 & \\cdots & \\lambda_n c_n \\end{bmatrix}",
+     "explanation": "A matrix times $T$ multiplies each column of $T$ separately. Each column is an eigenvector, so column $i$ becomes $\\lambda_i c_i$.",
+     "initialFrame": "animations/eigen-at-td/state-02.jpg",
+     "finalFrame": "animations/eigen-at-td/state-03.jpg",
+     "transition": {
+      "src": "animations/eigen-at-td/step-03.mp4",
+      "duration": 3.4667,
+      "frames": 104,
+      "masterFrames": [
+       309,
+       413
+      ],
+      "bytes": 152823,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "Right-multiplying by $D$ scales columns",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "TD = \\begin{bmatrix} \\lambda_1 c_1 & \\lambda_2 c_2 & \\cdots & \\lambda_n c_n \\end{bmatrix} \\;\\Rightarrow\\; AT = TD",
+     "explanation": "Multiplying $T$ on the right by a diagonal matrix scales column $i$ by $\\lambda_i$. That is exactly the previous result, so $AT = TD$. Note the order: $DT$ would scale rows instead.",
+     "initialFrame": "animations/eigen-at-td/state-03.jpg",
+     "finalFrame": "animations/eigen-at-td/state-04.jpg",
+     "transition": {
+      "src": "animations/eigen-at-td/step-04.mp4",
+      "duration": 4.2,
+      "frames": 126,
+      "masterFrames": [
+       412,
+       538
+      ],
+      "bytes": 124289,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 5,
+     "title": "When does this work?",
+     "relation": "caution",
+     "relationLabel": "Caveat",
+     "tex": "\\text{need } n \\text{ independent eigenvectors: } \\det T \\neq 0",
+     "explanation": "Distinct eigenvalues are enough but not required: $A = 2I$ has a repeated eigenvalue and is still diagonal. A defective matrix such as $\\begin{bmatrix}1&1\\\\0&1\\end{bmatrix}$ has only one eigenvector direction; it needs generalized eigenvectors and a Jordan form, which the lecture only mentions.",
+     "initialFrame": "animations/eigen-at-td/state-04.jpg",
+     "finalFrame": "animations/eigen-at-td/state-05.jpg",
+     "transition": {
+      "src": "animations/eigen-at-td/step-05.mp4",
+      "duration": 3.2667,
+      "frames": 98,
+      "masterFrames": [
+       537,
+       635
+      ],
+      "bytes": 170106,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 21.033,
+   "masterFrames": 635,
+   "renderSeconds": 18.1
+  },
+  {
+   "id": "change-coordinates",
+   "scene": "CoordinatesSequence",
+   "section": 3,
+   "title": "Eigenvector coordinates: $x = Tz$ gives $\\dot z = Dz$",
+   "summary": "Describe the state by how much of each eigenvector it contains. In those coordinates the dynamics matrix becomes the diagonal $D$.",
+   "initial": {
+    "title": "A change of coordinates",
+    "tex": "x = T z",
+    "explanation": "$z$ lists how much of each eigenvector (each column of $T$) is needed to build $x$. With the example $T$, the point $x = (2, 1)$ is $1\\cdot c_1 + 1\\cdot c_2$.",
+    "frame": "animations/change-coordinates/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "New axes along the eigenvectors",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "x = z_1 c_1 + z_2 c_2, \\qquad \\begin{bmatrix}2\\\\1\\end{bmatrix} = 1\\begin{bmatrix}1\\\\0\\end{bmatrix} + 1\\begin{bmatrix}1\\\\1\\end{bmatrix}",
+     "explanation": "The grid of $z$ coordinates is the standard grid sheared by $T$: its lines run along $c_1$ and $c_2$. The axes are not perpendicular, which is fine as long as they are independent.",
+     "initialFrame": "animations/change-coordinates/state-00.jpg",
+     "finalFrame": "animations/change-coordinates/state-01.jpg",
+     "transition": {
+      "src": "animations/change-coordinates/step-01.mp4",
+      "duration": 5.5667,
+      "frames": 167,
+      "masterFrames": [
+       8,
+       175
+      ],
+      "bytes": 120754,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Going back: $z = T^{-1}x$",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "z = T^{-1}x, \\qquad T^{-1} = \\begin{bmatrix} 1 & -1 \\\\ 0 & 1 \\end{bmatrix} \\neq T^{\\top} = \\begin{bmatrix} 1 & 0 \\\\ 1 & 1 \\end{bmatrix}",
+     "explanation": "Independent eigenvectors make $T$ invertible. Use the inverse, not the transpose: they agree only when the eigenvectors are orthonormal, which this example's are not.",
+     "initialFrame": "animations/change-coordinates/state-01.jpg",
+     "finalFrame": "animations/change-coordinates/state-02.jpg",
+     "transition": {
+      "src": "animations/change-coordinates/step-02.mp4",
+      "duration": 4.2333,
+      "frames": 127,
+      "masterFrames": [
+       174,
+       301
+      ],
+      "bytes": 113186,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Differentiate: $T$ is constant",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "x = Tz \\;\\Rightarrow\\; \\dot x = T\\dot z",
+     "explanation": "$T$ does not change with time, so the derivative passes straight through it.",
+     "initialFrame": "animations/change-coordinates/state-02.jpg",
+     "finalFrame": "animations/change-coordinates/state-03.jpg",
+     "transition": {
+      "src": "animations/change-coordinates/step-03.mp4",
+      "duration": 2.7667,
+      "frames": 83,
+      "masterFrames": [
+       300,
+       383
+      ],
+      "bytes": 107747,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "Substitute into $\\dot x = Ax$",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "T\\dot z = A x = A T z",
+     "explanation": "Replace $\\dot x$ by $T\\dot z$ on the left and $x$ by $Tz$ on the right. $T$ stays to the right of $A$.",
+     "initialFrame": "animations/change-coordinates/state-03.jpg",
+     "finalFrame": "animations/change-coordinates/state-04.jpg",
+     "transition": {
+      "src": "animations/change-coordinates/step-04.mp4",
+      "duration": 3.2,
+      "frames": 96,
+      "masterFrames": [
+       382,
+       478
+      ],
+      "bytes": 52704,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 5,
+     "title": "Multiply by $T^{-1}$ on the left",
+     "relation": "equivalent",
+     "relationLabel": "Equivalent equation (⇔)",
+     "tex": "\\dot z = T^{-1} A T\\, z",
+     "explanation": "Multiply both sides on the left by $T^{-1}$; on the left side $T^{-1}T = I$. Multiplying on the right instead would not make sense for the vector $\\dot z$.",
+     "initialFrame": "animations/change-coordinates/state-04.jpg",
+     "finalFrame": "animations/change-coordinates/state-05.jpg",
+     "transition": {
+      "src": "animations/change-coordinates/step-05.mp4",
+      "duration": 4.1,
+      "frames": 123,
+      "masterFrames": [
+       477,
+       600
+      ],
+      "bytes": 91911,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 6,
+     "title": "The dynamics are diagonal",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "T^{-1}AT = D \\;\\Rightarrow\\; \\dot z = D z",
+     "explanation": "From $AT = TD$, multiplying on the left by $T^{-1}$ gives $T^{-1}AT = D$. In eigenvector coordinates the system is $\\dot z = Dz$: the boxed result of the lecture.",
+     "initialFrame": "animations/change-coordinates/state-05.jpg",
+     "finalFrame": "animations/change-coordinates/state-06.jpg",
+     "transition": {
+      "src": "animations/change-coordinates/step-06.mp4",
+      "duration": 2.8667,
+      "frames": 86,
+      "masterFrames": [
+       599,
+       685
+      ],
+      "bytes": 73780,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 22.733,
+   "masterFrames": 685,
+   "renderSeconds": 16.9
+  },
+  {
+   "id": "decoupled",
+   "scene": "DecoupledSequence",
+   "section": 4,
+   "title": "Decoupled modes and $e^{Dt}$",
+   "summary": "A diagonal system splits into $n$ separate scalar equations, each solved by one exponential. Stacked, they form $e^{Dt}$.",
+   "initial": {
+    "title": "The diagonal system",
+    "tex": "\\dot z = D z",
+    "explanation": "This is the equation from the previous section. Writing it out shows why diagonal is so convenient.",
+    "frame": "animations/decoupled/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Write it out",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "\\frac{d}{dt}\\begin{bmatrix} z_1 \\\\ z_2 \\\\ \\vdots \\\\ z_n \\end{bmatrix} = \\begin{bmatrix} \\lambda_1 & 0 & 0 & 0 \\\\ 0 & \\lambda_2 & 0 & 0 \\\\ 0 & 0 & \\ddots & 0 \\\\ 0 & 0 & 0 & \\lambda_n \\end{bmatrix} \\begin{bmatrix} z_1 \\\\ z_2 \\\\ \\vdots \\\\ z_n \\end{bmatrix}",
+     "explanation": "All off-diagonal entries of $D$ are zero. Read row by row: row $i$ of $D$ has one nonzero entry, $\\lambda_i$, in column $i$.",
+     "initialFrame": "animations/decoupled/state-00.jpg",
+     "finalFrame": "animations/decoupled/state-01.jpg",
+     "transition": {
+      "src": "animations/decoupled/step-01.mp4",
+      "duration": 3.1333,
+      "frames": 94,
+      "masterFrames": [
+       8,
+       102
+      ],
+      "bytes": 140472,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Each row involves one variable",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "\\dot z_1 = \\lambda_1 z_1,\\quad \\dot z_2 = \\lambda_2 z_2,\\quad \\ldots,\\quad \\dot z_n = \\lambda_n z_n",
+     "explanation": "The equations are decoupled: $\\dot z_1$ depends only on $z_1$, $\\dot z_2$ only on $z_2$, and so on. Each mode evolves independently of the others.",
+     "initialFrame": "animations/decoupled/state-01.jpg",
+     "finalFrame": "animations/decoupled/state-02.jpg",
+     "transition": {
+      "src": "animations/decoupled/step-02.mp4",
+      "duration": 4.7,
+      "frames": 141,
+      "masterFrames": [
+       101,
+       242
+      ],
+      "bytes": 99334,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Solve each scalar equation",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "z_i(t) = e^{\\lambda_i t}\\, z_i(0)",
+     "explanation": "Each line is the scalar equation $\\dot y = \\lambda y$, solved by an exponential times its own initial value.",
+     "initialFrame": "animations/decoupled/state-02.jpg",
+     "finalFrame": "animations/decoupled/state-03.jpg",
+     "transition": {
+      "src": "animations/decoupled/step-03.mp4",
+      "duration": 4.2,
+      "frames": 126,
+      "masterFrames": [
+       241,
+       367
+      ],
+      "bytes": 164322,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "Stack them: $e^{Dt}$",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "z(t) = e^{Dt} z(0), \\qquad e^{Dt} = \\begin{bmatrix} e^{\\lambda_1 t} & 0 & 0 \\\\ 0 & \\ddots & 0 \\\\ 0 & 0 & e^{\\lambda_n t} \\end{bmatrix}",
+     "explanation": "Exponentials on the diagonal and zeros off it (the off-diagonal entries are $0$, not $e^0 = 1$). For diagonal $D$ every power $D^k$ is diagonal with entries $\\lambda_i^k$, so the series gives exactly this. The book writes $\\Lambda$ for the lecture's $D$.",
+     "initialFrame": "animations/decoupled/state-03.jpg",
+     "finalFrame": "animations/decoupled/state-04.jpg",
+     "transition": {
+      "src": "animations/decoupled/step-04.mp4",
+      "duration": 3.2333,
+      "frames": 97,
+      "masterFrames": [
+       366,
+       463
+      ],
+      "bytes": 124189,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 5,
+     "title": "Each mode on its own clock",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "z_1(t) = e^{-t},\\qquad z_2(t) = e^{-2t} \\qquad (z(0) = (1, 1))",
+     "explanation": "In the guide's example ($\\lambda_1 = -1$, $\\lambda_2 = -2$) both modes decay, the second twice as fast. Changing $z_1(0)$ would not affect $z_2$ at all.",
+     "initialFrame": "animations/decoupled/state-04.jpg",
+     "finalFrame": "animations/decoupled/state-05.jpg",
+     "transition": {
+      "src": "animations/decoupled/step-05.mp4",
+      "duration": 3.8333,
+      "frames": 115,
+      "masterFrames": [
+       462,
+       577
+      ],
+      "bytes": 119076,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 19.1,
+   "masterFrames": 577,
+   "renderSeconds": 17.2
+  },
+  {
+   "id": "similarity-proof",
+   "scene": "SimilaritySequence",
+   "section": 5,
+   "title": "Why $e^{At} = T e^{Dt} T^{-1}$",
+   "summary": "Rewrite $A$ as $TDT^{-1}$, watch the inner $T^{-1}T$ pairs cancel in every power, and factor $T$ and $T^{-1}$ out of the series.",
+   "initial": {
+    "title": "Start from the series",
+    "tex": "e^{At} = I + At + \\frac{A^2t^2}{2!} + \\frac{A^3t^3}{3!} + \\cdots",
+    "explanation": "We want a formula for $e^{At}$ that only needs $e^{Dt}$, which is easy. The tool is the eigen relation $AT = TD$.",
+    "frame": "animations/similarity-proof/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Solve $AT = TD$ for $A$",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "AT = TD \\;\\Rightarrow\\; A = T D T^{-1}",
+     "explanation": "Multiply both sides on the right by $T^{-1}$: $ATT^{-1} = A$. The $T^{-1}$ must go on the right, because that is where $T$ sits next to $A$.",
+     "initialFrame": "animations/similarity-proof/state-00.jpg",
+     "finalFrame": "animations/similarity-proof/state-01.jpg",
+     "transition": {
+      "src": "animations/similarity-proof/step-01.mp4",
+      "duration": 4.0667,
+      "frames": 122,
+      "masterFrames": [
+       8,
+       130
+      ],
+      "bytes": 105540,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Square it and cancel the middle",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "A^2 = (TDT^{-1})(TDT^{-1}) = TD\\,(T^{-1}T)\\,DT^{-1} = T D^2 T^{-1}",
+     "explanation": "Matrix products are associative, so the adjacent pair $T^{-1}T$ in the middle can be grouped and equals $I$. Only that adjacent pair cancels; the outer $T$ and $T^{-1}$ stay.",
+     "initialFrame": "animations/similarity-proof/state-01.jpg",
+     "finalFrame": "animations/similarity-proof/state-02.jpg",
+     "transition": {
+      "src": "animations/similarity-proof/step-02.mp4",
+      "duration": 4.7667,
+      "frames": 143,
+      "masterFrames": [
+       129,
+       272
+      ],
+      "bytes": 172055,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Every power works the same way",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "A^k = T D^k T^{-1}",
+     "explanation": "In $(TDT^{-1})(TDT^{-1})\\cdots(TDT^{-1})$ each inner $T^{-1}T$ cancels, leaving $k$ copies of $D$ between one $T$ and one $T^{-1}$.",
+     "initialFrame": "animations/similarity-proof/state-02.jpg",
+     "finalFrame": "animations/similarity-proof/state-03.jpg",
+     "transition": {
+      "src": "animations/similarity-proof/step-03.mp4",
+      "duration": 4.2667,
+      "frames": 128,
+      "masterFrames": [
+       271,
+       399
+      ],
+      "bytes": 151584,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "Substitute into the series",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "e^{At} = TT^{-1} + TDT^{-1}t + \\frac{TD^2T^{-1}t^2}{2!} + \\frac{TD^3T^{-1}t^3}{3!} + \\cdots",
+     "explanation": "Replace each $A^k$ by $TD^kT^{-1}$, and write the identity as $I = TT^{-1}$ so that the first term has the same shape as the others.",
+     "initialFrame": "animations/similarity-proof/state-03.jpg",
+     "finalFrame": "animations/similarity-proof/state-04.jpg",
+     "transition": {
+      "src": "animations/similarity-proof/step-04.mp4",
+      "duration": 3.3667,
+      "frames": 101,
+      "masterFrames": [
+       398,
+       499
+      ],
+      "bytes": 266195,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 5,
+     "title": "Factor $T$ left and $T^{-1}$ right",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "e^{At} = T\\left[ I + Dt + \\frac{D^2t^2}{2!} + \\frac{D^3t^3}{3!} + \\cdots \\right] T^{-1}",
+     "explanation": "Every term has $T$ on the far left and $T^{-1}$ on the far right; the powers of $t$ and the factorials are scalars and can sit anywhere. Factor $T$ out to the left and $T^{-1}$ to the right, keeping the order.",
+     "initialFrame": "animations/similarity-proof/state-04.jpg",
+     "finalFrame": "animations/similarity-proof/state-05.jpg",
+     "transition": {
+      "src": "animations/similarity-proof/step-05.mp4",
+      "duration": 3.8,
+      "frames": 114,
+      "masterFrames": [
+       498,
+       612
+      ],
+      "bytes": 184920,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 6,
+     "title": "Recognize $e^{Dt}$",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "e^{At} = T\\, e^{Dt}\\, T^{-1}",
+     "explanation": "The bracket is the series of $e^{Dt}$, the easy diagonal exponential. So the hard exponential $e^{At}$ costs one diagonal exponential and two matrix products.",
+     "initialFrame": "animations/similarity-proof/state-05.jpg",
+     "finalFrame": "animations/similarity-proof/state-06.jpg",
+     "transition": {
+      "src": "animations/similarity-proof/step-06.mp4",
+      "duration": 3.5333,
+      "frames": 106,
+      "masterFrames": [
+       611,
+       717
+      ],
+      "bytes": 207208,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 23.8,
+   "masterFrames": 717,
+   "renderSeconds": 16.5
+  },
+  {
+   "id": "map-evolve-map",
+   "scene": "PipelineSequence",
+   "section": 6,
+   "title": "Map, evolve, map back (the linked 22:22 moment)",
+   "summary": "Read $x(t) = Te^{Dt}T^{-1}x(0)$ from right to left: into eigenvector coordinates, forward in time there, back to physical coordinates. Worked with numbers.",
+   "initial": {
+    "title": "The solution in physical coordinates",
+    "tex": "x(t) = e^{At}x(0) = T\\,e^{Dt}\\,T^{-1}\\,x(0)",
+    "explanation": "Combine $x(t) = e^{At}x(0)$ with $e^{At} = Te^{Dt}T^{-1}$. Read it from right to left, the order in which the matrices act on $x(0)$.",
+    "frame": "animations/map-evolve-map/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Three stages",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "x(0) \\xrightarrow{\\;T^{-1}\\;} z(0) \\xrightarrow{\\;e^{Dt}\\;} z(t) \\xrightarrow{\\;T\\;} x(t)",
+     "explanation": "$T^{-1}x(0) = z(0)$ maps the start into eigenvector coordinates, $e^{Dt}$ advances it there (decoupled and easy), and $T$ maps the result back. This is the interpretation at 22:22 in the lecture.",
+     "initialFrame": "animations/map-evolve-map/state-00.jpg",
+     "finalFrame": "animations/map-evolve-map/state-01.jpg",
+     "transition": {
+      "src": "animations/map-evolve-map/step-01.mp4",
+      "duration": 4.8333,
+      "frames": 145,
+      "masterFrames": [
+       8,
+       153
+      ],
+      "bytes": 173845,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Map: $z(0) = T^{-1}x(0)$",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "z(0) = \\begin{bmatrix} 1 & -1 \\\\ 0 & 1 \\end{bmatrix}\\begin{bmatrix} 2 \\\\ 1 \\end{bmatrix} = \\begin{bmatrix} 1 \\\\ 1 \\end{bmatrix}",
+     "explanation": "Guide's example: $T = \\begin{bmatrix}1&1\\\\0&1\\end{bmatrix}$, $D = \\mathrm{diag}(-1, -2)$, $A = TDT^{-1} = \\begin{bmatrix}-1&-1\\\\0&-2\\end{bmatrix}$, $x(0) = (2, 1)$. Then $z(0) = (2 - 1,\\ 1) = (1, 1)$. (The transpose would give $(2, 3)$, which is wrong.)",
+     "initialFrame": "animations/map-evolve-map/state-01.jpg",
+     "finalFrame": "animations/map-evolve-map/state-02.jpg",
+     "transition": {
+      "src": "animations/map-evolve-map/step-02.mp4",
+      "duration": 4.3667,
+      "frames": 131,
+      "masterFrames": [
+       152,
+       283
+      ],
+      "bytes": 203776,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Evolve: $z(t) = e^{Dt}z(0)$",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "z(t) = \\begin{bmatrix} e^{-t} & 0 \\\\ 0 & e^{-2t} \\end{bmatrix}\\begin{bmatrix} 1 \\\\ 1 \\end{bmatrix} = \\begin{bmatrix} e^{-t} \\\\ e^{-2t} \\end{bmatrix} \\overset{t=\\ln 2}{=} \\begin{bmatrix} 1/2 \\\\ 1/4 \\end{bmatrix}",
+     "explanation": "Each eigen-coordinate decays on its own. At $t = \\ln 2$, $e^{-t} = 1/2$ and $e^{-2t} = 1/4$.",
+     "initialFrame": "animations/map-evolve-map/state-02.jpg",
+     "finalFrame": "animations/map-evolve-map/state-03.jpg",
+     "transition": {
+      "src": "animations/map-evolve-map/step-03.mp4",
+      "duration": 3.4333,
+      "frames": 103,
+      "masterFrames": [
+       282,
+       385
+      ],
+      "bytes": 110395,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "Map back: $x(t) = Tz(t)$",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "x(t) = \\begin{bmatrix} 1 & 1 \\\\ 0 & 1 \\end{bmatrix}\\begin{bmatrix} e^{-t} \\\\ e^{-2t} \\end{bmatrix} = \\begin{bmatrix} e^{-t} + e^{-2t} \\\\ e^{-2t} \\end{bmatrix} \\overset{t=\\ln 2}{=} \\begin{bmatrix} 3/4 \\\\ 1/4 \\end{bmatrix}",
+     "explanation": "Multiply by $T$: $x_1 = z_1 + z_2$ and $x_2 = z_2$. In physical coordinates the two exponentials are mixed, which is why $A$ is not diagonal.",
+     "initialFrame": "animations/map-evolve-map/state-03.jpg",
+     "finalFrame": "animations/map-evolve-map/state-04.jpg",
+     "transition": {
+      "src": "animations/map-evolve-map/step-04.mp4",
+      "duration": 3.4667,
+      "frames": 104,
+      "masterFrames": [
+       384,
+       488
+      ],
+      "bytes": 142927,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 5,
+     "title": "Check against $\\dot x = Ax$",
+     "relation": "compare",
+     "relationLabel": "Check",
+     "tex": "\\dot x(0) = \\begin{bmatrix} -1 - 2 \\\\ -2 \\end{bmatrix} = \\begin{bmatrix} -1 & -1 \\\\ 0 & -2 \\end{bmatrix}\\begin{bmatrix} 2 \\\\ 1 \\end{bmatrix} = \\begin{bmatrix} -3 \\\\ -2 \\end{bmatrix}",
+     "explanation": "Differentiate the formula at $t = 0$: $(-e^{-t} - 2e^{-2t},\\ -2e^{-2t}) \\to (-3, -2)$. The right-hand side $Ax(0)$ gives the same vector, and $x(0) = (1 + 1, 1) = (2, 1)$ matches too.",
+     "initialFrame": "animations/map-evolve-map/state-04.jpg",
+     "finalFrame": "animations/map-evolve-map/state-05.jpg",
+     "transition": {
+      "src": "animations/map-evolve-map/step-05.mp4",
+      "duration": 3.6667,
+      "frames": 110,
+      "masterFrames": [
+       487,
+       597
+      ],
+      "bytes": 119240,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 6,
+     "title": "Recap and what comes next",
+     "relation": "recap",
+     "relationLabel": "Recap",
+     "tex": "x(t) = T\\,e^{Dt}\\,T^{-1}x(0), \\qquad \\dot z = D z",
+     "explanation": "Think in eigenvector coordinates, where the modes are decoupled; map back when you need physical values. The lecture closes by deferring stability, discrete time and control inputs $+Bu$ to the next videos.",
+     "initialFrame": "animations/map-evolve-map/state-05.jpg",
+     "finalFrame": "animations/map-evolve-map/state-06.jpg",
+     "transition": {
+      "src": "animations/map-evolve-map/step-06.mp4",
+      "duration": 2.7,
+      "frames": 81,
+      "masterFrames": [
+       596,
+       677
+      ],
+      "bytes": 99960,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 22.467,
+   "masterFrames": 677,
+   "renderSeconds": 17.7
+  }
+ ]
+}

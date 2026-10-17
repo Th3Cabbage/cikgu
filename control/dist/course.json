@@ -1,0 +1,507 @@
+{
+ "version": 1,
+ "title": "Control Bootcamp: the overview",
+ "subtitle": "A study companion to Steve Brunton's overview lecture and Section 8.1 of Brunton & Kutz",
+ "video": {
+  "id": "Pi7l8mMjYVE",
+  "title": "Control Bootcamp: Overview (Steve Brunton, University of Washington)",
+  "duration": "19:31",
+  "url": "https://www.youtube.com/watch?v=Pi7l8mMjYVE"
+ },
+ "book": {
+  "title": "Data-Driven Science and Engineering: Machine Learning, Dynamical Systems, and Control",
+  "authors": "S. L. Brunton and J. N. Kutz",
+  "edition": "2017 preprint (Chapter 8, Linear Control Theory)",
+  "onlineUrl": "http://databookuw.com/databook.pdf",
+  "pageNote": "Page references give the printed page and the page of the local PDF (printed page + 20 for these pages). The online copy may be a different revision with different PDF page numbers."
+ },
+ "attribution": "Course text, diagrams and animations here are original paraphrases and drawings made for this guide. They summarize the lecture and the book; for the original wording, watch the lecture and read the chapter. Lecture captions and the chapter text are not included in this guide.",
+ "sections": [
+  {
+   "number": 1,
+   "id": "s1",
+   "nav": "Prediction to action",
+   "title": "From prediction to action",
+   "time": [0, 180],
+   "summary": "Control starts from a model of how a system evolves. We name its state, the input we can choose, the output we can measure, and the goal.",
+   "goals": [
+    "Say what a state is and why the pendulum needs both $\\theta$ and $\\dot\\theta$.",
+    "Distinguish the state $x$, the input $u$ and the output $y$.",
+    "Read a matrix-vector product row by row."
+   ],
+   "notes": [
+    {"heading": "Describing before steering",
+     "paragraphs": [
+      "The lecture opens with a point of view: many systems, from fluid flow to epidemics to planets, are modelled as dynamical systems, equations that say how a set of quantities changes in time. Such models are used to predict.",
+      "Control asks for more than prediction. We want to change the behaviour on purpose, either with a planned input or by watching the system and reacting to it. To do that we first need a precise vocabulary."
+     ]},
+    {"heading": "State, input, output",
+     "paragraphs": [
+      "The state $x$ is a collection of quantities sufficient, together with the model and future inputs, to determine the future. (It may contain redundant information; in practice we choose a convenient, small set.) For a rigid pendulum it is the angle $\\theta$ and the angular velocity $\\dot\\theta$: knowing only the angle cannot tell a pendulum at rest from one swinging through the same position.",
+      "The input $u$ is what we can set: a torque, a motor voltage, the motion of a base. The output $y$ is what sensors report. Outputs may be fewer than states (a camera might give the angle but not the velocity).",
+      "A model links them: $\\dot x = f(x, u)$ says how the state changes, $y = g(x)$ says what we see. The goal in this overview is regulation: bring the upright pendulum's state back to $x = 0$ and keep it there."
+     ]},
+    {"heading": "Refresher: derivatives, vectors, matrix products",
+     "paragraphs": [
+      "A dot means a time derivative: $\\dot\\theta = d\\theta/dt$ is how fast the angle changes, and $\\ddot\\theta$ is its rate of change in turn (angular acceleration).",
+      "A vector stacks numbers in a column, $x = \\begin{bmatrix}\\theta \\\\ \\dot\\theta\\end{bmatrix}$. A matrix times a vector takes each row of the matrix, multiplies entry by entry with the vector and adds: $\\begin{bmatrix}0 & 1 \\\\ 1 & 0\\end{bmatrix}\\begin{bmatrix}\\theta \\\\ \\dot\\theta\\end{bmatrix} = \\begin{bmatrix}0\\cdot\\theta + 1\\cdot\\dot\\theta \\\\ 1\\cdot\\theta + 0\\cdot\\dot\\theta\\end{bmatrix} = \\begin{bmatrix}\\dot\\theta \\\\ \\theta\\end{bmatrix}$.",
+      "A product $MN$ needs the number of columns of $M$ to equal the number of rows of $N$, and in general $MN \\neq NM$. Both facts matter in Section 5."
+     ]}
+   ],
+   "keyIdeas": [
+    "State $x$: what you must know now to predict the future.",
+    "Input $u$: what you choose. Output $y$: what you measure.",
+    "Upright is an equilibrium of the pendulum, but an unstable one."
+   ],
+   "example": {
+    "title": "Reading a state and a matrix product",
+    "problem": "A balancing rod has $\\theta = 0.1$ rad (tilted right) and $\\dot\\theta = -0.2$ rad/s. For the normalized model $\\dot x = Ax$ with $A = \\begin{bmatrix}0 & 1 \\\\ 1 & 0\\end{bmatrix}$, compute $\\dot x$ and say what each row means.",
+    "steps": [
+     {"text": "Stack the state.", "tex": "x = \\begin{bmatrix} 0.1 \\\\ -0.2 \\end{bmatrix}"},
+     {"text": "Row 1 of $A$ times $x$, then row 2.", "tex": "Ax = \\begin{bmatrix} 0\\cdot 0.1 + 1\\cdot(-0.2) \\\\ 1\\cdot 0.1 + 0\\cdot(-0.2) \\end{bmatrix} = \\begin{bmatrix} -0.2 \\\\ 0.1 \\end{bmatrix}"},
+     {"text": "Interpret: the first row just says the angle changes at the angular velocity, $-0.2$ rad/s (moving back towards upright). The second row says gravity accelerates the tilt at $0.1$ rad/s$^2$, away from upright.", "tex": "\\dot\\theta = -0.2, \\qquad \\ddot\\theta = 0.1"}
+    ],
+    "answer": "The rod is swinging back towards vertical, but gravity is already working against it: without an input the swing slows and the tilt eventually grows again."
+   },
+   "sources": {
+    "video": [
+     {"t": 0, "label": "What the bootcamp covers"},
+     {"t": 84, "label": "Seeing the world as dynamical systems"},
+     {"t": 125, "label": "Beyond prediction: manipulating a system"},
+     {"t": 155, "label": "Pendulum or crane: model, then a control policy"}
+    ],
+    "book": [
+     {"printed": 323, "pdf": 343, "label": "Chapter 8 introduction: why control"},
+     {"printed": 325, "pdf": 345, "label": "Fig. 8.2 and Eq. (8.1): system, sensors, actuators, disturbances"}
+    ]
+   },
+   "tutorNotes": "Book p.323 introduces control as manipulating a dynamical system using sensor data; p.325 (Fig. 8.2) shows the feedback framework: measurements y feed a controller that chooses actuation u despite disturbances w, with a cost J. Eq. (8.1) writes dx/dt = f(x,u,w_d), y = g(x,u,w_n)."
+  },
+  {
+   "number": 2,
+   "id": "s2",
+   "nav": "Types of control",
+   "title": "Types of control",
+   "time": [180, 490],
+   "summary": "Passive versus active, then open loop versus closed loop. The feedback loop is assembled piece by piece: measure, compare, act.",
+   "goals": [
+    "Classify a strategy as passive, open-loop, feedforward or closed-loop.",
+    "Trace the signals in a feedback block diagram, including the sign at the summing junction.",
+    "Explain what the vibrating-base pendulum example does and does not show."
+   ],
+   "notes": [
+    {"heading": "Passive and active",
+     "paragraphs": [
+      "Passive control is built into the design and needs no energy while running. The lecture's example is the streamlined tail section on a long-haul truck, which reduces drag; the book's is a stop sign. When passive control is enough it is cheap and reliable.",
+      "Active control spends energy through actuators while the system runs. It splits by whether sensors inform the input."
+     ]},
+    {"heading": "Open loop: a plan from a model",
+     "paragraphs": [
+      "An open-loop controller computes the input from a model and a desired output $r$, then plays it. Nothing is measured, so nothing comes back. The book lists a traffic example: signals pre-programmed for different times of day.",
+      "The lecture's open-loop example is an inverted pendulum whose base is shaken up and down fast enough that it stays upright. The input is preplanned (a sinusoid), and the effect vanishes the moment the shaking stops. A careful note: this works through parametric excitation, a time-varying change of the dynamics, which is a different model from adding a planned input $Bu(t)$ to a fixed linear system (see Section 3)."
+     ]},
+    {"heading": "Closed loop: measure, compare, act",
+     "paragraphs": [
+      "Closed-loop feedback taps the output $y$, returns it along a feedback path and subtracts it from the reference: $e = r - y$. The controller turns this error into the input. Signals flow forward through the controller and system, and back through the sensor.",
+      "The book's diagram also has disturbance feedforward: measure an incoming disturbance (a crowd about to leave a stadium) and feed it into a planned input. It uses a sensor, but not on the system's own response.",
+      "For balancing, the overview uses a special loop: the reference is the upright state, all states are measured ($y = x$), and the controller is a gain matrix, $u = K(0 - x) = -Kx$."
+     ]}
+   ],
+   "keyIdeas": [
+    "Passive: no energy in while running. Active: actuators spend energy.",
+    "Open loop: preplanned input, no measurement of the response.",
+    "Closed loop: the measured output returns and is subtracted from the reference."
+   ],
+   "example": {
+    "title": "Classify the strategy",
+    "problem": "Classify each: (a) a truck's tail fairing; (b) traffic lights on a fixed daily timetable; (c) a home thermostat; (d) rerouting traffic before a stadium crowd leaves; (e) traffic lights timed from roadbed sensors.",
+    "steps": [
+     {"text": "(a) Passive: designed once, no energy input while driving.", "tex": ""},
+     {"text": "(b) Open loop: a preprogrammed sequence that ignores the actual traffic.", "tex": ""},
+     {"text": "(c) Closed-loop feedback: it measures the room temperature and switches the heating from the error.", "tex": "e = T_{\\text{set}} - T_{\\text{measured}}"},
+     {"text": "(d) Disturbance feedforward: the disturbance (the crowd) is anticipated or measured and fed into a planned response.", "tex": ""},
+     {"text": "(e) Closed-loop feedback: sensors measure the system itself (traffic density) and the lights react.", "tex": ""}
+    ],
+    "answer": "Only (c) and (e) measure the system's own response, so only they can correct for surprises in that response."
+   },
+   "sources": {
+    "video": [
+     {"t": 178, "label": "Types of control"},
+     {"t": 198, "label": "Passive control: truck tail fairing"},
+     {"t": 236, "label": "Active control"},
+     {"t": 255, "label": "Open loop and the system block"},
+     {"t": 301, "label": "Shaken-base inverted pendulum"},
+     {"t": 363, "label": "Drawback of open loop"},
+     {"t": 385, "label": "Closed-loop feedback: sensors and controller"},
+     {"t": 461, "label": "Sensor-based feedback is the subject of the bootcamp"}
+    ],
+    "book": [
+     {"printed": 324, "pdf": 344, "label": "Types of control, Fig. 8.1 (includes disturbance feedforward)"},
+     {"printed": 326, "pdf": 346, "label": "Open-loop diagram, Fig. 8.3"},
+     {"printed": 327, "pdf": 347, "label": "Closed-loop diagram, Fig. 8.4"}
+    ]
+   },
+   "tutorNotes": "Book p.324 (Fig. 8.1): passive (no energy, e.g. stop signs); active splits into open-loop (pre-programmed, e.g. timed traffic signals), disturbance feedforward (measure exogenous disturbance, feed an open-loop law, e.g. stadium crowd), and closed-loop feedback (sensors measure the system, e.g. smart lights with roadbed sensors). Fig. 8.3 open loop: reference w_r into controller, u into system, disturbances and noise not accounted for. Fig. 8.4: y fed back and subtracted from w_r giving error epsilon. The lecture's shaken-base pendulum (Kapitza) is parametric excitation, not additive input."
+  },
+  {
+   "number": 3,
+   "id": "s3",
+   "nav": "Why feedback",
+   "title": "Why feedback?",
+   "time": [490, 778],
+   "summary": "Uncertainty, instability, disturbances and efficiency: what feedback can buy, and the conditions attached. A static cruise model makes the first and third concrete.",
+   "goals": [
+    "Separate internal model uncertainty from external disturbances.",
+    "Explain why an additive planned input cannot move the eigenvalues of a fixed linear model.",
+    "Derive $y = \\frac{aK}{1+aK}r + \\frac{1}{1+aK}d$ and read off what proportional feedback does and does not fix."
+   ],
+   "notes": [
+    {"heading": "Four reasons",
+     "paragraphs": [
+      "Uncertainty: a plan computed from a model inherits every error in the model (a longer rod, a heavier car). Feedback sees the result and corrects without needing the model to be perfect.",
+      "Instability: for $\\dot x = Ax + Bu(t)$ with a preplanned $u(t)$, the homogeneous part is still $\\dot x = Ax$, so the eigenvalues of $A$ do not move and a positive one keeps amplifying any small error. Feedback makes $u$ depend on $x$ and changes the matrix (Section 5). The shaken-base pendulum is not a counterexample: it changes the dynamics through a fast parametric oscillation, a different model.",
+      "Disturbances: a gust of wind is external forcing, often too hard to predict or measure directly. Its effect appears in the output, which a feedback loop can act on. The lecture's distinction: uncertainty is internal (the model is wrong), disturbances are external (something pushes the system).",
+      "Efficiency: a good balancing controller acts early, so its corrections stay small, whereas a shaken base needs energy all the time."
+     ]},
+    {"heading": "The fine print",
+     "paragraphs": [
+      "These are possibilities that good design unlocks, not guarantees. A badly chosen gain can destabilize a loop that was stable, feedback can feed sensor noise into the actuator (more so at high gain), and simple proportional feedback usually leaves a steady-state error. The book notes that a large gain can cost robustness and that an integral term helps."
+     ]},
+    {"heading": "A static cruise-control teaching model",
+     "paragraphs": [
+      "Following the book's cruise example, model speed as $y = a u + d$: throttle $u$, true gain $a$, disturbance $d$ such as a hill. It is deliberately crude: no acceleration dynamics, so it can show tracking error but never instability.",
+      "Open loop inverts a model gain $a_m$: $u = r/a_m$, so $y = (a/a_m) r + d$. A wrong model scales the speed and every hill passes straight through.",
+      "Closed loop sets $u = K(r - y)$. Then $y = aK(r - y) + d$, so $(1 + aK)y = aKr + d$ and $y = \\frac{aK}{1+aK}r + \\frac{1}{1+aK}d$. The model gain $a_m$ is not needed, the disturbance is divided by $1 + aK$, and the error $r - y = (r - d)/(1 + aK)$ shrinks with gain but generally remains nonzero at finite gain: proportional control cannot guarantee zero tracking error for an arbitrary reference and disturbance (it is zero only in special cases such as $d = r$). (The book's text quotes a 50% open-loop error for a true gain of 2 with a model gain of 1; with these definitions that case gives $y = 2r$, a 100% error. The derivation here is independent of that wording.)"
+     ]}
+   ],
+   "keyIdeas": [
+    "Planned additive input: eigenvalues of $A$ unchanged. Feedback: new matrix.",
+    "Uncertainty is internal, disturbance is external.",
+    "Proportional feedback divides disturbances by $1 + aK$; at finite gain the tracking error generally stays nonzero."
+   ],
+   "example": {
+    "title": "Cruise control with numbers",
+    "problem": "The model says $y = u$ ($a_m = 1$) but the car is really $y = 0.5u + d$. The target is $r = 60$. Compare open loop with closed loop for $K = 50$ and $K = 5$, on flat ground ($d = 0$) and on a hill ($d = -10$).",
+    "steps": [
+     {"text": "Open loop: $u = 60$, so $y = 0.5\\cdot 60 + d$.", "tex": "y_{\\text{open}} = 30 \\ (d=0), \\qquad 20 \\ (d=-10)"},
+     {"text": "Closed loop, $K = 50$: $aK = 25$.", "tex": "y = \\frac{25\\cdot 60 + d}{26} = 57.69 \\ (d=0), \\qquad 57.31 \\ (d=-10)"},
+     {"text": "Closed loop, $K = 5$: $aK = 2.5$.", "tex": "y = \\frac{2.5\\cdot 60 + d}{3.5} = 42.86 \\ (d=0), \\qquad 40.00 \\ (d=-10)"},
+     {"text": "The hill costs open loop 10 mph but costs the $K=50$ loop only $10/26 \\approx 0.38$ mph.", "tex": "\\frac{\\Delta y}{\\Delta d} = \\frac{1}{1 + aK}"}
+    ],
+    "answer": "Feedback removes most of the effect of both the wrong model and the hill, more so at higher gain. In this static model higher gain looks free; in a real car with dynamics, sensor noise and actuator limits it is not."
+   },
+   "sources": {
+    "video": [
+     {"t": 491, "label": "Why feedback?"},
+     {"t": 537, "label": "1. Uncertainty"},
+     {"t": 587, "label": "2. Instability: eigenvalues of the closed loop"},
+     {"t": 638, "label": "3. Disturbances"},
+     {"t": 688, "label": "Internal uncertainty versus external disturbances"},
+     {"t": 726, "label": "4. Efficiency"}
+    ],
+    "book": [
+     {"printed": 326, "pdf": 346, "label": "Why closed loop: open loop cannot correct disturbances or change dynamics"},
+     {"printed": 327, "pdf": 347, "label": "Benefits of feedback (stabilize, reject disturbances, correct model error)"},
+     {"printed": 328, "pdf": 348, "label": "Cruise control model and Eq. (8.6)"},
+     {"printed": 329, "pdf": 349, "label": "Fig. 8.5 and Code 8.1: open versus closed loop with rolling hills"}
+    ]
+   },
+   "tutorNotes": "Book p.326: open-loop cannot correct for external disturbances and cannot change the dynamics; model uncertainty contributes directly to open-loop error. p.327: feedback may stabilize, may compensate disturbances, may correct unmodeled dynamics (stated as possibilities). p.328: cruise model y = u; closed loop u = K(w_r - y); for true y = 2u, y = 2K/(1+2K) w_r; text's '50% error' wording is inconsistent (open-loop with y=2u, u=w_r gives 100%). p.329: example with model y=u, true y=0.5u, reference 60 mph, hills +/-10 mph at 0.5 Hz, K=50; notes large proportional gain may cost robustness and integral action helps."
+  },
+  {
+   "number": 4,
+   "id": "s4",
+   "nav": "State-space language",
+   "title": "The language of state space",
+   "time": [778, 944],
+   "summary": "$\\dot x = Ax$, its solution $e^{At}x(0)$, the control term $Bu$, the measurement $y = Cx$, and the sizes that make the products fit.",
+   "goals": [
+    "Know that the eigenvalues of $A$ decide decay or growth of $\\dot x = Ax$.",
+    "State the sizes of $x, u, y, A, B, C$ for $n$ states, $m$ inputs, $p$ outputs.",
+    "Write the normalized pendulum as $\\dot x = Ax + Bu$."
+   ],
+   "notes": [
+    {"heading": "Linear dynamics",
+     "paragraphs": [
+      "Near an equilibrium many systems are well approximated by $\\dot x = Ax$ (the book obtains $A$ by linearizing $f$, Section 8.2). The state may be large: an aircraft's position, attitude and their rates give twelve numbers.",
+      "The solution is $x(t) = e^{At}x(0)$, with the matrix exponential. You do not need to compute it here. What matters: if every eigenvalue of $A$ has negative real part, every solution decays to zero; if any has positive real part, some solutions grow."
+     ]},
+    {"heading": "Inputs and outputs",
+     "paragraphs": [
+      "Control adds $Bu$: $\\dot x = Ax + Bu$. The input $u$ is the knob (a torque, a voltage, the base position) and $B$ says how each input pushes each component of $\\dot x$.",
+      "Sensors give $y = Cx$, linear combinations of the state, possibly far fewer numbers than the state. The general form has $y = Cx + Du$; the overview takes $D = 0$ (no direct feedthrough)."
+     ]},
+    {"heading": "Sizes",
+     "paragraphs": [
+      "With $x \\in \\mathbb{R}^n$, $u \\in \\mathbb{R}^m$, $y \\in \\mathbb{R}^p$: $A$ is $n \\times n$, $B$ is $n \\times m$ and $C$ is $p \\times n$. Then $Ax$ and $Bu$ are both $n$-vectors, so they can be added to give $\\dot x$, and $Cx$ is a $p$-vector.",
+      "For the normalized inverted pendulum ($g/L = 1$, no damping, torque input): $A = \\begin{bmatrix}0 & 1 \\\\ 1 & 0\\end{bmatrix}$, $B = \\begin{bmatrix}0 \\\\ 1\\end{bmatrix}$, so $\\ddot\\theta = \\theta + u$. This is a small-angle linearization; it is trustworthy only near upright."
+     ]}
+   ],
+   "keyIdeas": [
+    "$\\dot x = Ax$: eigenvalues of $A$ decide decay or growth.",
+    "$A_{n\\times n}$, $B_{n\\times m}$, $C_{p\\times n}$.",
+    "Overview assumption: $D = 0$."
+   ],
+   "example": {
+    "title": "Sizes for a quadrotor",
+    "problem": "A quadrotor model has $n = 12$ states (position, attitude and their rates), $m = 4$ rotor inputs and $p = 6$ sensor readings. Give the sizes of $A$, $B$, $C$ and check $\\dot x = Ax + Bu$.",
+    "steps": [
+     {"text": "Matrix sizes follow from what they multiply and what they produce.", "tex": "A: 12\\times 12, \\quad B: 12\\times 4, \\quad C: 6\\times 12"},
+     {"text": "Check the products.", "tex": "(12\\times12)(12\\times1) = 12\\times1, \\qquad (12\\times4)(4\\times1) = 12\\times1"},
+     {"text": "Both are $12\\times1$, the size of $\\dot x$, so they can be added. And $Cx$ is $6\\times1$, the size of $y$.", "tex": ""}
+    ],
+    "answer": "$A$ is $12\\times12$, $B$ is $12\\times4$, $C$ is $6\\times12$."
+   },
+   "sources": {
+    "video": [
+     {"t": 777, "label": "Changing the dynamics with feedback: the setup"},
+     {"t": 800, "label": "The state vector: pendulum, aircraft"},
+     {"t": 835, "label": "Linear system x-dot = Ax"},
+     {"t": 854, "label": "Solution with the matrix exponential"},
+     {"t": 867, "label": "Eigenvalues and stability"},
+     {"t": 883, "label": "Adding the control term Bu"},
+     {"t": 919, "label": "Measurements y = Cx"}
+    ],
+    "book": [
+     {"printed": 330, "pdf": 350, "label": "Section 8.2: linearization, Eq. (8.10) with C and D"},
+     {"printed": 331, "pdf": 351, "label": "Unforced system and the matrix exponential, Eq. (8.12)"}
+    ]
+   },
+   "tutorNotes": "Book p.330: linear systems come from linearizing about a fixed point; an effective controller keeps the state near it where the approximation is valid; linearized dynamics dx/dt = Ax + Bu, y = Cx + Du (Eq. 8.10) with A, B, C, D Jacobians. p.331: unforced system with full-state measurement dx/dt = Ax, solution x(t) = e^{At}x(0) (Eq. 8.12) with the matrix exponential series."
+  },
+  {
+   "number": 5,
+   "id": "s5",
+   "nav": "Close the loop",
+   "title": "Closing the loop",
+   "time": [944, 1110],
+   "summary": "Assume the full state is measured, choose $u = -Kx$, substitute, and factor $x$ out on the right: $\\dot x = (A - BK)x$.",
+   "goals": [
+    "Perform the substitution $u = -Kx$ and keep the matrix order.",
+    "Explain why $K$ is $m\\times n$ and $BK$ is $n\\times n$.",
+    "State the stability test on the eigenvalues of $A - BK$, including the boundary case."
+   ],
+   "notes": [
+    {"heading": "Full-state feedback",
+     "paragraphs": [
+      "The overview now assumes every state is measured, $y = x$. A person balancing a broom has a fair sense of both its angle and its angular speed, so this is a natural first case. When only $y = Cx$ is available, the state must be estimated (later lectures, the Kalman filter).",
+      "Choose the control law $u = -Kx$, a constant matrix times the state. Since $u$ has $m$ entries and $x$ has $n$, $K$ is $m \\times n$."
+     ]},
+    {"heading": "The algebra",
+     "paragraphs": [
+      "Substitute: $\\dot x = Ax + B(-Kx) = Ax - BKx$. Both terms end in $x$, so factor it out on the right: $\\dot x = (A - BK)x$.",
+      "Order matters. $BK$ is $(n\\times m)(m\\times n) = n\\times n$, the same size as $A$, so $A - BK$ makes sense. $KB$ is $m\\times m$, and $x(A - BK)$ is not even defined for a column vector $x$."
+     ]},
+    {"heading": "What decides stability",
+     "paragraphs": [
+      "The closed loop is again a linear system $\\dot x = A_{\\text{cl}}x$ with $A_{\\text{cl}} = A - BK$. So the eigenvalues of $A - BK$, not those of $A$, decide what happens.",
+      "If all eigenvalues of $A - BK$ have negative real part, the closed loop is asymptotically stable: every initial state decays to zero. If any has positive real part, it is unstable. Eigenvalues with zero real part are a boundary case that needs more analysis (they may give undamped oscillation, a constant offset, or slow drift).",
+      "Whether $K$ can place the eigenvalues where we like depends on $A$ and $B$ (controllability), and how to choose a good $K$ is the subject of later lectures."
+     ]}
+   ],
+   "keyIdeas": [
+    "$u = -Kx \\Rightarrow \\dot x = (A - BK)x$, with $x$ factored on the right.",
+    "$K$ is $m\\times n$; $BK$ is $n\\times n$.",
+    "Stability: eigenvalues of $A - BK$."
+   ],
+   "example": {
+    "title": "A one-state loop",
+    "problem": "For the scalar system $\\dot x = 2x + u$ (unstable: eigenvalue $+2$), use $u = -kx$. For which $k$ is the closed loop asymptotically stable? What does $k = 5$ give?",
+    "steps": [
+     {"text": "Substitute the law.", "tex": "\\dot x = 2x + (-kx) = (2 - k)x"},
+     {"text": "The single eigenvalue is $2 - k$.", "tex": "x(t) = e^{(2-k)t}x(0)"},
+     {"text": "Asymptotically stable exactly when $2 - k < 0$.", "tex": "k > 2"},
+     {"text": "With $k = 5$ the eigenvalue is $-3$; with $k = 2$ it is $0$ (the state just stays put); with $k = 1$ it is still $+1$.", "tex": "k = 5:\\ \\lambda = -3"}
+    ],
+    "answer": "$k > 2$. Too little gain leaves it unstable; a gain with the wrong sign makes it worse."
+   },
+   "sources": {
+    "video": [
+     {"t": 944, "label": "Assume the full state is measured"},
+     {"t": 960, "label": "Control law u = -Kx"},
+     {"t": 986, "label": "Sensor-based feedback with y = x"},
+     {"t": 1006, "label": "Plugging in"},
+     {"t": 1021, "label": "Ax - BKx and the sizes of B and K"},
+     {"t": 1043, "label": "Factoring: (A - BK)x"},
+     {"t": 1073, "label": "Eigenvalues of the closed loop decide stability"},
+     {"t": 1096, "label": "When is this possible? Next lectures"}
+    ],
+    "book": [
+     {"printed": 328, "pdf": 348, "label": "Full-state feedback gives dx/dt = (A - BK)x"}
+    ]
+   },
+   "tutorNotes": "Book p.328: no open-loop strategy can change the eigenvalues of A; with full-state feedback u = -Kx, dx/dt = Ax + Bu = (A - BK)x; when eigenvalue placement is possible and how to choose K are later sections. Lecture: B is a tall matrix (n x m), K has the transposed shape (m x n), BK is n x n."
+  },
+  {
+   "number": 6,
+   "id": "s6",
+   "nav": "Make it concrete",
+   "title": "Make it concrete, and recap",
+   "time": [1110, 1171],
+   "summary": "The book's pendulum example: $K = [4\\ \\ 4]$ moves the eigenvalues from $\\pm 1$ to $-1$ and $-3$. Then the whole argument in one line, and what comes next.",
+   "goals": [
+    "Compute $BK$, $A - BK$ and its characteristic polynomial for the normalized pendulum.",
+    "Compare open-loop and closed-loop eigenvalues and responses.",
+    "Name the next topics: controllability, LQR, estimation."
+   ],
+   "notes": [
+    {"heading": "The example",
+     "paragraphs": [
+      "Take the normalized linearized pendulum, $A = \\begin{bmatrix}0 & 1 \\\\ 1 & 0\\end{bmatrix}$ and $B = \\begin{bmatrix}0 \\\\ 1\\end{bmatrix}$. Open loop, $\\det(\\lambda I - A) = \\lambda^2 - 1$, so $\\lambda = \\pm 1$: a saddle, unstable.",
+      "With the book's gain $K = [4\\ \\ 4]$, i.e. $u = -4\\theta - 4\\dot\\theta$: $BK = \\begin{bmatrix}0 & 0 \\\\ 4 & 4\\end{bmatrix}$ and $A - BK = \\begin{bmatrix}0 & 1 \\\\ -3 & -4\\end{bmatrix}$. Its characteristic polynomial is $\\lambda(\\lambda + 4) + 3 = \\lambda^2 + 4\\lambda + 3 = (\\lambda + 1)(\\lambda + 3)$, so the eigenvalues are $-1$ and $-3$.",
+      "Both are in the left half-plane, so the linearized closed loop is asymptotically stable. For a general gain $K = [k_1\\ \\ k_2]$ the polynomial is $\\lambda^2 + k_2\\lambda + (k_1 - 1)$, which has both roots in the left half-plane exactly when $k_1 > 1$ and $k_2 > 0$. Try it in the explorer."
+     ]},
+    {"heading": "Honest limits",
+     "paragraphs": [
+      "This is a linear, small-angle model. It describes the real pendulum only while the angle stays small; the stability conclusion is local. Feedback also assumed a perfect measurement of the full state and an unlimited torque."
+     ]},
+    {"heading": "Recap and next steps",
+     "paragraphs": [
+      "The overview's chain: model $\\dot x = Ax + Bu$; measure the state and choose $u = -Kx$; the closed loop is $\\dot x = (A - BK)x$; its eigenvalues decide stability. Feedback can handle uncertainty, instability and disturbances, and can be efficient, when it is designed well.",
+      "Next in the bootcamp: controllability (when can $K$ place every eigenvalue?), the linear quadratic regulator (choosing a good $K$ by optimization), and estimation with the Kalman filter (when only $y = Cx$ is measured)."
+     ]}
+   ],
+   "keyIdeas": [
+    "$A - BK = \\begin{bmatrix}0 & 1 \\\\ -3 & -4\\end{bmatrix}$, eigenvalues $-1, -3$.",
+    "General gain: stable iff $k_1 > 1$ and $k_2 > 0$.",
+    "Linear, local, full-state: the assumptions behind the result."
+   ],
+   "example": {
+    "title": "Another gain",
+    "problem": "For the same pendulum use $K = [2\\ \\ 2]$. Find $A - BK$, its eigenvalues and the kind of response.",
+    "steps": [
+     {"text": "Second row of $A$ minus $K$.", "tex": "A - BK = \\begin{bmatrix} 0 & 1 \\\\ 1 - 2 & 0 - 2 \\end{bmatrix} = \\begin{bmatrix} 0 & 1 \\\\ -1 & -2 \\end{bmatrix}"},
+     {"text": "Characteristic polynomial.", "tex": "\\lambda(\\lambda + 2) + 1 = \\lambda^2 + 2\\lambda + 1 = (\\lambda + 1)^2"},
+     {"text": "A double eigenvalue at $-1$: asymptotically stable, critically damped (fastest return without overshoot for this polynomial family).", "tex": "\\lambda_1 = \\lambda_2 = -1"}
+    ],
+    "answer": "Eigenvalues $-1, -1$: stable and critically damped. Check it in the explorer with $k_1 = 2$, $k_2 = 2$."
+   },
+   "sources": {
+    "video": [
+     {"t": 1110, "label": "Recap: feedback solves the fundamental problems"},
+     {"t": 1140, "label": "Feedback can be efficient"},
+     {"t": 1152, "label": "Closing remarks"}
+    ],
+    "book": [
+     {"printed": 327, "pdf": 347, "label": "Linearized inverted pendulum, Eq. (8.4)"},
+     {"printed": 328, "pdf": 348, "label": "Eigenvalues +/-1; K = [4 4] gives -1 and -3"}
+    ]
+   },
+   "tutorNotes": "Book p.327 Eq. (8.4): linearized inverted pendulum d/dt[x1;x2] = [[0,1],[g/L, d]][x1;x2] + [0;1]u with x1 = theta, x2 = theta-dot, u a torque. p.328: with omega_n = sqrt(g/L) = 1 and d = 0 the eigenvalues are +/-1 (saddle); K = [4 4], u = -4 theta - 4 theta-dot gives closed-loop eigenvalues -1 and -3; determining when eigenvalues can be moved and how to choose K is deferred. Note: the lecture itself does not work this numeric example; it comes from the book."
+  }
+ ],
+ "explorer": {
+  "pendulum": {
+   "k1": {"min": 0, "max": 10, "step": 0.1, "default": 4},
+   "k2": {"min": -2, "max": 8, "step": 0.1, "default": 4},
+   "theta0": {"min": -0.3, "max": 0.3, "step": 0.01, "default": 0.1},
+   "omega0": {"min": -0.5, "max": 0.5, "step": 0.01, "default": 0},
+   "pulse": {"amplitude": 0.6, "start": 1.0, "duration": 0.2},
+   "tMax": 10,
+   "thetaRange": 0.5,
+   "smallAngle": 0.3,
+   "presets": [
+    {"id": "open", "label": "No feedback", "k1": 0, "k2": 0},
+    {"id": "book", "label": "Book gain [4 4]", "k1": 4, "k2": 4},
+    {"id": "critical", "label": "Critical [2 2]", "k1": 2, "k2": 2},
+    {"id": "nodamp", "label": "No damping [4 0]", "k1": 4, "k2": 0},
+    {"id": "weak", "label": "Too weak [0.5 2]", "k1": 0.5, "k2": 2},
+    {"id": "offset", "label": "Boundary [1 2]", "k1": 1, "k2": 2},
+    {"id": "drift", "label": "Boundary [1 0]", "k1": 1, "k2": 0},
+    {"id": "negdamp", "label": "Wrong sign [4 -0.5]", "k1": 4, "k2": -0.5}
+   ]
+  },
+  "cruise": {
+   "aTrue": {"min": 0.25, "max": 2, "step": 0.05, "default": 0.5},
+   "aModel": {"min": 0.25, "max": 2, "step": 0.05, "default": 1},
+   "K": {"min": 0, "max": 100, "step": 1, "default": 50},
+   "hill": {"min": 0, "max": 20, "step": 1, "default": 10},
+   "reference": 60,
+   "tMax": 10,
+   "yMax": 140
+  }
+ },
+ "quiz": [
+  {"id": "q-state",
+   "question": "Why does the pendulum's state include the angular velocity $\\dot\\theta$ and not just the angle $\\theta$?",
+   "choices": [
+    {"text": "Because the angle alone does not determine what happens next.", "correct": true,
+     "why": "Right. A rod passing upright quickly and a rod resting upright have the same angle but very different futures. The state must be enough, with the model and the input, to predict the future."},
+    {"text": "Because sensors can only measure velocity.", "why": "No. What sensors measure is the output $y$; the state is defined by what the dynamics need, whatever is measured."},
+    {"text": "Because a state vector must always have exactly two entries.", "why": "No. The state can have any size $n$: twelve for an aircraft, two for this pendulum."},
+    {"text": "Because $\\dot\\theta$ is the control input.", "why": "No. The input $u$ is what we set (for example a torque). $\\dot\\theta$ is part of the state."}
+   ]},
+  {"id": "q-classify",
+   "question": "A home thermostat measures the room temperature and switches the heater on when the room is colder than the set point. What kind of control is this?",
+   "choices": [
+    {"text": "Passive control", "why": "Passive control spends no energy while running and does not react. The thermostat drives a heater."},
+    {"text": "Open-loop control", "why": "Open loop plays a preplanned input without measuring the result. The thermostat measures the room."},
+    {"text": "Closed-loop feedback", "correct": true, "why": "Yes. It measures the system's own output (temperature), compares it with the reference and acts on the error."},
+    {"text": "Disturbance feedforward", "why": "Feedforward measures an incoming disturbance (say, the outdoor temperature) rather than the response of the room itself."}
+   ]},
+  {"id": "q-junction",
+   "question": "In the closed-loop diagram, what enters the controller?",
+   "choices": [
+    {"text": "The reference $r$ only", "why": "That would be open loop: nothing about the actual response reaches the controller."},
+    {"text": "The error $e = r - y$", "correct": true, "why": "Yes. The measured output returns along the feedback path and is subtracted at the summing junction; the controller acts on the difference."},
+    {"text": "The sum $r + y$", "why": "The sign at the junction is minus. Adding $y$ would push harder the further the output goes, the opposite of correcting."},
+    {"text": "The disturbance $d$", "why": "A disturbance acts on the system. Feedback sees its effect through $y$, not $d$ itself."}
+   ]},
+  {"id": "q-openloop",
+   "question": "For $\\dot x = Ax + Bu(t)$ with a fixed matrix $A$ and a preplanned input $u(t)$, what happens to the eigenvalues that govern the homogeneous behaviour?",
+   "choices": [
+    {"text": "They stay the eigenvalues of $A$.", "correct": true, "why": "Right. A planned additive input is a forcing term; the homogeneous part is still $\\dot x = Ax$, so an eigenvalue at $+1$ keeps amplifying any small error."},
+    {"text": "They become the eigenvalues of $A - B$.", "why": "No such matrix appears: $u(t)$ does not depend on $x$, so it cannot change the matrix multiplying $x$."},
+    {"text": "They move to wherever $u(t)$ is designed to put them.", "why": "That needs $u$ to depend on the state, which is feedback."},
+    {"text": "They all become zero.", "why": "No. Nothing in a planned input changes $A$."}
+   ]},
+  {"id": "q-uncertainty",
+   "question": "Which is an example of model uncertainty rather than an external disturbance?",
+   "choices": [
+    {"text": "A gust of wind hits the pendulum.", "why": "That is external forcing: a disturbance."},
+    {"text": "The car is driving up a hill.", "why": "In the cruise model the hill enters as the disturbance $d$, an outside effect."},
+    {"text": "The real rod is 1 cm longer than the model assumes.", "correct": true, "why": "Yes. The model itself is wrong: internal uncertainty, in the lecture's words."},
+    {"text": "Someone briefly pushes the pendulum sideways with a finger.", "why": "That is an outside force added to the system for a moment: an external disturbance. The model of the pendulum itself is still right."}
+   ]},
+  {"id": "q-size",
+   "question": "A system has $n = 4$ states and $m = 2$ inputs. With $u = -Kx$, what size is $K$, and what size is $BK$?",
+   "choices": [
+    {"text": "$K$ is $2\\times4$; $BK$ is $4\\times4$", "correct": true, "why": "Right: $K$ maps a 4-vector to a 2-vector, and $(4\\times2)(2\\times4) = 4\\times4$, the size of $A$."},
+    {"text": "$K$ is $4\\times2$; $BK$ is $2\\times2$", "why": "That is the shape of $B$, and the product would be $KB$, which cannot be subtracted from $A$."},
+    {"text": "$K$ is $4\\times4$; $BK$ is $4\\times4$", "why": "$Kx$ must have the size of $u$, two entries, so $K$ has two rows."},
+    {"text": "$K$ is $2\\times2$; $BK$ is $4\\times2$", "why": "$K$ must multiply the 4-vector $x$, so it needs four columns."}
+   ]},
+  {"id": "q-factor",
+   "question": "Substituting $u = -Kx$ into $\\dot x = Ax + Bu$ gives which closed loop?",
+   "choices": [
+    {"text": "$\\dot x = (A - KB)x$", "why": "Order matters: the term is $B(-Kx) = -BKx$, so $B$ comes first."},
+    {"text": "$\\dot x = x(A - BK)$", "why": "Factoring must keep $x$ on the right of each product; $x$ is a column vector."},
+    {"text": "$\\dot x = (A - BK)x$", "correct": true, "why": "Yes: $Ax - BKx = (A - BK)x$."},
+    {"text": "$\\dot x = (A + BK)x$", "why": "The minus sign from $u = -Kx$ stays: $B(-Kx) = -BKx$."}
+   ]},
+  {"id": "q-poly",
+   "question": "For $A = \\begin{bmatrix}0 & 1 \\\\ 1 & 0\\end{bmatrix}$, $B = \\begin{bmatrix}0 \\\\ 1\\end{bmatrix}$ and $K = [4\\ \\ 4]$, what is the characteristic polynomial of $A - BK$?",
+   "choices": [
+    {"text": "$\\lambda^2 - 1$", "why": "That is the open-loop polynomial of $A$ itself, eigenvalues $\\pm 1$."},
+    {"text": "$\\lambda^2 + 4\\lambda + 3$", "correct": true, "why": "Yes: $A - BK = \\begin{bmatrix}0 & 1 \\\\ -3 & -4\\end{bmatrix}$, and $\\lambda(\\lambda+4) + 3 = (\\lambda+1)(\\lambda+3)$, eigenvalues $-1, -3$."},
+    {"text": "$\\lambda^2 - 4\\lambda + 5$", "why": "Check the signs: subtracting $BK$ puts $-4$ in the bottom-right entry, which becomes $+4\\lambda$."},
+    {"text": "$\\lambda^2 + 4\\lambda - 5$", "why": "The constant term is $\\det(A - BK) = 0\\cdot(-4) - 1\\cdot(-3) = 3$."}
+   ]},
+  {"id": "q-boundary",
+   "question": "With $K = [k_1\\ \\ k_2]$ the pendulum's closed loop has polynomial $\\lambda^2 + k_2\\lambda + (k_1 - 1)$. What happens for $k_1 = 4$, $k_2 = 0$?",
+   "choices": [
+    {"text": "Asymptotically stable: the tilt decays.", "why": "The roots are $\\pm i\\sqrt{3}$, real part zero, so nothing makes the motion decay."},
+    {"text": "An undamped oscillation that neither grows nor decays.", "correct": true, "why": "Right: eigenvalues on the imaginary axis. This boundary case is not asymptotically stable; any damping $k_2 > 0$ would make it so."},
+    {"text": "Unstable growth like $e^{t}$.", "why": "That was the open loop ($k_1 = 0$). With $k_1 > 1$ the gravity term is overcome."},
+    {"text": "Exactly the same as the open loop.", "why": "No: the feedback $u = -4\\theta$ has turned the saddle into a centre."}
+   ]},
+  {"id": "q-cruise",
+   "question": "In the static cruise model $y = au + d$ with $u = K(r - y)$, $a = 0.5$ and $K = 50$, what fraction of a disturbance $d$ reaches the speed?",
+   "choices": [
+    {"text": "All of it", "why": "That is the open-loop case."},
+    {"text": "Half", "why": "The disturbance is divided by $1 + aK = 26$, not by 2."},
+    {"text": "$1/26$", "correct": true, "why": "Yes: $y = \\frac{aK}{1+aK}r + \\frac{1}{1+aK}d$ with $1 + aK = 26$."},
+    {"text": "None of it", "why": "At finite gain the disturbance still reaches the output, scaled by $1/(1 + aK) = 1/26$, so feedback attenuates it but does not cancel it."}
+   ]}
+ ]
+}

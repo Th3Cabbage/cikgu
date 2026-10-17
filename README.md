@@ -1,5 +1,9 @@
 # Cikgu
 
+**Continuing on another computer?** Read [the handover](docs/HANDOVER.md) and
+[setup instructions](docs/SETUP.md). Claude starts from [CLAUDE.md](CLAUDE.md) and can use
+the checked-in `/build-study-package` skill for the next lecture.
+
 An animation-first study guide to **second-order linear differential equations**, for a first
 course. Assumed background: basic calculus (derivatives, the chain and product rules, `e^x`,
 sine and cosine).
@@ -17,6 +21,24 @@ same formulas and expose `solution(t, a, b, c, y0, v0)`.
 
 A hosted copy of the browser guide exists but is **private to its owner**; to use the guide,
 serve `browser/dist` locally as described below.
+
+**Also in this repository: a Control Bootcamp overview companion.** A separate local guide to
+Steve Brunton's Control Bootcamp overview lecture (state space, feedback, `u = -Kx`, `A - BK`),
+with animated derivations, an explorer, a quiz and an optional GPT tutor. Start it with
+`.\launch_control.ps1`; see [`control/README.md`](control/README.md) for details. It is
+independent of the ODE guide below.
+
+**And a Linear Systems companion** to the bootcamp's second lecture
+([Linear Systems](https://www.youtube.com/watch?v=nyqJJdhReiA), 24:47): `ẋ = Ax`, the matrix
+exponential, eigenvectors and `AT = TD`, eigenvector coordinates `x = Tz`, the proof of
+`e^{At} = T e^{Dt} T⁻¹`, and the map / evolve / map-back reading at 22:22 (Section 6). It has 33
+animated ManimGL steps, worked examples, a live explorer and a 10-question quiz, and it reuses the
+overview's player and optional tutor. Start it with `.\launch_linear_systems.ps1` (port 8780).
+Content source: `linear-systems/course_source.py` → `linear-systems/dist/course.json`; animations:
+`linear-systems/animation/` (`.venv\Scripts\python.exe linear-systems\animation\build_sequences.py`).
+Checks: `.venv\Scripts\python.exe qa\linear_systems_qa.py` and `node qa\linear_systems_browser_qa.js`.
+See [`linear-systems/README.md`](linear-systems/README.md) for instructions and
+[`tools/README.md`](tools/README.md) for the cached source preparation and reusable workflow.
 
 ## What's in the course
 

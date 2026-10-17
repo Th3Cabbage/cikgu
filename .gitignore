@@ -1,5 +1,8 @@
 # Python environments and caches
 .venv/
+.venv-download/
+/sources/
+/databook.pdf
 venv/
 __pycache__/
 *.py[cod]
