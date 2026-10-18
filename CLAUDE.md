@@ -1,6 +1,6 @@
 # Cikgu: start here
 
-This repository contains three working mathematics study packages. Read
+This repository contains four working mathematics study packages. Read
 [docs/HANDOVER.md](docs/HANDOVER.md) for their architecture, completed work and limitations;
 read [docs/SETUP.md](docs/SETUP.md) when using a new computer.
 
@@ -32,6 +32,7 @@ Load detailed references only when needed.
 | Original ODE browser guide | `.\launch_browser.ps1` | 8765 |
 | Control Bootcamp overview | `.\launch_control.ps1` | 8770 |
 | Linear Systems | `.\launch_linear_systems.ps1` | 8780 |
+| Stability and Eigenvalues | `.\launch_stability_eigenvalues.ps1` | 8790 |
 
 The new-package skill works with Claude alone. Codex can also plan/review when requested;
 do not recursively launch Claude from inside a Claude session just to follow the skill.

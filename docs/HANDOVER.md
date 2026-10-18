@@ -12,6 +12,7 @@ needed to understand the checked-in implementation.
 | Original ODE | Root `course.json`; second-order linear differential equations; browser and native guides | `launch_browser.ps1` / `launch_native.ps1` |
 | `control/` | Control Bootcamp overview, video `Pi7l8mMjYVE`; textbook Section 8.1 | `launch_control.ps1` |
 | `linear-systems/` | Linear Systems, video `nyqJJdhReiA`; textbook Section 8.2 | `launch_linear_systems.ps1` |
+| `stability-eigenvalues/` | Stability and Eigenvalues, video `h7nJ6ZL4Lf0`; Section 8.2, pp. 332/334/335 | `launch_stability_eigenvalues.ps1` |
 
 The original ODE browser assets are under `browser/dist`; its animations and native application
 are under `animation/` and `native/`. Each later package is independent: its `dist/` contains
@@ -48,6 +49,19 @@ from course/section/animation-step IDs, and handles missing keys. No live paid A
 made during verification. See [Linear Systems README](../linear-systems/README.md) and
 [review](../linear-systems/REVIEW.md) for details.
 
+Stability and Eigenvalues (playlist item 3, added 18 October 2026) covers the whole 19:30 lecture in
+six sections, continuous and discrete time: seven sequences (38 steps, two in Section 3), a three-view
+explorer, authored worked examples and ten quiz questions. `stability-eigenvalues/course_source.py`
+generates `dist/course.json`. YouTube automatic captions were available (no ASR); timestamps were
+checked against frames. Book links target printed pp. 332, 334, 335 = PDF pp. 352, 354, 355 of the
+2017 preprint downloaded from databookuw.com/databook.pdf (same pagination as the Linear Systems
+references). Lecture slips at 12:57 (T⁻¹DT order) and 16:10 ("real part" for magnitude) are flagged.
+Boundary cases (imaginary axis / unit circle, semisimple versus Jordan), transient growth and aliasing
+are labelled Supplement; the lecture states only the strict criteria. The explorer uses representative
+real 2×2 canonical families (real, complex pair, defective Jordan) with bounded sliders and
+T = [[1,s],[0,1]]; verdicts come from eigenvalues/Jordan structure, not the plotted window. See its
+[README](../stability-eigenvalues/README.md) and [review](../stability-eigenvalues/REVIEW.md).
+
 ## Reusable workflow and design decisions
 
 The user chose browser delivery with the ODE guide's step-controlled ManimGL experience.
@@ -75,6 +89,10 @@ The runner has Windows Git Bash assumptions; direct Claude Code use is also supp
 The current scaffold copies renderer code from the overview. The newer Linear Systems renderer
 has a corrected FFmpeg codec probe; when developing another renderer, check metadata against
 the actual input stream instead of assuming the copied overview probe reports every field.
+Stability and Eigenvalues copied the corrected Linear Systems renderer/server and defaults to
+`--jobs 1`: parallel renders collided on ManimGL's shared temporary SVG for identical Text. For a quick
+scene error check use `manimgl sequence_scenes.py <Scene> -w -s`; `-s` without `-w` opens an
+interactive preview window and does not exit.
 
 ## Evidence and known limits
 
@@ -88,6 +106,12 @@ Recorded delivery checks on 14 October 2026:
   240 Hz, pause/navigation cancellation and persisted time; five preparation tests cover caption
   handling, page validation and timestamps.
 
+Recorded Stability and Eigenvalues checks on 18 October 2026 (fresh root `.venv` from the pinned
+requirements on Python 3.13.5): 61/61 math/media/course/server checks (SciPy expm and solve_ivp,
+an eigenvalue/rank verdict reference for all 168 systems, and 700-digit long-horizon solutions for 48
+selected systems), the explorer regression, 108/108 browser checks, `check_study --decode` and a real
+launcher run. After the final review only modes-mix was re-rendered (`--only modes-mix`).
+
 These are historical results, not a claim about a fresh machine. Commands and dependencies are
 in setup/package docs. Numerical checks, actual decoded media and visual browser inspection
 serve different purposes. Ignored QA results/screenshots can be regenerated.
@@ -98,7 +122,7 @@ their identities/course data and missing-key state, and contained every clip/sti
 67 steps without a PDF, research cache or virtual environment. Documentation links resolved.
 This checks viewing portability; a fresh dependency installation/render was not repeated.
 
-YouTube supplied no captions for Linear Systems; local Whisper base.en ASR was generated and
+Later bootcamp lectures (linearization, controllability) are previewed only. YouTube supplied no captions for Linear Systems; local Whisper base.en ASR was generated and
 labelled as such. It contains recognition errors, so equations were checked against frames and
 the book. The source cache is ignored and must be regenerated or transferred separately.
 The user's PDF is also local-only: copy the same revision to root `databook.pdf` to keep page

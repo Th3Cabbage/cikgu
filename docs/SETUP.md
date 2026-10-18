@@ -20,6 +20,7 @@ Make sure `python --version` works. Then run one launcher:
 .\launch_browser.ps1             # ODE: default port 8765
 .\launch_control.ps1             # overview: 8770
 .\launch_linear_systems.ps1      # Linear Systems: 8780
+.\launch_stability_eigenvalues.ps1   # Stability and Eigenvalues: 8790
 ```
 
 Each opens a browser and prints its actual URL, using the next free port if necessary.
@@ -46,6 +47,16 @@ To regenerate Linear Systems research:
 ```powershell
 .\download_study.ps1 -Url 'https://www.youtube.com/watch?v=nyqJJdhReiA&t=1342s' -Slug linear-systems -BookPages '351-352' -Transcribe
 ```
+
+Stability and Eigenvalues (automatic captions exist, so no transcription runs; book PDF pages 352–354,
+with the p. 335 / PDF 355 example read from the same PDF):
+
+```powershell
+.\download_study.ps1 -Url 'https://www.youtube.com/watch?v=h7nJ6ZL4Lf0' -Slug stability-eigenvalues -BookPages '352-354' -Transcribe
+```
+
+The free 2017 preprint used for these page numbers can be downloaded from
+`https://databookuw.com/databook.pdf` to root `databook.pdf` (checked on 18 October 2026).
 
 The script creates `.venv-download`, installs source tools, caches downloads and only transcribes
 when captions are unavailable. Whisper downloads its model on first use. Internet access and
@@ -109,7 +120,14 @@ if Chrome is elsewhere. With the render environment installed:
 node qa\linear_systems_browser_qa.js
 node qa\linear_explorer_regression.js
 .\.venv\Scripts\python.exe tools\check_study.py --package linear-systems --decode
+.\.venv\Scripts\python.exe qa\stability_qa.py
+node qa\stability_explorer_regression.js
+node qa\stability_browser_qa.js
+.\.venv\Scripts\python.exe tools\check_study.py --package stability-eigenvalues --decode
 ```
+
+Render Stability and Eigenvalues sequentially (`--jobs 1`, its default); parallel ManimGL renders
+were seen to collide on shared temporary text SVG files.
 
 The QA scripts strip OpenAI variables from their test servers and avoid paid tutor calls. The
 book-range check runs only when a local PDF exists. Logs/results/screenshots are ignored and

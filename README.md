@@ -40,6 +40,14 @@ Checks: `.venv\Scripts\python.exe qa\linear_systems_qa.py` and `node qa\linear_s
 See [`linear-systems/README.md`](linear-systems/README.md) for instructions and
 [`tools/README.md`](tools/README.md) for the cached source preparation and reusable workflow.
 
+**And a Stability and Eigenvalues companion** to the third lecture
+([Stability and Eigenvalues](https://www.youtube.com/watch?v=h7nJ6ZL4Lf0), 19:30): growth and decay
+from `e^{Dt}`, complex eigenvalues and the envelope, the left half-plane, sampled discrete-time systems
+`x_{k+1} = Ã x_k`, the unit circle and the map `λ ↦ e^{λΔt}`, with clearly labelled supplements on
+boundary (Lyapunov/Jordan) cases. 38 ManimGL steps, worked examples, a three-view explorer and a
+10-question quiz. Start it with `.\launch_stability_eigenvalues.ps1` (port 8790); see
+[`stability-eigenvalues/README.md`](stability-eigenvalues/README.md).
+
 ## What's in the course
 
 Six lessons, nine animated derivations (63 steps) and an 11-question quiz:

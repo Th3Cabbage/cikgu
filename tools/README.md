@@ -54,7 +54,12 @@ Render with:
 ```
 
 Use `--only sequence-id` for a targeted revision, or `--no-render` to update text metadata from
-existing masters. Run package-specific math, media and browser checks before handing it over.
+existing masters. Prefer `--jobs 1` if scenes share text labels: parallel ManimGL processes were seen
+to race on the same temporary SVG file (Stability and Eigenvalues defaults to one job). To check that
+a scene runs without rendering video, use `manimgl sequence_scenes.py <Scene> -w -s` from the
+package's `animation` folder; `-s` without `-w` opens an interactive window that does not exit.
+The scaffold copies the overview renderer; compare with `linear-systems/animation/build_sequences.py`
+(corrected codec/size probe) when starting a new package. Run package-specific math, media and browser checks before handing it over.
 The generated launcher is `launch_another_lecture.ps1`.
 
 The reusable audit checks section routes, quiz explanations, referenced media and decoded frame
