@@ -1,0 +1,26 @@
+# Netlify: publish the unified Cikgu study site. The build uses Node.js built-ins only and copies the
+# rendered study packages already tracked in Git; nothing is rendered or installed (base = "site" also
+# keeps Netlify from installing the repository's Python/ManimGL requirements). See site/README.md.
+[build]
+  base = "site"
+  command = "node build.mjs"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Course routes are #hashes inside real directories, so there is deliberately no catch-all rewrite.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+    X-Frame-Options = "DENY"
+
+# Each Control Bootcamp lecture reads this static file to learn that the site has no chat server.
+[[headers]]
+  for = "/controls/*/api/status"
+  [headers.values]
+    Content-Type = "application/json; charset=utf-8"
+    Cache-Control = "no-cache"

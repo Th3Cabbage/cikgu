@@ -68,6 +68,9 @@ stop on navigation. Do not claim the explorer covers cases outside its mathemati
 - Keep rendered `dist` assets in Git so another machine can view without rendering. Keep source
   downloads, environments, master renders, logs and credentials outside the commit. Preserve
   third-party asset licenses. Do not bundle the source textbook or lecture into the web assets.
+- Add the finished lecture to the unified site: append it to `site/catalog.json` (slug, source,
+  title, short description, `storeKey`, `statusApp`), then run `node site/build.mjs`,
+  `node --test site/test/build.test.mjs` and `node qa/site_browser_qa.js`. See `site/README.md`.
 - Update package README/review and the handover with commands, actual checks and limitations.
   Give the user the launcher command. Commit or push only when requested.
 

@@ -14,7 +14,14 @@ No local username or original checkout path is required.
 
 ## View a completed package
 
-Make sure `python --version` works. Then run one launcher:
+Make sure `python --version` works. The unified site (all courses, shared navigation) also needs
+Node.js 18+ for its dependency-free build:
+
+```powershell
+.\launch_study.ps1               # all courses in one site: 8800 (see site/README.md)
+```
+
+Or run one package on its own (needed for the optional Ask GPT panel and local-PDF links):
 
 ```powershell
 .\launch_browser.ps1             # ODE: default port 8765
@@ -124,6 +131,8 @@ node qa\linear_explorer_regression.js
 node qa\stability_explorer_regression.js
 node qa\stability_browser_qa.js
 .\.venv\Scripts\python.exe tools\check_study.py --package stability-eigenvalues --decode
+node --test site/test/build.test.mjs
+node site/build.mjs; node qa\site_browser_qa.js
 ```
 
 Render Stability and Eigenvalues sequentially (`--jobs 1`, its default); parallel ManimGL renders
@@ -135,3 +144,4 @@ regenerated locally. See individual package READMEs for additional checks.
 
 Git carries code, instructions, dependency manifests and rendered viewing assets. It does not
 carry installed Python/Node environments, source downloads, raw logs, browser progress or sign-ins.
+The generated `site/dist` is ignored; rebuild it (Netlify does so on each deploy).

@@ -33,10 +33,15 @@ Load detailed references only when needed.
 | Control Bootcamp overview | `.\launch_control.ps1` | 8770 |
 | Linear Systems | `.\launch_linear_systems.ps1` | 8780 |
 | Stability and Eigenvalues | `.\launch_stability_eigenvalues.ps1` | 8790 |
+| Unified study site (all courses; Netlify build) | `.\launch_study.ps1` | 8800 |
 
 The new-package skill works with Claude alone. Codex can also plan/review when requested;
 do not recursively launch Claude from inside a Claude session just to follow the skill.
 Model choice is configurable and depends on the account on this computer; see setup docs.
+
+The unified site (`site/`, see [site/README.md](site/README.md)) copies each package `dist/` and adds
+shared navigation at build time; do not edit package apps for site integration. A finished lecture is
+added to the site through `site/catalog.json`. `site/dist` is generated and ignored.
 
 Update the handover and package documentation when architecture, commands or limitations change.
 Report checks actually run; historical results do not prove a new environment works.

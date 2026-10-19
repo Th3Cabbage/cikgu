@@ -19,8 +19,11 @@ lessons, worked examples, explorer settings and quiz are the same:
 Both use the same exact solver: `native/ode_math.py` and `browser/dist/ode_math.js` implement the
 same formulas and expose `solution(t, a, b, c, y0, v0)`.
 
-A hosted copy of the browser guide exists but is **private to its owner**; to use the guide,
-serve `browser/dist` locally as described below.
+**All courses in one website.** `.\launch_study.ps1` builds and opens the unified study site
+(port 8800): a library home with this ODE course and a Control Bootcamp course of three ordered
+lectures with shared navigation. The same build (`site/`, `netlify.toml`) publishes on Netlify; it is
+static, so its Ask GPT panel is off. See [`site/README.md`](site/README.md). The single-package
+launchers below still work on their own.
 
 **Also in this repository: a Control Bootcamp overview companion.** A separate local guide to
 Steve Brunton's Control Bootcamp overview lecture (state space, feedback, `u = -Kx`, `A - BK`),
@@ -276,6 +279,7 @@ deliberate, tiny approximation: across the explorer ranges the worst case is abo
 | `animation/` | Derivation scenes, step text, render config and `build_sequences.py` |
 | `native/` | `study_guide.py` (`SecondOrderStudyGuide`), `ode_math.py` (standard-library solver), `explanation_scenes.py` (overview clips), `guide_config.yml` |
 | `launch_browser.ps1`, `launch_native.ps1` | Launchers |
+| `site/`, `launch_study.ps1`, `netlify.toml` | Unified study site: registry, build, local server and Netlify settings (output `site/dist` is generated and ignored) |
 | `qa/` | Check scripts; `tooling/` holds the `package.json`/lockfile for `playwright-core` |
 | `requirements.txt`, `fix_manim_miktex.py` | ManimGL environment setup |
 

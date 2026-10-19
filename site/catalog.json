@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "title": "Cikgu",
+  "tagline": "Animated mathematics study guides",
+  "courses": [
+    {
+      "id": "ode",
+      "kind": "single",
+      "path": "ode",
+      "source": "browser/dist",
+      "title": "Second-Order Linear Differential Equations",
+      "short": "Second-order ODEs",
+      "description": "A first course on second-order linear equations: characteristic roots, initial value problems, forcing and resonance, and damped springs.",
+      "sectionsKey": "lessons",
+      "sectionLabel": "lesson",
+      "storeKey": "sode-theme",
+      "statusApp": null
+    },
+    {
+      "id": "controls",
+      "kind": "series",
+      "path": "controls",
+      "title": "Control Bootcamp",
+      "short": "Control Bootcamp",
+      "description": "Companions to Steve Brunton's Control Bootcamp lectures and Chapter 8 of Brunton & Kutz, from the idea of feedback to stability of linear systems.",
+      "lectures": [
+        {
+          "slug": "overview",
+          "source": "control/dist",
+          "title": "Overview",
+          "description": "Why feedback beats open-loop control, the state-space model, and how closing the loop moves an inverted pendulum's eigenvalues.",
+          "storeKey": "ctl-overview-v1",
+          "statusApp": "ControlBootcamp"
+        },
+        {
+          "slug": "linear-systems",
+          "source": "linear-systems/dist",
+          "title": "Linear Systems",
+          "description": "Solving x-dot = Ax with the matrix exponential: eigenvector coordinates, decoupled modes, and the map, evolve, map back picture.",
+          "storeKey": "linear-systems-v1",
+          "statusApp": "Study_linear_systems"
+        },
+        {
+          "slug": "stability-eigenvalues",
+          "source": "stability-eigenvalues/dist",
+          "title": "Stability and Eigenvalues",
+          "description": "When solutions decay: the left half-plane in continuous time, the unit circle in discrete time, and the map between them.",
+          "storeKey": "stability-eigenvalues-v1",
+          "statusApp": "Study_stability_eigenvalues"
+        }
+      ]
+    }
+  ]
+}

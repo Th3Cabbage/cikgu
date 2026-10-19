@@ -1,7 +1,7 @@
 # Cikgu handover
 
 This is the durable project context for a fresh Claude/Codex session or another computer.
-It records completed work through 18 October 2026. Start with `CLAUDE.md`; installation is in
+It records completed work through 19 October 2026. Start with `CLAUDE.md`; installation is in
 [SETUP.md](SETUP.md). Chat history, local agent session IDs and installed environments are not
 needed to understand the checked-in implementation.
 
@@ -13,6 +13,7 @@ needed to understand the checked-in implementation.
 | `control/` | Control Bootcamp overview, video `Pi7l8mMjYVE`; textbook Section 8.1 | `launch_control.ps1` |
 | `linear-systems/` | Linear Systems, video `nyqJJdhReiA`; textbook Section 8.2 | `launch_linear_systems.ps1` |
 | `stability-eigenvalues/` | Stability and Eigenvalues, video `h7nJ6ZL4Lf0`; Section 8.2, pp. 332/334/335 | `launch_stability_eigenvalues.ps1` |
+| `site/` | Unified website: ODE course + Control Bootcamp (3 lectures), shared navigation; Netlify build | `launch_study.ps1` |
 
 The original ODE browser assets are under `browser/dist`; its animations and native application
 are under `animation/` and `native/`. Each later package is independent: its `dist/` contains
@@ -61,6 +62,28 @@ are labelled Supplement; the lecture states only the strict criteria. The explor
 real 2×2 canonical families (real, complex pair, defective Jordan) with bounded sliders and
 T = [[1,s],[0,1]]; verdicts come from eigenvalues/Jordan structure, not the plotted window. See its
 [README](../stability-eigenvalues/README.md) and [review](../stability-eigenvalues/REVIEW.md).
+
+## Unified study site (19 October 2026)
+
+The user approved one website: a library home with the ODE guide as one course and a Control Bootcamp
+course of three ordered lectures, with shared navigation, one Netlify deployment and preserved
+teaching features/progress. `site/build.mjs` (Node built-ins only) copies each package `dist/`
+byte-for-byte into ignored `site/dist`, injecting only a course bar into each `index.html`; the
+registry is `site/catalog.json`. Root `netlify.toml` builds with base `site`, `node build.mjs`,
+publish `dist`. It was not deployed or connected to a Netlify account in this work.
+
+Limits: the site is static, so Ask GPT is disabled there (static `api/status`, explanatory panel) and
+book links use the online copy; the standalone launchers keep live chat/local PDF. Storage keys are
+unchanged, so progress is shared within one site origin, but local ports and the Netlify domain have
+separate progress (no migration). Details, Netlify UI settings and adding a lecture:
+[site/README.md](../site/README.md).
+
+Checks on 19 October 2026: 7/7 build-invariant tests (`node --test site/test/build.test.mjs`:
+determinism, byte-identical copies, public-asset-only output, link resolution, registry validation),
+79/79 HTTP/Chrome checks (`qa/site_browser_qa.js`, including all 365 manifest media paths and one
+played clip per package), a repeated default rebuild with identical tree hash, and a real
+`launch_study.ps1` run (busy-port fallback, nonce health check, server exit when the launcher was
+killed). Package content and media were not changed, so math/render suites were not rerun.
 
 ## Reusable workflow and design decisions
 
