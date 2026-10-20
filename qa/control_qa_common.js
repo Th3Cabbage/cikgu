@@ -1,4 +1,4 @@
-// Shared helpers for the Control Bootcamp browser checks: start control/server.py on a free
+// Shared helpers for the Control Bootcamp browser checks: start courses/controls/overview/server.py on a free
 // loopback port (identity confirmed by nonce), launch installed Chrome via playwright-core from
 // qa/tooling, and record PASS/FAIL lines.
 "use strict";
@@ -8,7 +8,7 @@ const os = require("os");
 const { spawn } = require("child_process");
 
 const PROJECT = path.dirname(__dirname);
-const DIST = path.join(PROJECT, "control", "dist");
+const DIST = path.join(PROJECT, "courses/controls/overview", "dist");
 const CHROME = process.env.CHROME_PATH || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const PY = [path.join(PROJECT, ".venv", "Scripts", "python.exe")].find(p => fs.existsSync(p)) || "python";
 const { chromium } = require(path.join(__dirname, "tooling", "node_modules", "playwright-core"));
@@ -31,7 +31,7 @@ function startServer(startPort, env) {
   const childEnv = Object.assign({}, process.env);
   Object.keys(childEnv).forEach(k => { if (/^OPENAI_/.test(k)) delete childEnv[k]; });
   Object.assign(childEnv, env || {});
-  const proc = spawn(PY, ["-I", path.join(PROJECT, "control", "server.py"), "--port", String(startPort || 8790),
+  const proc = spawn(PY, ["-I", path.join(PROJECT, "courses/controls/overview", "server.py"), "--port", String(startPort || 8790),
                           "--port-file", portFile, "--nonce", nonce], { stdio: ["ignore", "pipe", "pipe"], env: childEnv });
   let log = "";
   proc.stderr.on("data", d => { log += d; });

@@ -18,9 +18,9 @@ node_modules/
 *.key
 
 # Local ManimGL output: master renders, stamps, render probes, scratch renders
-animation/masters/
-animation/review-render/
-animation/_probe/
+courses/ode/animation/masters/
+courses/ode/animation/review-render/
+courses/ode/animation/_probe/
 *.stamp
 /media/
 /videos/
@@ -53,7 +53,7 @@ Thumbs.db
 desktop.ini
 .DS_Store
 
-# The published site is versioned as-is: keep every browser/dist asset
+# The published site is versioned as-is: keep every courses/ode/browser/dist asset
 # (step clips, stills, posters, KaTeX fonts and LICENSE) even if a rule above matches.
-!browser/dist/
-!browser/dist/**
+!courses/ode/browser/dist/
+!courses/ode/browser/dist/**

@@ -1,4 +1,4 @@
-"""Headless QA for native/study_guide.py. Opens no window.
+"""Headless QA for courses/ode/native/study_guide.py. Opens no window.
 
 Builds the real SecondOrderStudyGuide scene on ManimGL's offscreen (standalone OpenGL)
 camera at 1280x720, drives its real event handlers (on_mouse_press/drag/release/motion,
@@ -24,7 +24,7 @@ os.makedirs(RESULTS, exist_ok=True)
 
 PIXELS = (1280, 720)
 sys.argv = ["manimgl", "-w", "-r", f"{PIXELS[0]}x{PIXELS[1]}", "--video_dir", OUT_DIR]
-sys.path.insert(0, os.path.join(PROJECT, "native"))
+sys.path.insert(0, os.path.join(PROJECT, "courses/ode/native"))
 
 from manimlib import *  # noqa: E402,F403
 from manimlib.window import Window  # noqa: E402

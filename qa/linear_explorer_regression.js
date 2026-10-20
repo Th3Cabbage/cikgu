@@ -3,13 +3,13 @@ const assert = require('assert/strict');
 const fs = require('fs');
 const vm = require('vm');
 const path = require('path');
-const M = require('../linear-systems/dist/study_math.js');
+const M = require('../courses/controls/linear-systems/dist/study_math.js');
 for (const [a,b,expected] of [[0,1,'unstable'],[1,0,'unstable'],[-1,0,'marginal'],[0,0,'marginal'],[1,-1,'saddle'],[-1,-2,'stable']]) {
   assert.equal(M.classify(a,b),expected);
 }
 
 // Run the real explorer with a tiny DOM adapter and a manually driven RAF clock.
-const course = JSON.parse(fs.readFileSync(path.join(__dirname,'../linear-systems/dist/course.json'),'utf8'));
+const course = JSON.parse(fs.readFileSync(path.join(__dirname,'../courses/controls/linear-systems/dist/course.json'),'utf8'));
 const nodes = new Map();
 function element(tag, attrs={}, children=[]) {
   attrs=attrs||{};
@@ -26,7 +26,7 @@ function element(tag, attrs={}, children=[]) {
 let pending=null;
 const win={StudyMath:M};
 const sandbox={window:win,requestAnimationFrame(fn){pending=fn;return 1},cancelAnimationFrame(){pending=null},console};
-vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../linear-systems/dist/explorer.js'),'utf8'),sandbox);
+vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../courses/controls/linear-systems/dist/explorer.js'),'utf8'),sandbox);
 const state={explorer:null};
 const math=(n,text)=>{n.textContent=text;return n};
 win.StudyExplorer.render({root:element('root'),course,state,save(){},html:element,svg:element,mathText:math,flowMath:math,displayMath:math,announce(){}});

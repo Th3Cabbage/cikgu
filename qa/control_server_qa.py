@@ -1,4 +1,4 @@
-"""Checks for control/server.py: static root, /book, request guards and the tutor endpoint.
+"""Checks for courses/controls/overview/server.py: static root, /book, request guards and the tutor endpoint.
 
     .venv\\Scripts\\python.exe qa\\control_server_qa.py
 
@@ -23,7 +23,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PY = os.path.join(PROJECT, ".venv", "Scripts", "python.exe")
-SERVER = os.path.join(PROJECT, "control", "server.py")
+SERVER = os.path.join(PROJECT, "courses/controls/overview", "server.py")
 FAKE_KEY = "sk-test-" + uuid.uuid4().hex   # a fake key for the mock only
 RESULTS = []
 
@@ -175,7 +175,7 @@ def main():
               and "OPENAI_API_KEY" in j.get("error", ""), (st, j))
         check("missing key: reply contains no fabricated answer", "text" not in j)
         for path, want in [("/../README.md", 404), ("/..%2f..%2fREADME.md", 404), ("/%2e%2e/%2e%2e/databook.pdf", 404),
-                           ("/../../control/server.py", 404), ("/server.py", 404), ("/animations/", 404),
+                           ("/../../courses/controls/overview/server.py", 404), ("/server.py", 404), ("/animations/", 404),
                            ("/vendor/", 404), ("/.git/config", 404), ("/databook.pdf", 404)]:
             st, _, _ = req(port, "GET", path)
             check(f"blocked outside the static root: {path}", st == want, st)
@@ -186,7 +186,7 @@ def main():
         st, hd, _ = req(port, "GET", "/animations/close-loop/step-01.mp4", headers={"Range": "bytes=99999999-"})
         check("unsatisfiable range -> 416", st == 416)
         clip = "/animations/close-loop/step-01.mp4"
-        size = os.path.getsize(os.path.join(PROJECT, "control", "dist", clip.lstrip("/")))
+        size = os.path.getsize(os.path.join(PROJECT, "courses/controls/overview", "dist", clip.lstrip("/")))
         for r in ("bytes=-0", "bytes=-1-10", "bytes=10-2", "bytes=-2-10", "bytes=-", "bytes=+5-9", "bytes=1_0-20", "bytes=abc"):
             st, hd, b = req(port, "GET", clip, headers={"Range": r})
             check(f"malformed range {r!r} -> 416 with Content-Range */size", st == 416 and hd.get("Content-Range") == f"bytes */{size}"
@@ -320,7 +320,7 @@ def main():
         hang.shutdown()
 
     # in-process config parsing
-    sys.path.insert(0, os.path.join(PROJECT, "control"))
+    sys.path.insert(0, os.path.join(PROJECT, "courses/controls/overview"))
     import server as S  # noqa: E402
     c = S.Config({"OPENAI_MODEL": "gpt-4.1-mini"})
     check("config: non-reasoning model omits the reasoning field", c.reasoning_effort is None)

@@ -27,6 +27,7 @@ behavior and checks. Read compact transcripts once and only the relevant book pa
 ## Reuse the framework
 
 For a new package, use `tools/scaffold_study.py --slug <slug> --title <title> --port <free-port>`.
+It creates `courses/controls/<slug>/` by default; use `--subject <subject>` for another subject.
 It refuses to overwrite an existing package or launcher. For a revision, inspect the existing
 package rather than scaffolding over it. Read the helper's `--help` before changing arguments.
 

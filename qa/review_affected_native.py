@@ -12,7 +12,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 PROJECT = os.path.dirname(HERE)
 sys.argv = ["manimgl", "-w", "-r", "1280x720", "--video_dir", os.path.join(HERE, "scratch", "native_out")]
-sys.path.insert(0, os.path.join(PROJECT, "native"))
+sys.path.insert(0, os.path.join(PROJECT, "courses/ode/native"))
 for d in ("screenshots", "results"):
     os.makedirs(os.path.join(HERE, d), exist_ok=True)
 from manimlib import *  # noqa: E402,F403

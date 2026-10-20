@@ -3,7 +3,7 @@
   Open the native ManimGL study guide window (1280x720).
 
 .DESCRIPTION
-  Runs native\study_guide.py from this checkout with ManimGL. It uses the repo-local .venv
+  Runs courses\ode\native\study_guide.py from this checkout with ManimGL. It uses the repo-local .venv
   (see README) and falls back to a sibling ..\ManimGL\.venv if that exists instead.
   MiKTeX is added to this process's PATH only (Machine + User PATH re-read; nothing is
   saved). The first visit to each lesson page compiles its LaTeX once (a few seconds);
@@ -33,12 +33,12 @@ if (-not (Get-Command latex -ErrorAction SilentlyContinue)) {
 }
 
 # Relative to this checkout, which is the working directory for manimgl.
-$guide = 'native\study_guide.py'
-$config = 'native\guide_config.yml'
+$guide = 'courses\ode\native\study_guide.py'
+$config = 'courses\ode\native\guide_config.yml'
 
 Push-Location $root
 try {
-    foreach ($f in $guide, $config, 'course.json') {
+    foreach ($f in $guide, $config, 'courses\ode\course.json') {
         if (-not (Test-Path $f)) { throw "Missing $f" }
     }
     if ($CheckOnly) {

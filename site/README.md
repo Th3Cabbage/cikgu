@@ -5,11 +5,13 @@ One static website that gathers the study packages:
 | URL path | Content | Copied from |
 |---|---|---|
 | `/` | Library home: two courses | generated |
-| `/ode/` | Second-Order Linear Differential Equations | `browser/dist` |
+| `/ode/` | Second-Order Linear Differential Equations | `courses/ode/browser/dist` |
 | `/controls/` | Control Bootcamp course page: lectures in order, counts, saved progress | generated |
-| `/controls/overview/` | Lecture 1, Overview | `control/dist` |
-| `/controls/linear-systems/` | Lecture 2, Linear Systems | `linear-systems/dist` |
-| `/controls/stability-eigenvalues/` | Lecture 3, Stability and Eigenvalues | `stability-eigenvalues/dist` |
+| `/controls/overview/` | Lecture 1, Overview | `courses/controls/overview/dist` |
+| `/controls/linear-systems/` | Lecture 2, Linear Systems | `courses/controls/linear-systems/dist` |
+| `/controls/stability-eigenvalues/` | Lecture 3, Stability and Eigenvalues | `courses/controls/stability-eigenvalues/dist` |
+| `/controls/linearization/` | Lecture 4, Linearizing Around a Fixed Point | `courses/controls/linearization/dist` |
+| `/controls/controllability/` | Lecture 5, Controllability | `courses/controls/controllability/dist` |
 
 Each lecture keeps its own player, notes, worked examples, explorer, quiz, source links and routes
 (`#s1`, `#explorer`, `#quiz`, `#sources`; the ODE guide uses `#watch`, `#lesson-N`, ...).
@@ -42,7 +44,7 @@ closing the window stops it. Manual equivalent: `node site/build.mjs` then
    - Functions directory: leave empty. No environment variables are needed.
 3. Deploy. Pushes to `main` redeploy automatically.
 
-The build only copies files already in Git (about 38 MB, 674 files), so it needs no Python, ManimGL,
+The build only copies the committed viewing assets (about 46.5 MB, 839 output files), so it needs no Python, ManimGL,
 LaTeX or package install; `base = "site"` also stops Netlify from installing the repository's
 Python requirements. There is no catch-all rewrite: every page is a real directory, and course
 routes are `#hashes`. A small script in each lecture page adds the trailing slash if someone opens
@@ -54,11 +56,12 @@ routes are `#hashes`. A small script in each lecture page adds the trailing slas
   `OPENAI_API_KEY`. The site publishes a static `api/status` for each lecture saying chat is not
   configured; the panel explains that chat is not available on this site and never sends requests.
   Use `launch_control.ps1`, `launch_linear_systems.ps1` or `launch_stability_eigenvalues.ps1` with a
-  key for live chat. Do not add a key or a hosted chat proxy to this site without a separate design.
+  key for live chat; `launch_linearization.ps1` does the same for lecture 4.
+  Do not add a key or a hosted chat proxy to this site without a separate design.
 - **No local PDF links.** Book references open the online copy. The source PDF, lecture downloads and
   research caches are never copied (the build fails on any file that is not a public web asset).
 - **Progress is per website.** Each lecture keeps its original browser storage key
-  (`ctl-overview-v1`, `linear-systems-v1`, `stability-eigenvalues-v1`; ODE saves only its theme in
+  (`ctl-overview-v1`, `linear-systems-v1`, `stability-eigenvalues-v1`, `linearization-v1`; ODE saves only its theme in
   `sode-theme`), so progress carries across lectures, the course page and reloads on the same site.
   Browsers keep storage per origin: `127.0.0.1:8800`, the standalone launcher ports and the Netlify
   domain each have separate progress. Nothing is migrated automatically.
@@ -85,7 +88,7 @@ setting `--cikgu-cb-vis` to the visible bar height.
 
 1. Build the package with the normal workflow (`/build-study-package`) and commit its `dist/`.
 2. Append it to the Control Bootcamp `lectures` list in `catalog.json`:
-   `slug` (URL folder), `source` (`<package>/dist`), `title`, a one-sentence student-facing
+   `slug` (URL folder), `source` (`courses/controls/<package>/dist`), `title`, a one-sentence student-facing
    `description`, its `storeKey` (the `STORE_KEY` in its `app.js`) and `statusApp` (the `app` name its
    server reports). The order of the list is the lecture order.
 3. Run `node site/build.mjs`, `node --test site/test/build.test.mjs` and `node qa/site_browser_qa.js`.

@@ -2,7 +2,7 @@
 //
 //   node qa\linear_systems_browser_qa.js
 //
-// Starts linear-systems/server.py on a free loopback port (identity confirmed by nonce, no
+// Starts courses/controls/linear-systems/server.py on a free loopback port (identity confirmed by nonce, no
 // OPENAI_* variables), then checks: every section renders with typeset math and no overflow on
 // desktop and mobile; every sequence plays through to its final step (clips at 4x speed) with the
 // correct stills; back/replay/restart; the explorer (presets, sliders, exact worked numbers, play,
@@ -16,7 +16,7 @@ const os = require("os");
 const { spawn } = require("child_process");
 
 const PROJECT = path.dirname(__dirname);
-const PKG = path.join(PROJECT, "linear-systems");
+const PKG = path.join(PROJECT, "courses/controls/linear-systems");
 const DIST = path.join(PKG, "dist");
 const CHROME = process.env.CHROME_PATH || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const PY = [path.join(PROJECT, ".venv", "Scripts", "python.exe")].find(p => fs.existsSync(p)) || "python";

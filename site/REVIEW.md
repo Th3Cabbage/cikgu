@@ -1,4 +1,18 @@
-# Unified website review — 19 October 2026
+# Unified website review
+
+## 20 October 2026: fourth Control Bootcamp lecture
+
+Linearizing Around a Fixed Point now follows Stability and Eigenvalues. The catalog resolves the
+subject folders under `courses/`, with five guides in two courses. The static output has 839 files
+(about 46.5 MB). Existing URL paths and progress keys are unchanged; the new key is `linearization-v1`.
+
+Seven build tests and 93 browser/HTTP checks passed: all 455 manifest media paths, actual playback
+in every guide, lecture 3 → 4 → 3 navigation, quiz/progress restore, light/dark, mobile, reduced
+motion, blocked storage and no-JavaScript links. The new standalone guide separately passed 127
+browser checks including all 41 animation steps; its package review documents math/media checks.
+The site remains static with disabled chat and online book links.
+
+## 19 October 2026: initial unified site
 
 Implemented with Claude Opus 5.5 and independently reviewed by Codex. The home page groups the
 existing material into two courses: ODE and Control Bootcamp. Control Bootcamp contains Overview,

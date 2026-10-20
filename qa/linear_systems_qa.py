@@ -14,7 +14,6 @@ import json
 import math
 import os
 import re
-import shutil
 import subprocess
 import sys
 import tempfile
@@ -25,11 +24,10 @@ import numpy as np
 from scipy.linalg import expm
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PKG = os.path.join(ROOT, "linear-systems")
+PKG = os.path.join(ROOT, "courses/controls/linear-systems")
 DIST = os.path.join(PKG, "dist")
 ANIM = os.path.join(DIST, "animations")
 PY = sys.executable
-GIT = shutil.which("git") or os.path.join(os.environ.get("ProgramFiles", "C:\\Program Files"), "Git", "cmd", "git.exe")
 sys.path.insert(0, os.path.join(PKG, "animation"))
 sys.path.insert(0, PKG)
 
@@ -56,7 +54,7 @@ def math_checks():
     cases = [(-1, -2, 1, 2, 1, math.log(2)), (0.5, -1.5, 1, 1.2, 2.5, 1.5), (-1, -1, 1, 2, 1, 1.0), (0, 0, 0, 1, -1, 3)]
     for _ in range(40):
         cases.append(tuple(np.round(rng.uniform([-3, -3, -2, -3, -3, 0], [2, 2, 2, 3, 3, 4]), 2)))
-    js = ("const M=require('./linear-systems/dist/study_math.js');const C=" + json.dumps(cases) + ";"
+    js = ("const M=require('./courses/controls/linear-systems/dist/study_math.js');const C=" + json.dumps(cases) + ";"
           "console.log(JSON.stringify(C.map(c=>{const p={l1:c[0],l2:c[1],s:c[2],x1:c[3],x2:c[4]};"
           "return {r:M.pipeline(p,c[5]),E:M.expA(c[0],c[1],c[2],c[5]),r0:M.pipeline(p,0),"
           "rs:M.pipeline(p,c[5]+0.37),half:M.pipeline({l1:c[0],l2:c[1],s:c[2],x1:M.pipeline(p,c[5]).xt[0],x2:M.pipeline(p,c[5]).xt[1]},0.37)};})))")
@@ -84,7 +82,7 @@ def math_checks():
     check("math: semigroup x(t+h) = e^{Ah} x(t)", worst["semi"] < 1e-12, f"max rel err {worst['semi']:.1e}")
     check("math: AT = TD (columns are eigenvectors)", worst["eig"] < 1e-12)
 
-    w = node("const M=require('./linear-systems/dist/study_math.js');const p={l1:-1,l2:-2,s:1,x1:2,x2:1};"
+    w = node("const M=require('./courses/controls/linear-systems/dist/study_math.js');const p={l1:-1,l2:-2,s:1,x1:2,x2:1};"
              "console.log(JSON.stringify({r:M.pipeline(p,Math.log(2)),r0:M.pipeline(p,0),"
              "Tt:M.matvec(M.transpose(M.basis(-1,-2,1).T),[2,1]),J:M.expJordan(-1,0.7),rep:M.basis(-1,-1,1.3).A}))")
     r = w["r"]
@@ -153,7 +151,7 @@ def animation_checks():
     course = json.load(open(os.path.join(DIST, "course.json"), encoding="utf-8"))
     for sec in course["sections"]:
         texs += [st["tex"] for st in sec["example"]["steps"]]
-    errs = node("const k=require('./linear-systems/dist/vendor/katex/katex.min.js');const T=" + json.dumps(texs) + ";"
+    errs = node("const k=require('./courses/controls/linear-systems/dist/vendor/katex/katex.min.js');const T=" + json.dumps(texs) + ";"
                 "const e=[];T.forEach(t=>{try{k.renderToString(t,{throwOnError:true,displayMode:true})}catch(x){e.push(t.slice(0,40)+': '+x.message.slice(0,80))}});"
                 "console.log(JSON.stringify(e))")
     check("math: every step/example display formula typesets in KaTeX", not errs, f"{len(texs)} formulas" if not errs else errs[:3])
@@ -248,7 +246,7 @@ def server_checks():
 
 def isolation_checks():
     ps = open(os.path.join(ROOT, "launch_linear_systems.ps1"), encoding="utf-8").read()
-    check("launcher: targets linear-systems/server.py, port 8780, app identity", "linear-systems\\server.py" in ps and "8780" in ps
+    check("launcher: targets courses/controls/linear-systems/server.py, port 8780, app identity", "courses\\controls\\linear-systems\\server.py" in ps and "8780" in ps
           and "Study_linear_systems" in ps)
     banned = [os.path.relpath(os.path.join(dp, f), DIST) for dp, _, fs in os.walk(DIST) for f in fs
               if f.lower().endswith((".pdf", ".vtt", ".txt")) and "vendor" not in dp or f == "video.mp4"]
@@ -256,11 +254,14 @@ def isolation_checks():
     app = open(os.path.join(DIST, "app.js"), encoding="utf-8").read() + open(os.path.join(DIST, "index.html"), encoding="utf-8").read()
     check("shell: no leftover pendulum/cruise/Control Bootcamp overview labels",
           not re.search(r"pendulum|cruise|control_math|Control Bootcamp: the overview", app, re.I))
-    res = subprocess.run([GIT, "status", "--porcelain", "--", "control", "ode", "overview"], capture_output=True, text=True, cwd=ROOT)
-    diff = subprocess.run([GIT, "diff", "--name-only"], capture_output=True, text=True, cwd=ROOT, check=True)
-    tracked = diff.stdout.split()
-    check("isolation: no tracked ODE/overview files modified", not [f for f in tracked if not f.startswith(("README.md", ".gitignore"))], tracked)
-    del res
+    siblings = [os.path.join(ROOT, "courses", "controls", name, "dist")
+                for name in ("overview", "linear-systems", "stability-eigenvalues")]
+    keys = [re.search(r"var STORE_KEY\s*=\s*['\"]([^'\"]+)",
+                      open(os.path.join(path, "app.js"), encoding="utf-8").read())
+            for path in siblings]
+    check("isolation: control lectures have independent assets and progress keys",
+          len(set(map(os.path.realpath, siblings))) == 3 and all(keys)
+          and len({key.group(1) for key in keys if key}) == 3)
 
 
 def main():

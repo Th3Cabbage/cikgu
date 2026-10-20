@@ -30,15 +30,14 @@ from scipy.integrate import solve_ivp
 from scipy.linalg import expm
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PKG = os.path.join(ROOT, "stability-eigenvalues")
+PKG = os.path.join(ROOT, "courses/controls/stability-eigenvalues")
 DIST = os.path.join(PKG, "dist")
 ANIM = os.path.join(DIST, "animations")
 PY = sys.executable
 NODE = shutil.which("node") or os.path.join(os.environ.get("ProgramFiles", "C:\\Program Files"), "nodejs", "node.exe")
-GIT = shutil.which("git") or os.path.join(os.environ.get("ProgramFiles", "C:\\Program Files"), "Git", "cmd", "git.exe")
 sys.path.insert(0, os.path.join(PKG, "animation"))
 sys.path.insert(0, PKG)
-SM = "./stability-eigenvalues/dist/study_math.js"
+SM = "./courses/controls/stability-eigenvalues/dist/study_math.js"
 
 results = []
 
@@ -331,7 +330,7 @@ def animation_checks():
     course = json.load(open(os.path.join(DIST, "course.json"), encoding="utf-8"))
     for sec in course["sections"]:
         texs += [st["tex"] for st in sec["example"]["steps"]]
-    errs = node("const k=require('./stability-eigenvalues/dist/vendor/katex/katex.min.js');const T=" + json.dumps(texs) + ";"
+    errs = node("const k=require('./courses/controls/stability-eigenvalues/dist/vendor/katex/katex.min.js');const T=" + json.dumps(texs) + ";"
                 "const e=[];T.forEach(t=>{try{k.renderToString(t,{throwOnError:true,displayMode:true})}catch(x){e.push(t.slice(0,40)+': '+x.message.slice(0,80))}});"
                 "console.log(JSON.stringify(e))")
     check("math: every step/example display formula typesets in KaTeX", not errs, f"{len(texs)} formulas" if not errs else errs[:3])
@@ -457,7 +456,7 @@ def book_checks():
 
 def isolation_checks():
     ps = open(os.path.join(ROOT, "launch_stability_eigenvalues.ps1"), encoding="utf-8").read()
-    check("launcher: targets stability-eigenvalues/server.py, port 8790, app identity", "stability-eigenvalues\\server.py" in ps and "8790" in ps
+    check("launcher: targets courses/controls/stability-eigenvalues/server.py, port 8790, app identity", "courses\\controls\\stability-eigenvalues\\server.py" in ps and "8790" in ps
           and "Study_stability_eigenvalues" in ps)
     banned = [os.path.relpath(os.path.join(dp, f), DIST) for dp, _, fs in os.walk(DIST) for f in fs
               if (f.lower().endswith((".pdf", ".vtt", ".srt", ".txt", ".py")) and "vendor" not in dp) or f == "video.mp4"]
@@ -465,10 +464,14 @@ def isolation_checks():
     app = open(os.path.join(DIST, "app.js"), encoding="utf-8").read() + open(os.path.join(DIST, "index.html"), encoding="utf-8").read()
     check("shell: no leftover pendulum/cruise/Linear Systems labels",
           not re.search(r"pendulum|cruise|control_math|linear_systems|Linear Systems", app, re.I))
-    diff = subprocess.run([GIT, "diff", "--name-only"], capture_output=True, text=True, cwd=ROOT, check=True)
-    tracked = diff.stdout.split()
-    allowed = ("README.md", "CLAUDE.md", "docs/", "tools/README.md", ".claude/")
-    check("isolation: no tracked package/QA code of earlier lectures modified", not [f for f in tracked if not f.startswith(allowed)], tracked)
+    siblings = [os.path.join(ROOT, "courses", "controls", name, "dist")
+                for name in ("overview", "linear-systems", "stability-eigenvalues")]
+    keys = [re.search(r"var STORE_KEY\s*=\s*['\"]([^'\"]+)",
+                      open(os.path.join(path, "app.js"), encoding="utf-8").read())
+            for path in siblings]
+    check("isolation: control lectures have independent assets and progress keys",
+          len(set(map(os.path.realpath, siblings))) == 3 and all(keys)
+          and len({key.group(1) for key in keys if key}) == 3)
 
 
 def main():

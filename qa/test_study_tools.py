@@ -2,9 +2,13 @@
 from pathlib import Path
 import sys
 import unittest
+import tempfile
+import json
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
 from prepare_study import compact_captions, page_numbers, seconds
+from study_pipeline import route, make_brief, record_stage
+from run_claude import summary
 
 
 class SourceTests(unittest.TestCase):
@@ -44,6 +48,46 @@ very important.
 
     def test_timestamps(self):
         self.assertEqual(seconds('01:02:03.500'),3723.5)
+
+    def test_registered_playlist_routes_and_selects_recipe(self):
+        p=route('https://www.youtube.com/watch?v=u5Sv7YKAkt4&list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m','Controllability')
+        self.assertEqual((p['subject'],p['strategy'],p['book_pages']),('controls','controllability','356-357'))
+
+    def test_unknown_subjects_and_playlist_conflicts_are_not_guessed(self):
+        url='https://www.youtube.com/watch?v=u5Sv7YKAkt4'
+        with self.assertRaises(ValueError): route(url,'Controls')
+        self.assertEqual(route(url,'New Topic',subject='controls')['strategy'],'general')
+        with self.assertRaises(ValueError):
+            route(url+'&list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m','Controllability',subject='ode')
+        for bad in ['https://evil.example/watch?v=u5Sv7YKAkt4','https://youtube.com/watch?v=bad']:
+            with self.assertRaises(ValueError): route(bad,'Controllability',subject='controls')
+
+    def test_brief_bounds_work_and_does_not_request_historical_logs(self):
+        p=route('https://youtube.com/watch?v=u5Sv7YKAkt4','Controllability',subject='controls')
+        p.update(package='courses/controls/trial',slug='trial',title='Trial')
+        brief=make_brief(p)
+        self.assertIn('Do NOT render',brief)
+        self.assertIn('fresh session',brief)
+        self.assertIn('sources/trial/REVIEW.md',brief)
+
+    def test_runner_distinguishes_budget_stop_and_aggregates_usage(self):
+        result=summary([{'type':'result','subtype':'error_max_budget_usd','is_error':True,
+                         'session_id':'test','modelUsage':{'opus':{'outputTokens':12,'cacheReadInputTokens':100,'costUSD':0.25}}}])
+        self.assertTrue(result['is_error'])
+        self.assertEqual(result['subtype'],'error_max_budget_usd')
+        self.assertEqual(result['usage_totals']['outputTokens'],12)
+        self.assertEqual(result['usage_totals']['cacheReadInputTokens'],100)
+        self.assertEqual(result['usage_totals']['costUSD'],0.25)
+
+    def test_checkpoint_merges_independent_stages(self):
+        with tempfile.TemporaryDirectory() as work:
+            p=Path(work)/'pipeline.json';p.write_text(json.dumps({'plan':{'slug':'test'},'stages':{}}),encoding='utf-8')
+            record_stage(p,'author',{'ok':False,'running':True})
+            record_stage(p,'render',{'ok':True})
+            record_stage(p,'author',{'ok':True})
+            saved=json.loads(p.read_text(encoding='utf-8'))
+            self.assertEqual(saved['stages'],{'author':{'ok':True},'render':{'ok':True}})
+            self.assertEqual(saved['plan'],{'slug':'test'})
 
 
 if __name__=='__main__':

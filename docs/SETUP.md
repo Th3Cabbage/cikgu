@@ -28,6 +28,8 @@ Or run one package on its own (needed for the optional Ask GPT panel and local-P
 .\launch_control.ps1             # overview: 8770
 .\launch_linear_systems.ps1      # Linear Systems: 8780
 .\launch_stability_eigenvalues.ps1   # Stability and Eigenvalues: 8790
+.\launch_linearization.ps1        # Linearizing Around a Fixed Point: 8810
+.\launch_controllability.ps1      # Controllability: 8820
 ```
 
 Each opens a browser and prints its actual URL, using the next free port if necessary.
@@ -38,8 +40,8 @@ script, launch just that script with a process-level policy override:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\launch_linear_systems.ps1
 ```
 
-Without PowerShell, a direct viewing command is `python -I linear-systems/server.py --port 8780`;
-open the printed URL manually. The original ODE uses `python browser/serve_local.py --port 8765`.
+Without PowerShell, a direct viewing command is `python -I courses/controls/linear-systems/server.py --port 8780`;
+open the printed URL manually. The original ODE uses `python courses/ode/browser/serve_local.py --port 8765`.
 Do not open index.html via file://; the page fetches JSON over the local server.
 
 ## Restore the optional source book and research cache
@@ -65,6 +67,16 @@ with the p. 335 / PDF 355 example read from the same PDF):
 The free 2017 preprint used for these page numbers can be downloaded from
 `https://databookuw.com/databook.pdf` to root `databook.pdf` (checked on 18 October 2026).
 
+Linearizing Around a Fixed Point (playlist item 4, local Whisper transcript because English
+captions were unavailable):
+
+```powershell
+.\download_study.ps1 -Url 'https://www.youtube.com/watch?v=1YMTkELi3tE' -Slug linearization -BookPages '350,355' -Transcribe
+```
+
+These correspond to printed pages 330 and 335. The video includes viscous damping; the book's
+pendulum example omits it. The package's source review records the distinction and verified frames.
+
 The script creates `.venv-download`, installs source tools, caches downloads and only transcribes
 when captions are unavailable. Whisper downloads its model on first use. Internet access and
 video availability are required. Node supports YouTube challenges; a site restriction may still
@@ -76,14 +88,15 @@ Create a new environment on this computer; do not copy another computer's `.venv
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r linear-systems\requirements-render.txt
-.\.venv\Scripts\python.exe linear-systems\course_source.py
-.\.venv\Scripts\python.exe linear-systems\animation\build_sequences.py --jobs 2
+.\.venv\Scripts\python.exe -m pip install -r courses\controls\linear-systems\requirements-render.txt
+.\.venv\Scripts\python.exe courses\controls\linear-systems\course_source.py
+.\.venv\Scripts\python.exe courses\controls\linear-systems\animation\build_sequences.py --jobs 2
 ```
 
 The pinned requirements record the versions used for delivery. Rendering needs an OpenGL-capable
 environment; FFmpeg is supplied through imageio-ffmpeg. The overview/Linear Systems render helpers
-do not require LaTeX. The original ODE/native render path has its own setup notes in the root README.
+do not require LaTeX. The original ODE/native render path has its own
+[setup notes](../courses/ode/README.md#setup-for-the-native-guide-rendering-and-qa).
 Pre-rendered `dist/` assets already work without installing render dependencies.
 
 For a new lecture, use `/build-study-package` in Claude Code and the scaffold workflow in
@@ -131,11 +144,16 @@ node qa\linear_explorer_regression.js
 node qa\stability_explorer_regression.js
 node qa\stability_browser_qa.js
 .\.venv\Scripts\python.exe tools\check_study.py --package stability-eigenvalues --decode
+.\.venv\Scripts\python.exe qa\linearization_math_qa.py
+.\.venv\Scripts\python.exe qa\linearization_qa.py
+node qa\linearization_browser_qa.js
+.\.venv\Scripts\python.exe tools\check_study.py --package linearization --decode
+.\.venv\Scripts\python.exe qa\repo_layout_qa.py
 node --test site/test/build.test.mjs
 node site/build.mjs; node qa\site_browser_qa.js
 ```
 
-Render Stability and Eigenvalues sequentially (`--jobs 1`, its default); parallel ManimGL renders
+Render Stability and Eigenvalues and Linearization sequentially (`--jobs 1`, their default); parallel ManimGL renders
 were seen to collide on shared temporary text SVG files.
 
 The QA scripts strip OpenAI variables from their test servers and avoid paid tutor calls. The

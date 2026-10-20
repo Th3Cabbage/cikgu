@@ -1,4 +1,4 @@
-// Headless browser regression QA for browser/dist, using the installed Chrome (no browser download).
+// Headless browser regression QA for courses/ode/browser/dist, using the installed Chrome (no browser download).
 // Usage (from the repository root): node qa/browser_qa.js
 // Covers routing, lesson notes (KaTeX, fit, worked examples), the explorer (exact solution,
 // sliders, presets, zero solution, marker), the quiz, further reading, mobile layout and static
@@ -363,7 +363,7 @@ async function main() {
   }
   check("app files contain no local absolute paths or credentials", bad.length === 0, bad.join("; "));
   check("dist/course.json is an exact copy of the shared course.json",
-        fs.readFileSync(path.join(PROJECT, "course.json"), "utf8") === fs.readFileSync(path.join(DIST, "course.json"), "utf8"));
+        fs.readFileSync(path.join(PROJECT, "courses/ode/course.json"), "utf8") === fs.readFileSync(path.join(DIST, "course.json"), "utf8"));
   const mediaOk = course.lessons.flatMap(l => l.pages).flatMap(p => p.blocks).filter(b => b.type === "video")
     .every(b => fs.existsSync(path.join(DIST, b.src)) &&
                 fs.readFileSync(path.join(DIST, b.src)).equals(fs.readFileSync(path.join(PROJECT, "media", path.basename(b.src)))));

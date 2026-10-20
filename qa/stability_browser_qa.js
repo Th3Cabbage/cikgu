@@ -2,7 +2,7 @@
 //
 //   node qa\stability_browser_qa.js
 //
-// Starts stability-eigenvalues/server.py on a free loopback port (identity confirmed by nonce, no OPENAI_*
+// Starts courses/controls/stability-eigenvalues/server.py on a free loopback port (identity confirmed by nonce, no OPENAI_*
 // variables), then checks: every section renders with typeset math and no overflow; every sequence (both in
 // Section 3) plays through to its final step with the correct stills; back/replay/restart and saved step;
 // source and book links; the explorer (kinds, presets and their verdicts, slider redraw, off-scale clipping notes,
@@ -16,7 +16,7 @@ const os = require("os");
 const { spawn } = require("child_process");
 
 const PROJECT = path.dirname(__dirname);
-const PKG = path.join(PROJECT, "stability-eigenvalues");
+const PKG = path.join(PROJECT, "courses/controls/stability-eigenvalues");
 const DIST = path.join(PKG, "dist");
 const CHROME = process.env.CHROME_PATH || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const PY = [path.join(PROJECT, ".venv", "Scripts", "python.exe")].find(p => fs.existsSync(p)) || "python";

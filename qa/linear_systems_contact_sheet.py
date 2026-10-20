@@ -10,7 +10,7 @@ import sys
 from PIL import Image, ImageDraw
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ANIM = os.path.join(ROOT, "linear-systems", "dist", "animations")
+ANIM = os.path.join(ROOT, "courses/controls/linear-systems", "dist", "animations")
 OUT = os.path.join(ROOT, "qa", "screenshots", "linear-systems")
 
 

@@ -11,7 +11,7 @@ import os
 from PIL import Image, ImageDraw
 
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DIST = os.path.join(PROJECT, "control", "dist")
+DIST = os.path.join(PROJECT, "courses/controls/overview", "dist")
 OUT = os.path.join(PROJECT, "qa", "screenshots", "control")
 
 

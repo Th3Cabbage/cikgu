@@ -7,7 +7,7 @@
       "id": "ode",
       "kind": "single",
       "path": "ode",
-      "source": "browser/dist",
+      "source": "courses/ode/browser/dist",
       "title": "Second-Order Linear Differential Equations",
       "short": "Second-order ODEs",
       "description": "A first course on second-order linear equations: characteristic roots, initial value problems, forcing and resonance, and damped springs.",
@@ -22,11 +22,11 @@
       "path": "controls",
       "title": "Control Bootcamp",
       "short": "Control Bootcamp",
-      "description": "Companions to Steve Brunton's Control Bootcamp lectures and Chapter 8 of Brunton & Kutz, from the idea of feedback to stability of linear systems.",
+      "description": "Companions to Steve Brunton's Control Bootcamp lectures and Chapter 8 of Brunton & Kutz, from feedback and linear stability to local models of nonlinear systems.",
       "lectures": [
         {
           "slug": "overview",
-          "source": "control/dist",
+          "source": "courses/controls/overview/dist",
           "title": "Overview",
           "description": "Why feedback beats open-loop control, the state-space model, and how closing the loop moves an inverted pendulum's eigenvalues.",
           "storeKey": "ctl-overview-v1",
@@ -34,7 +34,7 @@
         },
         {
           "slug": "linear-systems",
-          "source": "linear-systems/dist",
+          "source": "courses/controls/linear-systems/dist",
           "title": "Linear Systems",
           "description": "Solving x-dot = Ax with the matrix exponential: eigenvector coordinates, decoupled modes, and the map, evolve, map back picture.",
           "storeKey": "linear-systems-v1",
@@ -42,11 +42,27 @@
         },
         {
           "slug": "stability-eigenvalues",
-          "source": "stability-eigenvalues/dist",
+          "source": "courses/controls/stability-eigenvalues/dist",
           "title": "Stability and Eigenvalues",
           "description": "When solutions decay: the left half-plane in continuous time, the unit circle in discrete time, and the map between them.",
           "storeKey": "stability-eigenvalues-v1",
           "statusApp": "Study_stability_eigenvalues"
+        },
+        {
+          "slug": "linearization",
+          "source": "courses/controls/linearization/dist",
+          "title": "Linearizing Around a Fixed Point",
+          "description": "Build a local linear model with the Jacobian, understand its limits, and compare nonlinear and linear pendulum motion around two equilibria.",
+          "storeKey": "linearization-v1",
+          "statusApp": "Study_linearization"
+        },
+        {
+          "slug": "controllability",
+          "source": "courses/controls/controllability/dist",
+          "title": "Controllability",
+          "description": "Build the controllability matrix, test reachable directions, and see how coupling and actuator placement change control authority.",
+          "storeKey": "controllability-v1",
+          "statusApp": "Study_controllability"
         }
       ]
     }

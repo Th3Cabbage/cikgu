@@ -3,7 +3,7 @@
   Serve the Linear Systems study companion on 127.0.0.1 and open it in the default browser.
 
 .DESCRIPTION
-  Starts linear-systems\server.py (standard-library Python, loopback only) on -Port, or the next free
+  Starts courses\controls\linear-systems\server.py (standard-library Python, loopback only) on -Port, or the next free
   port if that one is taken. Before opening the page it confirms, through /__control_health and a
   random per-launch nonce, that the server answering is the one this script started.
   The optional tutor is enabled only if OPENAI_API_KEY is set in the environment of this window
@@ -23,8 +23,8 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $root = $PSScriptRoot
-$server = Join-Path $root 'linear-systems\server.py'
-if (-not (Test-Path -LiteralPath $server)) { throw "linear-systems\server.py not found next to this script." }
+$server = Join-Path $root 'courses\controls\linear-systems\server.py'
+if (-not (Test-Path -LiteralPath $server)) { throw "courses\controls\linear-systems\server.py not found next to this script." }
 $venvPython = @((Join-Path $root '.venv\Scripts\python.exe'),
                 (Join-Path (Split-Path $root -Parent) 'ManimGL\.venv\Scripts\python.exe')) |
               Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1

@@ -19,8 +19,8 @@ process.on("exit", () => fs.rmSync(tmp, { recursive: true, force: true }));
 function packages(cat) {
   const out = [];
   for (const c of cat.courses) {
-    if (c.kind === "single") out.push({ src: c.sourceAbs, dest: c.path });
-    else for (const l of c.lectures) out.push({ src: l.sourceAbs, dest: c.path + "/" + l.slug });
+    if (c.kind === "single") out.push({ src: c.sourceAbs, dest: c.path, statusApp: c.statusApp });
+    else for (const l of c.lectures) out.push({ src: l.sourceAbs, dest: c.path + "/" + l.slug, statusApp: l.statusApp });
   }
   return out;
 }
@@ -58,7 +58,7 @@ test("output holds only public web assets", () => {
   }
   assert.ok(!first.files.some((f) => /\.(pdf|py|ps1|log|env|pem|key|md)$/i.test(f)));
   const statuses = first.files.filter((f) => f.endsWith("/api/status"));
-  assert.equal(statuses.length, 3);
+  assert.equal(statuses.length, packages(first.catalog).filter(p => p.statusApp).length);
   for (const f of statuses) {
     const s = JSON.parse(fs.readFileSync(path.join(first.out, f), "utf8"));
     assert.equal(s.tutor.configured, false);

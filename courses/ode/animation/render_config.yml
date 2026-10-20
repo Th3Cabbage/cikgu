@@ -1,0 +1,7 @@
+# ManimGL config for the browser guide's animated derivations (passed with --config_file
+# by build_sequences.py). Separate from courses/ode/native/guide_config.yml, which the native app uses.
+# fps is set here because ManimGL 1.7.2's --fps flag passes a string and fails.
+camera:
+  resolution: "(1280, 720)"
+  background_color: "#0B0F17"
+  fps: 60

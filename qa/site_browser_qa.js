@@ -127,7 +127,7 @@ async function httpChecks(base) {
   for (let i = 0; i < uniq.length; i += 24)
     statuses.push(...await Promise.all(uniq.slice(i, i + 24).map(u => get(u, { method: "HEAD" }).then(x => [u, x.status]))));
   const missing = statuses.filter(s => s[1] !== 200);
-  check(`http: all ${uniq.length} media files referenced by the four manifests are served`, missing.length === 0, missing.slice(0, 3).join(" "));
+  check(`http: all ${uniq.length} media files referenced by the manifests are served`, missing.length === 0, missing.slice(0, 3).join(" "));
 }
 
 async function main() {
@@ -155,14 +155,14 @@ async function main() {
     await page.click('.lib-card h2 a[href="controls/"]');
     await page.waitForURL(base + "controls/");
     const order = await page.$$eval(".lib-lecture h2 a", as => as.map(a => a.getAttribute("href")));
-    check("course: three lectures in order", JSON.stringify(order) === JSON.stringify(LECTURES.map(l => l.slug + "/")), order.join(" "));
+    check("course: lectures in catalog order", JSON.stringify(order) === JSON.stringify(LECTURES.map(l => l.slug + "/")), order.join(" "));
     const facts = await page.$$eval(".lib-lecture .lib-facts", ps => ps.map(p => p.textContent));
     const expectSteps = LECTURES.map(l => l.manifest.sequences.reduce((n, s) => n + s.steps.length, 0));
     check("course: step counts read from the manifests", facts.every((f, i) => f.includes(`${LECTURES[i].manifest.sequences.length} animations, ${expectSteps[i]} steps`)), facts.join(" | "));
     const ctas = await page.$$eval("[data-continue]", as => as.map(a => a.textContent));
     check("course: fresh browser offers Start lecture", ctas.every(t => /^Start lecture \(lecture \d: .+\) →$/.test(t)), ctas.join(" | "));
     const srcLinks = await page.$$eval(".lib-source a", as => as.map(a => a.href));
-    check("course: each lecture links its source video", srcLinks.length === 3 && srcLinks.every(h => /youtube\.com\/watch\?v=/.test(h)));
+    check("course: each lecture links its source video", srcLinks.length === LECTURES.length && srcLinks.every(h => /youtube\.com\/watch\?v=/.test(h)));
     await shot(page, "course-desktop", true);
 
     // Lecture 1 from the course page; bar shows position and next lecture.
@@ -259,6 +259,17 @@ async function main() {
     const expectedTotal = ls.manifest.sequences.reduce((n, s) => n + s.steps.length, 0);
     check("course: summary shows saved steps and quiz answers with a continue link",
           prog.includes(`${expectedSeen} of ${expectedTotal} animation steps seen · 1 of 10 quiz questions answered`) && cont[0] === ls.slug + "/#s1" && cont[1] === "Continue at section 1 (lecture 2: Linear Systems) →", prog + " | " + cont);
+
+    // Appending a lecture must also connect it to the preceding lecture in the live course bar.
+    const lastLecture = LECTURES[LECTURES.length - 1], previousLecture = LECTURES[LECTURES.length - 2];
+    await page.goto(base + previousLecture.url + "#s1"); await loaded(page);
+    await page.click('.cikgu-cb a[rel="next"]'); await loaded(page);
+    check("bar: final lecture is reachable from its predecessor in the same tab", page.url() === base + lastLecture.url, page.url());
+    check("bar: final lecture has a previous link and no next link",
+          await page.locator('.cikgu-cb a[rel="next"]').count() === 0 &&
+          await page.locator('.cikgu-cb a[rel="prev"]').getAttribute("href") === `../${previousLecture.slug}/`);
+    await page.click('.cikgu-cb a[rel="prev"]'); await loaded(page);
+    check("bar: final lecture links back to its predecessor", page.url() === base + previousLecture.url, page.url());
 
     // Theme: dark lecture, readable bar in both themes.
     await page.goto(base + LECTURES[2].url + "#s1"); await loaded(page);
@@ -381,7 +392,7 @@ async function main() {
     await np.goto(base + LECTURES[1].url);
     const bl = await np.$$eval(".cikgu-cb a", as => as.map(a => a.getAttribute("href")));
     check("no JavaScript: library and course bar links are plain links",
-          hl.includes("ode/") && hl.includes("controls/") && cl.length === 3 && bl.includes("../../") && bl.includes("../stability-eigenvalues/"), [hl.length, cl.length, bl.length].join(","));
+          hl.includes("ode/") && hl.includes("controls/") && cl.length === LECTURES.length && bl.includes("../../") && bl.includes("../stability-eigenvalues/"), [hl.length, cl.length, bl.length].join(","));
     await nojs.close();
   } finally {
     await browser.close();

@@ -1,0 +1,26 @@
+{
+ "module": "dist/study_math.js (UMD: require() in Node, window.StudyMath in browser)",
+ "exports": {
+  "ctrb(A, B)": "C = [B, AB, ..., A^(n-1)B], n x nq; B may be a flat vector (single input) or array of rows",
+  "ctrbBlocks(A, B)": "list of the n blocks A^k B",
+  "svd(M)": "{sigma: descending singular values (length = rows of M), U: left singular vectors}; one-sided Jacobi on M^T",
+  "rankInfo(M, relTol=1e-9)": "{sigma, U, rank, relTol, cond}; rank counts sigma_i > relTol*sigma_max; sigma_max <= 1e-12 -> rank 0; cond Infinity if rank deficient",
+  "controllability(A, B, relTol)": "{C, sigma, U, rank, n, controllable, cond, relTol}",
+  "explorerModel({c, b1, b2, alpha, beta, dual})": "A=[[1,c],[0,2]], B=[[b1],[b2]] or [[1,b1],[0,b2]] if dual; returns A,B,b,Ab,AB,C,sigma,rank,controllable,cond,det (single input: b2*(b1-c*b2); null if dual), point=alpha*b+beta*Ab, line/w (rank 1: col-space direction and w with w^T C = 0)",
+  "discreteTwoSteps(A, b, u0, u1)": "x1 = b u0, x2 = A b u0 + b u1 from x0 = 0 (discrete-time companion)",
+  "matmul, matvec, transpose, identity, det2, shape": "helpers"
+ },
+ "cases": [
+  {"id": "lecture-uncoupled", "source": "lecture 21:30, book Eq. 8.28", "A": [[1,0],[0,2]], "B": [[0],[1]], "C": [[0,0],[1,2]], "rank": 1, "sigma": [2.2360680, 0]},
+  {"id": "lecture-two-actuators", "source": "lecture 13:30, book Eq. 8.29", "A": [[1,0],[0,2]], "B": [[1,0],[0,1]], "C": [[1,0,1,0],[0,1,0,2]], "rank": 2, "sigma": [2.2360680, 1.4142136]},
+  {"id": "lecture-coupled", "source": "lecture 23:30, book Eq. 8.30", "A": [[1,1],[0,2]], "B": [[0],[1]], "C": [[0,1],[1,2]], "rank": 2, "det": -1, "sigma": [2.4142136, 0.4142136]},
+  {"id": "book-b11", "source": "book Eq. 8.31 (not worked in lecture)", "A": [[1,0],[0,2]], "B": [[1],[1]], "C": [[1,1],[1,2]], "rank": 2, "det": 1, "sigma": [2.6180340, 0.3819660]},
+  {"id": "authored-eigenvector-b", "source": "authored", "A": [[1,1],[0,2]], "B": [[1],[1]], "C": [[1,2],[1,2]], "rank": 1},
+  {"id": "authored-weak", "source": "authored (Section 6 example)", "A": [[1,0.1],[0,2]], "B": [[0],[1]], "C": [[0,0.1],[1,2]], "rank": 2, "det": -0.1, "sigma": [2.2378568, 0.0446856]},
+  {"id": "zero-input", "source": "edge case", "A": [[1,0],[0,2]], "B": [[0],[0]], "C": [[0,0],[0,0]], "rank": 0},
+  {"id": "authored-chain-e3", "source": "authored (Section 4 example)", "A": [[0,1,0],[0,0,1],[0,0,0]], "B": [[0],[0],[1]], "C": [[0,0,1],[0,1,0],[1,0,0]], "rank": 3},
+  {"id": "authored-chain-e1", "source": "authored (Section 4 example)", "A": [[0,1,0],[0,0,1],[0,0,0]], "B": [[1],[0],[0]], "C": [[1,0,0],[0,0,0],[0,0,0]], "rank": 1},
+  {"id": "authored-closed-loop", "source": "authored (Section 3 example)", "A": [[1,1],[0,2]], "B": [[0],[1]], "K": [[6,6]], "A_minus_BK": [[1,1],[-6,-4]], "eig": [-1,-2]}
+ ],
+ "explorerIdentities": "single input: rank < 2 iff b2 = 0 (b along eigenvector (1,0), eigenvalue 2 unmovable) or b1 = c*b2 (b along eigenvector (c,1), eigenvalue 1 unmovable); snapped 0.1 grid, e.g. c=0.2,b1=0.3,b2=1.5 gives det ~1e-17 -> rank 1 by tolerance"
+}

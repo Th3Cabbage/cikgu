@@ -6,8 +6,8 @@ const assert = require("assert/strict");
 const fs = require("fs");
 const vm = require("vm");
 const path = require("path");
-const M = require("../stability-eigenvalues/dist/study_math.js");
-const course = JSON.parse(fs.readFileSync(path.join(__dirname, "../stability-eigenvalues/dist/course.json"), "utf8"));
+const M = require("../courses/controls/stability-eigenvalues/dist/study_math.js");
+const course = JSON.parse(fs.readFileSync(path.join(__dirname, "../courses/controls/stability-eigenvalues/dist/course.json"), "utf8"));
 const cfg = course.explorer;
 const base = { s: 0.5, x1: 1, x2: 1 };
 const cases = [
@@ -46,7 +46,7 @@ function element(tag, attrs, children) {
 let pending = null;
 const win = { StudyMath: M };
 const sandbox = { window: win, requestAnimationFrame(fn) { pending = fn; return 1; }, cancelAnimationFrame() { pending = null; }, console, Math };
-vm.runInNewContext(fs.readFileSync(path.join(__dirname, "../stability-eigenvalues/dist/explorer.js"), "utf8"), sandbox);
+vm.runInNewContext(fs.readFileSync(path.join(__dirname, "../courses/controls/stability-eigenvalues/dist/explorer.js"), "utf8"), sandbox);
 const state = { explorer: null };
 const math = (n, text) => { n.textContent = text; return n; };
 const root = element("root");

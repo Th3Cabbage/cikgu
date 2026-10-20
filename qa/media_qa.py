@@ -1,4 +1,4 @@
-"""Media QA for the animated derivations in browser/dist/animations.
+"""Media QA for the animated derivations in courses/ode/browser/dist/animations.
 
     .\\.venv\\Scripts\\python.exe qa\\media_qa.py        (from the repository root)
 
@@ -24,7 +24,7 @@ from PIL import Image
 
 QA = os.path.dirname(os.path.abspath(__file__))
 PROJECT = os.path.dirname(QA)
-DIST = os.path.join(PROJECT, "browser", "dist")
+DIST = os.path.join(PROJECT, "courses/ode/browser", "dist")
 FRAMES = os.path.join(QA, "screenshots", "browser-redo", "frames")
 RESULTS = os.path.join(QA, "results", "browser-redo")
 os.makedirs(FRAMES, exist_ok=True)

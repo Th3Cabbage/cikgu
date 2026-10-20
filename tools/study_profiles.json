@@ -1,0 +1,29 @@
+{
+  "controls": {
+    "playlist": "PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m",
+    "template": "courses/controls/overview",
+    "book": "databook.pdf",
+    "strategies": {
+      "controllability": {
+        "keywords": ["controllability", "reachable", "reachability"],
+        "book_pages": "356-357",
+        "approach": "Matrix construction with visible multiplication, rank and reachable-subspace geometry. Reuse the browser player; implement only the new mathematics and explorer."
+      },
+      "stability": {
+        "keywords": ["stability", "eigenvalues"],
+        "book_pages": "",
+        "approach": "Eigenvalue geometry and trajectories; distinguish strict criteria from boundary cases."
+      },
+      "linearization": {
+        "keywords": ["linearizing", "linearization", "jacobian"],
+        "book_pages": "350,355",
+        "approach": "Shift coordinates, derive Jacobians, compare local and nonlinear trajectories with explicit validity limits."
+      },
+      "general": {
+        "keywords": [],
+        "book_pages": "",
+        "approach": "Review the transcript, select a small set of derivations and one explorer appropriate to the actual lecture."
+      }
+    }
+  }
+}

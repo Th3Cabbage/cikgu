@@ -12,7 +12,7 @@ import sys
 ROOT=Path(__file__).resolve().parents[1]
 
 
-def audit(package,decode=False):
+def audit(package,decode=False,typeset=False):
     dist=package/'dist'
     errors=[]
     def check(ok,msg):
@@ -54,20 +54,41 @@ def audit(package,decode=False):
             check(r.returncode==0 and bool(frames) and int(frames[-1])==clip['frames'],f'Decode/frame-count failure {sid}/{i}')
     blocked=[str(p.relative_to(dist)) for p in dist.rglob('*') if p.suffix.lower() in ('.pdf','.vtt','.srt','.env','.py')]
     check(not blocked,'Non-web source files in dist: '+','.join(blocked))
+    if typeset:
+        # Validate even hidden quiz feedback and tutor notes without opening each page manually.
+        js=r'''const fs=require('fs'),katex=require(process.argv[1]);
+const data=JSON.parse(fs.readFileSync(0,'utf8')),bad=[];let count=0;
+function walk(v,key){
+ if(typeof v==='string'){
+  const formulas=key==='tex'?[v]:Array.from(v.matchAll(/\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$/g),m=>m[1]||m[2]);
+  for(const f of formulas){count++;try{katex.renderToString(f,{throwOnError:true,strict:'error'});}catch(e){bad.push(f+': '+e.message);}}
+ }else if(Array.isArray(v))v.forEach(x=>walk(x,key));else if(v&&typeof v==='object')Object.entries(v).forEach(([k,x])=>walk(x,k));
+}walk(data,'');console.log(JSON.stringify({count,bad}));'''
+        parsed=subprocess.run(['node','-e',js,str(dist/'vendor/katex/katex.min.js')],
+                              input=json.dumps([course,man]),capture_output=True,text=True)
+        if parsed.returncode:
+            check(False,'KaTeX validation failed: '+parsed.stderr[-500:])
+        else:
+            report=json.loads(parsed.stdout)
+            for err in report['bad']: check(False,'KaTeX: '+err)
     return {'package':package.name,'sections':n,'sequences':len(ids),'steps':len(clips),
-            'quiz_questions':len(course['quiz']),'decoded':decode,'errors':errors}
+            'quiz_questions':len(course['quiz']),'decoded':decode,
+            'typeset_formulas':report['count'] if typeset and parsed.returncode==0 else None,'errors':errors}
 
 
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--package',required=True)
     ap.add_argument('--decode',action='store_true')
+    ap.add_argument('--typeset',action='store_true',help='Validate all content/manifest formulas, including hidden feedback (needs Node).')
     a=ap.parse_args()
     p=(ROOT/a.package).resolve()
+    if not p.exists() and re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*',a.package):
+        p=(ROOT/'courses/controls'/a.package).resolve()
     if not p.is_relative_to(ROOT) or p==ROOT:
         ap.error('Choose a package directory inside this repository.')
     try:
-        result=audit(p,a.decode)
+        result=audit(p,a.decode,a.typeset)
     except (OSError,KeyError,TypeError,ValueError) as e:
         result={'package':a.package,'errors':[str(e)]}
     print(json.dumps(result,ensure_ascii=True,indent=1))

@@ -1,8 +1,8 @@
-"""Media and content checks for control/dist.
+"""Media and content checks for courses/controls/overview/dist.
 
     .venv\\Scripts\\python.exe qa\\control_media_qa.py
 
- 1. manifest.json agrees with control/animation/control_specs.py (ids, sections, step titles,
+ 1. manifest.json agrees with courses/controls/overview/animation/control_specs.py (ids, sections, step titles,
     relations, formulas) and has 25-35 steps; every referenced clip and still exists.
  2. Every clip decodes with FFmpeg (bundled imageio-ffmpeg) to exactly the manifest's frame count,
     is H.264 1280x720 at 30 fps, and its frames are contiguous in the master (clip k ends on frame
@@ -26,9 +26,9 @@ import numpy as np
 from PIL import Image
 
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DIST = os.path.join(PROJECT, "control", "dist")
+DIST = os.path.join(PROJECT, "courses/controls/overview", "dist")
 SRC = os.path.join(PROJECT, "sources", "control-bootcamp-overview")
-sys.path.insert(0, os.path.join(PROJECT, "control", "animation"))
+sys.path.insert(0, os.path.join(PROJECT, "courses/controls/overview", "animation"))
 from control_specs import SEQUENCES  # noqa: E402
 
 import imageio_ffmpeg  # noqa: E402
@@ -147,7 +147,7 @@ def main():
     texts = {"course.json": open(os.path.join(DIST, "course.json"), encoding="utf-8").read(),
              "manifest.json": open(os.path.join(DIST, "animations", "manifest.json"), encoding="utf-8").read(),
              "app.js": open(os.path.join(DIST, "app.js"), encoding="utf-8").read(),
-             "control_specs.py": open(os.path.join(PROJECT, "control", "animation", "control_specs.py"), encoding="utf-8").read()}
+             "control_specs.py": open(os.path.join(PROJECT, "courses/controls/overview", "animation", "control_specs.py"), encoding="utf-8").read()}
     for src_name in ("chapter8.txt", "transcript.txt"):
         p = os.path.join(SRC, src_name)
         if not os.path.isfile(p):

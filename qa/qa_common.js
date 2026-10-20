@@ -7,7 +7,7 @@ const os = require("os");
 const { spawn } = require("child_process");
 
 const PROJECT = path.dirname(__dirname);
-const DIST = path.join(PROJECT, "browser", "dist");
+const DIST = path.join(PROJECT, "courses/ode/browser", "dist");
 const CHROME = process.env.CHROME_PATH || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 // Python for serve_local.py: repo-local .venv, else a sibling ../ManimGL/.venv, else python on PATH.
 const PY = [path.join(PROJECT, ".venv", "Scripts", "python.exe"),
@@ -25,11 +25,11 @@ function recorder() {
   return { results, check };
 }
 
-// Start browser/serve_local.py on a free loopback port and confirm its identity via the nonce.
+// Start courses/ode/browser/serve_local.py on a free loopback port and confirm its identity via the nonce.
 function startServer(startPort) {
   const portFile = path.join(os.tmpdir(), "sode-qa-port-" + process.pid + "-" + Date.now() + ".txt");
   const nonce = "qa-" + process.pid + "-" + Date.now();
-  const proc = spawn(PY, ["-I", path.join(PROJECT, "browser", "serve_local.py"), "--port", String(startPort || 8790),
+  const proc = spawn(PY, ["-I", path.join(PROJECT, "courses/ode/browser", "serve_local.py"), "--port", String(startPort || 8790),
                           "--port-file", portFile, "--nonce", nonce], { stdio: ["ignore", "pipe", "pipe"] });
   proc.stderr.on("data", () => {});
   proc.stdout.on("data", () => {});

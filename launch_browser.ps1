@@ -3,7 +3,7 @@
   Serve the browser study guide on 127.0.0.1 and open it in the default browser.
 
 .DESCRIPTION
-  Starts browser\serve_local.py (loopback only) on -Port, or the next free port if that one
+  Starts courses\ode\browser\serve_local.py (loopback only) on -Port, or the next free port if that one
   is taken. Before opening the page it confirms, through /__guide_health and a random
   per-launch nonce, that the server answering is the one this script started.
   Press Ctrl+C or close this window to stop the server.
@@ -20,7 +20,7 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $root = $PSScriptRoot
-$server = Join-Path $root 'browser\serve_local.py'
+$server = Join-Path $root 'courses\ode\browser\serve_local.py'
 $venvPython = @((Join-Path $root '.venv\Scripts\python.exe'),
                 (Join-Path (Split-Path $root -Parent) 'ManimGL\.venv\Scripts\python.exe')) |
               Where-Object { Test-Path $_ } | Select-Object -First 1

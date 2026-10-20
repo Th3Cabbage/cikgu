@@ -1,4 +1,4 @@
-"""Checks for native/ode_math.py and browser/dist/ode_math.js.
+"""Checks for courses/ode/native/ode_math.py and courses/ode/browser/dist/ode_math.js.
 
 Run from anywhere with the repo's .venv python (needs numpy/scipy, installed with manimgl):
     .\\.venv\\Scripts\\python.exe qa\\test_math.py
@@ -15,7 +15,7 @@ from scipy.integrate import solve_ivp
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PROJECT = os.path.dirname(HERE)
-sys.path.insert(0, os.path.join(PROJECT, "native"))
+sys.path.insert(0, os.path.join(PROJECT, "courses/ode/native"))
 import ode_math as M  # noqa: E402
 
 results = []
@@ -119,7 +119,7 @@ for bad, label in (((0, 1, 1), "a = 0"), ((float('nan'), 1, 1), "a = NaN"), ((1,
     check(f"rejects {label}", ok)
 
 # 6. JavaScript twin: same values, labels, bounds, formatting and validation.
-js = os.path.join(PROJECT, "browser", "dist", "ode_math.js")
+js = os.path.join(PROJECT, "courses/ode/browser", "dist", "ode_math.js")
 out = subprocess.run(["node", os.path.join(HERE, "math_grid.js"), js], capture_output=True, text=True, encoding="utf-8", check=True)
 data = json.loads(out.stdout)
 worst = 0.0

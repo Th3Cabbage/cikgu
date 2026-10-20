@@ -1,0 +1,655 @@
+{
+ "version": 1,
+ "width": 1280,
+ "height": 720,
+ "fps": 30,
+ "relations": {
+  "define": "Definition / choice",
+  "model": "Modelling step",
+  "classify": "Classification",
+  "diagram": "Picture",
+  "substitute": "Substitution",
+  "identity": "Identity (=)",
+  "equivalent": "Equivalent statement (⇔)",
+  "solve": "Solve",
+  "compute": "Computation",
+  "implies": "Consequence (⇒)",
+  "compare": "Check",
+  "caution": "Caveat",
+  "recap": "Recap"
+ },
+ "sections": {
+  "1": [
+   "input-sizes"
+  ],
+  "2": [
+   "feedback-substitution"
+  ],
+  "3": [
+   "three-examples"
+  ],
+  "4": [
+   "controllability-matrix"
+  ],
+  "5": [
+   "compare-ranks"
+  ],
+  "6": [
+   "ctrb-limits"
+  ]
+ },
+ "sequences": [
+  {
+   "id": "input-sizes",
+   "scene": "InputSizesSequence",
+   "section": 1,
+   "title": "Adding the input $Bu$",
+   "summary": "The input term joins the dynamics, and its shapes are forced: $B$ must be $n \\times q$ so that $Bu$ is an $n$-vector like $Ax$.",
+   "initial": {
+    "title": "Where we were",
+    "tex": "\\dot x = Ax",
+    "explanation": "The previous lectures studied $\\dot x = Ax$: the eigenvalues of $A$ alone decide whether the state decays or grows.",
+    "frame": "animations/input-sizes/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Add a control term",
+     "relation": "model",
+     "relationLabel": "Modelling step",
+     "tex": "\\dot x = Ax + Bu",
+     "explanation": "A forcing term $Bu$ is added. $u$ is the signal we choose; $B$ says how it enters each state equation.",
+     "initialFrame": "animations/input-sizes/state-00.jpg",
+     "finalFrame": "animations/input-sizes/state-01.jpg",
+     "transition": {
+      "src": "animations/input-sizes/step-01.mp4",
+      "duration": 2.5667,
+      "frames": 77,
+      "masterFrames": [
+       8,
+       85
+      ],
+      "bytes": 42004,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Shapes of every factor",
+     "relation": "define",
+     "relationLabel": "Definition / choice",
+     "tex": "\\underbrace{A}_{n\\times n}\\underbrace{x}_{n\\times 1} + \\underbrace{B}_{n\\times q}\\underbrace{u}_{q\\times 1}",
+     "explanation": "$x \\in \\mathbb{R}^n$ and $u \\in \\mathbb{R}^q$ ($q$ actuators). For $Bu$ to be an $n \\times 1$ column like $Ax$, $B$ must be $n$ tall and $q$ wide: one column per actuator.",
+     "initialFrame": "animations/input-sizes/state-01.jpg",
+     "finalFrame": "animations/input-sizes/state-02.jpg",
+     "transition": {
+      "src": "animations/input-sizes/step-02.mp4",
+      "duration": 4.0333,
+      "frames": 121,
+      "masterFrames": [
+       84,
+       205
+      ],
+      "bytes": 85513,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Assume the full state is measured",
+     "relation": "caution",
+     "relationLabel": "Caveat",
+     "tex": "y = Cx,\\quad C = I \\;\\Rightarrow\\; y = x",
+     "explanation": "Measurements $y = Cx$ come later. In this lecture $C = I$: every state is available for feedback. (This $C$ is not the controllability matrix $\\mathcal{C}$.)",
+     "initialFrame": "animations/input-sizes/state-02.jpg",
+     "finalFrame": "animations/input-sizes/state-03.jpg",
+     "transition": {
+      "src": "animations/input-sizes/step-03.mp4",
+      "duration": 3.5333,
+      "frames": 106,
+      "masterFrames": [
+       204,
+       310
+      ],
+      "bytes": 108256,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 10.133,
+   "masterFrames": 310,
+   "renderSeconds": 6.7
+  },
+  {
+   "id": "feedback-substitution",
+   "scene": "FeedbackSequence",
+   "section": 2,
+   "title": "Substituting $u = -Kx$",
+   "summary": "Proportional state feedback turns $\\dot x = Ax + Bu$ into $\\dot x = (A - BK)x$; controllability is about how freely $K$ can move its eigenvalues.",
+   "initial": {
+    "title": "System and feedback law",
+    "tex": "\\dot x = Ax + Bu,\\qquad u = -Kx",
+    "explanation": "With the whole state measured, the lecture uses the linear law $u = -Kx$, where $K$ is a $q \\times n$ gain matrix.",
+    "frame": "animations/feedback-substitution/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Put $-Kx$ in place of $u$",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "\\dot x = Ax + B(-Kx)",
+     "explanation": "The input $u$ is replaced by the feedback $-Kx$. $B$ still acts on it from the left.",
+     "initialFrame": "animations/feedback-substitution/state-00.jpg",
+     "finalFrame": "animations/feedback-substitution/state-01.jpg",
+     "transition": {
+      "src": "animations/feedback-substitution/step-01.mp4",
+      "duration": 2.4,
+      "frames": 72,
+      "masterFrames": [
+       8,
+       80
+      ],
+      "bytes": 74819,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Pull out the minus sign",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "\\dot x = Ax - BKx",
+     "explanation": "$B(-Kx) = -BKx$. $BK$ is $(n\\times q)(q\\times n) = n \\times n$, the same shape as $A$.",
+     "initialFrame": "animations/feedback-substitution/state-01.jpg",
+     "finalFrame": "animations/feedback-substitution/state-02.jpg",
+     "transition": {
+      "src": "animations/feedback-substitution/step-02.mp4",
+      "duration": 2.9667,
+      "frames": 89,
+      "masterFrames": [
+       79,
+       168
+      ],
+      "bytes": 90793,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Factor $x$ on the right",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "\\dot x = (A - BK)\\,x",
+     "explanation": "Both terms end in $x$, so $x$ factors out on the right. The closed loop is again $\\dot x = (\\text{matrix})x$ with the new matrix $A - BK$.",
+     "initialFrame": "animations/feedback-substitution/state-02.jpg",
+     "finalFrame": "animations/feedback-substitution/state-03.jpg",
+     "transition": {
+      "src": "animations/feedback-substitution/step-03.mp4",
+      "duration": 2.9667,
+      "frames": 89,
+      "masterFrames": [
+       167,
+       256
+      ],
+      "bytes": 76410,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "What controllability promises",
+     "relation": "equivalent",
+     "relationLabel": "Equivalent statement (⇔)",
+     "tex": "(A,B)\\ \\text{controllable} \\Leftrightarrow \\text{eig}(A-BK)\\ \\text{assignable} \\Leftrightarrow \\text{every state reachable}",
+     "explanation": "If $(A, B)$ is controllable, a suitable $K$ places the eigenvalues of $A - BK$ anywhere (as conjugate pairs for real matrices), and some input steers $x$ to any point in finite time. Only $A$ and $B$ decide this.",
+     "initialFrame": "animations/feedback-substitution/state-03.jpg",
+     "finalFrame": "animations/feedback-substitution/state-04.jpg",
+     "transition": {
+      "src": "animations/feedback-substitution/step-04.mp4",
+      "duration": 2.9667,
+      "frames": 89,
+      "masterFrames": [
+       255,
+       344
+      ],
+      "bytes": 136900,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 11.3,
+   "masterFrames": 344,
+   "renderSeconds": 7.5
+  },
+  {
+   "id": "three-examples",
+   "scene": "ThreeExamplesSequence",
+   "section": 3,
+   "title": "Blocked, more actuators, coupled",
+   "summary": "Writing the examples row by row shows when the input can reach every state: never for $x_1$ in the uncoupled case, directly with two actuators, and indirectly through coupling.",
+   "initial": {
+    "title": "Uncoupled dynamics, one input",
+    "tex": "\\dot x = \\begin{bmatrix}1&0\\\\0&2\\end{bmatrix}x + \\begin{bmatrix}0\\\\1\\end{bmatrix}u",
+    "explanation": "The lecture's first example: diagonal $A$ with eigenvalues $1$ and $2$ (both unstable) and a single actuator $B = [0, 1]^T$.",
+    "frame": "animations/three-examples/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Expand row by row",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "\\dot x_1 = x_1,\\qquad \\dot x_2 = 2x_2 + u",
+     "explanation": "Row 1: $1\\cdot x_1 + 0\\cdot x_2 + 0\\cdot u = x_1$. Row 2: $0\\cdot x_1 + 2x_2 + 1\\cdot u$.",
+     "initialFrame": "animations/three-examples/state-00.jpg",
+     "finalFrame": "animations/three-examples/state-01.jpg",
+     "transition": {
+      "src": "animations/three-examples/step-01.mp4",
+      "duration": 5.2,
+      "frames": 156,
+      "masterFrames": [
+       8,
+       164
+      ],
+      "bytes": 134705,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "$x_1$ is out of reach",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "\\dot x_1 = x_1 \\;\\Rightarrow\\; \\text{uncontrollable}",
+     "explanation": "The $x_1$ equation contains neither $u$ nor $x_2$, so no input affects $x_1$: it grows like $e^t$ regardless. The pair is uncontrollable.",
+     "initialFrame": "animations/three-examples/state-01.jpg",
+     "finalFrame": "animations/three-examples/state-02.jpg",
+     "transition": {
+      "src": "animations/three-examples/step-02.mp4",
+      "duration": 2.6,
+      "frames": 78,
+      "masterFrames": [
+       163,
+       241
+      ],
+      "bytes": 80375,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Fix 1: a second actuator",
+     "relation": "compare",
+     "relationLabel": "Check",
+     "tex": "B = I:\\quad \\dot x_1 = x_1 + u_1,\\quad \\dot x_2 = 2x_2 + u_2",
+     "explanation": "With $B = I$ each state has its own input, so both can be stabilised independently: controllable. Every column of $B$ is another actuator.",
+     "initialFrame": "animations/three-examples/state-02.jpg",
+     "finalFrame": "animations/three-examples/state-03.jpg",
+     "transition": {
+      "src": "animations/three-examples/step-03.mp4",
+      "duration": 3.4333,
+      "frames": 103,
+      "masterFrames": [
+       240,
+       343
+      ],
+      "bytes": 116617,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "Fix 2: coupling, one actuator",
+     "relation": "compare",
+     "relationLabel": "Check",
+     "tex": "A = \\begin{bmatrix}1&1\\\\0&2\\end{bmatrix}:\\quad \\dot x_1 = x_1 + x_2,\\quad \\dot x_2 = 2x_2 + u",
+     "explanation": "Back to one input $B = [0, 1]^T$, but now $x_2$ drives $x_1$. The input reaches $x_1$ through $x_2$, and the pair is controllable (proved by the rank test later).",
+     "initialFrame": "animations/three-examples/state-03.jpg",
+     "finalFrame": "animations/three-examples/state-04.jpg",
+     "transition": {
+      "src": "animations/three-examples/step-04.mp4",
+      "duration": 3.4333,
+      "frames": 103,
+      "masterFrames": [
+       342,
+       445
+      ],
+      "bytes": 100134,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 14.667,
+   "masterFrames": 445,
+   "renderSeconds": 9.0
+  },
+  {
+   "id": "controllability-matrix",
+   "scene": "ControllabilityMatrixSequence",
+   "section": 4,
+   "title": "The controllability matrix and its rank",
+   "summary": "Repeatedly multiplying $B$ by $A$ produces the blocks of $\\mathcal{C}$; controllability is the statement that these columns span $\\mathbb{R}^n$.",
+   "initial": {
+    "title": "Start from the input direction",
+    "tex": "B",
+    "explanation": "Everything is built from $B$, the directions the actuators push, and $A$, which moves those directions around.",
+    "frame": "animations/controllability-matrix/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Multiply by $A$, again and again",
+     "relation": "define",
+     "relationLabel": "Definition / choice",
+     "tex": "\\mathcal{C} = \\begin{bmatrix} B & AB & A^2B & \\cdots & A^{n-1}B \\end{bmatrix}",
+     "explanation": "Each block is $A$ times the previous one, with $A$ on the left. The list stops at $A^{n-1}B$: $n$ blocks.",
+     "initialFrame": "animations/controllability-matrix/state-00.jpg",
+     "finalFrame": "animations/controllability-matrix/state-01.jpg",
+     "transition": {
+      "src": "animations/controllability-matrix/step-01.mp4",
+      "duration": 3.8667,
+      "frames": 116,
+      "masterFrames": [
+       8,
+       124
+      ],
+      "bytes": 68254,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Size of $\\mathcal{C}$",
+     "relation": "define",
+     "relationLabel": "Definition / choice",
+     "tex": "\\mathcal{C} \\in \\mathbb{R}^{n \\times nq}",
+     "explanation": "Every block has the shape of $B$, $n \\times q$. Side by side, $n$ blocks make $n \\times nq$; square only for a single input.",
+     "initialFrame": "animations/controllability-matrix/state-01.jpg",
+     "finalFrame": "animations/controllability-matrix/state-02.jpg",
+     "transition": {
+      "src": "animations/controllability-matrix/step-02.mp4",
+      "duration": 2.2,
+      "frames": 66,
+      "masterFrames": [
+       123,
+       189
+      ],
+      "bytes": 58715,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "The rank test",
+     "relation": "equivalent",
+     "relationLabel": "Equivalent statement (⇔)",
+     "tex": "\\text{controllable} \\Leftrightarrow \\mathrm{rank}\\,\\mathcal{C} = n",
+     "explanation": "Controllable exactly when $\\mathcal{C}$ has $n$ independent columns, so its columns span $\\mathbb{R}^n$: full ROW rank. (The lecture says “full column rank”; that matches only for one input.)",
+     "initialFrame": "animations/controllability-matrix/state-02.jpg",
+     "finalFrame": "animations/controllability-matrix/state-03.jpg",
+     "transition": {
+      "src": "animations/controllability-matrix/step-03.mp4",
+      "duration": 2.0667,
+      "frames": 62,
+      "masterFrames": [
+       188,
+       250
+      ],
+      "bytes": 108671,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "Why: kick and let it ring (discrete time)",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "x_1 = Bu_0,\\quad x_2 = ABu_0 + Bu_1,\\quad x_3 = A^2Bu_0 + ABu_1 + Bu_2",
+     "explanation": "Authored illustration with $x_{k+1} = Ax_k + Bu_k$, $x_0 = 0$: each step passes earlier kicks through $A$ once more. Reachable states are combinations of the columns of $\\mathcal{C}$.",
+     "initialFrame": "animations/controllability-matrix/state-03.jpg",
+     "finalFrame": "animations/controllability-matrix/state-04.jpg",
+     "transition": {
+      "src": "animations/controllability-matrix/step-04.mp4",
+      "duration": 4.1,
+      "frames": 123,
+      "masterFrames": [
+       249,
+       372
+      ],
+      "bytes": 217148,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 12.233,
+   "masterFrames": 372,
+   "renderSeconds": 8.3
+  },
+  {
+   "id": "compare-ranks",
+   "scene": "CompareRanksSequence",
+   "section": 5,
+   "title": "Computing $\\mathcal{C}$: rank 1 versus rank 2",
+   "summary": "Multiplying $A$ into $B$ entry by entry for both examples: the uncoupled columns stay on the $x_2$ axis (rank 1), the coupled ones span the plane (rank 2).",
+   "initial": {
+    "title": "Uncoupled pair",
+    "tex": "A = \\begin{bmatrix}1&0\\\\0&2\\end{bmatrix},\\quad B = \\begin{bmatrix}0\\\\1\\end{bmatrix}",
+    "explanation": "The lecture's first example, now tested with $\\mathcal{C} = [B\\ \\ AB]$ since $n = 2$.",
+    "frame": "animations/compare-ranks/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Multiply $A$ into $B$",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "\\begin{bmatrix}1&0\\\\0&2\\end{bmatrix}\\begin{bmatrix}0\\\\1\\end{bmatrix} = \\begin{bmatrix}1\\cdot0 + 0\\cdot1\\\\0\\cdot0 + 2\\cdot1\\end{bmatrix} = \\begin{bmatrix}0\\\\2\\end{bmatrix}",
+     "explanation": "Row times column: top $1\\cdot0 + 0\\cdot1 = 0$, bottom $0\\cdot0 + 2\\cdot1 = 2$. So $AB = [0, 2]^T$.",
+     "initialFrame": "animations/compare-ranks/state-00.jpg",
+     "finalFrame": "animations/compare-ranks/state-01.jpg",
+     "transition": {
+      "src": "animations/compare-ranks/step-01.mp4",
+      "duration": 4.5,
+      "frames": 135,
+      "masterFrames": [
+       8,
+       143
+      ],
+      "bytes": 106895,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Assemble and look at the columns",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "\\mathcal{C} = \\begin{bmatrix}0&0\\\\1&2\\end{bmatrix}",
+     "explanation": "$B$ and $AB$ both lie on the $x_2$ axis; $AB = 2B$.",
+     "initialFrame": "animations/compare-ranks/state-01.jpg",
+     "finalFrame": "animations/compare-ranks/state-02.jpg",
+     "transition": {
+      "src": "animations/compare-ranks/step-02.mp4",
+      "duration": 2.7,
+      "frames": 81,
+      "masterFrames": [
+       142,
+       223
+      ],
+      "bytes": 65671,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Determinant 0, rank 1",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "\\det\\mathcal{C} = 0\\cdot2 - 0\\cdot1 = 0 \\;\\Rightarrow\\; \\mathrm{rank}\\,\\mathcal{C} = 1,\\quad A^2B = \\begin{bmatrix}0\\\\4\\end{bmatrix}",
+     "explanation": "Rank 1 < 2: uncontrollable. More powers do not help: $A^2B = [0, 4]^T$, $[0, 8]^T$, ... keep a zero on top.",
+     "initialFrame": "animations/compare-ranks/state-02.jpg",
+     "finalFrame": "animations/compare-ranks/state-03.jpg",
+     "transition": {
+      "src": "animations/compare-ranks/step-03.mp4",
+      "duration": 2.1333,
+      "frames": 64,
+      "masterFrames": [
+       222,
+       286
+      ],
+      "bytes": 72770,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "Coupled $A$, same $B$",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "\\begin{bmatrix}1&1\\\\0&2\\end{bmatrix}\\begin{bmatrix}0\\\\1\\end{bmatrix} = \\begin{bmatrix}1\\cdot0 + 1\\cdot1\\\\0\\cdot0 + 2\\cdot1\\end{bmatrix} = \\begin{bmatrix}1\\\\2\\end{bmatrix}",
+     "explanation": "The coupling entry contributes $1 \\cdot 1$ to the top row, so $AB = [1, 2]^T$ now has an $x_1$ component.",
+     "initialFrame": "animations/compare-ranks/state-03.jpg",
+     "finalFrame": "animations/compare-ranks/state-04.jpg",
+     "transition": {
+      "src": "animations/compare-ranks/step-04.mp4",
+      "duration": 5.2333,
+      "frames": 157,
+      "masterFrames": [
+       285,
+       442
+      ],
+      "bytes": 147828,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 5,
+     "title": "Determinant $-1$, rank 2",
+     "relation": "compare",
+     "relationLabel": "Check",
+     "tex": "\\mathcal{C} = \\begin{bmatrix}0&1\\\\1&2\\end{bmatrix},\\quad \\det\\mathcal{C} = 0\\cdot2 - 1\\cdot1 = -1 \\neq 0",
+     "explanation": "Two independent columns span the plane: rank 2, controllable.",
+     "initialFrame": "animations/compare-ranks/state-04.jpg",
+     "finalFrame": "animations/compare-ranks/state-05.jpg",
+     "transition": {
+      "src": "animations/compare-ranks/step-05.mp4",
+      "duration": 3.0333,
+      "frames": 91,
+      "masterFrames": [
+       441,
+       532
+      ],
+      "bytes": 88628,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 17.6,
+   "masterFrames": 532,
+   "renderSeconds": 8.9
+  },
+  {
+   "id": "ctrb-limits",
+   "scene": "CtrbLimitsSequence",
+   "section": 6,
+   "title": "ctrb in MATLAB and the limits of a yes/no test",
+   "summary": "The computer reproduces the board, but the rank test is binary and linear: degree of controllability and nonlinear effects need more.",
+   "initial": {
+    "title": "The command",
+    "tex": "\\texttt{rank(ctrb(A,B))}",
+    "explanation": "ctrb builds $\\mathcal{C}$; rank tests it. Useful when the system is too big to check by hand.",
+    "frame": "animations/ctrb-limits/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "The two examples on the computer",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "\\texttt{A=[1 0;0 2]} \\to 1,\\qquad \\texttt{A=[1 1;0 2]} \\to 2",
+     "explanation": "With B = [0; 1], the uncoupled A gives rank 1 (not controllable) and the coupled A gives rank 2 (controllable), matching the board.",
+     "initialFrame": "animations/ctrb-limits/state-00.jpg",
+     "finalFrame": "animations/ctrb-limits/state-01.jpg",
+     "transition": {
+      "src": "animations/ctrb-limits/step-01.mp4",
+      "duration": 2.5333,
+      "frames": 76,
+      "masterFrames": [
+       8,
+       84
+      ],
+      "bytes": 89380,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Linearizations only",
+     "relation": "caution",
+     "relationLabel": "Caveat",
+     "tex": "\\text{linearization uncontrollable} \\;\\not\\Rightarrow\\; \\text{nonlinear system uncontrollable}",
+     "explanation": "Neglected nonlinear terms may still give control authority, or not; nonlinear controllability is hard in general.",
+     "initialFrame": "animations/ctrb-limits/state-01.jpg",
+     "finalFrame": "animations/ctrb-limits/state-02.jpg",
+     "transition": {
+      "src": "animations/ctrb-limits/step-02.mp4",
+      "duration": 2.8,
+      "frames": 84,
+      "masterFrames": [
+       83,
+       167
+      ],
+      "bytes": 78130,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Yes/no hides the degree",
+     "relation": "caution",
+     "relationLabel": "Caveat",
+     "tex": "c = 0.1:\\ \\mathcal{C} = \\begin{bmatrix}0&0.1\\\\1&2\\end{bmatrix},\\ \\sigma \\approx (2.24,\\ 0.045);\\quad c = 1:\\ \\sigma \\approx (2.41,\\ 0.41)",
+     "explanation": "Authored comparison: both have rank 2, but a weak coupling leaves one direction barely actuated. The SVD of $\\mathcal{C}$ previews this; exact energy measures need the Gramian (later).",
+     "initialFrame": "animations/ctrb-limits/state-02.jpg",
+     "finalFrame": "animations/ctrb-limits/state-03.jpg",
+     "transition": {
+      "src": "animations/ctrb-limits/step-03.mp4",
+      "duration": 3.5333,
+      "frames": 106,
+      "masterFrames": [
+       166,
+       272
+      ],
+      "bytes": 101095,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "What comes next",
+     "relation": "recap",
+     "relationLabel": "Recap",
+     "tex": "\\text{why }\\mathcal{C}\\text{ works}\\;\\to\\;\\text{degree of controllability}\\;\\to\\;\\text{design } u = -Kx",
+     "explanation": "Following lectures justify the matrix, measure how controllable a system is, and finally design the feedback gain.",
+     "initialFrame": "animations/ctrb-limits/state-03.jpg",
+     "finalFrame": "animations/ctrb-limits/state-04.jpg",
+     "transition": {
+      "src": "animations/ctrb-limits/step-04.mp4",
+      "duration": 2.4667,
+      "frames": 74,
+      "masterFrames": [
+       271,
+       345
+      ],
+      "bytes": 56482,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 11.333,
+   "masterFrames": 345,
+   "renderSeconds": 8.6
+  }
+ ]
+}

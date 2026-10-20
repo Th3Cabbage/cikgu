@@ -27,7 +27,7 @@ for (const d of ["screenshots", "results"]) fs.mkdirSync(path.join(__dirname, d)
 (async () => {
   const nonce = "review-" + Date.now();
   const portFile = path.join(os.tmpdir(), nonce + ".txt");
-  const proc = spawn(PY, ["-I", path.join(PROJECT, "browser", "serve_local.py"), "--port", "8797", "--port-file", portFile, "--nonce", nonce]);
+  const proc = spawn(PY, ["-I", path.join(PROJECT, "courses/ode/browser", "serve_local.py"), "--port", "8797", "--port-file", portFile, "--nonce", nonce]);
   let base = null, serverPid = null;
   for (let i = 0; i < 60 && !base; i++) {
     await new Promise(r => setTimeout(r, 200));

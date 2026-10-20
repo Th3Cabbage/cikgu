@@ -5,7 +5,7 @@
 Checks
  1. The worked numbers the guide states (book example A, B, K; BK; A - BK; polynomial; eigenvalues;
     static cruise formulas and the worked-example values; open-loop eigenvalues +/-1).
- 2. control/dist/control_math.js, run in Node, against NumPy eigenvalues, the analytic stability
+ 2. courses/controls/overview/dist/control_math.js, run in Node, against NumPy eigenvalues, the analytic stability
     rule (k1 > 1 and k2 > 0) and its boundary cases, and SciPy solve_ivp responses (with and
     without the disturbance pulse) on a grid of gains and initial states.
  3. The static cruise formulas in JS against a direct linear solve.
@@ -21,7 +21,7 @@ from scipy.integrate import solve_ivp
 from scipy.linalg import expm
 
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DIST = os.path.join(PROJECT, "control", "dist")
+DIST = os.path.join(PROJECT, "courses/controls/overview", "dist")
 RESULTS = []
 
 

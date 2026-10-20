@@ -1,2 +1,2 @@
-# Keep the published static site byte-for-byte: no line-ending conversion in browser/dist.
-browser/dist/** -text
+# Keep the published static site byte-for-byte: no line-ending conversion in courses/ode/browser/dist.
+courses/ode/browser/dist/** -text whitespace=cr-at-eol
