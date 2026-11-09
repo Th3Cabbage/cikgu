@@ -57,3 +57,7 @@ desktop.ini
 # (step clips, stills, posters, KaTeX fonts and LICENSE) even if a rule above matches.
 !courses/ode/browser/dist/
 !courses/ode/browser/dist/**
+
+# Local copyrighted books (personal reference only; never commit or publish)
+/docs/*.pdf
+/docs/*.djvu

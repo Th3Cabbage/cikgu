@@ -9,6 +9,49 @@ Read `CLAUDE.md` and `docs/HANDOVER.md` for the project map. For installation or
 sources, read `docs/SETUP.md`. For script arguments and the course/explorer contract, read
 `tools/README.md`. Paths below are relative to the repository root.
 
+## Team and review checkpoints
+
+You (the lead Claude session) are the architect and own the whole workflow. Keep the plan, the
+mathematical core, animation design, notes, worked examples, quiz content, integration and
+commits yourself. Delegate only bounded, long or mechanical work to the Sonnet agents in
+`.claude/agents/`, each with an exact file list:
+
+- `source-reader`: a topic map of `sources/<slug>/` before you plan (read-only).
+- `package-builder`: explorer UI wiring, scaffolding, QA scripts/fixtures, catalog entry, docs.
+- `render-qa`: renders, `check_study`, contact sheets and browser suites; simple layout fixes.
+
+Do not let two agents edit the same file; give parallel coding tasks separate worktrees. Read
+every agent change before it stays in the branch. Agent reports are checks, not reviews.
+
+Codex is the only reviewer (Claude Code Codex plugin; model and effort in `.codex/config.toml`).
+Two reviews are required for a new package or substantial revision:
+
+1. **Plan and mathematics**, before animations and the explorer are built: an adversarial
+   review focused on source coverage, timestamps, derivations, worked examples, `study_math.js`
+   and `qa_cases.json`.
+2. **Before committing**: run the package math checks and `check_study`, then a standard review
+   of the full diff (code, explorer edge cases, quiz answers, docs, site integration).
+
+Start both reviews yourself; do not wait for the user to type a slash command. The plugin's
+slash commands cannot be invoked by Claude, but they only run its companion script, which you
+run with Bash (Git Bash) in the background and read when it finishes:
+
+```bash
+CX=$(ls -d ~/.claude/plugins/cache/openai-codex/codex/*/ | sort -V | tail -1)
+node "$CX/scripts/codex-companion.mjs" adversarial-review --wait "<focus text>"   # checkpoint 1
+node "$CX/scripts/codex-companion.mjs" review --wait                              # checkpoint 2
+```
+
+Every argument after the flags becomes focus text (even `--help`), and each run uses Codex
+usage, so run only the reviews you intend. Reviews cover the working-tree diff by default; add
+`--base <ref>` for committed branch work. Untracked files are included. Report the verdict and
+findings to the user.
+
+The user may ask for more reviews at any time. Fix or explicitly answer every finding, and record
+the findings and resolutions in the package `REVIEW.md`. If Codex is unavailable (not installed,
+not signed in or out of usage), continue, write "Codex review pending" with the missed
+checkpoint in `REVIEW.md`, tell the user, and run the review when Codex is available.
+
 ## Establish the lesson
 
 Identify the lecture URL, a unique package slug, and the intended scope. For a timestamped
@@ -73,9 +116,5 @@ stop on navigation. Do not claim the explorer covers cases outside its mathemati
   title, short description, `storeKey`, `statusApp`), then run `node site/build.mjs`,
   `node --test site/test/build.test.mjs` and `node qa/site_browser_qa.js`. See `site/README.md`.
 - Update package README/review and the handover with commands, actual checks and limitations.
-  Give the user the launcher command. Commit or push only when requested.
-
-Claude can perform this workflow directly. `tools/run_claude.py` is an optional external handoff
-runner for a planner/reviewer; it is not a requirement to start another Claude process. Its
-safe-mode session does not automatically load repository customization: the supplied brief must
-explicitly tell it to read `CLAUDE.md` and this skill if those instructions are wanted.
+  Give the user the launcher command. Commit or push only when requested, and only after the
+  pre-commit Codex review or a recorded "Codex review pending".

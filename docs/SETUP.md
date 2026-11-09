@@ -111,12 +111,17 @@ Install/sign in to Claude Code on this computer, then start it at the repository
 You can invoke `/build-study-package` directly. Your account, credentials, local session logs
 and personal skills do not transfer through Git.
 
-The optional external handoff runner finds Claude on PATH or in a VS Code extension. It defaults
-to `claude-opus-5-5` with medium effort; choose a model available on your account with `--model`.
-Its Git Bash paths assume the usual Windows Git installation. It uses safe mode, so a handoff
-brief should explicitly request reading `CLAUDE.md` and the skill file rather than relying on
-automatic project-skill loading. Do not start this runner recursively from inside Claude just
-to use the project skill.
+On Windows, install the Claude Code CLI from PowerShell with `irm https://claude.ai/install.ps1 | iex`
+and make sure `%USERPROFILE%\.local\bin` is on the user PATH (restart VS Code afterwards). The
+Sonnet subagents are checked in under `.claude/agents/` and need no setup.
+
+Codex is the reviewer. Install it with `npm install -g @openai/codex`, then in the Claude Code CLI
+run `/plugin marketplace add openai/codex-plugin-cc`, `/plugin install codex@openai-codex`,
+`/reload-plugins` and `/codex:setup`, and sign in with `codex login` (ChatGPT account or API key).
+`/plugin` is not available in the VS Code panel; use the terminal CLI for plugin management.
+`.codex/config.toml` selects `gpt-6.1-sol` with medium effort but loads only when Codex trusts this
+project; otherwise copy those lines to `~/.codex/config.toml`. The model may require a paid
+ChatGPT plan: check `codex debug models`, and choose an available model if it is missing.
 
 The browser's **Ask GPT** panel is separate from Claude Code. It is optional: configure
 `OPENAI_API_KEY` locally before launching if you want live chat. `OPENAI_MODEL` optionally changes

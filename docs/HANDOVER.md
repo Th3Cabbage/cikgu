@@ -151,16 +151,16 @@ mathtext-to-SVG helpers because the tested environment had no LaTeX installation
   new package, without copying teaching content or media. The author must supply the lesson,
   scenes, explorer and mathematical implementation. It refuses existing targets.
 - `tools/check_study.py`: compact content/media checks, optionally decoding every clip.
-- `tools/run_claude.py`: optional focused CLI handoff, resumable local logs and configurable
-  model/effort. Claude Opus 5.5 was used for the Linear Systems implementation; availability is
-  account-dependent and a future model can be selected with `--model`.
 - `.claude/skills/build-study-package/SKILL.md`: the maintained authoring workflow. Reuse the
   existing scripts rather than duplicating them inside the skill.
 
-Codex acted as planner/reviewer and Claude as implementer. A new Claude session may do the whole
-workflow; it does not require Codex or this collaboration arrangement. External runner sessions
-use safe mode: give explicit instructions in their brief to read the repository guidance.
-The runner has Windows Git Bash assumptions; direct Claude Code use is also supported.
+Roles changed in November 2026. Earlier packages were built with Codex as planner/reviewer and
+Claude as a restricted implementer launched by `tools/run_claude.py` (now removed). Now the lead
+Claude Opus session is the architect for the whole workflow, Sonnet subagents in `.claude/agents/`
+(`package-builder`, `render-qa`, `source-reader`) do bounded assigned work, and Codex is the only
+reviewer through the Claude Code Codex plugin (`gpt-6.1-sol`, medium effort, `.codex/config.toml`).
+Two Codex reviews are required per package (plan/maths, then pre-commit); if Codex is unavailable
+the package `REVIEW.md` records "Codex review pending". See CLAUDE.md and the skill.
 
 The current scaffold copies renderer code from the overview. The newer Linear Systems renderer
 has a corrected FFmpeg codec probe; when developing another renderer, check metadata against
@@ -221,10 +221,11 @@ its REVIEW.md records actual verification and the efficiency trial.
 For another Controls lecture, start with **`tools/study_pipeline.py`**, documented at the top of
 tools/README.md. A registered playlist selects a subject, and title keywords select a strategy
 from tools/study_profiles.json; unrecognized playlists require an explicit configured subject.
-Plan/prepare/scaffold/brief/author/preview/render/check/status are separate stages. Sources and
+Plan/prepare/scaffold/preview/render/check/status are separate stages (brief/author were
+removed with the role change in November 2026). Sources and
 merged stage checkpoints stay ignored in sources/<slug>. A human reviews transcript equations,
-book pages and sparse frames, then writes REVIEW.md in that cache before authoring. Claude gets
-a fresh compact brief and a CLI budget cap; default authoring effort is now low. The initial trial
+book pages and sparse frames, then writes REVIEW.md in that cache before authoring. Historically
+Claude got a fresh compact brief and a CLI budget cap with low effort. The Controllability trial
 used medium effort and finished in 13m43s with 87,256 output tokens, vs 323,667 in the previous
 lesson's two runs (different scope; excludes Codex/tooling/review usage). No savings are guaranteed.
 

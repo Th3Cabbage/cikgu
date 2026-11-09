@@ -1,0 +1,6 @@
+# Codex is this repository's only reviewer (see CLAUDE.md). The Claude Code Codex plugin uses
+# the same configuration as the Codex CLI. Codex loads this project file only after the project is
+# trusted; otherwise put the same two lines in ~/.codex/config.toml. If the model is unavailable on
+# the signed-in ChatGPT plan, choose one listed by `codex debug models` and update the docs.
+model = "gpt-6.1-sol"
+model_reasoning_effort = "medium"

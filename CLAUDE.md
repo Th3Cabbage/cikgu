@@ -7,10 +7,25 @@ read [docs/SETUP.md](docs/SETUP.md) when using a new computer.
 For a new lecture or substantial study-package work, use the repository skill
 `.claude/skills/build-study-package/SKILL.md` (`/build-study-package` in Claude Code).
 The deterministic source/scaffold/render/check commands are in [tools/README.md](tools/README.md).
-For new Controls lectures, start with `tools/study_pipeline.py`: it routes the playlist to a
-recipe, saves checkpoints, creates a compact brief and bounds fresh Claude runs. See the routed
-workflow at the start of tools/README.md. Keep shared verification with one owner.
-Load detailed references only when needed.
+For new Controls lectures, `tools/study_pipeline.py` routes the playlist to a recipe and runs the
+deterministic prepare/scaffold/preview/render/check stages with checkpoints. See the routed
+workflow at the start of tools/README.md. Load detailed references only when needed.
+
+## Team roles (from November 2026)
+
+- **Claude Opus (the lead session) is the architect.** It plans, reviews sources, writes the
+  mathematical core, animation design, notes, examples and quiz, integrates all changes and
+  commits when asked.
+- **Sonnet subagents** in `.claude/agents/` do bounded work the architect assigns with an exact
+  file list: `package-builder` (coding), `render-qa` (renders and QA, simple layout fixes) and
+  `source-reader` (read-only source maps). They report; the architect reads every change.
+- **Codex is the only reviewer**, through the Claude Code Codex plugin (`gpt-6.1-sol`, medium
+  effort, set in `.codex/config.toml`). It reviews code and mathematics but does not write the
+  packages. Required checkpoints are in the skill. If Codex is unavailable, finish the work, mark
+  the package "Codex review pending" in its `REVIEW.md`, and run the review later.
+- Tests and QA scripts are checks, not reviews; anyone may run them. Do not launch Claude
+  recursively from inside a Claude session. Packages built before November 2026 used the old
+  arrangement (Codex planned, Claude implemented); their BRIEF/REVIEW files are historical.
 
 Course sources are grouped by subject: `courses/controls/{overview,linear-systems,stability-eigenvalues,linearization,controllability}`
 and `courses/ode/` (browser, native, animation and course.json). Shared tools, tests, environments
@@ -44,9 +59,7 @@ and root launcher commands stay at the repository root. See `courses/README.md` 
 | Controllability | `.\launch_controllability.ps1` | 8820 |
 | Unified study site (all courses; Netlify build) | `.\launch_study.ps1` | 8800 |
 
-The new-package skill works with Claude alone. Codex can also plan/review when requested;
-do not recursively launch Claude from inside a Claude session just to follow the skill.
-Model choice is configurable and depends on the account on this computer; see setup docs.
+Model availability depends on the accounts on this computer; see setup docs.
 
 The unified site (`site/`, see [site/README.md](site/README.md)) copies each package `dist/` and adds
 shared navigation at build time; do not edit package apps for site integration. A finished lecture is

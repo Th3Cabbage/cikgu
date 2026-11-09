@@ -11,9 +11,8 @@ The current supported subject profile is Controls; the older ODE package remains
 .\.venv\Scripts\python.exe tools/study_pipeline.py plan --url 'https://www.youtube.com/watch?v=u5Sv7YKAkt4&list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m' --slug controllability --title 'Controllability' --port 8820
 .\.venv\Scripts\python.exe tools/study_pipeline.py prepare --slug controllability
 .\.venv\Scripts\python.exe tools/study_pipeline.py scaffold --slug controllability
-.\.venv\Scripts\python.exe tools/study_pipeline.py brief --slug controllability
-# Review transcript/book/frames and write sources/controllability/REVIEW.md before authoring.
-.\.venv\Scripts\python.exe tools/study_pipeline.py author --slug controllability --name controllability-efficient --budget-usd 4
+# Review transcript/book/frames (optionally via the source-reader agent), write
+# sources/controllability/REVIEW.md, author the lesson, then run the Codex plan/maths review.
 .\.venv\Scripts\python.exe tools/study_pipeline.py status --slug controllability
 ```
 
@@ -21,17 +20,11 @@ Each stage is explicit. Planning makes no network/model calls; preparation downl
 Source files and stage checkpoints live under ignored `sources/<slug>/`. Repeated preparation
 uses its existing cache; repeated scaffolding preserves authored files. A conflicting video/plan
 is rejected. Book-page defaults are candidates and must be checked against the local edition.
-The generated brief restricts Claude to lesson files in a fresh session; Codex performs rendering,
-math review and shared integration once. Completed authoring cannot silently run again.
-
-The author stage uses Opus 5.5 with low effort (`--effort medium` overrides this) and forwards
-`--max-budget-usd` to Claude CLI. The initial Controllability trial started with medium effort;
-its repeated long thinking periods motivated the lower default for subsequent authoring.
-This is the CLI's API-spend accounting limit, not a guaranteed subscription charge or wall-clock
-deadline; a budget stop leaves partial files for review and returns a failure. Do not resume the
-large previous lecture session. A focused repair uses a new compact brief and a new task name.
-The JSON summary records elapsed seconds, budget, terminal status and aggregated usage;
-cached-input tokens are repeated context reads, not unique words. Codex usage is not included.
+No stage calls a model. The lead Claude session authors the lesson between `scaffold` and
+`preview`, delegating bounded work to the Sonnet agents in `.claude/agents/`; Codex reviews it
+at the checkpoints in `.claude/skills/build-study-package/SKILL.md`. The earlier `brief`/`author`
+stages and `tools/run_claude.py` (Codex launching a restricted Claude implementer) were removed
+in November 2026; historical package BRIEF files describe that older arrangement.
 
 Preview one sequence, inspect its contact sheet, then render the remainder:
 
@@ -129,21 +122,7 @@ counts, with compact output:
 A slug resolves within `courses/controls/`. For another subject, pass its full repository-relative
 path, for example `--package courses/algebra/another-lecture`.
 
-Hand a focused implementation brief to Claude:
-
-```powershell
-.\.venv\Scripts\python.exe tools\run_claude.py courses\controls\another-lecture\BRIEF.md --name another-lecture
-.\.venv\Scripts\python.exe tools\run_claude.py --status another-lecture
-```
-
-The runner finds Claude Code in PATH or the VS Code extension, uses the selected Opus 5.5 model
-with medium effort, and retains resumable session IDs and raw logs in ignored `qa/scratch/`.
-It prints brief progress instead of large tool results. It uses your existing Claude sign-in;
-it does not read or print credentials. For a focused revision use a new task name and
-`--resume <session_id>`. Model and effort can be overridden explicitly. Claude still needs
-source review and independent checks; the scaffold is automation for repeated implementation work.
-
 Savings come from cached sources, removing duplicate rolling captions, selecting only relevant
-book pages/frames, reusing tested application code, and giving Claude a fresh, bounded brief
-instead of replaying the entire previous implementation conversation. No fixed token saving is
-guaranteed; model usage is recorded in each task's local summary JSON.
+book pages/frames, reusing tested application code, and delegating long mechanical work (source
+maps, renders, browser QA) to Sonnet agents instead of filling the lead session's context.
+No fixed token saving is guaranteed.
