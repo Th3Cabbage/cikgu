@@ -161,6 +161,14 @@
      "description": "Euler, midpoint and Runge-Kutta, order, ode23/ode45 error control and stiffness, with a live stage-by-stage explorer.",
      "storeKey": "numerical-methods-v1",
      "statusApp": "Study_numerical_methods"
+    },
+    {
+     "slug": "applications",
+     "source": "courses/mit-de/applications/dist",
+     "title": "Unit 12: Tumbling Box, Predator-Prey and Chaos",
+     "description": "The tumbling box on a sphere, predator-prey cycles, and the Lorenz attractor with sensitive dependence.",
+     "storeKey": "applications-v1",
+     "statusApp": "Study_applications"
     }
    ]
   }
