@@ -1,0 +1,12 @@
+# Unit 11 source map (source-reader; verify). Frames only for 60-65.
+- v57 Euler y_{n+1}=y_n+h f(t_n,y_n). [10:30] y'=2y, y(0)=10, h=1: slopes 20,60,180; y=30,90,270. Interest example r=.06. f=t^2+y^2.
+- v58 midpoint: s1=f(t,y), s2=f(t+h/2, y+h/2 s1), y+=h s2. y'=sqrt(1-y^2), [0,pi/2], h=pi/32 -> 0.997. y'=2y, h=1: 50, 250, 1250. Exercise trapezoid.
+- v59 RK4: s1; s2,s3 at midpoint; s4 at end; h(s1+2s2+2s3+s4)/6. Flame y'=y^2-y^3, y0=delta=0.01, tfinal=2/delta. Exercise y'=1+y^2.
+- v60 local error h^{p+1}, global h^p; orders 1,2,4 by halving h. Naming odePQ.
+- v61 BS23 (frame 0150): s1=f(tn,yn); s2=f(tn+h/2, yn+h/2 s1); s3=f(tn+3h/4, yn+3h/4 s2); y_{n+1}=yn+h/9(2s1+3s2+4s3); s4=f(t_{n+1},y_{n+1}); e=h/72(-5s1+6s2+8s3-9s4). FSAL. Example y'=2(a-t)y^2, a=1/4, y0=15.9 on [0,1]. Hermite interpolant.
+- v62 ode45 Dormand-Prince, stages at h/5, 3h/10, 4h/5, 8h/9, h (frame 0030); 6 evaluations (FSAL 7th).
+- v63 stiffness: flame with y0=1e-6, RelTol 1e-5; ode45 many steps near y=1; ode23s few. Implicit Euler y_{n+1}-h f(y_{n+1})=y_n (frame 0270). ode15s BDF/NDF.
+- v64 harmonic oscillator y=[x;x'], circle. Van der Pol mu=100 (y2'=mu(1-y1^2)y2-y1, verify), stiff.
+- v65 suite: ode45, ode23, ode113, ode15s, ode23s, ode23t, ode23tb.
+- Book PDF 196-208: Euler stability y'=-100y needs dt<2/100; backward Euler; RK4 stability |a dt|<2.78.
+- Caption: v60 transcript integral 1/(1+t^2) vs frame 1/(1+t)^2 exact 0.5 (use the frame).

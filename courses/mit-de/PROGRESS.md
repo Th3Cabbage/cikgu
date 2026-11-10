@@ -25,7 +25,10 @@ paraphrases with page references only; never copy book or caption text.
 
 ## Status
 
-Sources missing (YouTube now answers "Sign in to confirm you're not a bot"; retries stopped
+Source maps for every unit are in source-maps/ (Sonnet source-reader; verify against frames before use).
+Codex: adversarial maths review per unit; one standard review of the whole tree before the final commit.
+
+History: sources missing (YouTube answered "Sign in to confirm you're not a bot"; retries stopped
 10 November 2026): videos 6, 15, 17, 21, 24, 28, 40, 41, 42, 44, 51, 65, 66, 67, 68. Do not loop
 retries. User chose the browser sign-in: `tools/prepare_unit.py ... --cookies-from-browser firefox`
 (Firefox; cookies read by yt-dlp at run time, never saved). All 68 videos ready (294 MB in sources/).
@@ -34,7 +37,7 @@ retries. User chose the browser sign-in: `tools/prepare_unit.py ... --cookies-fr
 | Unit | Slug | Sources | Plan | Codex 1 | Content | Renders | QA | Codex 2 |
 |---|---|---|---|---|---|---|---|---|
 | 1 | first-order-linear | 10/10 | done (8 sections) | done: maths/quiz clean; 1 tool bug fixed | done (10 sequences, 33 steps; explorer by package-builder, reviewed) | done (4.7 MB) | math 515/515, check_study ok, browser 65/65, site 7/7 + 104/104 | done: no Unit 1 findings |
-| 2 | nonlinear-first-order | 3/3, map in source-maps/unit-02.md | | | | | | |
+| 2 | nonlinear-first-order | 3/3, map in source-maps/unit-02.md | done (3 sections) | done: 3 findings fixed | done (6 sequences, 20 steps; explorer by package-builder) | done (2.6 MB) | math 519/519, check_study ok, browser 43/43 | at final review |
 | 3 | second-order | | | | | | | |
 | 4 | networks-and-methods | | | | | | | |
 | 5 | laplace-transform | | | | | | | |

@@ -1,0 +1,8 @@
+# Unit 3 source map (source-reader, Sonnet; verify before use). Printed = PDF - 12.
+- v14 [00:00] ay''+by'+cy=f, two ICs. [03:30] my''+ky=0. [09:00] y''+wn^2 y=0, wn=sqrt(k/m). [09:30] y=c1 cos wn t + c2 sin wn t, c1=y(0), c2=y'(0)/wn. [15:00] w=2 pi f. [18:00] e^{±i wn t}. Frame 0690. Book PDF 87: R cos(wt-alpha), tan alpha = y'(0)/(w y(0)).
+- v15 [01:30] yp=Y cos wt, [03:00] Y=1/(k-m w^2) (frame 0390). [06:00] Y=1/(m(wn^2-w^2)). [08:30] my''+ky=delta. [10:30] g(0)=0, g'(0)=1/m. [13:00] g=sin(wn t)/(m wn) (frame 0870; ASR "sign" = sine).
+- v16 [00:00] As^2+Bs+C=0. [02:00] quadratic formula. [03:00] underdamped -B/2A ± i wd. [04:30] critical B^2=4AC. [05:30] overdamped. [06:00] s^2+2s (0,-2), [07:30] s^2+2s+1, [08:30] s^2+2s+2, s=-1±i. Frame 0450: s1+s2=-B/A, s1 s2=C/A. Book PDF 102-113, table PDF 108, y''-y'+y=0 PDF 107.
+- v17 [00:00] g''+Bg'+Cg=delta <=> g(0)=0, g'(0)=1. [03:30] g=(e^{s1 t}-e^{s2 t})/(s1-s2). [05:30] B=0: sin(wn t)/wn. [06:30] e^{-Bt/2} sin(wd t)/wd. [08:00] t e^{-Bt/2}. [10:30] r=1+(s2 e^{s1 t}-s1 e^{s2 t})/(s1-s2) for C=1 (frame 0810). [14:30] r = integral of g.
+- v18 [00:00] Y=1/P(s), transfer function (frame 0570). [03:00] resonance P(s1)=0. [06:30] L'Hopital: y = t e^{st}/(2As+B) = t e^{st}/P'(s). Book PDF 126, table PDF 129.
+- v19 [00:00] M=(C-Aw^2)/D, N=Bw/D, D=(C-Aw^2)^2+(Bw)^2. [03:00] G=1/sqrt D, tan alpha = Bw/(C-Aw^2). [06:00] y''+y'+2y=cos t: D=2, M=N=1/2, G=1/sqrt2, alpha=pi/4 (frame 0510). [09:00] wn=sqrt(C/A), zeta=B/sqrt(4AC).
+- Ideas: roots moving as B sweeps with y(t); L'Hopital to t e^{st}/P'; phasors M,N -> G, alpha; g integrating to r.

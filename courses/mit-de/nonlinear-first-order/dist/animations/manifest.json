@@ -1,0 +1,565 @@
+{
+ "version": 1,
+ "width": 1280,
+ "height": 720,
+ "fps": 30,
+ "relations": {
+  "define": "Definition / choice",
+  "model": "Modelling step",
+  "classify": "Classification",
+  "diagram": "Picture",
+  "substitute": "Substitution",
+  "identity": "Identity (=)",
+  "equivalent": "Equivalent statement (⇔)",
+  "solve": "Solve",
+  "compute": "Computation",
+  "implies": "Consequence (⇒)",
+  "compare": "Check",
+  "caution": "Caveat",
+  "recap": "Recap"
+ },
+ "sections": {
+  "1": [
+   "logistic-z",
+   "s-curve"
+  ],
+  "2": [
+   "stability-test",
+   "stability-line"
+  ],
+  "3": [
+   "separate",
+   "partial-fractions"
+  ]
+ },
+ "sequences": [
+  {
+   "id": "logistic-z",
+   "scene": "LogisticZSequence",
+   "section": 1,
+   "title": "The substitution $z = 1/y$ makes the logistic equation linear",
+   "summary": "The chain rule, one division by $y^2$, a linear solve, and a flip back to $y$.",
+   "initial": {
+    "title": "Growth with competition",
+    "tex": "y' = a\\,y - b\\,y^2",
+    "explanation": "Births minus competition. The $y^2$ term makes it nonlinear.",
+    "frame": "animations/logistic-z/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Chain rule for $z = 1/y$",
+     "relation": "define",
+     "relationLabel": "Definition / choice",
+     "tex": "z = \\frac{1}{y} \\;\\Rightarrow\\; z' = -\\frac{y'}{y^2}",
+     "explanation": "The derivative of $y^{-1}$ is $-y^{-2}$, times $y'$.",
+     "initialFrame": "animations/logistic-z/state-00.jpg",
+     "finalFrame": "animations/logistic-z/state-01.jpg",
+     "transition": {
+      "src": "animations/logistic-z/step-01.mp4",
+      "duration": 3.1,
+      "frames": 93,
+      "masterFrames": [
+       8,
+       101
+      ],
+      "bytes": 41891,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Substitute $y'$",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "z' = -\\frac{a y - b y^2}{y^2} = -\\frac{a}{y} + b = -a z + b",
+     "explanation": "Divide each term by $y^2$. What remains is $1/y = z$ to the first power: a linear equation.",
+     "initialFrame": "animations/logistic-z/state-01.jpg",
+     "finalFrame": "animations/logistic-z/state-02.jpg",
+     "transition": {
+      "src": "animations/logistic-z/step-02.mp4",
+      "duration": 4.5667,
+      "frames": 137,
+      "masterFrames": [
+       100,
+       237
+      ],
+      "bytes": 86038,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Solve, then flip",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "z = \\frac{b}{a} + \\Big(z(0) - \\frac{b}{a}\\Big)e^{-at} \\;\\Rightarrow\\; y = \\frac{a}{b + d\\,e^{-at}}",
+     "explanation": "Steady value $b/a$ plus a decaying null part. Then $y = 1/z$, with $d = a/y(0) - b$.",
+     "initialFrame": "animations/logistic-z/state-02.jpg",
+     "finalFrame": "animations/logistic-z/state-03.jpg",
+     "transition": {
+      "src": "animations/logistic-z/step-03.mp4",
+      "duration": 3.6333,
+      "frames": 109,
+      "masterFrames": [
+       236,
+       345
+      ],
+      "bytes": 146774,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 11.3,
+   "masterFrames": 345,
+   "renderSeconds": 7.8
+  },
+  {
+   "id": "s-curve",
+   "scene": "SCurveSequence",
+   "section": 1,
+   "title": "S-curves between the steady states $0$ and $a/b$",
+   "summary": "From $y(0) = 1/4$ the solution bends at half capacity; every positive start ends at $a/b$.",
+   "initial": {
+    "title": "Axes for $y' = y - y^2$",
+    "tex": "y' = y - y^2 \\quad (a = b = 1)",
+    "explanation": "Carrying capacity $a/b = 1$.",
+    "frame": "animations/s-curve/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "One S-curve",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "y = \\frac{1}{1 + 3e^{-t}}",
+     "explanation": "Starting at $1/4$: slow, fast, slow.",
+     "initialFrame": "animations/s-curve/state-00.jpg",
+     "finalFrame": "animations/s-curve/state-01.jpg",
+     "transition": {
+      "src": "animations/s-curve/step-01.mp4",
+      "duration": 2.5333,
+      "frames": 76,
+      "masterFrames": [
+       8,
+       84
+      ],
+      "bytes": 29070,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "The bend at half capacity",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "y'' = (1 - 2y)\\,y' = 0 \\;\\text{ at } y = \\tfrac12,\\ t = \\ln 3",
+     "explanation": "Growth is fastest where $y = a/(2b)$.",
+     "initialFrame": "animations/s-curve/state-01.jpg",
+     "finalFrame": "animations/s-curve/state-02.jpg",
+     "transition": {
+      "src": "animations/s-curve/step-02.mp4",
+      "duration": 3.1,
+      "frames": 93,
+      "masterFrames": [
+       83,
+       176
+      ],
+      "bytes": 46667,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Other starting values",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "y(0) > 0 \\;\\Rightarrow\\; y(t) \\to \\frac{a}{b}",
+     "explanation": "From below the curve rises, from above it falls; $0$ repels and $1$ attracts.",
+     "initialFrame": "animations/s-curve/state-02.jpg",
+     "finalFrame": "animations/s-curve/state-03.jpg",
+     "transition": {
+      "src": "animations/s-curve/step-03.mp4",
+      "duration": 3.5667,
+      "frames": 107,
+      "masterFrames": [
+       175,
+       282
+      ],
+      "bytes": 72548,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 9.2,
+   "masterFrames": 282,
+   "renderSeconds": 7.4
+  },
+  {
+   "id": "stability-test",
+   "scene": "StabilityTestSequence",
+   "section": 2,
+   "title": "The slope $f'(Y)$ decides stability",
+   "summary": "Tangent lines of $f(y) = y - y^2$ at its roots: slope $+1$ at $0$, $-1$ at $1$.",
+   "initial": {
+    "title": "Graph of $f$",
+    "tex": "y' = f(y) = y - y^2",
+    "explanation": "The height of the graph is the velocity of $y$.",
+    "frame": "animations/stability-test/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Steady states are roots",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "f(Y) = Y(1 - Y) = 0 \\;\\Rightarrow\\; Y = 0,\\ Y = 1",
+     "explanation": "Where the graph crosses zero, $y$ does not move.",
+     "initialFrame": "animations/stability-test/state-00.jpg",
+     "finalFrame": "animations/stability-test/state-01.jpg",
+     "transition": {
+      "src": "animations/stability-test/step-01.mp4",
+      "duration": 2.3,
+      "frames": 69,
+      "masterFrames": [
+       8,
+       77
+      ],
+      "bytes": 29175,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Tangent lines at the roots",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "f'(y) = 1 - 2y:\\quad f'(0) = +1,\\quad f'(1) = -1",
+     "explanation": "Near each root, $f$ looks like its tangent line.",
+     "initialFrame": "animations/stability-test/state-01.jpg",
+     "finalFrame": "animations/stability-test/state-02.jpg",
+     "transition": {
+      "src": "animations/stability-test/step-02.mp4",
+      "duration": 2.7,
+      "frames": 81,
+      "masterFrames": [
+       76,
+       157
+      ],
+      "bytes": 51721,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "The linear equation for the gap",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "(y - Y)' \\approx f'(Y)\\,(y - Y) \\;\\Rightarrow\\; y - Y \\approx C\\,e^{f'(Y)t}",
+     "explanation": "Negative slope: the gap decays (stable). Positive slope: it grows (unstable).",
+     "initialFrame": "animations/stability-test/state-02.jpg",
+     "finalFrame": "animations/stability-test/state-03.jpg",
+     "transition": {
+      "src": "animations/stability-test/step-03.mp4",
+      "duration": 3.2667,
+      "frames": 98,
+      "masterFrames": [
+       156,
+       254
+      ],
+      "bytes": 131235,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 8.267,
+   "masterFrames": 254,
+   "renderSeconds": 7.6
+  },
+  {
+   "id": "stability-line",
+   "scene": "StabilityLineSequence",
+   "section": 2,
+   "title": "The stability line for $y' = y - y^3$",
+   "summary": "The sign of $f$ on each interval sets an arrow; arrows into a point mean stable.",
+   "initial": {
+    "title": "Three steady states",
+    "tex": "f(y) = y - y^3 = y(1 - y)(1 + y)",
+    "explanation": "Roots at $-1$, $0$ and $1$.",
+    "frame": "animations/stability-line/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Sign of $f$ on each interval",
+     "relation": "classify",
+     "relationLabel": "Classification",
+     "tex": "f > 0 \\text{ on } (-\\infty,-1) \\cup (0,1),\\qquad f < 0 \\text{ on } (-1,0) \\cup (1,\\infty)",
+     "explanation": "Positive $f$ moves $y$ up (right on the line), negative $f$ moves it down.",
+     "initialFrame": "animations/stability-line/state-00.jpg",
+     "finalFrame": "animations/stability-line/state-01.jpg",
+     "transition": {
+      "src": "animations/stability-line/step-01.mp4",
+      "duration": 1.9667,
+      "frames": 59,
+      "masterFrames": [
+       8,
+       67
+      ],
+      "bytes": 21498,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Arrows on the line",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "\\longrightarrow\\ -1\\ \\longleftarrow\\ \\ 0\\ \\longrightarrow\\ 1\\ \\longleftarrow",
+     "explanation": "The arrows copy the signs onto one line of $y$ values.",
+     "initialFrame": "animations/stability-line/state-01.jpg",
+     "finalFrame": "animations/stability-line/state-02.jpg",
+     "transition": {
+      "src": "animations/stability-line/step-02.mp4",
+      "duration": 3.2333,
+      "frames": 97,
+      "masterFrames": [
+       66,
+       163
+      ],
+      "bytes": 49277,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Read off stability",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "-1,\\ 1 \\text{ stable } (f' = -2),\\qquad 0 \\text{ unstable } (f' = 1)",
+     "explanation": "Arrows point into $\\pm1$ and away from $0$, which agrees with the slope test.",
+     "initialFrame": "animations/stability-line/state-02.jpg",
+     "finalFrame": "animations/stability-line/state-03.jpg",
+     "transition": {
+      "src": "animations/stability-line/step-03.mp4",
+      "duration": 2.4333,
+      "frames": 73,
+      "masterFrames": [
+       162,
+       235
+      ],
+      "bytes": 52848,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 7.633,
+   "masterFrames": 235,
+   "renderSeconds": 6.7
+  },
+  {
+   "id": "separate",
+   "scene": "SeparateSequence",
+   "section": 3,
+   "title": "Separating $y' = t/y$",
+   "summary": "Move $y$ to one side and $t$ to the other, integrate, and solve for $y$; from $y(0) = 0$ two solutions appear.",
+   "initial": {
+    "title": "A separable equation",
+    "tex": "\\frac{dy}{dt} = \\frac{t}{y}",
+    "explanation": "A function of $t$ divided by a function of $y$.",
+    "frame": "animations/separate/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Separate",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "y\\,dy = t\\,dt",
+     "explanation": "Multiply both sides by $y\\,dt$.",
+     "initialFrame": "animations/separate/state-00.jpg",
+     "finalFrame": "animations/separate/state-01.jpg",
+     "transition": {
+      "src": "animations/separate/step-01.mp4",
+      "duration": 2.1333,
+      "frames": 64,
+      "masterFrames": [
+       8,
+       72
+      ],
+      "bytes": 58898,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Integrate from the start",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "\\tfrac12 y^2 - \\tfrac12 y(0)^2 = \\tfrac12 t^2",
+     "explanation": "Integrate $y$ from $y(0)$ to $y(t)$ and $t$ from $0$ to $t$.",
+     "initialFrame": "animations/separate/state-01.jpg",
+     "finalFrame": "animations/separate/state-02.jpg",
+     "transition": {
+      "src": "animations/separate/step-02.mp4",
+      "duration": 1.9667,
+      "frames": 59,
+      "masterFrames": [
+       71,
+       130
+      ],
+      "bytes": 81312,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Solve for $y$",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "y(t) = \\sqrt{y(0)^2 + t^2}",
+     "explanation": "Positive root for a positive start: hyperbola branches.",
+     "initialFrame": "animations/separate/state-02.jpg",
+     "finalFrame": "animations/separate/state-03.jpg",
+     "transition": {
+      "src": "animations/separate/step-03.mp4",
+      "duration": 3.1,
+      "frames": 93,
+      "masterFrames": [
+       129,
+       222
+      ],
+      "bytes": 100924,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "A start at zero",
+     "relation": "caution",
+     "relationLabel": "Caveat",
+     "tex": "y(0) = 0:\\quad y = t \\ \\text{ and } \\ y = -t \\quad (t \\neq 0)",
+     "explanation": "At the start $t/y$ is $0/0$. Both lines satisfy the equation for $t \\neq 0$ and run into the origin, but neither is a solution at $t = 0$ itself: the guarantee of one solution is lost.",
+     "initialFrame": "animations/separate/state-03.jpg",
+     "finalFrame": "animations/separate/state-04.jpg",
+     "transition": {
+      "src": "animations/separate/step-04.mp4",
+      "duration": 2.6667,
+      "frames": 80,
+      "masterFrames": [
+       221,
+       301
+      ],
+      "bytes": 88162,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 9.867,
+   "masterFrames": 301,
+   "renderSeconds": 8.9
+  },
+  {
+   "id": "partial-fractions",
+   "scene": "PartialFractionsSequence",
+   "section": 3,
+   "title": "The logistic equation by partial fractions",
+   "summary": "Split $1/(y - y^2)$ into two simple fractions, integrate to logarithms, and solve.",
+   "initial": {
+    "title": "Separated logistic equation",
+    "tex": "\\frac{dy}{y - y^2} = dt",
+    "explanation": "Here $g(t) = 1$ and $f(y) = 1/(y - y^2)$.",
+    "frame": "animations/partial-fractions/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Factor and split",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "\\frac{1}{y(1 - y)} = \\frac{A}{y} + \\frac{B}{1 - y}",
+     "explanation": "Two simple poles, at $y = 0$ and $y = 1$.",
+     "initialFrame": "animations/partial-fractions/state-00.jpg",
+     "finalFrame": "animations/partial-fractions/state-01.jpg",
+     "transition": {
+      "src": "animations/partial-fractions/step-01.mp4",
+      "duration": 2.5333,
+      "frames": 76,
+      "masterFrames": [
+       8,
+       84
+      ],
+      "bytes": 44815,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Find $A$ and $B$",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "1 = A(1 - y) + B\\,y \\;\\Rightarrow\\; A = 1 \\ (y = 0),\\ \\ B = 1 \\ (y = 1)",
+     "explanation": "Multiply through by $y(1-y)$ and put in the two roots.",
+     "initialFrame": "animations/partial-fractions/state-01.jpg",
+     "finalFrame": "animations/partial-fractions/state-02.jpg",
+     "transition": {
+      "src": "animations/partial-fractions/step-02.mp4",
+      "duration": 3.1,
+      "frames": 93,
+      "masterFrames": [
+       83,
+       176
+      ],
+      "bytes": 120383,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Integrate to logarithms",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "\\ln|y| - \\ln|1 - y| = t + C",
+     "explanation": "$\\int dy/(1-y) = -\\ln|1-y|$. Absolute values keep starts below $0$ and above $1$.",
+     "initialFrame": "animations/partial-fractions/state-02.jpg",
+     "finalFrame": "animations/partial-fractions/state-03.jpg",
+     "transition": {
+      "src": "animations/partial-fractions/step-03.mp4",
+      "duration": 1.9667,
+      "frames": 59,
+      "masterFrames": [
+       175,
+       234
+      ],
+      "bytes": 81484,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "Solve for $y$",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "\\frac{y}{1 - y} = K e^{t} \\;\\Rightarrow\\; y = \\frac{1}{1 + e^{-t}/K}",
+     "explanation": "Here $K = y(0)/(1 - y(0))$ may have either sign, and $1/K = d$. The constant solutions $y = 0$ and $y = 1$, lost by the division, are added back. The $z = 1/y$ route was shorter.",
+     "initialFrame": "animations/partial-fractions/state-03.jpg",
+     "finalFrame": "animations/partial-fractions/state-04.jpg",
+     "transition": {
+      "src": "animations/partial-fractions/step-04.mp4",
+      "duration": 2.9,
+      "frames": 87,
+      "masterFrames": [
+       233,
+       320
+      ],
+      "bytes": 114251,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 10.5,
+   "masterFrames": 320,
+   "renderSeconds": 7.9
+  }
+ ]
+}

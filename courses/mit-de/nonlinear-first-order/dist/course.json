@@ -1,0 +1,896 @@
+{
+ "version": 1,
+ "title": "Nonlinear First Order Equations",
+ "subtitle": "Unit 2 of a study companion to MIT Learn Differential Equations (Gilbert Strang), videos 11-13, with Strang's Differential Equations and Linear Algebra, Sections 1.7-1.8",
+ "video": {
+  "id": "TCkLSYxx21c",
+  "title": "MIT Learn Differential Equations, videos 11-13",
+  "duration": "47:49",
+  "url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63oTpyxCMLKt_JmB0WtSZfG"
+ },
+ "videos": [
+  {
+   "n": 11,
+   "id": "TCkLSYxx21c",
+   "title": "The Logistic Equation",
+   "duration": "13:27",
+   "url": "https://www.youtube.com/watch?v=TCkLSYxx21c"
+  },
+  {
+   "n": 12,
+   "id": "NmntYoB1uJg",
+   "title": "The Stability and Instability of Steady States",
+   "duration": "21:15",
+   "url": "https://www.youtube.com/watch?v=NmntYoB1uJg"
+  },
+  {
+   "n": 13,
+   "id": "_FATUw506mE",
+   "title": "Separable Equations",
+   "duration": "13:07",
+   "url": "https://www.youtube.com/watch?v=_FATUw506mE"
+  }
+ ],
+ "book": {
+  "title": "Differential Equations and Linear Algebra",
+  "authors": "Gilbert Strang",
+  "short": "Strang, Ch. 1",
+  "edition": "Wellesley-Cambridge Press, 2014 (Chapter 1, Sections 1.7-1.8)",
+  "onlineUrl": "",
+  "pageNote": "Page references give the printed page and the page of the local PDF (printed page + 12). The book is not freely available online, so only a local copy can be opened."
+ },
+ "attribution": "Course text, diagrams and animations here are original paraphrases and drawings made for this guide; examples marked authored are not from the lectures. They summarize MIT OpenCourseWare's Learn Differential Equations videos (Gilbert Strang, CC BY-NC-SA) and Strang's textbook; for the original wording, watch the videos and read the book. Captions, video and book text are not included in this guide.",
+ "explorer": {
+  "models": [
+   {
+    "id": "logistic",
+    "label": "Logistic  a y − b y²",
+    "params": [
+     "a",
+     "b"
+    ]
+   },
+   {
+    "id": "cubic",
+    "label": "Cubic  y − y³",
+    "params": []
+   },
+   {
+    "id": "harvest",
+    "label": "Harvesting  a y − b y² − h",
+    "params": [
+     "a",
+     "b",
+     "h"
+    ]
+   },
+   {
+    "id": "square",
+    "label": "y² − 1",
+    "params": []
+   }
+  ],
+  "defaultModel": "logistic",
+  "a": {
+   "min": 0.2,
+   "max": 3,
+   "step": 0.1,
+   "default": 1
+  },
+  "b": {
+   "min": 0.2,
+   "max": 2,
+   "step": 0.1,
+   "default": 1
+  },
+  "h": {
+   "min": 0,
+   "max": 1.5,
+   "step": 0.05,
+   "default": 0.15
+  },
+  "y0": {
+   "min": -2,
+   "max": 3,
+   "step": 0.05,
+   "default": 0.25
+  },
+  "tMax": 8,
+  "yRange": [
+   -2,
+   3
+  ],
+  "presets": [
+   {
+    "id": "quarter",
+    "label": "Quarter capacity",
+    "model": "logistic",
+    "a": 1,
+    "b": 1,
+    "y0": 0.25,
+    "note": "Section 1 example: $y = 1/(1 + 3e^{-t})$ reaches $\\tfrac12$ at $t = \\ln 3$."
+   },
+   {
+    "id": "above",
+    "label": "Start above capacity",
+    "model": "logistic",
+    "a": 1,
+    "b": 0.5,
+    "y0": 2.8,
+    "note": "Above $a/b = 2$ the slope is negative and $y$ decreases to $2$."
+   },
+   {
+    "id": "cubic",
+    "label": "Three steady states",
+    "model": "cubic",
+    "y0": 0.1,
+    "note": "Section 2: $0$ unstable, $\\pm1$ stable."
+   },
+   {
+    "id": "harvest",
+    "label": "Harvesting",
+    "model": "harvest",
+    "a": 1,
+    "b": 1,
+    "h": 0.15,
+    "y0": 0.6,
+    "note": "Book extension: a constant harvest $h$ moves both steady states; for $h > a^2/(4b)$ there are none and the population collapses."
+   },
+   {
+    "id": "square",
+    "label": "y² − 1 from 0",
+    "model": "square",
+    "y0": 0,
+    "note": "Section 2 example: $-1$ stable, $1$ unstable; from $0$ the solution falls to $-1$."
+   }
+  ],
+  "tutorContext": "The explorer studies autonomous equations y' = f(y): logistic f = a y - b y^2 (steady states 0 and a/b), cubic f = y - y^3 (0, 1, -1), harvesting f = a y - b y^2 - h (roots (a +- sqrt(a^2 - 4bh))/(2b) when a^2 >= 4bh, none otherwise), and f = y^2 - 1 (+-1). It draws f(y) against y with the stability line (steady states marked stable when f'(Y) < 0, unstable when f'(Y) > 0, undecided at a double root), and the solution y(t) from y0 on 0 <= t <= 8, computed by classical RK4 with step 0.01 (the logistic case is also compared with the exact formula a/(b + d e^(-at))). Solutions that leave the plotted range are clipped with a notice (y' = y^2 - 1 blows up in finite time from y0 > 1)."
+ },
+ "sections": [
+  {
+   "nav": "The logistic equation",
+   "v": 11,
+   "title": "Growth limited by competition: $y' = ay - by^2$",
+   "summary": "The logistic equation adds a competition term $-by^2$ to exponential growth. The substitution $z = 1/y$ makes it linear, $z' = -az + b$, and gives $y(t) = \\dfrac{a}{b + d\\,e^{-at}}$. Every positive start approaches the carrying capacity $a/b$ along an S-shaped curve.",
+   "time": [
+    0,
+    807
+   ],
+   "goals": [
+    "Explain the competition term $-by^2$ and why it stops growth.",
+    "Use $z = 1/y$ to turn the logistic equation into a linear one and solve it.",
+    "Find the steady states $0$ and $a/b$ and describe the S-curve between them."
+   ],
+   "notes": [
+    {
+     "heading": "The model",
+     "paragraphs": [
+      "For a population $y$ with more births than deaths, $y' = ay$ alone predicts exponential growth forever. Real populations compete for space and food. The number of possible encounters between members grows like $y \\cdot y$, so the model subtracts a term $by^2$: $y' = ay - by^2$. When $y$ is small the linear term wins and growth is nearly exponential; when $y$ is large the square wins and growth stops."
+     ]
+    },
+    {
+     "heading": "The trick: z = 1/y",
+     "paragraphs": [
+      "Nonlinear equations rarely have formulas, but this one does. Let $z = 1/y$. By the chain rule $z' = -y^{-2}\\,y'$. Substitute $y' = ay - by^2$: $z' = -\\dfrac{ay - by^2}{y^2} = -\\dfrac{a}{y} + b = -az + b$.",
+      "That is a linear equation with a constant input, solved in Unit 1: $z(t) = \\dfrac{b}{a} + \\left(z(0) - \\dfrac{b}{a}\\right)e^{-at}$. Turning back with $y = 1/z$ puts the exponential in the denominator:",
+      "$y(t) = \\dfrac{a}{b + d\\,e^{-at}}, \\qquad d = \\dfrac{a}{y(0)} - b.$"
+     ]
+    },
+    {
+     "heading": "The S-curve",
+     "paragraphs": [
+      "As $t \\to \\infty$ the term $d e^{-at}$ vanishes (for $a > 0$) and $y \\to a/b$, the carrying capacity. Run time backwards, $t \\to -\\infty$, and the denominator becomes huge, so $y \\to 0$. In between the solution rises slowly, then fast, then slowly again: an S-shaped or sigmoid curve. It bends over where $y'' = (a - 2by)\\,y' = 0$, at half the capacity, $y = a/(2b)$.",
+      "A population that starts above $a/b$ has $y' < 0$ and decreases towards $a/b$ from above."
+     ]
+    },
+    {
+     "heading": "Steady states",
+     "paragraphs": [
+      "A steady state is a constant solution: $y' = 0$, so $ay - by^2 = y(a - by) = 0$. The two are $Y = 0$ and $Y = a/b$. Start exactly at either and nothing ever changes. Start near $0$ (but positive) and the population leaves: $Y = 0$ is unstable. Start near $a/b$ and it returns: $Y = a/b$ is stable. The next section turns this into a test for any equation $y' = f(y)$."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$y' = ay - by^2$: growth minus competition.",
+    "$z = 1/y$ gives $z' = -az + b$ (linear).",
+    "$y = \\dfrac{a}{b + d e^{-at}}$, $d = a/y(0) - b$.",
+    "Steady states $0$ (unstable) and $a/b$ (stable)."
+   ],
+   "example": {
+    "title": "A population at a quarter of capacity (authored)",
+    "problem": "Solve $y' = y - y^2$ with $y(0) = \\tfrac14$. When does it reach half the capacity?",
+    "steps": [
+     {
+      "text": "Here a = b = 1, so d = a/y(0) - b = 4 - 1 = 3.",
+      "tex": "y(t) = \\frac{1}{1 + 3e^{-t}}"
+     },
+     {
+      "text": "Half the capacity a/b = 1 is 1/2: solve 1 + 3e^{-t} = 2.",
+      "tex": "e^{-t} = \\tfrac13 \\;\\Rightarrow\\; t = \\ln 3 \\approx 1.10"
+     },
+     {
+      "text": "That is also the inflection point y = a/(2b), where growth is fastest.",
+      "tex": "y'' = (1 - 2y)\\,y' = 0 \\text{ at } y = \\tfrac12"
+     }
+    ],
+    "answer": "$y = 1/(1 + 3e^{-t})$; it reaches $\\tfrac12$ at $t = \\ln 3$, where the S-curve is steepest."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 11,
+      "t": 0,
+      "label": "Growth cut off by competition"
+     },
+     {
+      "v": 11,
+      "t": 60,
+      "label": "y times y counts interactions"
+     },
+     {
+      "v": 11,
+      "t": 90,
+      "label": "The logistic equation has a neat trick"
+     },
+     {
+      "v": 11,
+      "t": 120,
+      "label": "z = 1/y gives a linear equation"
+     },
+     {
+      "v": 11,
+      "t": 180,
+      "label": "dz/dt = -y^(-2) dy/dt"
+     },
+     {
+      "v": 11,
+      "t": 210,
+      "label": "Result: dz/dt = -az + b"
+     },
+     {
+      "v": 11,
+      "t": 240,
+      "label": "Solve for z, then y = 1/z"
+     },
+     {
+      "v": 11,
+      "t": 300,
+      "label": "The constant d comes from y(0)"
+     },
+     {
+      "v": 11,
+      "t": 330,
+      "label": "It cannot grow forever"
+     },
+     {
+      "v": 11,
+      "t": 420,
+      "label": "Approach to a/b"
+     },
+     {
+      "v": 11,
+      "t": 450,
+      "label": "S-curve, sigmoid"
+     },
+     {
+      "v": 11,
+      "t": 510,
+      "label": "Steady states"
+     },
+     {
+      "v": 11,
+      "t": 600,
+      "label": "Y = 0 or Y = a/b"
+     },
+     {
+      "v": 11,
+      "t": 720,
+      "label": "a/b stable, 0 unstable"
+     },
+     {
+      "v": 11,
+      "t": 750,
+      "label": "Next: dy/dt = f(y)"
+     }
+    ],
+    "book": [
+     {
+      "printed": 53,
+      "pdf": 65,
+      "label": "Section 1.7: the logistic equation"
+     },
+     {
+      "printed": 54,
+      "pdf": 66,
+      "label": "Solving with z = 1/y; the S-curve"
+     }
+    ]
+   },
+   "tutorNotes": "Video 11. y' = ay - by^2. z = 1/y: z' = -y^-2 y' = -az + b. z = b/a + (z0 - b/a) e^(-at). y = a/(b + d e^(-at)), d = a/y(0) - b. t -> infinity: a/b; t -> -infinity: 0; inflection at a/(2b). Steady states 0 (unstable) and a/b (stable).",
+   "id": "s1",
+   "number": 1
+  },
+  {
+   "nav": "Stability of steady states",
+   "v": 12,
+   "title": "Stable or unstable: the sign of $df/dy$",
+   "summary": "For $y' = f(y)$, a steady state $Y$ has $f(Y) = 0$. It is stable when $f'(Y) < 0$ and unstable when $f'(Y) > 0$, because near $Y$ the difference $y - Y$ behaves like $e^{f'(Y)t}$. A stability line with arrows shows every solution's direction at a glance.",
+   "time": [
+    0,
+    1275
+   ],
+   "goals": [
+    "Find steady states by solving $f(Y) = 0$.",
+    "Apply the test: $f'(Y) < 0$ stable, $f'(Y) > 0$ unstable, $f'(Y) = 0$ undecided.",
+    "Explain the test by the linear approximation $f(y) \\approx f'(Y)(y - Y)$.",
+    "Draw the stability line for $y - y^2$ and $y - y^3$."
+   ],
+   "notes": [
+    {
+     "heading": "Steady states and stability",
+     "paragraphs": [
+      "An autonomous equation $y' = f(y)$ has a right side that depends on $y$ alone. A steady state $Y$ is a root of $f$: if $y$ starts there, $y' = 0$ and it stays there. The question for every application is what happens when $y$ starts near $Y$. If it is pulled back, $Y$ is stable; if it is pushed away, $Y$ is unstable.",
+      "Three examples carry the lecture: $y' = ay$ with $Y = 0$; the logistic $y' = y - y^2$ with $Y = 0$ and $1$; and $y' = y - y^3$ with $Y = 0, 1, -1$."
+     ]
+    },
+    {
+     "heading": "The test",
+     "paragraphs": [
+      "For the linear case the answer is known: $y = Ce^{at}$ goes to $0$ exactly when $a < 0$. For a nonlinear $f$, the number that plays the role of $a$ is the slope $f'(Y)$ at the steady state: stable if $f'(Y) < 0$, unstable if $f'(Y) > 0$.",
+      "Logistic: $f = y - y^2$, $f' = 1 - 2y$. At $0$ it is $+1$ (unstable); at $1$ it is $-1$ (stable). Cubic: $f = y - y^3$, $f' = 1 - 3y^2$. At $0$ it is $+1$ (unstable); at $\\pm1$ it is $-2$ (both stable)."
+     ]
+    },
+    {
+     "heading": "Why the slope decides",
+     "paragraphs": [
+      "Write $y = Y + \\Delta$ with a small $\\Delta$. Since $f(Y) = 0$, the tangent line gives $f(y) \\approx f(Y) + f'(Y)\\,\\Delta = f'(Y)\\,\\Delta$. And $y' = \\Delta'$ because $Y$ is constant. So $\\Delta' \\approx f'(Y)\\,\\Delta$: a linear equation with rate $f'(Y)$, whose solutions behave like $e^{f'(Y)t}$. A negative rate shrinks the gap; a positive one grows it.",
+      "If $f'(Y) = 0$ the linear term gives no information, and the higher terms decide. The test is then silent."
+     ]
+    },
+    {
+     "heading": "A book in the air",
+     "paragraphs": [
+      "Strang throws a book spinning about each of its three axes. About the longest and the shortest axes it turns cleanly; about the middle axis it tumbles. This is stability in three dimensions, and it returns in Unit 12 with a system of equations."
+     ]
+    },
+    {
+     "heading": "The stability line",
+     "paragraphs": [
+      "Mark the steady states on a line of $y$ values and draw an arrow on each interval in the direction of the sign of $f$: right where $f > 0$ ($y$ increases), left where $f < 0$. Arrows pointing into a steady state from both sides mean stable; arrows pointing away mean unstable. For $y - y^3$ the arrows run into $-1$ and $1$ and away from $0$, without any formula for the solutions."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Steady state: $f(Y) = 0$.",
+    "$f'(Y) < 0$ stable, $f'(Y) > 0$ unstable.",
+    "Near $Y$: $(y - Y)' \\approx f'(Y)(y - Y)$.",
+    "Stability line: arrows follow the sign of $f$."
+   ],
+   "example": {
+    "title": "Two steady states of y' = y^2 - 1 (authored)",
+    "problem": "Find and classify the steady states of $y' = y^2 - 1$. What happens to a solution that starts at $y(0) = 0$?",
+    "steps": [
+     {
+      "text": "Steady states solve f(Y) = 0.",
+      "tex": "Y^2 - 1 = 0 \\;\\Rightarrow\\; Y = -1,\\ Y = 1"
+     },
+     {
+      "text": "Slope f'(y) = 2y at each.",
+      "tex": "f'(-1) = -2 < 0 \\ \\text{(stable)},\\qquad f'(1) = 2 > 0 \\ \\text{(unstable)}"
+     },
+     {
+      "text": "At y = 0, f(0) = -1 < 0, so y decreases.",
+      "tex": "y(0) = 0 \\;\\longrightarrow\\; y(t) \\to -1"
+     }
+    ],
+    "answer": "$Y = -1$ is stable and $Y = 1$ unstable. Starting at $0$ (between them, where $f < 0$) the solution falls to $-1$."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 12,
+      "t": 0,
+      "label": "Stability or instability of a steady state"
+     },
+     {
+      "v": 12,
+      "t": 30,
+      "label": "Steady state: f(Y) = 0"
+     },
+     {
+      "v": 12,
+      "t": 90,
+      "label": "Stable: nearby solutions return"
+     },
+     {
+      "v": 12,
+      "t": 120,
+      "label": "Example y' = ay"
+     },
+     {
+      "v": 12,
+      "t": 150,
+      "label": "Logistic y - y^2: Y = 0 or 1"
+     },
+     {
+      "v": 12,
+      "t": 210,
+      "label": "y - y^3: Y = 0, 1, -1"
+     },
+     {
+      "v": 12,
+      "t": 270,
+      "label": "Linear: stable when a < 0"
+     },
+     {
+      "v": 12,
+      "t": 330,
+      "label": "Test: df/dy negative at Y"
+     },
+     {
+      "v": 12,
+      "t": 390,
+      "label": "Logistic: 1 - 2y"
+     },
+     {
+      "v": 12,
+      "t": 480,
+      "label": "Cubic: 1 - 3y^2"
+     },
+     {
+      "v": 12,
+      "t": 600,
+      "label": "Why the test works"
+     },
+     {
+      "v": 12,
+      "t": 690,
+      "label": "Approximate f(y) - f(Y) by the slope"
+     },
+     {
+      "v": 12,
+      "t": 750,
+      "label": "A linear equation with rate f'(Y)"
+     },
+     {
+      "v": 12,
+      "t": 840,
+      "label": "Tumbling book experiment"
+     },
+     {
+      "v": 12,
+      "t": 990,
+      "label": "The stability line"
+     },
+     {
+      "v": 12,
+      "t": 1050,
+      "label": "Logistic on the line"
+     },
+     {
+      "v": 12,
+      "t": 1170,
+      "label": "Cubic: arrows into -1 and 1"
+     }
+    ],
+    "book": [
+     {
+      "printed": 58,
+      "pdf": 70,
+      "label": "Section 1.7: stability of steady states, the sign of df/dy"
+     }
+    ]
+   },
+   "tutorNotes": "Video 12. y' = f(y); steady state f(Y) = 0; stable if f'(Y) < 0, unstable if f'(Y) > 0, undecided if 0. Reason: y = Y + D, D' ~ f'(Y) D. Logistic y - y^2: f' = 1 - 2y, 0 unstable, 1 stable. Cubic y - y^3: f' = 1 - 3y^2, 0 unstable, +-1 stable. Tumbling book: stable about longest and shortest axes, unstable about the middle axis. Stability line: arrows follow sign of f.",
+   "id": "s2",
+   "number": 2
+  },
+  {
+   "nav": "Separable equations",
+   "v": 13,
+   "title": "Separable equations: $\\int f(y)\\,dy = \\int g(t)\\,dt$",
+   "summary": "When $y' = g(t)/f(y)$, the variables separate: $f(y)\\,dy = g(t)\\,dt$. Integrate both sides, then solve for $y$. For $y' = t/y$ this gives $y = \\sqrt{y(0)^2 + t^2}$; at the start $y(0) = 0$ the equation is $0/0$ and uniqueness is lost. The logistic equation separates too, with partial fractions.",
+   "time": [
+    0,
+    787
+   ],
+   "goals": [
+    "Recognise a separable equation and separate it.",
+    "Integrate both sides with matching limits and solve for $y$.",
+    "Notice where a solution can fail to be unique.",
+    "Use partial fractions $\\dfrac{1}{y - y^2} = \\dfrac{1}{y} + \\dfrac{1}{1-y}$ for the logistic equation."
+   ],
+   "notes": [
+    {
+     "heading": "What separable means",
+     "paragraphs": [
+      "The right side is a function of $t$ times a function of $y$: write $y' = g(t)/f(y)$. Then $t$ and $y$ can be moved to different sides: $f(y)\\,dy = g(t)\\,dt$. The equation $y' = y + t$ is not separable, because a sum cannot be split this way.",
+      "The simplest case $f = 1$ is $y' = g(t)$, which is just calculus: $y$ is an integral of $g$."
+     ]
+    },
+    {
+     "heading": "The method",
+     "paragraphs": [
+      "Integrate both sides from the start to the present: $\\displaystyle\\int_{y(0)}^{y(t)} f(y)\\,dy = \\int_0^t g(s)\\,ds$. Two integrals, and then one more step: the left side is some function of $y$, which must be solved for $y$ itself. That last step is not always possible in closed form."
+     ]
+    },
+    {
+     "heading": "Example: y' = t/y",
+     "paragraphs": [
+      "Separate: $y\\,dy = t\\,dt$. Integrate: $\\tfrac12 y(t)^2 - \\tfrac12 y(0)^2 = \\tfrac12 t^2$. Solve: $y(t) = \\sqrt{y(0)^2 + t^2}$ (taking the positive root when $y(0) > 0$).",
+      "Look for dangerous points. At $y = 0$ the right side $t/y$ is undefined, and the start $y(0) = 0$ at $t = 0$ makes it $0/0$. For every $t \\neq 0$, both $y = t$ and $y = -t$ satisfy the equation ($y' = \\pm 1 = t/y$), and both run into the origin. So the formula offers two candidates through one starting point, but neither is a classical solution at $t = 0$ itself, where the equation has no meaning. The existence and uniqueness guarantee needs a right side that behaves well at the start; here it does not."
+     ]
+    },
+    {
+     "heading": "The logistic equation, separated",
+     "paragraphs": [
+      "$y' = y - y^2$ is separable with $g = 1$: $\\dfrac{dy}{y - y^2} = dt$. The left side needs partial fractions: split $\\dfrac{1}{y - y^2} = \\dfrac{1}{y(1-y)}$ into $\\dfrac{A}{y} + \\dfrac{B}{1-y}$. Here $A = B = 1$. Then each piece integrates to a logarithm: $\\ln|y| - \\ln|1 - y| = t + C$. Exponentiating gives $\\dfrac{y}{1 - y} = Ke^{t}$ with $K = \\dfrac{y(0)}{1 - y(0)}$ of either sign, which covers starts below $0$, between $0$ and $1$, and above $1$. Solving gives the logistic curve again.",
+      "Dividing by $y - y^2$ assumed $y \\neq 0$ and $y \\neq 1$. Those two constant solutions are lost in the division and must be added back separately.",
+      "It works, but the $z = 1/y$ trick of Section 1 was quicker. Partial fractions return with the Laplace transform in Unit 5."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Separable: $y' = g(t)/f(y)$.",
+    "$\\int_{y(0)}^{y} f\\,dy = \\int_0^t g\\,dt$, then solve for $y$.",
+    "$y' = t/y$: $\\;y = \\sqrt{y(0)^2 + t^2}$.",
+    "$y(0) = 0$: $t/y$ is $0/0$; $y = \\pm t$ fit for $t \\neq 0$ but no unique solution starts there."
+   ],
+   "example": {
+    "title": "A solution that blows up (authored)",
+    "problem": "Solve $y' = t\\,y^2$ with $y(0) = \\tfrac12$.",
+    "steps": [
+     {
+      "text": "Separate: f(y) = 1/y^2, g(t) = t.",
+      "tex": "\\int_{1/2}^{y} \\frac{dy}{y^2} = \\int_0^t s\\,ds"
+     },
+     {
+      "text": "Integrate both sides.",
+      "tex": "-\\frac{1}{y} + 2 = \\frac{t^2}{2}"
+     },
+     {
+      "text": "Solve for y.",
+      "tex": "y(t) = \\frac{1}{2 - t^2/2} = \\frac{2}{4 - t^2}"
+     }
+    ],
+    "answer": "$y = 2/(4 - t^2)$, which becomes infinite at $t = 2$: a nonlinear equation can blow up in finite time, which a linear one cannot."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 13,
+      "t": 0,
+      "label": "Separable equations, including nonlinear ones"
+     },
+     {
+      "v": 13,
+      "t": 30,
+      "label": "y' = y + t is not separable"
+     },
+     {
+      "v": 13,
+      "t": 60,
+      "label": "Simplest case dy/dt = g(t)"
+     },
+     {
+      "v": 13,
+      "t": 120,
+      "label": "Separate and integrate both sides"
+     },
+     {
+      "v": 13,
+      "t": 150,
+      "label": "Two integrals, then solve for y"
+     },
+     {
+      "v": 13,
+      "t": 210,
+      "label": "Example y' = t/y"
+     },
+     {
+      "v": 13,
+      "t": 240,
+      "label": "Integrate: (1/2) y^2"
+     },
+     {
+      "v": 13,
+      "t": 300,
+      "label": "y = sqrt(y(0)^2 + t^2)"
+     },
+     {
+      "v": 13,
+      "t": 330,
+      "label": "Dangerous points"
+     },
+     {
+      "v": 13,
+      "t": 390,
+      "label": "y = t solves it"
+     },
+     {
+      "v": 13,
+      "t": 420,
+      "label": "So does y = -t"
+     },
+     {
+      "v": 13,
+      "t": 450,
+      "label": "Logistic equation by separation"
+     },
+     {
+      "v": 13,
+      "t": 510,
+      "label": "Integral of 1/(y - y^2)"
+     },
+     {
+      "v": 13,
+      "t": 570,
+      "label": "Partial fractions"
+     },
+     {
+      "v": 13,
+      "t": 660,
+      "label": "Integrate to logarithms"
+     },
+     {
+      "v": 13,
+      "t": 690,
+      "label": "The z = 1/y trick was quicker"
+     }
+    ],
+    "book": [
+     {
+      "printed": 65,
+      "pdf": 77,
+      "label": "Section 1.8: separable equations, Example 1"
+     },
+     {
+      "printed": 66,
+      "pdf": 78,
+      "label": "The logistic equation by separation"
+     },
+     {
+      "printed": 56,
+      "pdf": 68,
+      "label": "Section 1.7: partial fractions"
+     }
+    ]
+   },
+   "tutorNotes": "Video 13. Separable y' = g(t)/f(y): integral f(y) dy from y(0) to y = integral g dt from 0 to t, then solve for y. y' = y + t is not separable. y' = t/y: y = sqrt(y(0)^2 + t^2); from y(0) = 0 the right side is 0/0: y = t and y = -t satisfy the equation for t != 0 and both reach the origin, but neither is a classical solution at t = 0 (no existence/uniqueness guarantee there). Logistic by partial fractions: 1/(y - y^2) = 1/y + 1/(1 - y), ln|y| - ln|1 - y| = t + C, y/(1 - y) = K e^t with K = y0/(1 - y0); the constant solutions 0 and 1 are lost by the division and restored separately.",
+   "id": "s3",
+   "number": 3
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q-competition",
+   "question": "In $y' = ay - by^2$ with $a, b > 0$, why does the population stop growing?",
+   "choices": [
+    {
+     "text": "Because $y$ reaches $a$.",
+     "why": "No. Setting $ay - by^2 = 0$ gives $y = a/b$, not $a$ (unless $b = 1$)."
+    },
+    {
+     "text": "For large $y$ the term $by^2$ outgrows $ay$, so $y'$ becomes $0$ at $y = a/b$ and negative above it.",
+     "why": "Right. The square wins for large $y$; the balance point is the carrying capacity $a/b$.",
+     "correct": true
+    },
+    {
+     "text": "Because $b$ is negative.",
+     "why": "No. With $b > 0$ the term $-by^2$ is what slows growth."
+    },
+    {
+     "text": "It never stops; the solution grows like $e^{at}$.",
+     "why": "No. That is the linear model without competition."
+    }
+   ]
+  },
+  {
+   "id": "q-z",
+   "question": "With $z = 1/y$, what equation does $y' = ay - by^2$ become?",
+   "choices": [
+    {
+     "text": "$z' = az - b$",
+     "why": "No. The chain rule gives $z' = -y^{-2}y'$; the minus sign flips both terms."
+    },
+    {
+     "text": "$z' = -az^2 + b$",
+     "why": "No. Dividing $ay$ by $y^2$ leaves $a/y = az$, to the first power."
+    },
+    {
+     "text": "$z' = 1/(ay - by^2)$",
+     "why": "No. The derivative of $1/y$ is not $1/y'$."
+    },
+    {
+     "text": "$z' = -az + b$",
+     "why": "Right. $z' = -y^{-2}y' = -a/y + b = -az + b$: linear with a constant input.",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "id": "q-limit",
+   "question": "What does the logistic solution $y = \\dfrac{a}{b + de^{-at}}$ approach as $t \\to \\infty$ (with $a > 0$)?",
+   "choices": [
+    {
+     "text": "$a/b$",
+     "why": "Right. $de^{-at} \\to 0$, leaving $a/b$, the carrying capacity.",
+     "correct": true
+    },
+    {
+     "text": "$0$",
+     "why": "No. That is the limit as $t \\to -\\infty$."
+    },
+    {
+     "text": "$a/d$",
+     "why": "No. The $d$ term is the one that disappears."
+    },
+    {
+     "text": "Infinity",
+     "why": "No. The competition term prevents unlimited growth."
+    }
+   ]
+  },
+  {
+   "id": "q-test",
+   "question": "For $y' = f(y)$ with $f(Y) = 0$, when is $Y$ stable?",
+   "choices": [
+    {
+     "text": "When $f'(Y) > 0$.",
+     "why": "No. A positive rate makes the gap grow like $e^{f'(Y)t}$: unstable."
+    },
+    {
+     "text": "Always, because $Y$ is a constant solution.",
+     "why": "No. Constant solutions can be unstable, like $Y = 0$ for the logistic equation."
+    },
+    {
+     "text": "When $f'(Y) < 0$.",
+     "why": "Right. Near $Y$, $(y - Y)' \\approx f'(Y)(y - Y)$, which decays when the rate is negative.",
+     "correct": true
+    },
+    {
+     "text": "When $f(Y) < 0$.",
+     "why": "No. $f(Y) = 0$ at every steady state; it is the slope that matters."
+    }
+   ]
+  },
+  {
+   "id": "q-cubic",
+   "question": "For $y' = y - y^3$, which steady states are stable?",
+   "choices": [
+    {
+     "text": "All three",
+     "why": "No. The sign of $f'$ differs at $0$."
+    },
+    {
+     "text": "Only $Y = 1$",
+     "why": "No. $f$ is odd, so $-1$ behaves like $1$: $f'(-1) = -2$."
+    },
+    {
+     "text": "$Y = 1$ and $Y = -1$",
+     "why": "Right. $f' = 1 - 3y^2 = -2$ at $\\pm1$; at $0$ it is $+1$, unstable.",
+     "correct": true
+    },
+    {
+     "text": "Only $Y = 0$",
+     "why": "No. $f'(0) = 1 > 0$, so $0$ is unstable."
+    }
+   ]
+  },
+  {
+   "id": "q-zero-slope",
+   "question": "What does the test say when $f'(Y) = 0$?",
+   "choices": [
+    {
+     "text": "$Y$ is not a steady state.",
+     "why": "No. Being a steady state only needs $f(Y) = 0$."
+    },
+    {
+     "text": "Nothing: the linear approximation is zero, so higher-order terms decide.",
+     "why": "Right. For example $y' = -y^3$ is stable at $0$ and $y' = y^3$ is unstable, and both have $f'(0) = 0$.",
+     "correct": true
+    },
+    {
+     "text": "$Y$ is stable.",
+     "why": "No. $y' = y^3$ has $f'(0) = 0$ and is unstable."
+    },
+    {
+     "text": "$Y$ is unstable.",
+     "why": "No. $y' = -y^3$ has $f'(0) = 0$ and is stable."
+    }
+   ]
+  },
+  {
+   "id": "q-line",
+   "question": "On a stability line, arrows point away from $Y$ on both sides. What does that mean?",
+   "choices": [
+    {
+     "text": "$Y$ is stable.",
+     "why": "No. Stable steady states have arrows pointing into them."
+    },
+    {
+     "text": "$f(Y) \\ne 0$.",
+     "why": "No. Every point marked on the line is a steady state."
+    },
+    {
+     "text": "The solution oscillates around $Y$.",
+     "why": "No. A first order autonomous equation cannot oscillate: $y$ moves monotonically."
+    },
+    {
+     "text": "$Y$ is unstable: solutions starting near it move away.",
+     "why": "Right. Arrows follow the sign of $f$; arrows leaving $Y$ mean $f$ pushes $y$ away.",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "id": "q-separable",
+   "question": "Which equation is separable?",
+   "choices": [
+    {
+     "text": "$y' = t\\,e^{y}$",
+     "why": "Right. It is $g(t) = t$ times a function of $y$: $e^{-y}dy = t\\,dt$.",
+     "correct": true
+    },
+    {
+     "text": "$y' = y + t$",
+     "why": "No. A sum of a $y$ part and a $t$ part cannot be written as a product."
+    },
+    {
+     "text": "$y' = \\sin(ty)$",
+     "why": "No. $\\sin(ty)$ does not split into a function of $t$ times a function of $y$."
+    },
+    {
+     "text": "$y' = y^2 + t^2$",
+     "why": "No. Again a sum, not a product."
+    }
+   ]
+  },
+  {
+   "id": "q-ty",
+   "question": "What is the solution of $y' = t/y$ with $y(0) = 3$?",
+   "choices": [
+    {
+     "text": "$y = 3e^{t^2/2}$",
+     "why": "No. That solves $y' = ty$, a different separable equation."
+    },
+    {
+     "text": "$y = \\sqrt{9 + t^2}$",
+     "why": "Right. $\\tfrac12y^2 - \\tfrac92 = \\tfrac12t^2$, so $y^2 = 9 + t^2$, positive root since $y(0) > 0$.",
+     "correct": true
+    },
+    {
+     "text": "$y = 3 + t$",
+     "why": "No. Then $y' = 1$ but $t/y = t/(3 + t) \\ne 1$."
+    },
+    {
+     "text": "$y = 3 + \\tfrac12 t^2$",
+     "why": "No. That would solve $y' = t$, without the division by $y$."
+    }
+   ]
+  },
+  {
+   "id": "q-unique",
+   "question": "What goes wrong for $y' = t/y$ with the start $y(0) = 0$?",
+   "choices": [
+    {
+     "text": "Nothing: $y = \\sqrt{t^2}$ is the unique solution.",
+     "why": "No. $|t|$ is not differentiable at $0$, and $y = -|t|$ fits just as well for $t \\neq 0$."
+    },
+    {
+     "text": "The separation method cannot be applied to $y' = t/y$.",
+     "why": "No. The equation is separable; the trouble is only at points where $y = 0$."
+    },
+    {
+     "text": "The right side is $0/0$ at the start, so the usual guarantee of one solution fails: $y = t$ and $y = -t$ both satisfy the equation for $t \\neq 0$ and both run into the origin.",
+     "why": "Right. Neither is a classical solution at $t = 0$ itself, because the equation is undefined there. The formula gives two candidates, not a unique answer.",
+     "correct": true
+    },
+    {
+     "text": "Nothing: $y = 0$ is the unique solution.",
+     "why": "No. $y = 0$ makes $t/y$ undefined for every $t$; it is not a solution."
+    }
+   ]
+  }
+ ]
+}
