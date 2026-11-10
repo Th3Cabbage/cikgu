@@ -1,0 +1,971 @@
+{
+ "version": 1,
+ "title": "Electrical Networks and Solution Methods",
+ "subtitle": "Unit 4 of a study companion to MIT Learn Differential Equations (Gilbert Strang), videos 20-23, with Strang's Differential Equations and Linear Algebra, Sections 2.5-2.6",
+ "video": {
+  "id": "6b9AW6QxXt0",
+  "title": "MIT Learn Differential Equations, videos 20-23",
+  "duration": "1:08:16",
+  "url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63oTpyxCMLKt_JmB0WtSZfG"
+ },
+ "videos": [
+  {
+   "n": 20,
+   "id": "6b9AW6QxXt0",
+   "title": "Electrical Networks: Voltages and Currents",
+   "duration": "16:33",
+   "url": "https://www.youtube.com/watch?v=6b9AW6QxXt0"
+  },
+  {
+   "n": 21,
+   "id": "mKYlNJhK_2o",
+   "title": "Method of Undetermined Coefficients",
+   "duration": "16:32",
+   "url": "https://www.youtube.com/watch?v=mKYlNJhK_2o"
+  },
+  {
+   "n": 22,
+   "id": "u_XsCvhzzbg",
+   "title": "An Example of Undetermined Coefficients",
+   "duration": "15:49",
+   "url": "https://www.youtube.com/watch?v=u_XsCvhzzbg"
+  },
+  {
+   "n": 23,
+   "id": "0f15AVSQ770",
+   "title": "Variation of Parameters",
+   "duration": "19:22",
+   "url": "https://www.youtube.com/watch?v=0f15AVSQ770"
+  }
+ ],
+ "book": {
+  "title": "Differential Equations and Linear Algebra",
+  "authors": "Gilbert Strang",
+  "short": "Strang, Ch. 2",
+  "edition": "Wellesley-Cambridge Press, 2014 (Chapter 2, Sections 2.5-2.6)",
+  "onlineUrl": "",
+  "pageNote": "Page references give the printed page and the page of the local PDF (printed page + 12). The book is not freely available online, so only a local copy can be opened."
+ },
+ "attribution": "Course text, diagrams and animations here are original paraphrases and drawings made for this guide; examples marked authored are not from the lectures. They summarize MIT OpenCourseWare's Learn Differential Equations videos (Gilbert Strang, CC BY-NC-SA) and Strang's textbook; for the original wording, watch the videos and read the book. Captions, video and book text are not included in this guide.",
+ "explorer": {
+  "modes": [
+   {
+    "id": "rlc",
+    "label": "RLC loop: impedance"
+   },
+   {
+    "id": "uc",
+    "label": "Undetermined coefficients"
+   }
+  ],
+  "defaultMode": "uc",
+  "R": {
+   "min": 0.5,
+   "max": 50,
+   "step": 0.5,
+   "default": 10
+  },
+  "L": {
+   "min": 0.01,
+   "max": 1,
+   "step": 0.01,
+   "default": 0.1
+  },
+  "Cexp": {
+   "min": -6,
+   "max": -2,
+   "step": 0.1,
+   "default": -4,
+   "label": "log10 C"
+  },
+  "omega": {
+   "min": 10,
+   "max": 1000,
+   "step": 5,
+   "default": 100
+  },
+  "B": {
+   "min": -4,
+   "max": 4,
+   "step": 0.5,
+   "default": -3
+  },
+  "Cc": {
+   "min": -4,
+   "max": 6,
+   "step": 0.5,
+   "default": 2
+  },
+  "forms": [
+   {
+    "id": "poly",
+    "label": "t^k (polynomial)"
+   },
+   {
+    "id": "exp",
+    "label": "t^k e^(st)"
+   },
+   {
+    "id": "cos",
+    "label": "t^k cos(ωt)"
+   }
+  ],
+  "k": {
+   "min": 0,
+   "max": 2,
+   "step": 1,
+   "default": 1
+  },
+  "s": {
+   "min": -3,
+   "max": 3,
+   "step": 0.5,
+   "default": 2
+  },
+  "w": {
+   "min": 0.5,
+   "max": 4,
+   "step": 0.5,
+   "default": 1
+  },
+  "amp": {
+   "min": -4,
+   "max": 4,
+   "step": 0.5,
+   "default": 4
+  },
+  "tMax": 3,
+  "presets": [
+   {
+    "id": "lecture22",
+    "label": "y'' − 3y' + 2y = 4t",
+    "mode": "uc",
+    "B": -3,
+    "Cc": 2,
+    "form": "poly",
+    "k": 1,
+    "amp": 4,
+    "note": "Section 3: $y_p = 3 + 2t$."
+   },
+   {
+    "id": "lecture21",
+    "label": "y'' + y' + y = t",
+    "mode": "uc",
+    "B": 1,
+    "Cc": 1,
+    "form": "poly",
+    "k": 1,
+    "amp": 1,
+    "note": "Section 2: $y_p = t - 1$."
+   },
+   {
+    "id": "quad",
+    "label": "y'' + y' + y = t²",
+    "mode": "uc",
+    "B": 1,
+    "Cc": 1,
+    "form": "poly",
+    "k": 2,
+    "amp": 1,
+    "note": "Section 2 example: $y_p = t^2 - 2t$."
+   },
+   {
+    "id": "res2",
+    "label": "Resonance e^(2t)",
+    "mode": "uc",
+    "B": -3,
+    "Cc": 2,
+    "form": "exp",
+    "k": 0,
+    "s": 2,
+    "amp": 1,
+    "note": "Section 3 example: $s = 2$ is a root, so $y_p = te^{2t}$."
+   },
+   {
+    "id": "tcos",
+    "label": "t cos t, damped",
+    "mode": "uc",
+    "B": 1,
+    "Cc": 1,
+    "form": "cos",
+    "k": 1,
+    "w": 1,
+    "amp": 1,
+    "note": "Four coefficients: $(a + bt)\\cos t + (c + dt)\\sin t$."
+   },
+   {
+    "id": "radio",
+    "label": "Book circuit",
+    "mode": "rlc",
+    "R": 10,
+    "L": 0.1,
+    "Cexp": -4,
+    "omega": 100,
+    "note": "Section 1 example: $Z = 10 - 90i$ at $\\omega = 100$; resonance near $316$."
+   }
+  ],
+  "tutorContext": "Two modes. RLC: Z = R + i(omega L - 1/(omega C)) drawn as a vector in the complex plane, |Z|, phase angle, current amplitude |V|/|Z| for V = 1, resonance omega_0 = 1/sqrt(LC), and the curve |I|(omega) on a log frequency axis. Undetermined coefficients: y'' + B y' + C y = amp * f with f = t^k, t^k e^(st) or t^k cos(omega t) (k = 0, 1, 2). It finds the root multiplicity m of the input exponent (s, 0 or i omega) in P(s) = s^2 + B s + C, shows the trial form t^m (a0 + ... + ak t^k) e^(st) (real form with cos and sin for the cosine family), the solved coefficients, y_p, a residual check P(D) y_p - f at sample points, and plots y_p with the convolution solution integral_0^t g(t - T) f(T) dT (zero initial conditions), which differs from y_p by a null solution."
+ },
+ "sections": [
+  {
+   "nav": "RLC networks",
+   "v": 20,
+   "title": "An RLC loop and its complex impedance $Z$",
+   "summary": "Kirchhoff's voltage law around a loop with resistor $R$, inductor $L$ and capacitor $C$ gives $LI'' + RI' + I/C = $ (derivative of the source). With the source $Ve^{i\\omega t}$ the current is $I = \\dfrac{V}{Z}e^{i\\omega t}$, where $Z = R + i\\left(\\omega L - \\dfrac{1}{\\omega C}\\right)$ is the complex impedance.",
+   "time": [
+    0,
+    993
+   ],
+   "goals": [
+    "Write the loop equation from the three voltage drops $LI'$, $RI$ and $\\frac1C\\int I$.",
+    "Match $L, R, 1/C$ with mass, damping and spring constant $m, b, k$.",
+    "Find the impedance $Z$ and its size $|Z| = \\sqrt{R^2 + (\\omega L - 1/\\omega C)^2}$.",
+    "Find the frequency where the loop resonates: $\\omega L = 1/(\\omega C)$."
+   ],
+   "notes": [
+    {
+     "heading": "Voltage drops around a loop",
+     "paragraphs": [
+      "Kirchhoff's voltage law: around a closed loop the voltage drops add up to the applied voltage. A resistor drops $RI$ (Ohm's law), an inductor $L\\,dI/dt$, and a capacitor $Q/C$ where the charge $Q$ is the integral of the current. With a source $Ve^{i\\omega t}$:",
+      "$L\\dfrac{dI}{dt} + RI + \\dfrac{1}{C}\\displaystyle\\int I\\,dt = Ve^{i\\omega t}.$ Differentiating once removes the integral: $LI'' + RI' + \\dfrac{1}{C}I = i\\omega V e^{i\\omega t}$."
+     ]
+    },
+    {
+     "heading": "The mechanical twin",
+     "paragraphs": [
+      "This is the spring equation of Unit 3 with $L \\leftrightarrow m$, $R \\leftrightarrow b$ and $1/C \\leftrightarrow k$. Inductance resists changes in current as mass resists changes in velocity; resistance dissipates energy like friction; the capacitor stores energy like a spring. Early analog computers used exactly this match to solve mechanical problems with circuits."
+     ]
+    },
+    {
+     "heading": "Impedance",
+     "paragraphs": [
+      "Try $I = We^{i\\omega t}$ in the integral form. The derivative gives $i\\omega L$, the integral gives $1/(i\\omega C)$, so $\\left(i\\omega L + R + \\dfrac{1}{i\\omega C}\\right)W = V$. Since $1/i = -i$, the bracket is",
+      "$Z = R + i\\left(\\omega L - \\dfrac{1}{\\omega C}\\right), \\qquad W = \\dfrac{V}{Z}.$ The real part is resistance; the imaginary part, the reactance, comes from the inductor and the capacitor with opposite signs.",
+      "The size is $|Z|^2 = R^2 + \\left(\\omega L - \\dfrac{1}{\\omega C}\\right)^2$, a sum of squares (not a difference). The current amplitude is $|V|/|Z|$, and the current lags the voltage by the angle of $Z$."
+     ]
+    },
+    {
+     "heading": "Tuning and networks",
+     "paragraphs": [
+      "$|Z|$ is smallest, equal to $R$, when the reactance vanishes: $\\omega L = 1/(\\omega C)$, that is $\\omega_0 = 1/\\sqrt{LC}$. A radio is tuned by changing $C$ until $\\omega_0$ matches the station. Real circuits have many loops and nodes; Kirchhoff's current law at nodes leads to matrices (incidence matrices, Unit 7)."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$LI' + RI + \\frac1C\\int I = V e^{i\\omega t}$.",
+    "$L, R, 1/C \\leftrightarrow m, b, k$.",
+    "$Z = R + i(\\omega L - 1/\\omega C)$, $I = (V/Z)e^{i\\omega t}$.",
+    "Resonance: $\\omega_0 = 1/\\sqrt{LC}$, $|Z| = R$."
+   ],
+   "example": {
+    "title": "Impedance at two frequencies (authored, book values)",
+    "problem": "$R = 10$, $L = 0.1$, $C = 10^{-4}$. Find $\\omega_0$, and $Z$ and $|Z|$ at $\\omega = 100$.",
+    "steps": [
+     {
+      "text": "Resonant frequency.",
+      "tex": "\\omega_0 = \\frac{1}{\\sqrt{LC}} = \\frac{1}{\\sqrt{10^{-5}}} \\approx 316.2"
+     },
+     {
+      "text": "At omega = 100: omega L = 10 and 1/(omega C) = 100.",
+      "tex": "Z = 10 + i(10 - 100) = 10 - 90i"
+     },
+     {
+      "text": "Size of Z.",
+      "tex": "|Z| = \\sqrt{100 + 8100} = \\sqrt{8200} \\approx 90.6"
+     }
+    ],
+    "answer": "$\\omega_0 \\approx 316$; at $\\omega = 100$ the capacitor dominates, $Z = 10 - 90i$, and the current is about $9$ times smaller than at resonance."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 20,
+      "t": 0,
+      "label": "An RLC loop with a switch"
+     },
+     {
+      "v": 20,
+      "t": 120,
+      "label": "Kirchhoff's voltage law: L dI/dt + R I + (1/C) integral of I"
+     },
+     {
+      "v": 20,
+      "t": 240,
+      "label": "Differentiate to remove the integral"
+     },
+     {
+      "v": 20,
+      "t": 300,
+      "label": "Analogy with m, b, k"
+     },
+     {
+      "v": 20,
+      "t": 360,
+      "label": "Analog computers"
+     },
+     {
+      "v": 20,
+      "t": 390,
+      "label": "Try I = W e^(i omega t)"
+     },
+     {
+      "v": 20,
+      "t": 540,
+      "label": "Impedance Z"
+     },
+     {
+      "v": 20,
+      "t": 690,
+      "label": "|Z| squared, using 1/i = -i"
+     },
+     {
+      "v": 20,
+      "t": 810,
+      "label": "Many loops: Kirchhoff's current law"
+     }
+    ],
+    "book": [
+     {
+      "printed": 118,
+      "pdf": 130,
+      "label": "Section 2.5: electrical networks and mechanical systems"
+     },
+     {
+      "printed": 121,
+      "pdf": 133,
+      "label": "Complex impedance"
+     }
+    ]
+   },
+   "tutorNotes": "Video 20. RLC loop: L I' + R I + (1/C) int I = V e^(i omega t); differentiate: L I'' + R I' + I/C = i omega V e^(i omega t). L, R, 1/C like m, b, k. I = W e^(i omega t): (i omega L + R + 1/(i omega C)) W = V, Z = R + i(omega L - 1/(omega C)), W = V/Z. |Z|^2 = R^2 + (omega L - 1/(omega C))^2. Resonance omega_0 = 1/sqrt(LC), |Z| = R.",
+   "id": "s1",
+   "number": 1
+  },
+  {
+   "nav": "Undetermined coefficients",
+   "v": 21,
+   "title": "Undetermined coefficients: guess the form, find the numbers",
+   "summary": "For $Ay'' + By' + Cy = f(t)$ with a nice $f$ (exponentials, sines and cosines, polynomials and their products), $y_p$ has the same form as $f$ with unknown coefficients. Substitute and match terms. If $f$ contains a null solution (resonance), multiply the guess by $t$.",
+   "time": [
+    0,
+    992
+   ],
+   "goals": [
+    "Name the right-hand sides for which the method works.",
+    "Choose the trial form for $t$, $\\sin t$, $e^{st}$ and $t\\sin t$.",
+    "Match coefficients to find $y_p$.",
+    "Recognise resonance and add the factor $t$."
+   ],
+   "notes": [
+    {
+     "heading": "Nice functions",
+     "paragraphs": [
+      "The method works when differentiating $f$ keeps it inside a small family: $e^{st}$ stays $e^{st}$; $\\cos\\omega t$ and $\\sin\\omega t$ turn into each other; a polynomial of degree $n$ stays a polynomial of degree at most $n$. Products of these also work. For other functions, such as $\\sec t$ or $\\ln t$, the guess never closes up, and variation of parameters (Section 4) is needed."
+     ]
+    },
+    {
+     "heading": "The trial forms",
+     "paragraphs": [
+      "$f = e^{st}$: try $Ye^{st}$, which gives $Y = 1/(As^2 + Bs + C)$ (Unit 3).",
+      "$f = t$: try $y_p = a + bt$. For $y'' + y' + y = t$: $0 + b + (a + bt) = t$, so $b = 1$ and $a + b = 0$: $y_p = t - 1$.",
+      "$f = \\sin t$: the damping term mixes sines and cosines, so try $C_1\\cos t + C_2\\sin t$.",
+      "$f = t\\sin t$: try $(a + bt)\\cos t + (c + dt)\\sin t$: four coefficients from four matching equations."
+     ]
+    },
+    {
+     "heading": "Resonance",
+     "paragraphs": [
+      "If $f$ itself solves the null equation, the trial form gives zero on the left side and cannot match. Example: $y'' - y = e^t$, where $e^t$ is a null solution. Multiply the guess by $t$: try $Y\\,te^{t}$. In general, multiply by $t^m$ where $m$ is how many times the exponent is a root of $As^2 + Bs + C$."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Works for $e^{st}$, $\\cos$, $\\sin$, polynomials, products.",
+    "$f = t$: try $a + bt$.",
+    "$f = t\\sin t$: $(a + bt)\\cos t + (c + dt)\\sin t$.",
+    "Resonance: multiply the guess by $t$."
+   ],
+   "example": {
+    "title": "A quadratic input (authored)",
+    "problem": "Find $y_p$ for $y'' + y' + y = t^2$.",
+    "steps": [
+     {
+      "text": "Try a + bt + ct^2: y'' = 2c, y' = b + 2ct.",
+      "tex": "2c + (b + 2ct) + (a + bt + ct^2) = t^2"
+     },
+     {
+      "text": "Match t^2, then t, then constants.",
+      "tex": "c = 1,\\qquad 2c + b = 0 \\Rightarrow b = -2,\\qquad 2c + b + a = 0 \\Rightarrow a = 0"
+     },
+     {
+      "text": "Assemble.",
+      "tex": "y_p = t^2 - 2t"
+     }
+    ],
+    "answer": "$y_p = t^2 - 2t$; check: $2 + (2t - 2) + (t^2 - 2t) = t^2$."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 21,
+      "t": 0,
+      "label": "y'' + y' + y = f(t) with a nice function"
+     },
+     {
+      "v": 21,
+      "t": 60,
+      "label": "f = e^(st): try Y e^(st)"
+     },
+     {
+      "v": 21,
+      "t": 150,
+      "label": "f = t: try a + bt"
+     },
+     {
+      "v": 21,
+      "t": 240,
+      "label": "Match coefficients: y_p = t - 1"
+     },
+     {
+      "v": 21,
+      "t": 330,
+      "label": "f = sin t: cosine and sine"
+     },
+     {
+      "v": 21,
+      "t": 420,
+      "label": "Euler's formula link"
+     },
+     {
+      "v": 21,
+      "t": 450,
+      "label": "f = t sin t: four coefficients"
+     },
+     {
+      "v": 21,
+      "t": 720,
+      "label": "Resonance: try Y t e^t"
+     }
+    ],
+    "book": [
+     {
+      "printed": 130,
+      "pdf": 142,
+      "label": "Section 2.6: the method of undetermined coefficients"
+     },
+     {
+      "printed": 133,
+      "pdf": 145,
+      "label": "Summary of the method"
+     }
+    ]
+   },
+   "tutorNotes": "Video 21. Undetermined coefficients for y'' + y' + y = f: f = e^(st) -> Y e^(st); f = t -> a + bt gives y_p = t - 1; f = sin t -> C1 cos t + C2 sin t; f = t sin t -> (a + bt) cos t + (c + dt) sin t. Resonance y'' - y = e^t -> try Y t e^t. Method works only for exponentials, sin/cos, polynomials and products.",
+   "id": "s2",
+   "number": 2
+  },
+  {
+   "nav": "A worked example",
+   "v": 22,
+   "title": "$y'' - 3y' + 2y = 4t$ and its family",
+   "summary": "The null solutions are $e^t$ and $e^{2t}$. The input $4t$ gives $y_p = 3 + 2t$; $4t^2$ needs $a + bt + ct^2$; $e^{st}$ gives $e^{st}/(s^2 - 3s + 2)$, except at the resonant exponents $s = 1$ and $s = 2$, where $te^{st}$ appears.",
+   "time": [
+    0,
+    949
+   ],
+   "goals": [
+    "Find the null solutions from $s^2 - 3s + 2 = (s-1)(s-2)$.",
+    "Solve for $y_p$ with a linear and a quadratic input.",
+    "Handle exponential and cosine inputs through $Y = 1/P(s)$, and resonance."
+   ],
+   "notes": [
+    {
+     "heading": "Linear equations, two routes",
+     "paragraphs": [
+      "Strang's big picture: nonlinear equations go to numerical methods (Unit 11). Linear equations with constant coefficients have formulas: either the integral with the impulse response (Section 4), or, for nice inputs, undetermined coefficients."
+     ]
+    },
+    {
+     "heading": "Null solutions and a polynomial input",
+     "paragraphs": [
+      "$s^2 - 3s + 2 = (s - 1)(s - 2)$ gives $y_n = c_1e^t + c_2e^{2t}$. For $f = 4t$ try $a + bt$: $0 - 3b + 2(a + bt) = 4t$. Matching $t$: $2b = 4$, so $b = 2$. Matching constants: $2a - 3b = 0$, so $a = 3$. Thus $y_p = 3 + 2t$.",
+      "For $f = 4t^2$ the guess needs all lower powers: $a + bt + ct^2$, three coefficients."
+     ]
+    },
+    {
+     "heading": "Exponentials, cosines and resonance",
+     "paragraphs": [
+      "$f = e^{st}$ gives $y_p = e^{st}/(s^2 - 3s + 2)$. With $s = i\\omega$ the real part answers $\\cos\\omega t$, and in real form the guess is $M\\cos\\omega t + N\\sin\\omega t$.",
+      "At $s = 1$ or $s = 2$ the denominator is zero: the input is a null solution. Then the guess is $Y\\,te^{st}$, and Unit 3 gives $Y = 1/P'(s)$ with $P'(s) = 2s - 3$.",
+      "The list of nice inputs: $e^{st}$, $\\cos\\omega t$ and $\\sin\\omega t$, polynomials, and their products such as $te^{st}$ or $t\\cos\\omega t$ (whose guess $(a + bt)\\cos\\omega t + (c + dt)\\sin\\omega t$ has four coefficients)."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$y_n = c_1e^t + c_2e^{2t}$.",
+    "$f = 4t$: $y_p = 3 + 2t$.",
+    "$f = e^{st}$: $y_p = e^{st}/(s^2 - 3s + 2)$.",
+    "$s = 1, 2$: resonance, $y_p = te^{st}/(2s - 3)$."
+   ],
+   "example": {
+    "title": "Resonance at s = 2 (authored)",
+    "problem": "Find $y_p$ for $y'' - 3y' + 2y = e^{2t}$.",
+    "steps": [
+     {
+      "text": "P(2) = 4 - 6 + 2 = 0: e^(2t) is a null solution.",
+      "tex": "\\text{try } y_p = Y\\,t\\,e^{2t}"
+     },
+     {
+      "text": "Unit 3's resonance formula with P'(s) = 2s - 3.",
+      "tex": "Y = \\frac{1}{P'(2)} = \\frac{1}{1} = 1"
+     },
+     {
+      "text": "Check: (t e^(2t))' = (1 + 2t)e^(2t), (t e^(2t))'' = (4 + 4t)e^(2t).",
+      "tex": "(4 + 4t) - 3(1 + 2t) + 2t = 1"
+     }
+    ],
+    "answer": "$y_p = te^{2t}$."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 22,
+      "t": 0,
+      "label": "Nonlinear goes numerical; linear has formulas"
+     },
+     {
+      "v": 22,
+      "t": 60,
+      "label": "y'' - 3y' + 2y = 4t: null solutions e^t, e^(2t)"
+     },
+     {
+      "v": 22,
+      "t": 120,
+      "label": "Try a + bt"
+     },
+     {
+      "v": 22,
+      "t": 180,
+      "label": "b = 2, a = 3"
+     },
+     {
+      "v": 22,
+      "t": 240,
+      "label": "f = 4t^2: a + bt + ct^2"
+     },
+     {
+      "v": 22,
+      "t": 270,
+      "label": "f = e^(st): Y = 1/(s^2 - 3s + 2)"
+     },
+     {
+      "v": 22,
+      "t": 360,
+      "label": "s = i omega gives cos and sin"
+     },
+     {
+      "v": 22,
+      "t": 450,
+      "label": "s = 1 or 2: resonance"
+     },
+     {
+      "v": 22,
+      "t": 510,
+      "label": "The nice functions"
+     },
+     {
+      "v": 22,
+      "t": 750,
+      "label": "t cos omega t: four coefficients"
+     },
+     {
+      "v": 22,
+      "t": 810,
+      "label": "Resonance with e^t: try Y t e^t"
+     }
+    ],
+    "book": [
+     {
+      "printed": 131,
+      "pdf": 143,
+      "label": "Undetermined coefficients: examples"
+     },
+     {
+      "printed": 132,
+      "pdf": 144,
+      "label": "Resonance: the extra factor t"
+     }
+    ]
+   },
+   "tutorNotes": "Video 22. y'' - 3y' + 2y = 4t: null e^t, e^(2t); try a + bt: -3b + 2a + 2bt = 4t, b = 2, a = 3, y_p = 3 + 2t. 4t^2: a + bt + ct^2. e^(st): y_p = e^(st)/(s^2 - 3s + 2); s = i omega gives cos/sin. s = 1, 2 resonance: Y t e^(st), Y = 1/P'(s) = 1/(2s - 3). t cos(omega t): (a + bt) cos + (c + dt) sin.",
+   "id": "s3",
+   "number": 3
+  },
+  {
+   "nav": "Variation of parameters",
+   "v": 23,
+   "title": "Variation of parameters: $y = c_1(t)y_1 + c_2(t)y_2$",
+   "summary": "Let the constants in the null solution vary. Requiring $c_1'y_1 + c_2'y_2 = 0$ and $c_1'y_1' + c_2'y_2' = f$ gives $c_1' = -y_2f/W$ and $c_2' = y_1f/W$, with the Wronskian $W = y_1y_2' - y_2y_1'$. For constant coefficients this is the integral $\\int_0^t g(t - T)f(T)\\,dT$ with the impulse response.",
+   "time": [
+    0,
+    1162
+   ],
+   "goals": [
+    "Set up the two conditions on $c_1'$ and $c_2'$.",
+    "Solve them with the Wronskian.",
+    "Apply the method to an input the guessing method cannot handle.",
+    "See that, for constant coefficients, it reproduces $\\int g(t - T)f(T)\\,dT$."
+   ],
+   "notes": [
+    {
+     "heading": "Varying the constants",
+     "paragraphs": [
+      "Start from the null solutions $y_1, y_2$ of $y'' + B(t)y' + C(t)y = 0$ (here the leading coefficient is $1$). Look for $y = c_1(t)y_1 + c_2(t)y_2$. Its derivative has four terms; impose $c_1'y_1 + c_2'y_2 = 0$ so that $y' = c_1y_1' + c_2y_2'$. Differentiating again and using the null equations, the remaining condition is $c_1'y_1' + c_2'y_2' = f$."
+     ]
+    },
+    {
+     "heading": "The Wronskian",
+     "paragraphs": [
+      "Two linear equations for $c_1', c_2'$ with determinant $W = y_1y_2' - y_2y_1'$, the Wronskian. It is never zero when $y_1, y_2$ are independent. Cramer's rule:",
+      "$c_1' = -\\dfrac{y_2 f}{W}, \\qquad c_2' = \\dfrac{y_1 f}{W}, \\qquad y_p = -y_1\\displaystyle\\int\\frac{y_2f}{W}\\,dt + y_2\\int\\frac{y_1f}{W}\\,dt.$"
+     ]
+    },
+    {
+     "heading": "Constant coefficients: the impulse response again",
+     "paragraphs": [
+      "With distinct roots $s_1 \\neq s_2$, take $y_1 = e^{s_1t}$ and $y_2 = e^{s_2t}$: $W = (s_2 - s_1)e^{(s_1 + s_2)t}$. Taking the integrals from $0$ to $t$, the exponentials combine into $e^{s_i(t - T)}$, and the answer is",
+      "$y_p(t) = \\displaystyle\\int_0^t \\frac{e^{s_2(t-T)} - e^{s_1(t-T)}}{s_2 - s_1}\\,f(T)\\,dT = \\int_0^t g(t - T)\\,f(T)\\,dT.$",
+      "With a double root $s_1 = s_2 = r$ that quotient is $0/0$ and the exponentials are not independent. The null solutions are then $e^{rt}$ and $te^{rt}$, with $W = e^{2rt}$, and the same computation gives $g(t) = te^{rt}$, the limit of the quotient as $s_2 \\to s_1$.",
+      "Each input $f(T)\\,dT$ at time $T$ starts its own impulse response $g$, which runs for the time $t - T$. This is the second order version of the Unit 1 formula, and the convolution of Unit 5."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$c_1'y_1 + c_2'y_2 = 0$, $c_1'y_1' + c_2'y_2' = f$.",
+    "$W = y_1y_2' - y_2y_1'$.",
+    "$c_1' = -y_2f/W$, $c_2' = y_1f/W$.",
+    "Constant coefficients: $y_p = \\int_0^t g(t - T)f(T)\\,dT$."
+   ],
+   "example": {
+    "title": "An input with no good guess (authored)",
+    "problem": "Find $y_p$ for $y'' + y = \\sec t$ on $|t| < \\pi/2$.",
+    "steps": [
+     {
+      "text": "y1 = cos t, y2 = sin t, W = cos^2 t + sin^2 t = 1.",
+      "tex": "c_1' = -\\sin t\\sec t = -\\tan t,\\qquad c_2' = \\cos t\\sec t = 1"
+     },
+     {
+      "text": "Integrate.",
+      "tex": "c_1 = \\ln|\\cos t|,\\qquad c_2 = t"
+     },
+     {
+      "text": "Assemble.",
+      "tex": "y_p = \\cos t\\,\\ln|\\cos t| + t\\sin t"
+     }
+    ],
+    "answer": "$y_p = \\cos t\\ln(\\cos t) + t\\sin t$ on $|t| < \\pi/2$; undetermined coefficients could not find it, because $\\sec t$ is not a nice function."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 23,
+      "t": 0,
+      "label": "Variation of parameters needs y1 and y2"
+     },
+     {
+      "v": 23,
+      "t": 120,
+      "label": "Any f(t), even varying coefficients"
+     },
+     {
+      "v": 23,
+      "t": 240,
+      "label": "y = c1(t) y1 + c2(t) y2"
+     },
+     {
+      "v": 23,
+      "t": 300,
+      "label": "Two conditions and the solution"
+     },
+     {
+      "v": 23,
+      "t": 360,
+      "label": "The Wronskian W"
+     },
+     {
+      "v": 23,
+      "t": 510,
+      "label": "Constant coefficients: e^(s1 t), e^(s2 t)"
+     },
+     {
+      "v": 23,
+      "t": 600,
+      "label": "W = (s2 - s1) e^((s1 + s2) t)"
+     },
+     {
+      "v": 23,
+      "t": 720,
+      "label": "Combine the integrals"
+     },
+     {
+      "v": 23,
+      "t": 990,
+      "label": "The impulse response g(t - T)"
+     },
+     {
+      "v": 23,
+      "t": 1050,
+      "label": "Each input starts a response"
+     }
+    ],
+    "book": [
+     {
+      "printed": 133,
+      "pdf": 145,
+      "label": "Variation of parameters"
+     },
+     {
+      "printed": 134,
+      "pdf": 146,
+      "label": "Example: y'' + y = t, and the impulse response"
+     }
+    ]
+   },
+   "tutorNotes": "Video 23. y = c1(t) y1 + c2(t) y2 with c1' y1 + c2' y2 = 0, c1' y1' + c2' y2' = f. W = y1 y2' - y2 y1'. c1' = -y2 f/W, c2' = y1 f/W. Constant coefficients with distinct roots: y1 = e^(s1 t), y2 = e^(s2 t), W = (s2 - s1) e^((s1 + s2) t), y_p = integral_0^t g(t - T) f(T) dT with g = (e^(s2 t) - e^(s1 t))/(s2 - s1); double root r: null solutions e^(rt), t e^(rt), W = e^(2rt), g = t e^(rt). Example y'' + y = sec t: y_p = cos t ln|cos t| + t sin t.",
+   "id": "s4",
+   "number": 4
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q-analogy",
+   "question": "In the analogy between $LI'' + RI' + I/C$ and $my'' + by' + ky$, what matches the spring constant $k$?",
+   "choices": [
+    {
+     "text": "$R$",
+     "why": "No. Resistance matches damping $b$."
+    },
+    {
+     "text": "$1/C$",
+     "why": "Right. The capacitor stores energy like a spring; its coefficient is $1/C$.",
+     "correct": true
+    },
+    {
+     "text": "$C$",
+     "why": "No. The capacitance appears as $1/C$ in the equation."
+    },
+    {
+     "text": "$L$",
+     "why": "No. Inductance matches mass $m$."
+    }
+   ]
+  },
+  {
+   "id": "q-impedance",
+   "question": "What is the impedance of the RLC loop at frequency $\\omega$?",
+   "choices": [
+    {
+     "text": "$R + i\\left(\\omega L + \\dfrac{1}{\\omega C}\\right)$",
+     "why": "No. $1/(i\\omega C) = -i/(\\omega C)$: the capacitor term has a minus sign."
+    },
+    {
+     "text": "$R + \\omega L + \\dfrac{1}{\\omega C}$",
+     "why": "No. The inductor and capacitor terms are imaginary."
+    },
+    {
+     "text": "$R\\,\\omega L/(\\omega C)$",
+     "why": "No. The three voltage drops add; they do not multiply."
+    },
+    {
+     "text": "$R + i\\left(\\omega L - \\dfrac{1}{\\omega C}\\right)$",
+     "why": "Right. $i\\omega L + R + 1/(i\\omega C)$, and $1/i = -i$.",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "id": "q-tune",
+   "question": "At which frequency is $|Z|$ smallest?",
+   "choices": [
+    {
+     "text": "$\\omega_0 = 1/\\sqrt{LC}$, where $|Z| = R$",
+     "why": "Right. The reactance $\\omega L - 1/(\\omega C)$ vanishes there.",
+     "correct": true
+    },
+    {
+     "text": "$\\omega = 0$",
+     "why": "No. At low frequency $1/(\\omega C)$ is huge."
+    },
+    {
+     "text": "$\\omega = R/L$",
+     "why": "No. $R$ does not affect where the reactance is zero."
+    },
+    {
+     "text": "$|Z|$ is the same at every frequency.",
+     "why": "No. Only the real part $R$ is fixed."
+    }
+   ]
+  },
+  {
+   "id": "q-guess-t",
+   "question": "For $y'' + y' + y = t$, what is $y_p$?",
+   "choices": [
+    {
+     "text": "$t + 1$",
+     "why": "No. That gives $1 + t + 1 = t + 2$."
+    },
+    {
+     "text": "$\\tfrac12 t^2$",
+     "why": "No. A polynomial input of degree $1$ needs a guess of degree $1$ here."
+    },
+    {
+     "text": "$t - 1$",
+     "why": "Right. With $a + bt$: $b + a + bt = t$, so $b = 1$ and $a = -1$.",
+     "correct": true
+    },
+    {
+     "text": "$t$",
+     "why": "No. Then $y' = 1$ adds a constant: $0 + 1 + t \\neq t$."
+    }
+   ]
+  },
+  {
+   "id": "q-guess-form",
+   "question": "What trial form does $f = t\\sin t$ need (no resonance)?",
+   "choices": [
+    {
+     "text": "$(a + bt)\\sin t$",
+     "why": "No. Differentiating $\\sin t$ produces $\\cos t$ terms too."
+    },
+    {
+     "text": "$a\\cos t + c\\sin t$",
+     "why": "No. The factor $t$ in the input must appear in the guess."
+    },
+    {
+     "text": "$(a + bt)\\cos t + (c + dt)\\sin t$",
+     "why": "Right. Derivatives of $t\\sin t$ produce $\\cos t$, $t\\cos t$, $\\sin t$ and $t\\sin t$.",
+     "correct": true
+    },
+    {
+     "text": "$bt\\sin t$",
+     "why": "No. Derivatives bring in cosines and terms without $t$."
+    }
+   ]
+  },
+  {
+   "id": "q-example",
+   "question": "For $y'' - 3y' + 2y = 4t$, what is $y_p$?",
+   "choices": [
+    {
+     "text": "$4t$",
+     "why": "No. Substitution gives $-12 + 8t$."
+    },
+    {
+     "text": "$3 + 2t$",
+     "why": "Right. $-3b + 2a + 2bt = 4t$ gives $b = 2$, $a = 3$.",
+     "correct": true
+    },
+    {
+     "text": "$2t$",
+     "why": "No. Then $-3(2) + 2(2t) = 4t - 6 \\neq 4t$."
+    },
+    {
+     "text": "$2 + 3t$",
+     "why": "No. Match $t$ first: $2b = 4$, so $b = 2$."
+    }
+   ]
+  },
+  {
+   "id": "q-resonance",
+   "question": "Which input makes $y'' - 3y' + 2y = f$ resonant?",
+   "choices": [
+    {
+     "text": "$e^{3t}$",
+     "why": "No. $P(3) = 2 \\neq 0$, so $y_p = e^{3t}/2$."
+    },
+    {
+     "text": "$\\cos t$",
+     "why": "No. The roots are real, so $\\pm i$ are not roots."
+    },
+    {
+     "text": "$t$",
+     "why": "No. $s = 0$ is not a root because $C = 2 \\neq 0$."
+    },
+    {
+     "text": "$e^{2t}$",
+     "why": "Right. $2$ is a root of $s^2 - 3s + 2$, so $e^{2t}$ is a null solution.",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "id": "q-nice",
+   "question": "For which input does the method of undetermined coefficients fail?",
+   "choices": [
+    {
+     "text": "$\\sec t$",
+     "why": "Right. Its derivatives ($\\sec t\\tan t$, ...) never close into a finite family; use variation of parameters.",
+     "correct": true
+    },
+    {
+     "text": "$t^2e^{-t}$",
+     "why": "No. A polynomial times an exponential is a nice function."
+    },
+    {
+     "text": "$e^{t}\\cos 3t$",
+     "why": "No. An exponential times a cosine is nice: try $e^t(M\\cos 3t + N\\sin 3t)$."
+    },
+    {
+     "text": "$5$",
+     "why": "No. A constant is a polynomial of degree $0$."
+    }
+   ]
+  },
+  {
+   "id": "q-wronskian",
+   "question": "In variation of parameters, what is $c_2'$?",
+   "choices": [
+    {
+     "text": "$f/W$",
+     "why": "No. The other null solution multiplies $f$."
+    },
+    {
+     "text": "$y_1f/W$",
+     "why": "Right. Cramer's rule on $c_1'y_1 + c_2'y_2 = 0$, $c_1'y_1' + c_2'y_2' = f$.",
+     "correct": true
+    },
+    {
+     "text": "$-y_2f/W$",
+     "why": "No. That is $c_1'$."
+    },
+    {
+     "text": "$y_2f/W$",
+     "why": "No. Check the sign and which null solution appears."
+    }
+   ]
+  },
+  {
+   "id": "q-convolution",
+   "question": "For constant coefficients, variation of parameters (integrals from $0$ to $t$) gives which formula?",
+   "choices": [
+    {
+     "text": "$y_p(t) = \\int_0^t g(T)\\,dT$",
+     "why": "No. That is the step response, for $f = 1$ only."
+    },
+    {
+     "text": "$y_p(t) = f(t)/W(t)$",
+     "why": "No. The Wronskian sits inside the integrals for $c_1$ and $c_2$."
+    },
+    {
+     "text": "$y_p(t) = \\int_0^t g(t - T)f(T)\\,dT$",
+     "why": "Right. Each input at time $T$ starts an impulse response that runs for time $t - T$.",
+     "correct": true
+    },
+    {
+     "text": "$y_p(t) = g(t)\\,f(t)$",
+     "why": "No. The response depends on the whole past of $f$, not only its present value."
+    }
+   ]
+  }
+ ]
+}

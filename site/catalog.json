@@ -97,6 +97,14 @@
      "description": "Free and forced oscillation, damping cases, impulse and step responses, resonance with t e^(st)/P'(s), and gain and phase for damped cosine forcing.",
      "storeKey": "second-order-v1",
      "statusApp": "Study_second_order"
+    },
+    {
+     "slug": "networks-and-methods",
+     "source": "courses/mit-de/networks-and-methods/dist",
+     "title": "Unit 4: Networks, Undetermined Coefficients and Variation of Parameters",
+     "description": "RLC loops and complex impedance, undetermined coefficients with resonance, and variation of parameters leading to the impulse-response integral.",
+     "storeKey": "networks-and-methods-v1",
+     "statusApp": "Study_networks_and_methods"
     }
    ]
   }

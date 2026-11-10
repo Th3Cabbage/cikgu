@@ -1,0 +1,443 @@
+{
+ "version": 1,
+ "width": 1280,
+ "height": 720,
+ "fps": 30,
+ "relations": {
+  "define": "Definition / choice",
+  "model": "Modelling step",
+  "classify": "Classification",
+  "diagram": "Picture",
+  "substitute": "Substitution",
+  "identity": "Identity (=)",
+  "equivalent": "Equivalent statement (⇔)",
+  "solve": "Solve",
+  "compute": "Computation",
+  "implies": "Consequence (⇒)",
+  "compare": "Check",
+  "caution": "Caveat",
+  "recap": "Recap"
+ },
+ "sections": {
+  "1": [
+   "rlc-impedance"
+  ],
+  "2": [
+   "uc-match"
+  ],
+  "3": [
+   "uc-example"
+  ],
+  "4": [
+   "vp-wronskian",
+   "vp-convolution"
+  ]
+ },
+ "sequences": [
+  {
+   "id": "rlc-impedance",
+   "scene": "RLCImpedanceSequence",
+   "section": 1,
+   "title": "Kirchhoff's law to the impedance $Z$",
+   "summary": "Three voltage drops, the trial current $We^{i\\omega t}$, and the complex number $Z$ drawn in the plane.",
+   "initial": {
+    "title": "One loop",
+    "tex": "L\\,I' + R\\,I + \\frac{1}{C}\\int I\\,dt = V e^{i\\omega t}",
+    "explanation": "Inductor, resistor and capacitor drops add to the source voltage.",
+    "frame": "animations/rlc-impedance/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Try $I = We^{i\\omega t}$",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "\\left(i\\omega L + R + \\frac{1}{i\\omega C}\\right)W = V",
+     "explanation": "The derivative brings $i\\omega$; the integral divides by $i\\omega$.",
+     "initialFrame": "animations/rlc-impedance/state-00.jpg",
+     "finalFrame": "animations/rlc-impedance/state-01.jpg",
+     "transition": {
+      "src": "animations/rlc-impedance/step-01.mp4",
+      "duration": 2.0667,
+      "frames": 62,
+      "masterFrames": [
+       8,
+       70
+      ],
+      "bytes": 72768,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Collect real and imaginary parts",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "Z = R + i\\left(\\omega L - \\frac{1}{\\omega C}\\right),\\qquad W = \\frac{V}{Z}",
+     "explanation": "$1/i = -i$ turns the capacitor term negative.",
+     "initialFrame": "animations/rlc-impedance/state-01.jpg",
+     "finalFrame": "animations/rlc-impedance/state-02.jpg",
+     "transition": {
+      "src": "animations/rlc-impedance/step-02.mp4",
+      "duration": 2.2333,
+      "frames": 67,
+      "masterFrames": [
+       69,
+       136
+      ],
+      "bytes": 86894,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Draw $Z$",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "|Z|^2 = R^2 + \\left(\\omega L - \\frac{1}{\\omega C}\\right)^2",
+     "explanation": "Resistance along the real axis, reactance up (inductor) or down (capacitor). At $\\omega_0 = 1/\\sqrt{LC}$ the reactance vanishes.",
+     "initialFrame": "animations/rlc-impedance/state-02.jpg",
+     "finalFrame": "animations/rlc-impedance/state-03.jpg",
+     "transition": {
+      "src": "animations/rlc-impedance/step-03.mp4",
+      "duration": 3.8667,
+      "frames": 116,
+      "masterFrames": [
+       135,
+       251
+      ],
+      "bytes": 87032,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 8.167,
+   "masterFrames": 251,
+   "renderSeconds": 8.4
+  },
+  {
+   "id": "uc-match",
+   "scene": "UCMatchSequence",
+   "section": 2,
+   "title": "Matching coefficients for $y'' + y' + y = t$",
+   "summary": "Substitute $a + bt$, collect powers of $t$, and solve two equations.",
+   "initial": {
+    "title": "A polynomial input",
+    "tex": "y'' + y' + y = t",
+    "explanation": "Derivatives of a linear polynomial stay polynomials.",
+    "frame": "animations/uc-match/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Guess $a + bt$",
+     "relation": "define",
+     "relationLabel": "Definition / choice",
+     "tex": "y_p = a + bt,\\quad y_p' = b,\\quad y_p'' = 0",
+     "explanation": "Same form as the input, unknown numbers.",
+     "initialFrame": "animations/uc-match/state-00.jpg",
+     "finalFrame": "animations/uc-match/state-01.jpg",
+     "transition": {
+      "src": "animations/uc-match/step-01.mp4",
+      "duration": 2.7,
+      "frames": 81,
+      "masterFrames": [
+       8,
+       89
+      ],
+      "bytes": 58646,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Substitute",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "0 + b + (a + bt) = t",
+     "explanation": "Put the three pieces into the equation.",
+     "initialFrame": "animations/uc-match/state-01.jpg",
+     "finalFrame": "animations/uc-match/state-02.jpg",
+     "transition": {
+      "src": "animations/uc-match/step-02.mp4",
+      "duration": 2.0667,
+      "frames": 62,
+      "masterFrames": [
+       88,
+       150
+      ],
+      "bytes": 65197,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Match powers of $t$",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "t:\\ b = 1,\\qquad 1:\\ a + b = 0 \\;\\Rightarrow\\; y_p = t - 1",
+     "explanation": "Both sides must agree term by term.",
+     "initialFrame": "animations/uc-match/state-02.jpg",
+     "finalFrame": "animations/uc-match/state-03.jpg",
+     "transition": {
+      "src": "animations/uc-match/step-03.mp4",
+      "duration": 3.3,
+      "frames": 99,
+      "masterFrames": [
+       149,
+       248
+      ],
+      "bytes": 57973,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 8.067,
+   "masterFrames": 248,
+   "renderSeconds": 8.1
+  },
+  {
+   "id": "uc-example",
+   "scene": "UCExampleSequence",
+   "section": 3,
+   "title": "$y'' - 3y' + 2y = 4t$, then a resonant input",
+   "summary": "Match to get $y_p = 3 + 2t$; then $e^{2t}$ hits a root and needs the factor $t$.",
+   "initial": {
+    "title": "Null solutions",
+    "tex": "s^2 - 3s + 2 = (s - 1)(s - 2)",
+    "explanation": "$y_n = c_1e^{t} + c_2e^{2t}$.",
+    "frame": "animations/uc-example/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Substitute $a + bt$",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "-3b + 2(a + bt) = 4t",
+     "explanation": "$y'' = 0$, $y' = b$.",
+     "initialFrame": "animations/uc-example/state-00.jpg",
+     "finalFrame": "animations/uc-example/state-01.jpg",
+     "transition": {
+      "src": "animations/uc-example/step-01.mp4",
+      "duration": 1.9667,
+      "frames": 59,
+      "masterFrames": [
+       8,
+       67
+      ],
+      "bytes": 101468,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Match",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "2b = 4,\\quad 2a - 3b = 0 \\;\\Rightarrow\\; y_p = 3 + 2t",
+     "explanation": "Powers of $t$ first, then constants.",
+     "initialFrame": "animations/uc-example/state-01.jpg",
+     "finalFrame": "animations/uc-example/state-02.jpg",
+     "transition": {
+      "src": "animations/uc-example/step-02.mp4",
+      "duration": 2.7,
+      "frames": 81,
+      "masterFrames": [
+       66,
+       147
+      ],
+      "bytes": 61505,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Input $e^{2t}$: resonance",
+     "relation": "caution",
+     "relationLabel": "Caveat",
+     "tex": "P(2) = 0 \\;\\Rightarrow\\; y_p = \\frac{t\\,e^{2t}}{P'(2)} = t\\,e^{2t}",
+     "explanation": "$e^{2t}$ is a null solution, so $Ye^{2t}$ gives zero. Multiply by $t$.",
+     "initialFrame": "animations/uc-example/state-02.jpg",
+     "finalFrame": "animations/uc-example/state-03.jpg",
+     "transition": {
+      "src": "animations/uc-example/step-03.mp4",
+      "duration": 2.8667,
+      "frames": 86,
+      "masterFrames": [
+       146,
+       232
+      ],
+      "bytes": 93366,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 7.533,
+   "masterFrames": 232,
+   "renderSeconds": 7.4
+  },
+  {
+   "id": "vp-wronskian",
+   "scene": "VPWronskianSequence",
+   "section": 4,
+   "title": "Varying the constants: two equations and the Wronskian",
+   "summary": "Write the two conditions as a $2\\times2$ system and solve by Cramer's rule.",
+   "initial": {
+    "title": "Let the constants move",
+    "tex": "y = c_1(t)\\,y_1 + c_2(t)\\,y_2",
+    "explanation": "$y_1, y_2$ are null solutions.",
+    "frame": "animations/vp-wronskian/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Two conditions",
+     "relation": "define",
+     "relationLabel": "Definition / choice",
+     "tex": "\\begin{bmatrix} y_1 & y_2 \\\\ y_1' & y_2' \\end{bmatrix}\\begin{bmatrix} c_1' \\\\ c_2' \\end{bmatrix} = \\begin{bmatrix} 0 \\\\ f \\end{bmatrix}",
+     "explanation": "The first keeps $y'$ simple; the second makes $y$ solve the equation.",
+     "initialFrame": "animations/vp-wronskian/state-00.jpg",
+     "finalFrame": "animations/vp-wronskian/state-01.jpg",
+     "transition": {
+      "src": "animations/vp-wronskian/step-01.mp4",
+      "duration": 1.9667,
+      "frames": 59,
+      "masterFrames": [
+       8,
+       67
+      ],
+      "bytes": 57692,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "The determinant",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "W = y_1y_2' - y_2y_1'",
+     "explanation": "The Wronskian is nonzero for independent null solutions.",
+     "initialFrame": "animations/vp-wronskian/state-01.jpg",
+     "finalFrame": "animations/vp-wronskian/state-02.jpg",
+     "transition": {
+      "src": "animations/vp-wronskian/step-02.mp4",
+      "duration": 1.9667,
+      "frames": 59,
+      "masterFrames": [
+       66,
+       125
+      ],
+      "bytes": 49136,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Cramer's rule",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "c_1' = -\\frac{y_2 f}{W},\\qquad c_2' = \\frac{y_1 f}{W}",
+     "explanation": "Replace a column by the right side and divide by $W$; then integrate.",
+     "initialFrame": "animations/vp-wronskian/state-02.jpg",
+     "finalFrame": "animations/vp-wronskian/state-03.jpg",
+     "transition": {
+      "src": "animations/vp-wronskian/step-03.mp4",
+      "duration": 2.9667,
+      "frames": 89,
+      "masterFrames": [
+       124,
+       213
+      ],
+      "bytes": 113544,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 6.9,
+   "masterFrames": 213,
+   "renderSeconds": 8.0
+  },
+  {
+   "id": "vp-convolution",
+   "scene": "VPConvolutionSequence",
+   "section": 4,
+   "title": "Each input starts its own impulse response",
+   "summary": "For constant coefficients the answer is $\\int_0^t g(t - T)f(T)\\,dT$: a sum of delayed, scaled copies of $g$.",
+   "initial": {
+    "title": "Impulse response",
+    "tex": "g(t) = \\frac{e^{s_2t} - e^{s_1t}}{s_2 - s_1}",
+    "explanation": "Example $y'' + 3y' + 2y$: $g = e^{-t} - e^{-2t}$.",
+    "frame": "animations/vp-convolution/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Inputs at times $T$",
+     "relation": "model",
+     "relationLabel": "Modelling step",
+     "tex": "f(T)\\,dT \\;\\longrightarrow\\; f(T)\\,g(t - T)\\,dT",
+     "explanation": "A slice of input at time $T$ responds like a small impulse.",
+     "initialFrame": "animations/vp-convolution/state-00.jpg",
+     "finalFrame": "animations/vp-convolution/state-01.jpg",
+     "transition": {
+      "src": "animations/vp-convolution/step-01.mp4",
+      "duration": 3.0,
+      "frames": 90,
+      "masterFrames": [
+       8,
+       98
+      ],
+      "bytes": 49190,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Add the responses",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "y(t) = \\int_0^t g(t - T)\\,f(T)\\,dT",
+     "explanation": "Superposition: the equation is linear.",
+     "initialFrame": "animations/vp-convolution/state-01.jpg",
+     "finalFrame": "animations/vp-convolution/state-02.jpg",
+     "transition": {
+      "src": "animations/vp-convolution/step-02.mp4",
+      "duration": 2.5333,
+      "frames": 76,
+      "masterFrames": [
+       97,
+       173
+      ],
+      "bytes": 121774,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Example $f = 1$",
+     "relation": "compare",
+     "relationLabel": "Check",
+     "tex": "y = \\int_0^t g = \\tfrac12 - e^{-t} + \\tfrac12e^{-2t}",
+     "explanation": "With a constant input the sum is the step response of Unit 3.",
+     "initialFrame": "animations/vp-convolution/state-02.jpg",
+     "finalFrame": "animations/vp-convolution/state-03.jpg",
+     "transition": {
+      "src": "animations/vp-convolution/step-03.mp4",
+      "duration": 2.0,
+      "frames": 60,
+      "masterFrames": [
+       172,
+       232
+      ],
+      "bytes": 75757,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 7.533,
+   "masterFrames": 232,
+   "renderSeconds": 7.3
+  }
+ ]
+}
