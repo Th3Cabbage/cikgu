@@ -38,7 +38,7 @@ retries. User chose the browser sign-in: `tools/prepare_unit.py ... --cookies-fr
 |---|---|---|---|---|---|---|---|---|
 | 1 | first-order-linear | 10/10 | done (8 sections) | done: maths/quiz clean; 1 tool bug fixed | done (10 sequences, 33 steps; explorer by package-builder, reviewed) | done (4.7 MB) | math 515/515, check_study ok, browser 65/65, site 7/7 + 104/104 | done: no Unit 1 findings |
 | 2 | nonlinear-first-order | 3/3, map in source-maps/unit-02.md | done (3 sections) | done: 3 findings fixed | done (6 sequences, 20 steps; explorer by package-builder) | done (2.6 MB) | math 519/519, check_study ok, browser 43/43 | at final review |
-| 3 | second-order | | | | | | | |
+| 3 | second-order | 6/6, map in source-maps/unit-03.md | done (6 sections) | done: 2 findings fixed | done (6 sequences, 19 steps) | done (2.4 MB) | math 405/405, check_study ok, browser 45/45 | at final review |
 | 4 | networks-and-methods | | | | | | | |
 | 5 | laplace-transform | | | | | | | |
 | 6 | phase-plane | | | | | | | |

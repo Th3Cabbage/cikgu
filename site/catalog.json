@@ -89,6 +89,14 @@
      "description": "The logistic equation and its S-curve, stability of steady states by the sign of f'(Y), the stability line, and separable equations.",
      "storeKey": "nonlinear-first-order-v1",
      "statusApp": "Study_nonlinear_first_order"
+    },
+    {
+     "slug": "second-order",
+     "source": "courses/mit-de/second-order/dist",
+     "title": "Unit 3: Second Order Equations and Oscillation",
+     "description": "Free and forced oscillation, damping cases, impulse and step responses, resonance with t e^(st)/P'(s), and gain and phase for damped cosine forcing.",
+     "storeKey": "second-order-v1",
+     "statusApp": "Study_second_order"
     }
    ]
   }

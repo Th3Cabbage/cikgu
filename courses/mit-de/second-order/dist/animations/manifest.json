@@ -1,0 +1,550 @@
+{
+ "version": 1,
+ "width": 1280,
+ "height": 720,
+ "fps": 30,
+ "relations": {
+  "define": "Definition / choice",
+  "model": "Modelling step",
+  "classify": "Classification",
+  "diagram": "Picture",
+  "substitute": "Substitution",
+  "identity": "Identity (=)",
+  "equivalent": "Equivalent statement (⇔)",
+  "solve": "Solve",
+  "compute": "Computation",
+  "implies": "Consequence (⇒)",
+  "compare": "Check",
+  "caution": "Caveat",
+  "recap": "Recap"
+ },
+ "sections": {
+  "1": [
+   "free-oscillation"
+  ],
+  "2": [
+   "forced-cosine"
+  ],
+  "3": [
+   "damping-roots"
+  ],
+  "4": [
+   "impulse-step"
+  ],
+  "5": [
+   "resonance-limit"
+  ],
+  "6": [
+   "gain-phase"
+  ]
+ },
+ "sequences": [
+  {
+   "id": "free-oscillation",
+   "scene": "FreeOscillationSequence",
+   "section": 1,
+   "title": "Free harmonic motion from two initial conditions",
+   "summary": "Cosine and sine solve $y'' + \\omega_n^2y = 0$; $y(0)$ and $y'(0)$ fix the mix, which is one shifted cosine.",
+   "initial": {
+    "title": "No damping, no force",
+    "tex": "y'' + \\omega_n^2\\,y = 0,\\qquad \\omega_n^2 = k/m",
+    "explanation": "The example uses $\\omega_n = 2$, $y(0) = 1$, $y'(0) = 2$.",
+    "frame": "animations/free-oscillation/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Two null solutions",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "(\\cos\\omega_n t)'' = -\\omega_n^2\\cos\\omega_n t,\\quad (\\sin\\omega_n t)'' = -\\omega_n^2\\sin\\omega_n t",
+     "explanation": "Two derivatives bring out $-\\omega_n^2$, which the $\\omega_n^2y$ term cancels.",
+     "initialFrame": "animations/free-oscillation/state-00.jpg",
+     "finalFrame": "animations/free-oscillation/state-01.jpg",
+     "transition": {
+      "src": "animations/free-oscillation/step-01.mp4",
+      "duration": 3.3,
+      "frames": 99,
+      "masterFrames": [
+       8,
+       107
+      ],
+      "bytes": 64087,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Match $y(0)$ and $y'(0)$",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "y = y(0)\\cos\\omega_n t + \\frac{y'(0)}{\\omega_n}\\sin\\omega_n t = \\cos 2t + \\sin 2t",
+     "explanation": "At $t = 0$ only the cosine counts for $y$ and only the sine for $y'$.",
+     "initialFrame": "animations/free-oscillation/state-01.jpg",
+     "finalFrame": "animations/free-oscillation/state-02.jpg",
+     "transition": {
+      "src": "animations/free-oscillation/step-02.mp4",
+      "duration": 2.8,
+      "frames": 84,
+      "masterFrames": [
+       106,
+       190
+      ],
+      "bytes": 148699,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "One cosine with a lag",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "\\cos 2t + \\sin 2t = \\sqrt2\\,\\cos\\left(2t - \\tfrac{\\pi}{4}\\right)",
+     "explanation": "$R = \\sqrt{c_1^2 + c_2^2}$ and $\\tan\\alpha = c_2/c_1$. The amplitude never changes.",
+     "initialFrame": "animations/free-oscillation/state-02.jpg",
+     "finalFrame": "animations/free-oscillation/state-03.jpg",
+     "transition": {
+      "src": "animations/free-oscillation/step-03.mp4",
+      "duration": 3.2,
+      "frames": 96,
+      "masterFrames": [
+       189,
+       285
+      ],
+      "bytes": 90160,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 9.3,
+   "masterFrames": 285,
+   "renderSeconds": 8.2
+  },
+  {
+   "id": "forced-cosine",
+   "scene": "ForcedCosineSequence",
+   "section": 2,
+   "title": "Forcing at frequency $\\omega$: the frequency response",
+   "summary": "Substitute $Y\\cos\\omega t$, match cosines, and watch $Y$ blow up as $\\omega \\to \\omega_n$.",
+   "initial": {
+    "title": "Driven spring",
+    "tex": "m y'' + k y = \\cos\\omega t",
+    "explanation": "Outside frequency $\\omega$, natural frequency $\\omega_n = \\sqrt{k/m}$.",
+    "frame": "animations/forced-cosine/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Try $Y\\cos\\omega t$",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "-m\\omega^2 Y\\cos\\omega t + kY\\cos\\omega t = \\cos\\omega t",
+     "explanation": "Two derivatives give $-\\omega^2$; without damping no sine appears.",
+     "initialFrame": "animations/forced-cosine/state-00.jpg",
+     "finalFrame": "animations/forced-cosine/state-01.jpg",
+     "transition": {
+      "src": "animations/forced-cosine/step-01.mp4",
+      "duration": 2.6333,
+      "frames": 79,
+      "masterFrames": [
+       8,
+       87
+      ],
+      "bytes": 121084,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Match the cosines",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "Y = \\frac{1}{k - m\\omega^2} = \\frac{1}{m(\\omega_n^2 - \\omega^2)}",
+     "explanation": "Use $k = m\\omega_n^2$.",
+     "initialFrame": "animations/forced-cosine/state-01.jpg",
+     "finalFrame": "animations/forced-cosine/state-02.jpg",
+     "transition": {
+      "src": "animations/forced-cosine/step-02.mp4",
+      "duration": 2.8,
+      "frames": 84,
+      "masterFrames": [
+       86,
+       170
+      ],
+      "bytes": 89652,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Graph of $Y(\\omega)$",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "|Y| \\to \\infty \\text{ as } \\omega \\to \\omega_n",
+     "explanation": "Pushing near the natural rhythm gives a huge response; at $\\omega = \\omega_n$ (resonance) a new formula is needed.",
+     "initialFrame": "animations/forced-cosine/state-02.jpg",
+     "finalFrame": "animations/forced-cosine/state-03.jpg",
+     "transition": {
+      "src": "animations/forced-cosine/step-03.mp4",
+      "duration": 3.6333,
+      "frames": 109,
+      "masterFrames": [
+       169,
+       278
+      ],
+      "bytes": 88094,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 9.067,
+   "masterFrames": 278,
+   "renderSeconds": 7.4
+  },
+  {
+   "id": "damping-roots",
+   "scene": "DampingRootsSequence",
+   "section": 3,
+   "title": "Raising the parabola $s^2 + 2s + C$",
+   "summary": "Two real roots, then a double root, then complex roots: overdamped, critical, underdamped.",
+   "initial": {
+    "title": "Characteristic equation",
+    "tex": "y = e^{st}:\\quad s^2 + 2s + C = 0",
+    "explanation": "Here $A = 1$, $B = 2$; the spring constant $C$ will grow.",
+    "frame": "animations/damping-roots/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "$C = 0$: roots $0$ and $-2$",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "s^2 + 2s = s(s + 2)",
+     "explanation": "The parabola crosses zero twice: two real exponents.",
+     "initialFrame": "animations/damping-roots/state-00.jpg",
+     "finalFrame": "animations/damping-roots/state-01.jpg",
+     "transition": {
+      "src": "animations/damping-roots/step-01.mp4",
+      "duration": 2.1333,
+      "frames": 64,
+      "masterFrames": [
+       8,
+       72
+      ],
+      "bytes": 36726,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "$C = 1$: a double root",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "s^2 + 2s + 1 = (s + 1)^2",
+     "explanation": "It just touches zero at $-1$: critical damping, $e^{-t}$ and $te^{-t}$.",
+     "initialFrame": "animations/damping-roots/state-01.jpg",
+     "finalFrame": "animations/damping-roots/state-02.jpg",
+     "transition": {
+      "src": "animations/damping-roots/step-02.mp4",
+      "duration": 2.3,
+      "frames": 69,
+      "masterFrames": [
+       71,
+       140
+      ],
+      "bytes": 57996,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "$C = 2$: complex roots",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "s^2 + 2s + 2 = 0 \\;\\Rightarrow\\; s = -1 \\pm i",
+     "explanation": "No real roots: the motion oscillates while its amplitude decays like $e^{-t}$.",
+     "initialFrame": "animations/damping-roots/state-02.jpg",
+     "finalFrame": "animations/damping-roots/state-03.jpg",
+     "transition": {
+      "src": "animations/damping-roots/step-03.mp4",
+      "duration": 2.3667,
+      "frames": 71,
+      "masterFrames": [
+       139,
+       210
+      ],
+      "bytes": 58435,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "The four cases",
+     "relation": "classify",
+     "relationLabel": "Classification",
+     "tex": "B^2 > 4AC,\\quad B^2 = 4AC,\\quad B^2 < 4AC,\\quad B = 0",
+     "explanation": "Overdamped, critical, underdamped, undamped.",
+     "initialFrame": "animations/damping-roots/state-03.jpg",
+     "finalFrame": "animations/damping-roots/state-04.jpg",
+     "transition": {
+      "src": "animations/damping-roots/step-04.mp4",
+      "duration": 2.0667,
+      "frames": 62,
+      "masterFrames": [
+       209,
+       271
+      ],
+      "bytes": 64584,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 8.867,
+   "masterFrames": 271,
+   "renderSeconds": 7.8
+  },
+  {
+   "id": "impulse-step",
+   "scene": "ImpulseStepSequence",
+   "section": 4,
+   "title": "From the impulse response to the step response",
+   "summary": "Build $g$ from two exponentials with $g(0) = 0$, $g'(0) = 1$, then integrate it to get $r$.",
+   "initial": {
+    "title": "An example",
+    "tex": "y'' + 3y' + 2y,\\qquad s_1 = -1,\\ s_2 = -2",
+    "explanation": "Overdamped: two negative real roots.",
+    "frame": "animations/impulse-step/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Impulse response",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "g(t) = \\frac{e^{s_1t} - e^{s_2t}}{s_1 - s_2} = e^{-t} - e^{-2t}",
+     "explanation": "The difference starts at $0$; dividing by $s_1 - s_2$ makes the starting slope $1$.",
+     "initialFrame": "animations/impulse-step/state-00.jpg",
+     "finalFrame": "animations/impulse-step/state-01.jpg",
+     "transition": {
+      "src": "animations/impulse-step/step-01.mp4",
+      "duration": 2.7333,
+      "frames": 82,
+      "masterFrames": [
+       8,
+       90
+      ],
+      "bytes": 46590,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Step = integral of impulse",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "r(t) = \\int_0^t g(s)\\,ds",
+     "explanation": "The step function is the integral of the delta function.",
+     "initialFrame": "animations/impulse-step/state-01.jpg",
+     "finalFrame": "animations/impulse-step/state-02.jpg",
+     "transition": {
+      "src": "animations/impulse-step/step-02.mp4",
+      "duration": 1.9667,
+      "frames": 59,
+      "masterFrames": [
+       89,
+       148
+      ],
+      "bytes": 52889,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "The step response",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "r(t) = \\tfrac12 - e^{-t} + \\tfrac12e^{-2t} \\;\\to\\; \\tfrac{1}{C} = \\tfrac12",
+     "explanation": "Area under $g$ so far. It settles at $1/C$.",
+     "initialFrame": "animations/impulse-step/state-02.jpg",
+     "finalFrame": "animations/impulse-step/state-03.jpg",
+     "transition": {
+      "src": "animations/impulse-step/step-03.mp4",
+      "duration": 2.8,
+      "frames": 84,
+      "masterFrames": [
+       147,
+       231
+      ],
+      "bytes": 56582,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 7.5,
+   "masterFrames": 231,
+   "renderSeconds": 7.3
+  },
+  {
+   "id": "resonance-limit",
+   "scene": "ResonanceLimitSequence",
+   "section": 5,
+   "title": "Resonance by l'Hôpital: $te^{s_1t}/P'(s_1)$",
+   "summary": "Subtract a null solution so the quotient becomes $0/0$, then differentiate top and bottom in $s$.",
+   "initial": {
+    "title": "Exponential input",
+    "tex": "P(D)\\,y = e^{st},\\qquad y_p = \\frac{e^{st}}{P(s)}",
+    "explanation": "Fails when $P(s_1) = 0$.",
+    "frame": "animations/resonance-limit/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Subtract a null solution",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "y = \\frac{e^{st} - e^{s_1t}}{P(s)}",
+     "explanation": "$e^{s_1t}/P(s)$ solves the null equation, so $y$ still solves $P(D)y = e^{st}$.",
+     "initialFrame": "animations/resonance-limit/state-00.jpg",
+     "finalFrame": "animations/resonance-limit/state-01.jpg",
+     "transition": {
+      "src": "animations/resonance-limit/step-01.mp4",
+      "duration": 2.0667,
+      "frames": 62,
+      "masterFrames": [
+       8,
+       70
+      ],
+      "bytes": 66929,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Let $s \\to s_1$: $0/0$",
+     "relation": "caution",
+     "relationLabel": "Caveat",
+     "tex": "\\frac{e^{s_1t} - e^{s_1t}}{P(s_1)} = \\frac{0}{0}",
+     "explanation": "Top and bottom both vanish at the root.",
+     "initialFrame": "animations/resonance-limit/state-01.jpg",
+     "finalFrame": "animations/resonance-limit/state-02.jpg",
+     "transition": {
+      "src": "animations/resonance-limit/step-02.mp4",
+      "duration": 2.3667,
+      "frames": 71,
+      "masterFrames": [
+       69,
+       140
+      ],
+      "bytes": 61548,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Differentiate in $s$",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "y_p = \\frac{\\partial_s(e^{st} - e^{s_1t})}{P'(s)}\\Big|_{s = s_1} = \\frac{t\\,e^{s_1t}}{P'(s_1)}",
+     "explanation": "The derivative of $e^{st}$ with respect to $s$ is $te^{st}$: the factor $t$ of resonance.",
+     "initialFrame": "animations/resonance-limit/state-02.jpg",
+     "finalFrame": "animations/resonance-limit/state-03.jpg",
+     "transition": {
+      "src": "animations/resonance-limit/step-03.mp4",
+      "duration": 2.8667,
+      "frames": 86,
+      "masterFrames": [
+       139,
+       225
+      ],
+      "bytes": 91576,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 7.3,
+   "masterFrames": 225,
+   "renderSeconds": 7.1
+  },
+  {
+   "id": "gain-phase",
+   "scene": "GainPhaseSequence",
+   "section": 6,
+   "title": "Rectangular to polar: $M\\cos + N\\sin = G\\cos(\\omega t - \\alpha)$",
+   "summary": "For $y'' + y' + 2y = \\cos t$: $M = N = \\tfrac12$, so $G = 1/\\sqrt2$ and $\\alpha = \\pi/4$.",
+   "initial": {
+    "title": "Damped, driven",
+    "tex": "y'' + y' + 2y = \\cos t",
+    "explanation": "The $y'$ term turns cosines into sines.",
+    "frame": "animations/gain-phase/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Match cos and sin",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "M = \\frac{C - A\\omega^2}{D} = \\tfrac12,\\quad N = \\frac{B\\omega}{D} = \\tfrac12,\\quad D = 2",
+     "explanation": "$C - A\\omega^2 = 1$ and $B\\omega = 1$.",
+     "initialFrame": "animations/gain-phase/state-00.jpg",
+     "finalFrame": "animations/gain-phase/state-01.jpg",
+     "transition": {
+      "src": "animations/gain-phase/step-01.mp4",
+      "duration": 2.2,
+      "frames": 66,
+      "masterFrames": [
+       8,
+       74
+      ],
+      "bytes": 61135,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "The point $(M, N)$",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "G = \\sqrt{M^2 + N^2} = \\tfrac{1}{\\sqrt2},\\qquad \\tan\\alpha = \\frac{N}{M} = 1",
+     "explanation": "Length and angle of the vector from the origin to $(M, N)$.",
+     "initialFrame": "animations/gain-phase/state-01.jpg",
+     "finalFrame": "animations/gain-phase/state-02.jpg",
+     "transition": {
+      "src": "animations/gain-phase/step-02.mp4",
+      "duration": 3.3667,
+      "frames": 101,
+      "masterFrames": [
+       73,
+       174
+      ],
+      "bytes": 64627,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "The response lags",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "y_p = \\tfrac{1}{\\sqrt2}\\cos\\left(t - \\tfrac{\\pi}{4}\\right)",
+     "explanation": "Smaller by $G$ and later by $\\alpha/\\omega$ than the input $\\cos t$.",
+     "initialFrame": "animations/gain-phase/state-02.jpg",
+     "finalFrame": "animations/gain-phase/state-03.jpg",
+     "transition": {
+      "src": "animations/gain-phase/step-03.mp4",
+      "duration": 2.8667,
+      "frames": 86,
+      "masterFrames": [
+       173,
+       259
+      ],
+      "bytes": 65302,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 8.433,
+   "masterFrames": 259,
+   "renderSeconds": 8.2
+  }
+ ]
+}
