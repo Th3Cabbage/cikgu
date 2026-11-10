@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>First Order Linear Equations · study companion</title>
+<meta name="description" content="A local study companion to the First Order Linear Equations lecture: animated derivations, notes, an explorer and a quiz.">
+<meta name="theme-color" content="#f5f6f8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="styles.css">
+<script src="theme-boot.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar">
+  <button type="button" class="icon-btn nav-toggle" aria-expanded="false" aria-controls="sidenav">
+    <span aria-hidden="true">☰</span><span class="nav-toggle-text">Sections</span>
+  </button>
+  <a class="brand" href="#s1"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">First Order Linear Equations</span><span class="brand-sub">study companion</span></a>
+  <div class="top-actions">
+    <button type="button" class="icon-btn" id="theme-toggle" aria-pressed="false" title="Switch between light and dark themes">
+      <span aria-hidden="true" class="theme-icon">◐</span><span class="theme-label">Dark theme</span>
+    </button>
+    <button type="button" class="icon-btn" id="tutor-toggle" aria-expanded="false" aria-controls="tutor" title="Open the GPT tutor chat">
+      <span aria-hidden="true">✦</span><span>Ask GPT</span>
+    </button>
+  </div>
+</header>
+<div class="shell" id="shell">
+  <nav class="sidenav" id="sidenav" aria-label="Course">
+    <p class="nav-heading">Lecture sections</p>
+    <ol class="section-links" id="section-links"></ol>
+    <p class="nav-heading">Practice</p>
+    <ul class="tool-links">
+      <li><a href="#explorer" data-route="explorer"><span class="tool-icon" aria-hidden="true">⌁</span>Explorer</a></li>
+      <li><a href="#quiz" data-route="quiz"><span class="tool-icon" aria-hidden="true">?</span>Quiz</a></li>
+      <li><a href="#sources" data-route="sources"><span class="tool-icon" aria-hidden="true">§</span>Sources &amp; credits</a></li>
+    </ul>
+    <div class="nav-foot">
+      <p class="progress-summary" id="progress-summary"></p>
+      <button type="button" class="link-btn" id="reset-progress">Reset saved progress</button>
+    </div>
+  </nav>
+  <div class="scrim" id="scrim" hidden></div>
+  <main class="main" id="main" tabindex="-1">
+    <div id="view"><p class="loading-note">Loading the course…</p></div>
+  </main>
+  <aside class="tutor" id="tutor" aria-label="GPT tutor" hidden></aside>
+</div>
+<p id="app-status" class="sr-only" role="status" aria-live="polite"></p>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="vendor/katex/contrib/auto-render.min.js"></script>
+<script src="study_math.js"></script>
+<script src="explorer.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

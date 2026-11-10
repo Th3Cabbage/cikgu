@@ -1,0 +1,924 @@
+{
+ "version": 1,
+ "width": 1280,
+ "height": 720,
+ "fps": 30,
+ "relations": {
+  "define": "Definition / choice",
+  "model": "Modelling step",
+  "classify": "Classification",
+  "diagram": "Picture",
+  "substitute": "Substitution",
+  "identity": "Identity (=)",
+  "equivalent": "Equivalent statement (⇔)",
+  "solve": "Solve",
+  "compute": "Computation",
+  "implies": "Consequence (⇒)",
+  "compare": "Check",
+  "caution": "Caveat",
+  "recap": "Recap"
+ },
+ "sections": {
+  "1": [
+   "course-map"
+  ],
+  "2": [
+   "calculus-check",
+   "tangent-taylor"
+  ],
+  "3": [
+   "exponential-response",
+   "resonance"
+  ],
+  "4": [
+   "cosine-response"
+  ],
+  "5": [
+   "any-input"
+  ],
+  "6": [
+   "step-delta"
+  ],
+  "7": [
+   "complex-polar"
+  ],
+  "8": [
+   "integrating-factor"
+  ]
+ },
+ "sequences": [
+  {
+   "id": "course-map",
+   "scene": "CourseMapSequence",
+   "section": 1,
+   "title": "From $y' = ay + q$ to partial differential equations",
+   "summary": "The series climbs from one first order equation to second order equations, systems with matrices, numerical methods and PDEs.",
+   "initial": {
+    "title": "The model equation",
+    "tex": "\\frac{dy}{dt} = a\\,y + q(t)",
+    "explanation": "The rate of change of $y$ is a growth term $ay$ plus an outside input $q(t)$. Linear: $y$ appears only to the first power.",
+    "frame": "animations/course-map/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Nonlinear and second order",
+     "relation": "classify",
+     "relationLabel": "Classification",
+     "tex": "y' = f(y), \\qquad m y'' + b y' + k y = f(t)",
+     "explanation": "A right side such as $y^2$ makes the equation nonlinear. Newton's law brings second derivatives: mass, damping, spring, force.",
+     "initialFrame": "animations/course-map/state-00.jpg",
+     "finalFrame": "animations/course-map/state-01.jpg",
+     "transition": {
+      "src": "animations/course-map/step-01.mp4",
+      "duration": 2.4,
+      "frames": 72,
+      "masterFrames": [
+       8,
+       80
+      ],
+      "bytes": 47818,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Systems: vectors and matrices",
+     "relation": "model",
+     "relationLabel": "Modelling step",
+     "tex": "\\mathbf{y}' = A\\,\\mathbf{y}, \\qquad \\mathbf{y}'' + S\\,\\mathbf{y} = \\mathbf{0}",
+     "explanation": "Several coupled unknowns form a vector. Eigenvectors of $A$ uncouple the system into separate first order equations.",
+     "initialFrame": "animations/course-map/state-01.jpg",
+     "finalFrame": "animations/course-map/state-02.jpg",
+     "transition": {
+      "src": "animations/course-map/step-02.mp4",
+      "duration": 1.7333,
+      "frames": 52,
+      "masterFrames": [
+       79,
+       131
+      ],
+      "bytes": 51440,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Numbers and PDEs",
+     "relation": "recap",
+     "relationLabel": "Recap",
+     "tex": "\\text{Euler} \\to \\text{ode45}, \\qquad u_t = u_{xx}, \\quad u_{tt} = u_{xx}",
+     "explanation": "Most real equations are solved numerically, from Euler's step to ode45. The series ends with the heat and wave equations.",
+     "initialFrame": "animations/course-map/state-02.jpg",
+     "finalFrame": "animations/course-map/state-03.jpg",
+     "transition": {
+      "src": "animations/course-map/step-03.mp4",
+      "duration": 2.3667,
+      "frames": 71,
+      "masterFrames": [
+       130,
+       201
+      ],
+      "bytes": 77017,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 6.5,
+   "masterFrames": 201,
+   "renderSeconds": 7.3
+  },
+  {
+   "id": "calculus-check",
+   "scene": "CalculusCheckSequence",
+   "section": 2,
+   "title": "Checking $y = \\int_0^t e^{t-s}q(s)\\,ds$ with the product rule",
+   "summary": "Pull $e^t$ out of the integral, differentiate the product, and use the fundamental theorem: the two terms of the product rule are the two terms of $y' = y + q$.",
+   "initial": {
+    "title": "A formula to check",
+    "tex": "y(t) = \\int_0^t e^{t-s}\\,q(s)\\,ds",
+    "explanation": "Claim: this solves $y' = y + q(t)$ with $y(0) = 0$. Each input $q(s)$ grows by $e^{t-s}$.",
+    "frame": "animations/calculus-check/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Split the exponential",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "y(t) = e^{t}\\int_0^t e^{-s}\\,q(s)\\,ds",
+     "explanation": "$e^{t-s} = e^t e^{-s}$, and $e^t$ does not depend on $s$, so it comes outside: $y$ is a product.",
+     "initialFrame": "animations/calculus-check/state-00.jpg",
+     "finalFrame": "animations/calculus-check/state-01.jpg",
+     "transition": {
+      "src": "animations/calculus-check/step-01.mp4",
+      "duration": 3.3667,
+      "frames": 101,
+      "masterFrames": [
+       8,
+       109
+      ],
+      "bytes": 74199,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Product rule",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "y' = e^{t}\\int_0^t e^{-s}q(s)\\,ds + e^{t}\\cdot e^{-t}q(t)",
+     "explanation": "Derivative of $e^t$ times the integral, plus $e^t$ times the derivative of the integral. The fundamental theorem gives that derivative: $e^{-t}q(t)$.",
+     "initialFrame": "animations/calculus-check/state-01.jpg",
+     "finalFrame": "animations/calculus-check/state-02.jpg",
+     "transition": {
+      "src": "animations/calculus-check/step-02.mp4",
+      "duration": 4.1,
+      "frames": 123,
+      "masterFrames": [
+       108,
+       231
+      ],
+      "bytes": 159407,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Recognise both terms",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "y' = y + q(t)",
+     "explanation": "The first term is $y$ itself, and $e^te^{-t} = 1$ leaves $q(t)$. The equation is satisfied.",
+     "initialFrame": "animations/calculus-check/state-02.jpg",
+     "finalFrame": "animations/calculus-check/state-03.jpg",
+     "transition": {
+      "src": "animations/calculus-check/step-03.mp4",
+      "duration": 3.6333,
+      "frames": 109,
+      "masterFrames": [
+       230,
+       339
+      ],
+      "bytes": 110112,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 11.1,
+   "masterFrames": 339,
+   "renderSeconds": 8.4
+  },
+  {
+   "id": "tangent-taylor",
+   "scene": "TangentTaylorSequence",
+   "section": 2,
+   "title": "Tangent line, tangent parabola, Taylor series",
+   "summary": "Approximate $e^t$ near $t = 0$: the line uses the slope, the parabola adds bending, and all derivatives together give the exact series.",
+   "initial": {
+    "title": "The curve $e^t$",
+    "tex": "f(t) = e^{t},\\qquad f(0) = f'(0) = f''(0) = 1",
+    "explanation": "Every derivative of $e^t$ is $e^t$, so all of them equal $1$ at $t = 0$.",
+    "frame": "animations/tangent-taylor/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Tangent line",
+     "relation": "define",
+     "relationLabel": "Definition / choice",
+     "tex": "f(\\Delta t) \\approx f(0) + \\Delta t\\, f'(0) = 1 + \\Delta t",
+     "explanation": "Start at the height and follow the slope. Good for small steps; the curve pulls away for large ones.",
+     "initialFrame": "animations/tangent-taylor/state-00.jpg",
+     "finalFrame": "animations/tangent-taylor/state-01.jpg",
+     "transition": {
+      "src": "animations/tangent-taylor/step-01.mp4",
+      "duration": 2.5667,
+      "frames": 77,
+      "masterFrames": [
+       8,
+       85
+      ],
+      "bytes": 37732,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Tangent parabola",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "f(\\Delta t) \\approx 1 + \\Delta t + \\tfrac{1}{2}(\\Delta t)^2",
+     "explanation": "Add $\\tfrac12(\\Delta t)^2 f''(0)$ to account for the bending. Much closer.",
+     "initialFrame": "animations/tangent-taylor/state-01.jpg",
+     "finalFrame": "animations/tangent-taylor/state-02.jpg",
+     "transition": {
+      "src": "animations/tangent-taylor/step-02.mp4",
+      "duration": 2.9333,
+      "frames": 88,
+      "masterFrames": [
+       84,
+       172
+      ],
+      "bytes": 73189,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "All derivatives: the Taylor series",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "e^{t} = 1 + t + \\frac{t^2}{2!} + \\frac{t^3}{3!} + \\cdots",
+     "explanation": "The $n$-th term is $t^n f^{(n)}(0)/n!$. For $e^t$ the infinite sum equals the function exactly.",
+     "initialFrame": "animations/tangent-taylor/state-02.jpg",
+     "finalFrame": "animations/tangent-taylor/state-03.jpg",
+     "transition": {
+      "src": "animations/tangent-taylor/step-03.mp4",
+      "duration": 3.3667,
+      "frames": 101,
+      "masterFrames": [
+       171,
+       272
+      ],
+      "bytes": 66722,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 8.867,
+   "masterFrames": 272,
+   "renderSeconds": 8.5
+  },
+  {
+   "id": "exponential-response",
+   "scene": "ExponentialResponseSequence",
+   "section": 3,
+   "title": "The exponential response $Y = 1/(s-a)$",
+   "summary": "Substitute $Ye^{st}$, divide out $e^{st}$, solve for $Y$, then add the null solution and match $y(0)$.",
+   "initial": {
+    "title": "Exponential input",
+    "tex": "y' = a\\,y + e^{st}",
+    "explanation": "The best input: its derivative is itself times $s$.",
+    "frame": "animations/exponential-response/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Substitute $y = Ye^{st}$",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "s\\,Y e^{st} = a\\,Y e^{st} + e^{st}",
+     "explanation": "The derivative brings down $s$. Every term carries $e^{st}$.",
+     "initialFrame": "animations/exponential-response/state-00.jpg",
+     "finalFrame": "animations/exponential-response/state-01.jpg",
+     "transition": {
+      "src": "animations/exponential-response/step-01.mp4",
+      "duration": 2.7333,
+      "frames": 82,
+      "masterFrames": [
+       8,
+       90
+      ],
+      "bytes": 76620,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Divide by $e^{st}$",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "(s - a)\\,Y = 1 \\;\\Rightarrow\\; Y = \\frac{1}{s - a}",
+     "explanation": "$e^{st}$ is never zero, so divide it out and collect the $Y$ terms.",
+     "initialFrame": "animations/exponential-response/state-01.jpg",
+     "finalFrame": "animations/exponential-response/state-02.jpg",
+     "transition": {
+      "src": "animations/exponential-response/step-02.mp4",
+      "duration": 3.6,
+      "frames": 108,
+      "masterFrames": [
+       89,
+       197
+      ],
+      "bytes": 85767,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Add a null solution",
+     "relation": "model",
+     "relationLabel": "Modelling step",
+     "tex": "y = \\frac{e^{st}}{s-a} + C e^{at}",
+     "explanation": "$Ce^{at}$ solves $y' = ay$, so adding it keeps the equation true and gives freedom to match $y(0)$.",
+     "initialFrame": "animations/exponential-response/state-02.jpg",
+     "finalFrame": "animations/exponential-response/state-03.jpg",
+     "transition": {
+      "src": "animations/exponential-response/step-03.mp4",
+      "duration": 2.5667,
+      "frames": 77,
+      "masterFrames": [
+       196,
+       273
+      ],
+      "bytes": 87673,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "Match $y(0)$ and regroup",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "y = y(0)\\,e^{at} + \\frac{e^{st} - e^{at}}{s - a}",
+     "explanation": "$C = y(0) - 1/(s-a)$. Regrouped: the starting value grows, and the input part starts from $0$.",
+     "initialFrame": "animations/exponential-response/state-03.jpg",
+     "finalFrame": "animations/exponential-response/state-04.jpg",
+     "transition": {
+      "src": "animations/exponential-response/step-04.mp4",
+      "duration": 2.9667,
+      "frames": 89,
+      "masterFrames": [
+       272,
+       361
+      ],
+      "bytes": 98407,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 11.867,
+   "masterFrames": 361,
+   "renderSeconds": 10.5
+  },
+  {
+   "id": "resonance",
+   "scene": "ResonanceSequence",
+   "section": 3,
+   "title": "Resonance: $0/0$ becomes $t\\,e^{at}$",
+   "summary": "When $s = a$ the input part is $0/0$. L'Hôpital's rule in $s$ gives the resonant solution $t\\,e^{at}$.",
+   "initial": {
+    "title": "The input part",
+    "tex": "y_{vp} = \\frac{e^{st} - e^{at}}{s - a}",
+    "explanation": "Fine whenever $s \\ne a$.",
+    "frame": "animations/resonance/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Let $s \\to a$",
+     "relation": "caution",
+     "relationLabel": "Caveat",
+     "tex": "\\frac{e^{at} - e^{at}}{a - a} = \\frac{0}{0}",
+     "explanation": "Top and bottom both vanish. Not infinite: undecided, so look closer.",
+     "initialFrame": "animations/resonance/state-00.jpg",
+     "finalFrame": "animations/resonance/state-01.jpg",
+     "transition": {
+      "src": "animations/resonance/step-01.mp4",
+      "duration": 2.8667,
+      "frames": 86,
+      "masterFrames": [
+       8,
+       94
+      ],
+      "bytes": 60299,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "L'Hôpital: differentiate in $s$",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "\\frac{\\partial_s\\left(e^{st} - e^{at}\\right)}{\\partial_s (s - a)} = \\frac{t\\,e^{st}}{1}",
+     "explanation": "The derivative of $e^{st}$ with respect to $s$ brings down $t$; $e^{at}$ does not depend on $s$.",
+     "initialFrame": "animations/resonance/state-01.jpg",
+     "finalFrame": "animations/resonance/state-02.jpg",
+     "transition": {
+      "src": "animations/resonance/step-02.mp4",
+      "duration": 3.0667,
+      "frames": 92,
+      "masterFrames": [
+       93,
+       185
+      ],
+      "bytes": 56536,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "The resonant response",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "y_{vp} = t\\,e^{at}",
+     "explanation": "Set $s = a$. The factor $t$ is the signature of resonance: the response outgrows $e^{at}$.",
+     "initialFrame": "animations/resonance/state-02.jpg",
+     "finalFrame": "animations/resonance/state-03.jpg",
+     "transition": {
+      "src": "animations/resonance/step-03.mp4",
+      "duration": 3.3,
+      "frames": 99,
+      "masterFrames": [
+       184,
+       283
+      ],
+      "bytes": 70980,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 9.233,
+   "masterFrames": 283,
+   "renderSeconds": 7.8
+  },
+  {
+   "id": "cosine-response",
+   "scene": "CosineResponseSequence",
+   "section": 4,
+   "title": "Matching cosines and sines, then one shifted cosine",
+   "summary": "A cosine input needs a sine in the answer. Match coefficients for $M$ and $N$, then convert to gain $G$ and lag $\\alpha$.",
+   "initial": {
+    "title": "Cosine input",
+    "tex": "y' = a\\,y + \\cos\\omega t",
+    "explanation": "The derivative of a cosine is a sine, so a pure cosine guess cannot work.",
+    "frame": "animations/cosine-response/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Guess both",
+     "relation": "define",
+     "relationLabel": "Definition / choice",
+     "tex": "y_p = M\\cos\\omega t + N\\sin\\omega t",
+     "explanation": "Two unknown numbers, $M$ and $N$.",
+     "initialFrame": "animations/cosine-response/state-00.jpg",
+     "finalFrame": "animations/cosine-response/state-01.jpg",
+     "transition": {
+      "src": "animations/cosine-response/step-01.mp4",
+      "duration": 2.3667,
+      "frames": 71,
+      "masterFrames": [
+       8,
+       79
+      ],
+      "bytes": 43208,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Substitute and match",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "\\cos:\\ -aM + \\omega N = 1, \\qquad \\sin:\\ -\\omega M - aN = 0",
+     "explanation": "Cosine terms on both sides must agree, and so must sine terms: two equations.",
+     "initialFrame": "animations/cosine-response/state-01.jpg",
+     "finalFrame": "animations/cosine-response/state-02.jpg",
+     "transition": {
+      "src": "animations/cosine-response/step-02.mp4",
+      "duration": 4.6,
+      "frames": 138,
+      "masterFrames": [
+       78,
+       216
+      ],
+      "bytes": 151855,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Solve for $M$ and $N$",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "M = \\frac{-a}{\\omega^2 + a^2}, \\qquad N = \\frac{\\omega}{\\omega^2 + a^2}",
+     "explanation": "Two equations, two unknowns. Check: $-\\omega M - aN = 0$.",
+     "initialFrame": "animations/cosine-response/state-02.jpg",
+     "finalFrame": "animations/cosine-response/state-03.jpg",
+     "transition": {
+      "src": "animations/cosine-response/step-03.mp4",
+      "duration": 2.6333,
+      "frames": 79,
+      "masterFrames": [
+       215,
+       294
+      ],
+      "bytes": 150781,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "Polar form",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "y_p = G\\cos(\\omega t - \\alpha),\\quad G = \\frac{1}{\\sqrt{\\omega^2 + a^2}},\\quad \\tan\\alpha = \\frac{N}{M}",
+     "explanation": "$(M, N) = (G\\cos\\alpha, G\\sin\\alpha)$: the gain is the length, the lag is the angle.",
+     "initialFrame": "animations/cosine-response/state-03.jpg",
+     "finalFrame": "animations/cosine-response/state-04.jpg",
+     "transition": {
+      "src": "animations/cosine-response/step-04.mp4",
+      "duration": 4.0333,
+      "frames": 121,
+      "masterFrames": [
+       293,
+       414
+      ],
+      "bytes": 120931,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 13.633,
+   "masterFrames": 414,
+   "renderSeconds": 8.9
+  },
+  {
+   "id": "any-input",
+   "scene": "AnyInputSequence",
+   "section": 5,
+   "title": "Every deposit grows: the general formula",
+   "summary": "Deposits $q(s)\\,ds$ made at times $s$ each grow by $e^{a(t-s)}$; adding them all is an integral.",
+   "initial": {
+    "title": "Deposits over time",
+    "tex": "y' = a\\,y + q(t),\\quad y(0)",
+    "explanation": "The starting balance and a continuous stream of deposits $q(t)$.",
+    "frame": "animations/any-input/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "The starting deposit grows",
+     "relation": "model",
+     "relationLabel": "Modelling step",
+     "tex": "y(0)\\,e^{at}",
+     "explanation": "With no deposits the balance follows the null solution.",
+     "initialFrame": "animations/any-input/state-00.jpg",
+     "finalFrame": "animations/any-input/state-01.jpg",
+     "transition": {
+      "src": "animations/any-input/step-01.mp4",
+      "duration": 2.0,
+      "frames": 60,
+      "masterFrames": [
+       8,
+       68
+      ],
+      "bytes": 28446,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "One deposit at time $s$",
+     "relation": "model",
+     "relationLabel": "Modelling step",
+     "tex": "q(s)\\,ds \\;\\longrightarrow\\; e^{a(t-s)}\\,q(s)\\,ds",
+     "explanation": "A deposit made at time $s$ grows only during the remaining time $t - s$.",
+     "initialFrame": "animations/any-input/state-01.jpg",
+     "finalFrame": "animations/any-input/state-02.jpg",
+     "transition": {
+      "src": "animations/any-input/step-02.mp4",
+      "duration": 2.8667,
+      "frames": 86,
+      "masterFrames": [
+       67,
+       153
+      ],
+      "bytes": 47884,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Add them all",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "y(t) = y(0)\\,e^{at} + \\int_0^t e^{a(t-s)}\\,q(s)\\,ds",
+     "explanation": "The equation is linear, so contributions add; adding continuously is integrating.",
+     "initialFrame": "animations/any-input/state-02.jpg",
+     "finalFrame": "animations/any-input/state-03.jpg",
+     "transition": {
+      "src": "animations/any-input/step-03.mp4",
+      "duration": 3.9333,
+      "frames": 118,
+      "masterFrames": [
+       152,
+       270
+      ],
+      "bytes": 90294,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 8.8,
+   "masterFrames": 270,
+   "renderSeconds": 8.9
+  },
+  {
+   "id": "step-delta",
+   "scene": "StepDeltaSequence",
+   "section": 6,
+   "title": "Step, delta and the impulse response",
+   "summary": "The step jumps from 0 to 1; its derivative is the delta, one unit in one instant; the delta input produces the impulse response.",
+   "initial": {
+    "title": "The unit step",
+    "tex": "H(t - T) = \\begin{cases}0 & t < T\\\\ 1 & t \\ge T\\end{cases}",
+    "explanation": "A switch that turns on at $t = T$ and stays on.",
+    "frame": "animations/step-delta/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Its derivative: the delta",
+     "relation": "define",
+     "relationLabel": "Definition / choice",
+     "tex": "\\delta(t - T) = \\frac{d}{dt}H(t - T),\\qquad \\int \\delta(t-T)\\,dt = 1",
+     "explanation": "Zero slope everywhere except the jump. The delta is known through its integral: one unit, all at $t = T$.",
+     "initialFrame": "animations/step-delta/state-00.jpg",
+     "finalFrame": "animations/step-delta/state-01.jpg",
+     "transition": {
+      "src": "animations/step-delta/step-01.mp4",
+      "duration": 3.0333,
+      "frames": 91,
+      "masterFrames": [
+       8,
+       99
+      ],
+      "bytes": 33058,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Picking out a value",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "\\int_{-\\infty}^{\\infty}\\delta(t - T)\\,f(t)\\,dt = f(T)",
+     "explanation": "Only the moment $t = T$ counts.",
+     "initialFrame": "animations/step-delta/state-01.jpg",
+     "finalFrame": "animations/step-delta/state-02.jpg",
+     "transition": {
+      "src": "animations/step-delta/step-02.mp4",
+      "duration": 2.0667,
+      "frames": 62,
+      "masterFrames": [
+       98,
+       160
+      ],
+      "bytes": 64279,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "The impulse response",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "y' = ay + \\delta(t-T),\\ y(0) = 0 \\;\\Rightarrow\\; y = H(t-T)\\,e^{a(t-T)}",
+     "explanation": "Nothing before $T$; one unit arrives at $T$ and then grows (or decays) at rate $a$.",
+     "initialFrame": "animations/step-delta/state-02.jpg",
+     "finalFrame": "animations/step-delta/state-03.jpg",
+     "transition": {
+      "src": "animations/step-delta/step-03.mp4",
+      "duration": 3.0333,
+      "frames": 91,
+      "masterFrames": [
+       159,
+       250
+      ],
+      "bytes": 54484,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 8.133,
+   "masterFrames": 250,
+   "renderSeconds": 7.2
+  },
+  {
+   "id": "complex-polar",
+   "scene": "ComplexPolarSequence",
+   "section": 7,
+   "title": "The complex route: polar form of $i\\omega - a$",
+   "summary": "Solve with $e^{i\\omega t}$, write $i\\omega - a = Re^{i\\alpha}$, and take the real part.",
+   "initial": {
+    "title": "Complex input",
+    "tex": "y' = a\\,y + e^{i\\omega t}\\;\\Rightarrow\\; Y = \\frac{1}{i\\omega - a}",
+    "explanation": "Section 3's formula with $s = i\\omega$.",
+    "frame": "animations/complex-polar/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Place $i\\omega - a$ in the plane",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "i\\omega - a = R\\,e^{i\\alpha},\\qquad R = \\sqrt{a^2 + \\omega^2}",
+     "explanation": "Real part $-a$, imaginary part $\\omega$. Pythagoras gives the length $R$; $\\alpha$ is the angle.",
+     "initialFrame": "animations/complex-polar/state-00.jpg",
+     "finalFrame": "animations/complex-polar/state-01.jpg",
+     "transition": {
+      "src": "animations/complex-polar/step-01.mp4",
+      "duration": 3.9,
+      "frames": 117,
+      "masterFrames": [
+       8,
+       125
+      ],
+      "bytes": 53607,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Divide in polar form",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "y_c = \\frac{1}{R}\\,e^{-i\\alpha}\\,e^{i\\omega t} = \\frac{1}{R}\\,e^{i(\\omega t - \\alpha)}",
+     "explanation": "Dividing by $Re^{i\\alpha}$ divides by $R$ and subtracts $\\alpha$ from the angle.",
+     "initialFrame": "animations/complex-polar/state-01.jpg",
+     "finalFrame": "animations/complex-polar/state-02.jpg",
+     "transition": {
+      "src": "animations/complex-polar/step-02.mp4",
+      "duration": 2.6333,
+      "frames": 79,
+      "masterFrames": [
+       124,
+       203
+      ],
+      "bytes": 66364,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Take the real part",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "\\operatorname{Re}\\,y_c = \\frac{1}{R}\\cos(\\omega t - \\alpha)",
+     "explanation": "The response to $\\cos\\omega t$: gain $1/R$, lag $\\alpha$. The imaginary part answers $\\sin\\omega t$.",
+     "initialFrame": "animations/complex-polar/state-02.jpg",
+     "finalFrame": "animations/complex-polar/state-03.jpg",
+     "transition": {
+      "src": "animations/complex-polar/step-03.mp4",
+      "duration": 2.3,
+      "frames": 69,
+      "masterFrames": [
+       202,
+       271
+      ],
+      "bytes": 88254,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 8.833,
+   "masterFrames": 271,
+   "renderSeconds": 7.4
+  },
+  {
+   "id": "integrating-factor",
+   "scene": "IntegratingFactorSequence",
+   "section": 8,
+   "title": "An integrating factor makes a perfect derivative",
+   "summary": "With $M' = -aM$, the product rule turns $y' = a(t)y + q$ into $(My)' = Mq$, which integrates directly.",
+   "initial": {
+    "title": "Varying rate",
+    "tex": "y' = a(t)\\,y + q(t)",
+    "explanation": "The interest rate itself changes with time.",
+    "frame": "animations/integrating-factor/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Choose $M$",
+     "relation": "define",
+     "relationLabel": "Definition / choice",
+     "tex": "M' = -a(t)\\,M,\\qquad M(t) = e^{-\\int_0^t a}",
+     "explanation": "The null equation with a minus sign, starting from $M(0) = 1$.",
+     "initialFrame": "animations/integrating-factor/state-00.jpg",
+     "finalFrame": "animations/integrating-factor/state-01.jpg",
+     "transition": {
+      "src": "animations/integrating-factor/step-01.mp4",
+      "duration": 2.1333,
+      "frames": 64,
+      "masterFrames": [
+       8,
+       72
+      ],
+      "bytes": 50951,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Product rule on $My$",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "(My)' = M y' + M' y = M\\,(y' - a y) = M q",
+     "explanation": "$M' y = -aMy$ cancels the growth term, leaving only the input.",
+     "initialFrame": "animations/integrating-factor/state-01.jpg",
+     "finalFrame": "animations/integrating-factor/state-02.jpg",
+     "transition": {
+      "src": "animations/integrating-factor/step-02.mp4",
+      "duration": 4.1,
+      "frames": 123,
+      "masterFrames": [
+       71,
+       194
+      ],
+      "bytes": 108957,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Integrate and divide",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "y(t) = e^{\\int_0^t a}\\,y(0) + \\int_0^t e^{\\int_s^t a}\\,q(s)\\,ds",
+     "explanation": "$M(t)y(t) - y(0) = \\int_0^t Mq$; dividing by $M(t)$ turns $M(s)/M(t)$ into the growth factor from $s$ to $t$.",
+     "initialFrame": "animations/integrating-factor/state-02.jpg",
+     "finalFrame": "animations/integrating-factor/state-03.jpg",
+     "transition": {
+      "src": "animations/integrating-factor/step-03.mp4",
+      "duration": 3.6667,
+      "frames": 110,
+      "masterFrames": [
+       193,
+       303
+      ],
+      "bytes": 212921,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "Example $a = 2t$",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "M = e^{-t^2},\\qquad y(t) = e^{t^2}y(0) + \\int_0^t e^{t^2 - s^2}\\,q(s)\\,ds",
+     "explanation": "$\\int_0^t 2\\tau\\,d\\tau = t^2$: deposits grow by $e^{t^2 - s^2}$.",
+     "initialFrame": "animations/integrating-factor/state-03.jpg",
+     "finalFrame": "animations/integrating-factor/state-04.jpg",
+     "transition": {
+      "src": "animations/integrating-factor/step-04.mp4",
+      "duration": 3.6,
+      "frames": 108,
+      "masterFrames": [
+       302,
+       410
+      ],
+      "bytes": 256912,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 13.5,
+   "masterFrames": 410,
+   "renderSeconds": 9.9
+  }
+ ]
+}

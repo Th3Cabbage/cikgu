@@ -65,6 +65,24 @@
           "statusApp": "Study_controllability"
         }
       ]
+    },
+    {
+      "id": "mit-de",
+      "kind": "series",
+      "path": "mit-de",
+      "title": "MIT Learn Differential Equations",
+      "short": "MIT Differential Equations",
+      "description": "Companions to Gilbert Strang and Cleve Moler's MIT OpenCourseWare series and Strang's Differential Equations and Linear Algebra, from first order equations to systems, numerical methods and PDEs.",
+      "lectures": [
+        {
+          "slug": "first-order-linear",
+          "source": "courses/mit-de/first-order-linear/dist",
+          "title": "Unit 1: First Order Linear Equations",
+          "description": "Exponential, cosine, step and delta inputs to y' = ay + q(t), resonance, the general solution formula and integrating factors.",
+          "storeKey": "first-order-linear-v1",
+          "statusApp": "Study_first_order_linear"
+        }
+      ]
     }
   ]
 }

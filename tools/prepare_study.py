@@ -107,6 +107,11 @@ def main():
     ap.add_argument('--captions-only', action='store_true')
     ap.add_argument('--refresh', action='store_true')
     ap.add_argument('--transcribe', action='store_true', help='Generate local captions if YouTube has none (downloads Whisper once).')
+    ap.add_argument('--book', default='databook.pdf', help='Repository-relative local book PDF (never committed).')
+    ap.add_argument('--max-height', type=int, default=1080, help='Highest video resolution to download.')
+    ap.add_argument('--frame-every', type=int, default=180, help='Seconds between review frames.')
+    ap.add_argument('--drop-video', action='store_true', help='Delete video.mp4 after frames are saved (saves disk space).')
+    ap.add_argument('--cookies-from-browser', metavar='BROWSER', help="Use this browser's YouTube sign-in (e.g. firefox) when YouTube asks to confirm you are not a bot. Cookies are read by yt-dlp at run time and never saved.")
     args = ap.parse_args()
     if not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', args.slug):
         ap.error('Slug must contain lowercase words separated by hyphens.')
@@ -127,16 +132,31 @@ def main():
         if existing.get('id') != vid:
             ap.error('This source slug belongs to a different video. Choose a new slug.')
     captions = sorted(out.glob('video.en*.vtt'))
-    cached = (out/'video.info.json').is_file() and (captions or args.transcribe) and (args.captions_only or (out/'video.mp4').is_file())
+    focus = query.get('t', [''])[0].rstrip('s')
+
+    def frame_times(duration):
+        times = set(range(30, int(duration), max(10, args.frame_every)))
+        if focus.isdigit() and int(focus) < duration:
+            times.add(int(focus))
+        return sorted(times)
+
+    # Without the video, the cache is complete only if every requested frame already exists.
+    have_frames = False
+    if existing_info.is_file() and not (out/'video.mp4').is_file():
+        duration = json.loads(existing_info.read_text(encoding='utf-8'))['duration']
+        have_frames = all((out/'frames'/f'{t:04}.jpg').is_file() for t in frame_times(duration))
+    cached = (out/'video.info.json').is_file() and (captions or args.transcribe) and (args.captions_only or (out/'video.mp4').is_file() or (args.drop_video and have_frames))
     if args.refresh or not cached:
         cmd = [sys.executable, '-m', 'yt_dlp', '--ignore-config', '--no-playlist', '--force-overwrites' if args.refresh else '--no-overwrites',
                '--js-runtimes', 'node', '--ffmpeg-location', ffmpeg, '--write-subs', '--write-auto-subs',
                '--sub-langs', 'en,en-orig', '--sub-format', 'vtt', '--write-info-json', '--write-description',
                '--socket-timeout', '30', '--retries', '3', '--no-progress',
-               '-f', 'bv*[height<=1080][ext=mp4]+ba[ext=m4a]/b[height<=1080][ext=mp4]/b[height<=1080]',
+               '-f', f'bv*[height<={args.max_height}][ext=mp4]+ba[ext=m4a]/b[height<={args.max_height}][ext=mp4]/b[height<={args.max_height}]',
                '--merge-output-format', 'mp4', '-o', str(out/'video.%(ext)s')]
         if args.captions_only:
             cmd.append('--skip-download')
+        if args.cookies_from_browser:
+            cmd += ['--cookies-from-browser', args.cookies_from_browser]
         result = subprocess.run(cmd + [f'https://www.youtube.com/watch?v={vid}'])
         if result.returncode:
             print('Retrying once after updating the isolated downloader to its latest prerelease.',flush=True)
@@ -169,7 +189,7 @@ def main():
     (out/'source.json').write_text(json.dumps(summary,ensure_ascii=False,indent=1),encoding='utf-8')
     if summary['pdf_pages']:
         import pymupdf
-        with pymupdf.open(ROOT/'databook.pdf') as doc:
+        with pymupdf.open(ROOT/args.book) as doc:
             if max(summary['pdf_pages']) > len(doc):
                 ap.error('Book page exceeds PDF length.')
             text = '\n'.join(f'\n--- PDF PAGE {p}; PRINTED PAGE {doc[p-1].get_label()} ---\n'+doc[p-1].get_text()
@@ -178,15 +198,13 @@ def main():
     frames = out/'frames'
     if (out/'video.mp4').is_file():
         frames.mkdir(exist_ok=True)
-        times = set(range(30, int(info['duration']), 180))
-        focus = query.get('t', [''])[0].rstrip('s')
-        if focus.isdigit() and int(focus) < info['duration']:
-            times.add(int(focus))
-        for t in sorted(times):
+        for t in frame_times(info['duration']):
             frame = frames/f'{t:04}.jpg'
             if not frame.exists() or args.refresh:
                 subprocess.run([ffmpeg,'-v','error','-y','-ss',str(t),'-i',str(out/'video.mp4'),
                                 '-frames:v','1','-update','1',str(frame)],check=True)
+        if args.drop_video:
+            (out/'video.mp4').unlink()
     print(json.dumps({'title':info['title'],'duration':info['duration'],'source_folder':str(out),
                       'transcript_words':sum(len(c['text'].split()) for c in transcript),
                       'transcript_segments':len(transcript),'keyframes':len(list(frames.glob('*.jpg'))),

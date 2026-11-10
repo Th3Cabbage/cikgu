@@ -69,6 +69,18 @@ Python is required; Node.js supports YouTube's JavaScript challenges. Tools are 
 `.venv-download`, separate from rendering dependencies. A site restriction can still prevent a
 download; the script reports it rather than claiming success.
 
+`tools/prepare_study.py` (run with `.venv-download\Scripts\python.exe`) also accepts `--book`
+(a repository-relative local PDF other than `databook.pdf`), `--max-height` (default 1080),
+`--frame-every` (seconds between frames, default 180), `--drop-video` (delete `video.mp4` once all
+requested frames exist; the cache counts as complete only when every requested frame is present)
+and `--cookies-from-browser firefox` (use that browser's YouTube sign-in when YouTube answers
+"Sign in to confirm you're not a bot"; yt-dlp reads the cookies at run time and nothing is saved).
+
+For a multi-video unit, `tools/prepare_unit.py --units courses/mit-de/units.json [--unit N]`
+prepares every video of the unit (720p, a frame every 60 s, video deleted afterwards, a pause
+after each new download; `--cookies-from-browser` is passed through). The unit's book pages are
+extracted into its first video's folder. Do not loop retries after a block; wait or sign in.
+
 Create a **new** package from the existing, tested overview framework:
 
 ```powershell

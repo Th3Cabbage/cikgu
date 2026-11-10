@@ -142,7 +142,8 @@ async function main() {
     const { ctx, page } = await newPage(browser);
     await page.goto(base);
     const cards = await page.$$eval(".lib-card h2 a", as => as.map(a => [a.textContent, a.getAttribute("href")]));
-    check("home: two courses, ODE and Control Bootcamp", cards.length === 2 && cards[0][1] === "ode/" && cards[1][1] === "controls/", JSON.stringify(cards));
+    check("home: one card per catalog course, in catalog order",
+          JSON.stringify(cards.map(c => c[1])) === JSON.stringify(catalog.courses.map(c => c.path + "/")), JSON.stringify(cards));
     check("home: no horizontal overflow at 1440 px", await noOverflow(page));
     await shot(page, "home-desktop-light");
     await page.click("#theme-toggle");

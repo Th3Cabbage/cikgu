@@ -116,6 +116,19 @@ The package review also caught misplaced master-render ignore patterns from the 
 Every control package now uses `/animation/masters/`; layout QA checks actual Git ignore behaviour
 for every course and checks that public viewing assets remain versionable.
 
+## MIT Learn Differential Equations (started 10 November 2026)
+
+A third course on the study site: companions to the 68-video MIT OpenCourseWare playlist
+(Gilbert Strang, videos 1-56; Cleve Moler, numerical methods, videos 57-68) and Strang's
+*Differential Equations and Linear Algebra*, in 12 units under `courses/mit-de/<slug>/`, built with
+the new team roles (Claude architect, Sonnet agents, Codex reviewer). The unit map, video IDs and
+book pages are in `courses/mit-de/units.json`; status, decisions and review results are in
+`courses/mit-de/PROGRESS.md`. Each unit is scaffolded normally and then adapted once by
+`courses/mit-de/adapt_shell.py` (several videos per unit: sources carry a video number `v` and time
+`t`; Strang's book has no online copy). The local book `docs/DIFFER~1.pdf` is ignored by Git
+(printed page = PDF page - 12); notes are original paraphrases with page references only.
+Unit 1 (videos 1-10, port 8831) is complete; see its README for checks.
+
 ## Unified study site (19 October 2026)
 
 The user approved one website: a library home with the ODE guide as one course and a Control Bootcamp

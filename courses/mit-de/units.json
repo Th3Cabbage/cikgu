@@ -1,0 +1,594 @@
+{
+ "title": "MIT Learn Differential Equations",
+ "playlist": "PLUl4u3cNGP63oTpyxCMLKt_JmB0WtSZfG",
+ "source": "MIT OpenCourseWare, Gilbert Strang and Cleve Moler (CC BY-NC-SA)",
+ "book": "docs/DIFFER~1.pdf",
+ "book_title": "Gilbert Strang, Differential Equations and Linear Algebra (Wellesley-Cambridge, 2014)",
+ "book_note": "Local reference only; never commit or publish. PDF page = printed page + 12 from PDF page 13 to the end (checked on 493 pages).",
+ "units": [
+  {
+   "n": 1,
+   "slug": "first-order-linear",
+   "title": "First Order Linear Equations",
+   "book_pages": "13-64",
+   "book_sections": "1.1-1.6",
+   "videos": [
+    {
+     "n": 1,
+     "id": "ZvL88xqYSak",
+     "seconds": 173,
+     "title": "Gilbert and Cleve Introduction",
+     "source_slug": "mit-de-01"
+    },
+    {
+     "n": 2,
+     "id": "ghjOS7Q82s0",
+     "seconds": 844,
+     "title": "Overview of Differential Equations",
+     "source_slug": "mit-de-02"
+    },
+    {
+     "n": 3,
+     "id": "f0BxAtprWts",
+     "seconds": 888,
+     "title": "The Calculus You Need",
+     "source_slug": "mit-de-03"
+    },
+    {
+     "n": 4,
+     "id": "CB9I4mwpQ5E",
+     "seconds": 800,
+     "title": "Response to Exponential Input",
+     "source_slug": "mit-de-04"
+    },
+    {
+     "n": 5,
+     "id": "xw3ccgYhFis",
+     "seconds": 955,
+     "title": "Response to Oscillating Input",
+     "source_slug": "mit-de-05"
+    },
+    {
+     "n": 6,
+     "id": "0r2L3wTqkBc",
+     "seconds": 839,
+     "title": "Solution for Any Input",
+     "source_slug": "mit-de-06"
+    },
+    {
+     "n": 7,
+     "id": "ECslmuGlu-U",
+     "seconds": 941,
+     "title": "Step Function and Delta Function",
+     "source_slug": "mit-de-07"
+    },
+    {
+     "n": 8,
+     "id": "kIT2uMxYh6M",
+     "seconds": 771,
+     "title": "Response to Complex Exponential",
+     "source_slug": "mit-de-08"
+    },
+    {
+     "n": 9,
+     "id": "MJUjSKew4nQ",
+     "seconds": 827,
+     "title": "Integrating Factor for Constant Rate",
+     "source_slug": "mit-de-09"
+    },
+    {
+     "n": 10,
+     "id": "qJOQOkJ7rI8",
+     "seconds": 683,
+     "title": "Integrating Factor for a Varying Rate",
+     "source_slug": "mit-de-10"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "slug": "nonlinear-first-order",
+   "title": "Nonlinear First Order Equations",
+   "book_pages": "65-84",
+   "book_sections": "1.7-1.8",
+   "videos": [
+    {
+     "n": 11,
+     "id": "TCkLSYxx21c",
+     "seconds": 807,
+     "title": "The Logistic Equation",
+     "source_slug": "mit-de-11"
+    },
+    {
+     "n": 12,
+     "id": "NmntYoB1uJg",
+     "seconds": 1275,
+     "title": "The Stability and Instability of Steady States",
+     "source_slug": "mit-de-12"
+    },
+    {
+     "n": 13,
+     "id": "_FATUw506mE",
+     "seconds": 787,
+     "title": "Separable Equations",
+     "source_slug": "mit-de-13"
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "slug": "second-order",
+   "title": "Second Order Equations and Oscillation",
+   "book_pages": "85-129",
+   "book_sections": "2.1-2.4",
+   "videos": [
+    {
+     "n": 14,
+     "id": "xCCeV-glFdM",
+     "seconds": 1160,
+     "title": "Second Order Equations",
+     "source_slug": "mit-de-14"
+    },
+    {
+     "n": 15,
+     "id": "zkFZY6esNOU",
+     "seconds": 932,
+     "title": "Forced Harmonic Motion",
+     "source_slug": "mit-de-15"
+    },
+    {
+     "n": 16,
+     "id": "zqks_JcU0cM",
+     "seconds": 844,
+     "title": "Unforced Damped Motion",
+     "source_slug": "mit-de-16"
+    },
+    {
+     "n": 17,
+     "id": "PoHO4PZtW78",
+     "seconds": 962,
+     "title": "Impulse Response and Step Response",
+     "source_slug": "mit-de-17"
+    },
+    {
+     "n": 18,
+     "id": "o93axeQJqJ8",
+     "seconds": 740,
+     "title": "Exponential Response - Possible Resonance",
+     "source_slug": "mit-de-18"
+    },
+    {
+     "n": 19,
+     "id": "SMQPt7t0bHk",
+     "seconds": 794,
+     "title": "Second Order Equations with Damping",
+     "source_slug": "mit-de-19"
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "slug": "networks-and-methods",
+   "title": "Networks, Undetermined Coefficients and Variation of Parameters",
+   "book_pages": "130-150",
+   "book_sections": "2.5-2.6",
+   "videos": [
+    {
+     "n": 20,
+     "id": "6b9AW6QxXt0",
+     "seconds": 993,
+     "title": "Electrical Networks: Voltages and Currents",
+     "source_slug": "mit-de-20"
+    },
+    {
+     "n": 21,
+     "id": "mKYlNJhK_2o",
+     "seconds": 992,
+     "title": "Method of Undetermined Coefficients",
+     "source_slug": "mit-de-21"
+    },
+    {
+     "n": 22,
+     "id": "u_XsCvhzzbg",
+     "seconds": 949,
+     "title": "An Example of Undetermined Coefficients",
+     "source_slug": "mit-de-22"
+    },
+    {
+     "n": 23,
+     "id": "0f15AVSQ770",
+     "seconds": 1162,
+     "title": "Variation of Parameters",
+     "source_slug": "mit-de-23"
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "slug": "laplace-transform",
+   "title": "The Laplace Transform and Convolution",
+   "book_pages": "151-164,482-501",
+   "book_sections": "2.7, 8.5-8.6",
+   "videos": [
+    {
+     "n": 24,
+     "id": "9RJml41PFnc",
+     "seconds": 1358,
+     "title": "Laplace Transform: First Order Equation",
+     "source_slug": "mit-de-24"
+    },
+    {
+     "n": 25,
+     "id": "kcLc4FsshO4",
+     "seconds": 991,
+     "title": "Laplace Transform: Second Order Equation",
+     "source_slug": "mit-de-25"
+    },
+    {
+     "n": 26,
+     "id": "WZMQdLW4COQ",
+     "seconds": 629,
+     "title": "Laplace Transforms and Convolution",
+     "source_slug": "mit-de-26"
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "slug": "phase-plane",
+   "title": "Phase Plane, Linearization and Stability",
+   "book_pages": "166-195",
+   "book_sections": "3.1-3.3",
+   "videos": [
+    {
+     "n": 27,
+     "id": "cDfWtSqGiBY",
+     "seconds": 1261,
+     "title": "Pictures of Solutions",
+     "source_slug": "mit-de-27"
+    },
+    {
+     "n": 28,
+     "id": "VqXKa11IA6A",
+     "seconds": 1106,
+     "title": "Phase Plane Pictures: Source, Sink, Saddle",
+     "source_slug": "mit-de-28"
+    },
+    {
+     "n": 29,
+     "id": "n9H-6TQIEJc",
+     "seconds": 826,
+     "title": "Phase Plane Pictures: Spirals and Centers",
+     "source_slug": "mit-de-29"
+    },
+    {
+     "n": 30,
+     "id": "fd7ioT_wwPE",
+     "seconds": 632,
+     "title": "Two First Order Equations: Stability",
+     "source_slug": "mit-de-30"
+    },
+    {
+     "n": 31,
+     "id": "0hx59wYpFyY",
+     "seconds": 908,
+     "title": "Linearization at Critical Points",
+     "source_slug": "mit-de-31"
+    },
+    {
+     "n": 32,
+     "id": "N6pc8Axv3Gs",
+     "seconds": 1301,
+     "title": "Linearization of two nonlinear equations",
+     "source_slug": "mit-de-32"
+    },
+    {
+     "n": 33,
+     "id": "GAOjfd5QJZE",
+     "seconds": 1170,
+     "title": "Eigenvalues and Stability: 2 by 2 Matrix, A",
+     "source_slug": "mit-de-33"
+    },
+    {
+     "n": 34,
+     "id": "Jy5XpZqy56U",
+     "seconds": 1374,
+     "title": "The Tumbling Box in 3-D",
+     "source_slug": "mit-de-34"
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "slug": "linear-algebra",
+   "title": "Column Space, Basis and Graphs",
+   "book_pages": "263-272,297-336",
+   "book_sections": "5.1, 5.4-5.6",
+   "videos": [
+    {
+     "n": 35,
+     "id": "n98ilenWoak",
+     "seconds": 764,
+     "title": "The Column Space of a Matrix",
+     "source_slug": "mit-de-35"
+    },
+    {
+     "n": 36,
+     "id": "eeMJg4uI7o0",
+     "seconds": 800,
+     "title": "Independence, Basis, and Dimension",
+     "source_slug": "mit-de-36"
+    },
+    {
+     "n": 37,
+     "id": "ggWYkes-n6E",
+     "seconds": 957,
+     "title": "The Big Picture of Linear Algebra",
+     "source_slug": "mit-de-37"
+    },
+    {
+     "n": 38,
+     "id": "RwBCrVB98s8",
+     "seconds": 927,
+     "title": "Graphs",
+     "source_slug": "mit-de-38"
+    },
+    {
+     "n": 39,
+     "id": "nGKeHq_kRQA",
+     "seconds": 1191,
+     "title": "Incidence Matrices of Graphs",
+     "source_slug": "mit-de-39"
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "slug": "eigenvalues-systems",
+   "title": "Eigenvalues and Linear Systems y' = Ay",
+   "book_pages": "337-396",
+   "book_sections": "6.1-6.5",
+   "videos": [
+    {
+     "n": 40,
+     "id": "DzqE7tj7eIM",
+     "seconds": 1141,
+     "title": "Eigenvalues and Eigenvectors",
+     "source_slug": "mit-de-40"
+    },
+    {
+     "n": 41,
+     "id": "U8R54zOTVLw",
+     "seconds": 697,
+     "title": "Diagonalizing a Matrix",
+     "source_slug": "mit-de-41"
+    },
+    {
+     "n": 42,
+     "id": "xtMzTXHO_zA",
+     "seconds": 1074,
+     "title": "Powers of Matrices and Markov Matrices",
+     "source_slug": "mit-de-42"
+    },
+    {
+     "n": 43,
+     "id": "iVlHPDER0FA",
+     "seconds": 948,
+     "title": "Solving Linear Systems",
+     "source_slug": "mit-de-43"
+    },
+    {
+     "n": 44,
+     "id": "LwSk9M5lJx4",
+     "seconds": 932,
+     "title": "The Matrix Exponential",
+     "source_slug": "mit-de-44"
+    },
+    {
+     "n": 45,
+     "id": "LKMGo8G7-vk",
+     "seconds": 891,
+     "title": "Similar Matrices",
+     "source_slug": "mit-de-45"
+    },
+    {
+     "n": 46,
+     "id": "ZTNniGvY5IQ",
+     "seconds": 955,
+     "title": "Symmetric Matrices, Real Eigenvalues, Orthogonal Eigenvectors",
+     "source_slug": "mit-de-46"
+    },
+    {
+     "n": 47,
+     "id": "Ku2zZ5Vfpzo",
+     "seconds": 1010,
+     "title": "Second Order Systems",
+     "source_slug": "mit-de-47"
+    }
+   ]
+  },
+  {
+   "n": 9,
+   "slug": "positive-definite-svd",
+   "title": "Positive Definite Matrices and the SVD",
+   "book_pages": "408-417",
+   "book_sections": "7.2",
+   "videos": [
+    {
+     "n": 48,
+     "id": "ojUQk_GNQbQ",
+     "seconds": 1301,
+     "title": "Positive Definite Matrices",
+     "source_slug": "mit-de-48"
+    },
+    {
+     "n": 49,
+     "id": "mBcLRGuAFUk",
+     "seconds": 851,
+     "title": "Singular Value Decomposition (the SVD)",
+     "source_slug": "mit-de-49"
+    }
+   ]
+  },
+  {
+   "n": 10,
+   "slug": "fourier-pde",
+   "title": "Boundary Problems, Fourier Series and PDEs",
+   "book_pages": "418-434,446-457,467-481",
+   "book_sections": "7.3-7.4, 8.1, 8.3-8.4",
+   "videos": [
+    {
+     "n": 50,
+     "id": "E97SZm2ZrBo",
+     "seconds": 1023,
+     "title": "Boundary Conditions Replace Initial Conditions",
+     "source_slug": "mit-de-50"
+    },
+    {
+     "n": 51,
+     "id": "-D4GDdxJrpg",
+     "seconds": 797,
+     "title": "Laplace Equation",
+     "source_slug": "mit-de-51"
+    },
+    {
+     "n": 52,
+     "id": "vA9dfINW4Rg",
+     "seconds": 996,
+     "title": "Fourier Series",
+     "source_slug": "mit-de-52"
+    },
+    {
+     "n": 53,
+     "id": "lL0oUZGMhXc",
+     "seconds": 836,
+     "title": "Examples of Fourier Series",
+     "source_slug": "mit-de-53"
+    },
+    {
+     "n": 54,
+     "id": "WWphCZkdByA",
+     "seconds": 844,
+     "title": "Fourier Series Solution of Laplace's Equation",
+     "source_slug": "mit-de-54"
+    },
+    {
+     "n": 55,
+     "id": "i8rnEl8O-r0",
+     "seconds": 648,
+     "title": "Heat Equation",
+     "source_slug": "mit-de-55"
+    },
+    {
+     "n": 56,
+     "id": "9TQCKWWAVjM",
+     "seconds": 914,
+     "title": "Wave Equation",
+     "source_slug": "mit-de-56"
+    }
+   ]
+  },
+  {
+   "n": 11,
+   "slug": "numerical-methods",
+   "title": "Numerical Methods for ODEs",
+   "book_pages": "196-208",
+   "book_sections": "3.4-3.5",
+   "videos": [
+    {
+     "n": 57,
+     "id": "aW-e04zwTnc",
+     "seconds": 922,
+     "title": "Euler, ODE1",
+     "source_slug": "mit-de-57"
+    },
+    {
+     "n": 58,
+     "id": "x0Ap2kDsGRQ",
+     "seconds": 406,
+     "title": "Midpoint Method, ODE2",
+     "source_slug": "mit-de-58"
+    },
+    {
+     "n": 59,
+     "id": "Mva9UIz_wwA",
+     "seconds": 578,
+     "title": "Classical Runge-Kutta, ODE4",
+     "source_slug": "mit-de-59"
+    },
+    {
+     "n": 60,
+     "id": "6O9D6am_RK4",
+     "seconds": 326,
+     "title": "Order, Naming Conventions",
+     "source_slug": "mit-de-60"
+    },
+    {
+     "n": 61,
+     "id": "ScZMBOB_qYQ",
+     "seconds": 637,
+     "title": "Estimating Error, ODE23",
+     "source_slug": "mit-de-61"
+    },
+    {
+     "n": 62,
+     "id": "DkOgvZywshI",
+     "seconds": 407,
+     "title": "ODE45",
+     "source_slug": "mit-de-62"
+    },
+    {
+     "n": 63,
+     "id": "gwmIksA7aXM",
+     "seconds": 435,
+     "title": "Stiffness, ODE23s, ODE15s",
+     "source_slug": "mit-de-63"
+    },
+    {
+     "n": 64,
+     "id": "NNhVVk244ZA",
+     "seconds": 857,
+     "title": "Systems of Equations",
+     "source_slug": "mit-de-64"
+    },
+    {
+     "n": 65,
+     "id": "cQKR5m5pTTg",
+     "seconds": 335,
+     "title": "The MATLAB ODE Suite",
+     "source_slug": "mit-de-65"
+    }
+   ]
+  },
+  {
+   "n": 12,
+   "slug": "applications",
+   "title": "Tumbling Box, Predator-Prey and Chaos",
+   "book_pages": "182-195",
+   "book_sections": "3.3",
+   "videos": [
+    {
+     "n": 66,
+     "id": "ttCKLZ2fWWE",
+     "seconds": 592,
+     "title": "Tumbling Box",
+     "source_slug": "mit-de-66"
+    },
+    {
+     "n": 67,
+     "id": "zrFJKy5l_PY",
+     "seconds": 857,
+     "title": "Predator-Prey Equations",
+     "source_slug": "mit-de-67"
+    },
+    {
+     "n": 68,
+     "id": "Q_f1vRLAENA",
+     "seconds": 625,
+     "title": "Lorenz Attractor and Chaos",
+     "source_slug": "mit-de-68"
+    }
+   ]
+  }
+ ]
+}
