@@ -1,0 +1,1238 @@
+{
+ "version": 1,
+ "title": "Boundary Problems, Fourier Series and PDEs",
+ "subtitle": "Unit 10 of a study companion to MIT Learn Differential Equations (Gilbert Strang), videos 50-56, with Strang's Differential Equations and Linear Algebra, Sections 7.3-7.4, 8.1, 8.3-8.4",
+ "video": {
+  "id": "E97SZm2ZrBo",
+  "title": "MIT Learn Differential Equations, videos 50-56",
+  "duration": "1:40:58",
+  "url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63oTpyxCMLKt_JmB0WtSZfG"
+ },
+ "videos": [
+  {
+   "n": 50,
+   "id": "E97SZm2ZrBo",
+   "title": "Boundary Conditions Replace Initial Conditions",
+   "duration": "17:03",
+   "url": "https://www.youtube.com/watch?v=E97SZm2ZrBo"
+  },
+  {
+   "n": 51,
+   "id": "-D4GDdxJrpg",
+   "title": "Laplace Equation",
+   "duration": "13:17",
+   "url": "https://www.youtube.com/watch?v=-D4GDdxJrpg"
+  },
+  {
+   "n": 52,
+   "id": "vA9dfINW4Rg",
+   "title": "Fourier Series",
+   "duration": "16:36",
+   "url": "https://www.youtube.com/watch?v=vA9dfINW4Rg"
+  },
+  {
+   "n": 53,
+   "id": "lL0oUZGMhXc",
+   "title": "Examples of Fourier Series",
+   "duration": "13:56",
+   "url": "https://www.youtube.com/watch?v=lL0oUZGMhXc"
+  },
+  {
+   "n": 54,
+   "id": "WWphCZkdByA",
+   "title": "Fourier Series Solution of Laplace's Equation",
+   "duration": "14:04",
+   "url": "https://www.youtube.com/watch?v=WWphCZkdByA"
+  },
+  {
+   "n": 55,
+   "id": "i8rnEl8O-r0",
+   "title": "Heat Equation",
+   "duration": "10:48",
+   "url": "https://www.youtube.com/watch?v=i8rnEl8O-r0"
+  },
+  {
+   "n": 56,
+   "id": "9TQCKWWAVjM",
+   "title": "Wave Equation",
+   "duration": "15:14",
+   "url": "https://www.youtube.com/watch?v=9TQCKWWAVjM"
+  }
+ ],
+ "book": {
+  "title": "Differential Equations and Linear Algebra",
+  "authors": "Gilbert Strang",
+  "short": "Strang, Ch. 7-8",
+  "edition": "Wellesley-Cambridge Press, 2014 (Sections 7.3-7.4, 8.1, 8.3-8.4)",
+  "onlineUrl": "",
+  "pageNote": "Page references give the printed page and the page of the local PDF (printed page + 12). The book is not freely available online, so only a local copy can be opened."
+ },
+ "attribution": "Course text, diagrams and animations here are original paraphrases and drawings made for this guide; examples marked authored are not from the lectures. They summarize MIT OpenCourseWare's Learn Differential Equations videos (Gilbert Strang, CC BY-NC-SA) and Strang's textbook; for the original wording, watch the videos and read the book. Captions, video and book text are not included in this guide.",
+ "explorer": {
+  "modes": [
+   {
+    "id": "series",
+    "label": "Fourier partial sums"
+   },
+   {
+    "id": "heat",
+    "label": "Heat equation on [0, 1]"
+   },
+   {
+    "id": "wave",
+    "label": "Plucked string on [0, π]"
+   }
+  ],
+  "defaultMode": "series",
+  "functions": [
+   {
+    "id": "square",
+    "label": "Square wave"
+   },
+   {
+    "id": "ramp",
+    "label": "Ramp |x|"
+   },
+   {
+    "id": "saw",
+    "label": "Sawtooth x"
+   },
+   {
+    "id": "delta",
+    "label": "Delta δ(x)"
+   }
+  ],
+  "N": {
+   "min": 1,
+   "max": 60,
+   "step": 1,
+   "default": 5
+  },
+  "heatStarts": [
+   {
+    "id": "one",
+    "label": "u(0, x) = 1"
+   },
+   {
+    "id": "tent",
+    "label": "Tent peak at 1/2"
+   },
+   {
+    "id": "two",
+    "label": "sin πx + ½ sin 3πx"
+   }
+  ],
+  "t": {
+   "min": 0,
+   "max": 0.3,
+   "step": 0.002,
+   "default": 0.01
+  },
+  "pluck": {
+   "min": 0.1,
+   "max": 3.04,
+   "step": 0.02,
+   "default": 1.5708
+  },
+  "tw": {
+   "min": 0,
+   "max": 6.2832,
+   "step": 0.02,
+   "default": 0
+  },
+  "presets": [
+   {
+    "id": "sq5",
+    "label": "Square wave, 5 terms",
+    "mode": "series",
+    "fn": "square",
+    "N": 5,
+    "note": "Section 4: $\\tfrac4\\pi(\\sin x + \\tfrac13\\sin 3x + \\tfrac15\\sin 5x)$; watch the overshoot near the jumps."
+   },
+   {
+    "id": "gibbs",
+    "label": "Gibbs with 59 terms",
+    "mode": "series",
+    "fn": "square",
+    "N": 59,
+    "note": "The overshoot stays near $9\\%$ of the jump."
+   },
+   {
+    "id": "ramp",
+    "label": "Ramp, 5 terms",
+    "mode": "series",
+    "fn": "ramp",
+    "N": 5,
+    "note": "Section 4: $1/k^2$ coefficients converge much faster."
+   },
+   {
+    "id": "delta",
+    "label": "Delta, 20 terms",
+    "mode": "series",
+    "fn": "delta",
+    "N": 20,
+    "note": "Section 3: coefficients do not decay; partial sums spike at $0$ and keep oscillating elsewhere. The series converges to $\\delta$ only as a distribution (in integrals against smooth functions)."
+   },
+   {
+    "id": "hot",
+    "label": "Hot bar",
+    "mode": "heat",
+    "start": "one",
+    "t": 0.01,
+    "note": "Section 6: $B_k = \\tfrac{4}{k\\pi}$ for odd $k$."
+   },
+   {
+    "id": "pluck",
+    "label": "Pluck at the middle",
+    "mode": "wave",
+    "pluck": 1.5708,
+    "tw": 0.8,
+    "note": "Section 7: $d_n = \\tfrac{8}{\\pi^2 n^2}\\sin\\tfrac{n\\pi}{2}$ for height $1$."
+   }
+  ],
+  "tutorContext": "Three modes. Fourier partial sums on [-pi, pi]: square wave (b_k = 4/(pi k), odd k), ramp |x| (a0 = pi/2, a_k = -4/(pi k^2), odd k), sawtooth x (b_k = 2(-1)^(k+1)/k), delta (a0 = 1/(2pi), a_k = 1/pi; its partial sums do not converge pointwise, only as a distribution, i.e. integrals against smooth periodic functions tend to the value at 0); it plots f and S_N for N terms (N = 1..60), a bar chart of |coefficients| on a log scale, and the maximum overshoot near a jump (Gibbs, about 9% of the jump). Heat: u_t = u_xx on [0, 1] with zero ends; initial conditions 1 (B_k = 4/(k pi), odd k), a tent with peak 1 at x = 1/2 (B_k = 8 sin(k pi/2)/(k pi)^2), or sin(pi x) + sin(3 pi x)/2; u(t, x) = sum B_k e^(-k^2 pi^2 t) sin(k pi x) with 60 modes, time slider. Wave: string on [0, pi], c = 1, released from rest from a pluck of height 1 at x = p: d_n = 2 sin(n p) / (n^2 p (pi - p)); u = sum d_n cos(n t) sin(n x) with 80 modes, compared with d'Alembert's (u0(x - t) + u0(x + t))/2 using the odd 2 pi periodic extension."
+ },
+ "sections": [
+  {
+   "nav": "Boundary value problems",
+   "v": 50,
+   "title": "$-y'' = f(x)$ with $y(0) = y(1) = 0$",
+   "summary": "Boundary conditions at both ends replace initial conditions. For $-y'' = f$ on $0 \\le x \\le 1$ with fixed ends, $y = y_p + Cx + D$ and the two end values fix $C$ and $D$. A uniform load $f = 1$ gives the parabola $y = \\tfrac12(x - x^2)$; a point load $\\delta(x - a)$ gives two straight lines meeting at $a$, with the slope dropping by $1$.",
+   "time": [
+    0,
+    1023
+   ],
+   "goals": [
+    "Solve $-y'' = f$ with $y(0) = y(1) = 0$.",
+    "Use the null solutions $Cx + D$ to meet both boundary conditions.",
+    "Solve the point-load problem $-y'' = \\delta(x - a)$ by matching at $x = a$."
+   ],
+   "notes": [
+    {
+     "heading": "Two boundary conditions",
+     "paragraphs": [
+      "Second order equations need two conditions. In space (a bar, a string, a beam) they are naturally given at the two ends: $y(0) = 0$ and $y(1) = 0$. The null solutions of $-y'' = 0$ are $Cx + D$, so $y = y_p + Cx + D$."
+     ]
+    },
+    {
+     "heading": "Uniform load",
+     "paragraphs": [
+      "$f = 1$: $y_p = -\\tfrac12x^2$. Then $y(0) = D = 0$ and $y(1) = -\\tfrac12 + C = 0$, so $C = \\tfrac12$ and $y = \\tfrac12(x - x^2)$, a parabola that sags most in the middle, like a bar hanging between two supports."
+     ]
+    },
+    {
+     "heading": "Point load",
+     "paragraphs": [
+      "$f = \\delta(x - a)$: away from $a$ there is no load, so $y$ is linear on each side. Fixed ends give $y = Cx$ on the left and $y = E(1 - x)$ on the right. Two conditions at $a$: $y$ is continuous, and integrating $-y'' = \\delta$ across $a$ shows the slope drops by exactly $1$. Solving, $C = 1 - a$ and $E = a$:",
+      "$y = (1 - a)x$ for $x \\le a$, $\\quad y = a(1 - x)$ for $x \\ge a$. This is the Green's function: the response at $x$ to a unit load at $a$."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$y = y_p + Cx + D$, two end conditions.",
+    "$f = 1$: $y = \\tfrac12(x - x^2)$.",
+    "$\\delta(x - a)$: slope drops by $1$ at $a$.",
+    "$y = (1-a)x$ then $a(1-x)$."
+   ],
+   "example": {
+    "title": "A linearly increasing load (authored)",
+    "problem": "Solve $-y'' = x$ with $y(0) = y(1) = 0$.",
+    "steps": [
+     {
+      "text": "Integrate twice.",
+      "tex": "y_p = -\\tfrac16x^3"
+     },
+     {
+      "text": "y(0) = D = 0 and y(1) = -1/6 + C = 0.",
+      "tex": "C = \\tfrac16"
+     },
+     {
+      "text": "Assemble.",
+      "tex": "y = \\tfrac16(x - x^3)"
+     }
+    ],
+    "answer": "$y = (x - x^3)/6$, largest at $x = 1/\\sqrt3$, to the right of centre where the load is heavier."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 50,
+      "t": 0,
+      "label": "-y'' = f with y(0) = y(1) = 0"
+     },
+     {
+      "v": 50,
+      "t": 120,
+      "label": "Particular plus null solutions Cx + D"
+     },
+     {
+      "v": 50,
+      "t": 210,
+      "label": "f = 1: y = x/2 - x^2/2"
+     },
+     {
+      "v": 50,
+      "t": 330,
+      "label": "A bar hanging between supports"
+     },
+     {
+      "v": 50,
+      "t": 450,
+      "label": "Point load delta(x - a)"
+     },
+     {
+      "v": 50,
+      "t": 600,
+      "label": "Straight lines on each side"
+     },
+     {
+      "v": 50,
+      "t": 780,
+      "label": "Continuity and the slope jump"
+     },
+     {
+      "v": 50,
+      "t": 900,
+      "label": "Integrate across the delta"
+     }
+    ],
+    "book": [
+     {
+      "printed": 406,
+      "pdf": 418,
+      "label": "Section 7.3: boundary conditions replace initial conditions"
+     }
+    ]
+   },
+   "tutorNotes": "Video 50. -y'' = f, y(0) = y(1) = 0, y = y_p + Cx + D. f = 1: y = (x - x^2)/2. f = delta(x - a): y = (1 - a)x for x <= a, a(1 - x) for x >= a; continuous, slope drops by 1 at a (Green's function).",
+   "id": "s1",
+   "number": 1
+  },
+  {
+   "nav": "Laplace's equation",
+   "v": 51,
+   "title": "$u_{xx} + u_{yy} = 0$: polynomials and $r^n\\cos n\\theta$",
+   "summary": "Laplace's equation has the solutions $1, x, y, x^2 - y^2, 2xy, x^3 - 3xy^2, \\ldots$: the real and imaginary parts of $(x + iy)^n$. In polar coordinates these are $r^n\\cos n\\theta$ and $r^n\\sin n\\theta$, and combinations of them match boundary values on a circle.",
+   "time": [
+    0,
+    797
+   ],
+   "goals": [
+    "Check that $x^2 - y^2$ and $2xy$ satisfy Laplace's equation.",
+    "Generate solutions from $(x + iy)^n$.",
+    "Write the general solution inside a circle with $r^n\\cos n\\theta$, $r^n\\sin n\\theta$."
+   ],
+   "notes": [
+    {
+     "heading": "Solutions you can guess",
+     "paragraphs": [
+      "$u_{xx} + u_{yy} = 0$ describes steady temperature, potential, or an ideal fluid. Degree $0$: $u = 1$. Degree $1$: $x$ and $y$. Degree $2$: $x^2$ fails ($u_{xx} = 2$), but $x^2 - y^2$ works ($2 - 2 = 0$), and so does $2xy$. Degree $3$: $x^3 - 3xy^2$ and $3x^2y - y^3$. Two new solutions at each degree."
+     ]
+    },
+    {
+     "heading": "The pattern",
+     "paragraphs": [
+      "$(x + iy)^2 = x^2 - y^2 + 2ixy$ and $(x + iy)^3 = x^3 - 3xy^2 + i(3x^2y - y^3)$: the real and imaginary parts of $(x + iy)^n$ always solve Laplace's equation. In polar form $x + iy = re^{i\\theta}$, so $(x + iy)^n = r^ne^{in\\theta}$, with real and imaginary parts $r^n\\cos n\\theta$ and $r^n\\sin n\\theta$."
+     ]
+    },
+    {
+     "heading": "Inside a circle",
+     "paragraphs": [
+      "Combine them: $u(r, \\theta) = a_0 + \\sum_{n\\ge1}(a_nr^n\\cos n\\theta + b_nr^n\\sin n\\theta)$. On the boundary $r = 1$ this is a Fourier series in $\\theta$; matching the given boundary values $u_0(\\theta)$ is exactly the problem of finding Fourier coefficients (Sections 3 and 5). Example data: $u_0 = +1$ on the top half of the circle and $-1$ on the bottom half."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$x^2 - y^2$, $2xy$, $x^3 - 3xy^2$, ...",
+    "$\\operatorname{Re}$ and $\\operatorname{Im}$ of $(x + iy)^n$.",
+    "Polar: $r^n\\cos n\\theta$, $r^n\\sin n\\theta$.",
+    "Boundary values on $r = 1$: a Fourier series."
+   ],
+   "example": {
+    "title": "Harmonic or not (authored)",
+    "problem": "Which solve Laplace's equation: $e^x\\cos y$, $x^2 + y^2$, $x^4 - 6x^2y^2 + y^4$?",
+    "steps": [
+     {
+      "text": "e^x cos y: u_xx = e^x cos y, u_yy = -e^x cos y.",
+      "tex": "u_{xx} + u_{yy} = 0\\ \\checkmark\\quad(\\operatorname{Re}\\,e^{x+iy})"
+     },
+     {
+      "text": "x^2 + y^2: 2 + 2.",
+      "tex": "u_{xx} + u_{yy} = 4 \\neq 0"
+     },
+     {
+      "text": "x^4 - 6x^2y^2 + y^4 = Re (x + iy)^4.",
+      "tex": "(12x^2 - 12y^2) + (-12x^2 + 12y^2) = 0\\ \\checkmark"
+     }
+    ],
+    "answer": "$e^x\\cos y$ and $x^4 - 6x^2y^2 + y^4$ are harmonic; $x^2 + y^2$ is not."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 51,
+      "t": 0,
+      "label": "Laplace's equation with boundary values"
+     },
+     {
+      "v": 51,
+      "t": 60,
+      "label": "Solutions 1, x, y"
+     },
+     {
+      "v": 51,
+      "t": 120,
+      "label": "x^2 - y^2 and 2xy"
+     },
+     {
+      "v": 51,
+      "t": 150,
+      "label": "Pattern: (x + iy)^n"
+     },
+     {
+      "v": 51,
+      "t": 270,
+      "label": "Degree 3"
+     },
+     {
+      "v": 51,
+      "t": 420,
+      "label": "Polar form r^n cos n theta, r^n sin n theta"
+     },
+     {
+      "v": 51,
+      "t": 540,
+      "label": "Combination for a circle"
+     },
+     {
+      "v": 51,
+      "t": 660,
+      "label": "Boundary data +1 and -1"
+     }
+    ],
+    "book": [
+     {
+      "printed": 416,
+      "pdf": 428,
+      "label": "Section 7.4: Laplace's equation and A^T A"
+     }
+    ]
+   },
+   "tutorNotes": "Video 51. u_xx + u_yy = 0. Solutions 1, x, y, x^2 - y^2, 2xy, x^3 - 3xy^2, 3x^2 y - y^3 = Re/Im (x + iy)^n = r^n cos(n theta), r^n sin(n theta). u = a0 + sum (a_n r^n cos n theta + b_n r^n sin n theta) inside the unit circle; boundary values -> Fourier coefficients.",
+   "id": "s2",
+   "number": 2
+  },
+  {
+   "nav": "Fourier series",
+   "v": 52,
+   "title": "Fourier coefficients by orthogonality",
+   "summary": "$f(x) = a_0 + \\sum(a_k\\cos kx + b_k\\sin kx)$ on $-\\pi \\le x \\le \\pi$. The cosines and sines are orthogonal, so multiplying by $\\cos kx$ and integrating isolates one coefficient: $a_k = \\tfrac1\\pi\\int f\\cos kx\\,dx$, $b_k = \\tfrac1\\pi\\int f\\sin kx\\,dx$, $a_0 = \\tfrac{1}{2\\pi}\\int f$ (the average). The delta function has $a_0 = \\tfrac{1}{2\\pi}$ and every $a_k = \\tfrac1\\pi$.",
+   "time": [
+    0,
+    996
+   ],
+   "goals": [
+    "State the orthogonality of $\\cos nx$ and $\\cos kx$ on $[-\\pi, \\pi]$.",
+    "Derive the formulas for $a_0$, $a_k$, $b_k$.",
+    "Compute the Fourier series of $\\delta(x)$."
+   ],
+   "notes": [
+    {
+     "heading": "Orthogonal functions",
+     "paragraphs": [
+      "For integers $n \\neq k$, $\\int_{-\\pi}^{\\pi}\\cos nx\\cos kx\\,dx = 0$, and likewise for sines and for a sine against a cosine. This is the function version of perpendicular vectors: the integral of a product plays the role of the dot product $c_1d_1 + c_2d_2 + \\cdots$. Each function has $\\int\\cos^2kx\\,dx = \\pi$ for $k \\ge 1$ (and $\\int 1\\,dx = 2\\pi$)."
+     ]
+    },
+    {
+     "heading": "The coefficient formulas",
+     "paragraphs": [
+      "Multiply $f(x) = a_0 + \\sum(a_n\\cos nx + b_n\\sin nx)$ by $\\cos kx$ and integrate from $-\\pi$ to $\\pi$. Every term but one integrates to zero, leaving $\\int f\\cos kx\\,dx = \\pi a_k$. So",
+      "$a_k = \\dfrac1\\pi\\displaystyle\\int_{-\\pi}^{\\pi}f(x)\\cos kx\\,dx,\\quad b_k = \\dfrac1\\pi\\int_{-\\pi}^{\\pi}f(x)\\sin kx\\,dx,\\quad a_0 = \\dfrac{1}{2\\pi}\\int_{-\\pi}^{\\pi}f(x)\\,dx.$",
+      "In complex form, $f = \\sum_{-\\infty}^{\\infty}c_ke^{ikx}$ with $c_k = \\tfrac{1}{2\\pi}\\int f(x)e^{-ikx}\\,dx$."
+     ]
+    },
+    {
+     "heading": "The delta function",
+     "paragraphs": [
+      "$\\delta(x)$ is even, so all $b_k = 0$. The integrals pick out the value at $0$: $a_0 = \\tfrac{1}{2\\pi}$ and $a_k = \\tfrac1\\pi\\cos 0 = \\tfrac1\\pi$. So $\\delta(x) = \\tfrac{1}{2\\pi} + \\tfrac1\\pi(\\cos x + \\cos 2x + \\cos 3x + \\cdots)$. The coefficients do not decay at all: the delta function is as rough as possible.",
+      "This equality holds in the sense of distributions, not point by point. The partial sums do not settle down to $0$ away from $x = 0$ (at $x = \\pi$ they alternate between $\\pm\\tfrac{1}{2\\pi}$). What does converge is the integral of the partial sums against any smooth periodic function $g$: it tends to $g(0)$, which is what $\\delta$ means."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$\\int\\cos nx\\cos kx = 0$ for $n \\neq k$.",
+    "$a_k = \\tfrac1\\pi\\int f\\cos kx$, $b_k = \\tfrac1\\pi\\int f\\sin kx$.",
+    "$a_0$ = average of $f$.",
+    "$\\delta$: $a_0 = \\tfrac{1}{2\\pi}$, $a_k = \\tfrac1\\pi$, no decay."
+   ],
+   "example": {
+    "title": "The sawtooth (authored)",
+    "problem": "Find the Fourier series of $f(x) = x$ on $-\\pi < x < \\pi$.",
+    "steps": [
+     {
+      "text": "f is odd: all a_k = 0. Integrate by parts for b_k.",
+      "tex": "b_k = \\frac1\\pi\\int_{-\\pi}^{\\pi}x\\sin kx\\,dx = \\frac{2(-1)^{k+1}}{k}"
+     },
+     {
+      "text": "Write the series.",
+      "tex": "x = 2\\left(\\sin x - \\frac{\\sin 2x}{2} + \\frac{\\sin 3x}{3} - \\cdots\\right)"
+     },
+     {
+      "text": "The jump at x = pi makes the coefficients decay like 1/k.",
+      "tex": "|b_k| = 2/k"
+     }
+    ],
+    "answer": "$x = 2\\sum(-1)^{k+1}\\sin(kx)/k$ on $(-\\pi, \\pi)$."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 52,
+      "t": 0,
+      "label": "Fourier series: cosines and sines"
+     },
+     {
+      "v": 52,
+      "t": 60,
+      "label": "Complex form c_k e^(ikx)"
+     },
+     {
+      "v": 52,
+      "t": 120,
+      "label": "Orthogonality of cosines"
+     },
+     {
+      "v": 52,
+      "t": 270,
+      "label": "Like a dot product of vectors"
+     },
+     {
+      "v": 52,
+      "t": 330,
+      "label": "Multiply by cos kx and integrate"
+     },
+     {
+      "v": 52,
+      "t": 480,
+      "label": "a_k, b_k, a_0 formulas"
+     },
+     {
+      "v": 52,
+      "t": 660,
+      "label": "Example: the delta function"
+     },
+     {
+      "v": 52,
+      "t": 780,
+      "label": "Coefficients 1/pi: no decay"
+     }
+    ],
+    "book": [
+     {
+      "printed": 434,
+      "pdf": 446,
+      "label": "Section 8.1: Fourier series"
+     }
+    ]
+   },
+   "tutorNotes": "Video 52. f = a0 + sum (a_k cos kx + b_k sin kx) on [-pi, pi], or sum c_k e^(ikx). Orthogonality: integral cos nx cos kx = 0 (n != k), = pi (n = k >= 1). a_k = (1/pi) int f cos kx, b_k = (1/pi) int f sin kx, a0 = (1/2pi) int f (average), c_k = (1/2pi) int f e^(-ikx). delta(x) = 1/(2pi) + (1/pi)(cos x + cos 2x + ...) in the sense of distributions (partial sums do not converge pointwise; at x = pi they alternate +-1/(2pi)).",
+   "id": "s3",
+   "number": 3
+  },
+  {
+   "nav": "Square wave and ramp",
+   "v": 53,
+   "title": "Square wave: $\\tfrac4\\pi(\\sin x + \\tfrac13\\sin 3x + \\cdots)$; ramp: $\\tfrac1{k^2}$ decay",
+   "summary": "The odd square wave ($+1$ on $(0, \\pi)$, $-1$ on $(-\\pi, 0)$) has $b_k = \\tfrac{4}{\\pi k}$ for odd $k$. Integrating it gives the even ramp $|x|$, with coefficients that decay like $1/k^2$. Smoother functions have faster-decaying coefficients; differentiation multiplies $c_k$ by $ik$.",
+   "time": [
+    0,
+    836
+   ],
+   "goals": [
+    "Compute the coefficients of the square wave.",
+    "Get the series of $|x|$ by integrating the square wave.",
+    "Relate smoothness to the decay of coefficients."
+   ],
+   "notes": [
+    {
+     "heading": "Square wave",
+     "paragraphs": [
+      "$SW(x)$ is odd, so only sines appear: $b_k = \\tfrac2\\pi\\int_0^\\pi\\sin kx\\,dx = \\tfrac{2}{\\pi k}(1 - \\cos k\\pi)$, which is $\\tfrac{4}{\\pi k}$ for odd $k$ and $0$ for even $k$:",
+      "$SW(x) = \\dfrac4\\pi\\left(\\sin x + \\dfrac{\\sin 3x}{3} + \\dfrac{\\sin 5x}{5} + \\cdots\\right).$ Partial sums overshoot near each jump by about $9\\%$ of the jump (the Gibbs phenomenon), however many terms are kept."
+     ]
+    },
+    {
+     "heading": "Integrate to a ramp",
+     "paragraphs": [
+      "The ramp $|x|$ has slope $SW(x)$. Integrating the series term by term turns $\\sin kx$ into $-\\cos kx/k$, so $|x| = \\tfrac\\pi2 - \\tfrac4\\pi\\left(\\cos x + \\tfrac{\\cos 3x}{9} + \\tfrac{\\cos 5x}{25} + \\cdots\\right)$. The constant $\\tfrac\\pi2$ is the average of $|x|$, added separately because integration does not produce it."
+     ]
+    },
+    {
+     "heading": "Smoothness and decay",
+     "paragraphs": [
+      "A jump gives coefficients like $1/k$ (square wave); a corner gives $1/k^2$ (ramp); the delta function gives no decay at all. In complex form, the derivative of $\\sum c_ke^{ikx}$ is $\\sum ikc_ke^{ikx}$: differentiation multiplies by $ik$ and makes coefficients larger, integration divides by $ik$. A shift $f(x - d)$ multiplies $c_k$ by $e^{-ikd}$."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$SW = \\tfrac4\\pi\\sum_{k\\ \\text{odd}}\\sin kx/k$.",
+    "$|x| = \\tfrac\\pi2 - \\tfrac4\\pi\\sum_{k\\ \\text{odd}}\\cos kx/k^2$.",
+    "Jump: $1/k$; corner: $1/k^2$; delta: no decay.",
+    "$d/dx$: $c_k \\to ikc_k$."
+   ],
+   "example": {
+    "title": "A famous sum from the square wave (authored)",
+    "problem": "Evaluate the square wave series at $x = \\pi/2$.",
+    "steps": [
+     {
+      "text": "SW(pi/2) = 1; sin(k pi/2) = 1, -1, 1, ... for k = 1, 3, 5, ...",
+      "tex": "1 = \\frac4\\pi\\left(1 - \\frac13 + \\frac15 - \\frac17 + \\cdots\\right)"
+     },
+     {
+      "text": "Rearrange.",
+      "tex": "1 - \\frac13 + \\frac15 - \\cdots = \\frac\\pi4"
+     },
+     {
+      "text": "From the ramp at x = 0 (|0| = 0) a second sum follows.",
+      "tex": "1 + \\frac19 + \\frac1{25} + \\cdots = \\frac{\\pi^2}{8}"
+     }
+    ],
+    "answer": "Leibniz's series $\\pi/4$ and the odd-square sum $\\pi^2/8$."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 53,
+      "t": 0,
+      "label": "The odd square wave"
+     },
+     {
+      "v": 53,
+      "t": 120,
+      "label": "b_k = (2/pi) integral of sin kx"
+     },
+     {
+      "v": 53,
+      "t": 210,
+      "label": "4/pi (sin x + sin 3x/3 + ...)"
+     },
+     {
+      "v": 53,
+      "t": 330,
+      "label": "Integrate to the ramp"
+     },
+     {
+      "v": 53,
+      "t": 450,
+      "label": "Constant pi/2 is the average"
+     },
+     {
+      "v": 53,
+      "t": 540,
+      "label": "Decay 1/k against 1/k^2"
+     },
+     {
+      "v": 53,
+      "t": 630,
+      "label": "Derivative multiplies by ik"
+     },
+     {
+      "v": 53,
+      "t": 720,
+      "label": "Shift f(x - d)"
+     }
+    ],
+    "book": [
+     {
+      "printed": 436,
+      "pdf": 448,
+      "label": "Square wave and its integral"
+     },
+     {
+      "printed": 438,
+      "pdf": 450,
+      "label": "Smoothness and decay of coefficients"
+     }
+    ]
+   },
+   "tutorNotes": "Video 53. Square wave (odd, +1 on (0, pi)): b_k = 4/(pi k) for odd k, 0 even; SW = (4/pi)(sin x + sin 3x/3 + ...). Integrate: |x| = pi/2 - (4/pi)(cos x + cos 3x/9 + cos 5x/25 + ...). Decay 1/k (jump), 1/k^2 (corner), none (delta). d/dx multiplies c_k by ik; shift f(x - d) multiplies c_k by e^(-ikd). Gibbs overshoot ~9% of the jump.",
+   "id": "s4",
+   "number": 4
+  },
+  {
+   "nav": "Laplace on a disc",
+   "v": 54,
+   "title": "Boundary data on a circle: the Poisson kernel",
+   "summary": "On the unit disc, boundary values $u(1, \\theta) = \\sum(a_n\\cos n\\theta + b_n\\sin n\\theta)$ extend inside as $u(r, \\theta) = \\sum r^n(a_n\\cos n\\theta + b_n\\sin n\\theta)$. For $u(1, \\theta) = \\delta(\\theta)$ the sum is $\\tfrac{1}{2\\pi}\\tfrac{1 - r^2}{1 + r^2 - 2r\\cos\\theta}$. The centre value is the average of the boundary values.",
+   "time": [
+    0,
+    844
+   ],
+   "goals": [
+    "Extend a boundary Fourier series into the disc with factors $r^n$.",
+    "Sum the series for delta boundary data (geometric series).",
+    "Explain the mean value property and the maximum principle."
+   ],
+   "notes": [
+    {
+     "heading": "From the boundary inwards",
+     "paragraphs": [
+      "Each boundary term $\\cos n\\theta$ becomes the harmonic function $r^n\\cos n\\theta$, which equals $\\cos n\\theta$ at $r = 1$. So the Fourier coefficients of the boundary data are all that is needed: high frequencies are damped strongly inside by $r^n$."
+     ]
+    },
+    {
+     "heading": "A point source on the boundary",
+     "paragraphs": [
+      "Take $u(1, \\theta) = \\delta(\\theta)$. Section 3 gives $a_0 = \\tfrac{1}{2\\pi}$, $a_n = \\tfrac1\\pi$. Then $u = \\tfrac{1}{2\\pi} + \\tfrac1\\pi\\sum r^n\\cos n\\theta = \\tfrac{1}{2\\pi}\\operatorname{Re}\\left(1 + 2\\sum(re^{i\\theta})^n\\right)$, a geometric series. Its sum is",
+      "$u(r, \\theta) = \\dfrac{1}{2\\pi}\\,\\dfrac{1 - r^2}{1 + r^2 - 2r\\cos\\theta}.$ At $\\theta = 0$ this is $\\tfrac{1}{2\\pi}\\tfrac{1 + r}{1 - r}$, which blows up as $r \\to 1$, as a point source should."
+     ]
+    },
+    {
+     "heading": "Averages and extremes",
+     "paragraphs": [
+      "At the centre $r = 0$ only $a_0$ survives: $u(0) = a_0$, the average of the boundary values. A harmonic function therefore has no maximum or minimum inside; its extremes are on the boundary. The discrete version is the five-point scheme: the value at a grid point is the average of its four neighbours."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$\\cos n\\theta \\to r^n\\cos n\\theta$ inside.",
+    "$\\delta$ data: $u = \\tfrac{1}{2\\pi}\\tfrac{1 - r^2}{1 + r^2 - 2r\\cos\\theta}$.",
+    "$u(0)$ = average on the boundary.",
+    "Maximum principle; five-point average."
+   ],
+   "example": {
+    "title": "Boundary data cos^2 theta (authored)",
+    "problem": "Solve Laplace's equation in the unit disc with $u(1, \\theta) = \\cos^2\\theta$.",
+    "steps": [
+     {
+      "text": "Write the boundary data as a Fourier series.",
+      "tex": "\\cos^2\\theta = \\tfrac12 + \\tfrac12\\cos 2\\theta"
+     },
+     {
+      "text": "Multiply each term by r^n.",
+      "tex": "u = \\tfrac12 + \\tfrac12r^2\\cos 2\\theta"
+     },
+     {
+      "text": "In x, y: r^2 cos 2 theta = x^2 - y^2.",
+      "tex": "u = \\tfrac12 + \\tfrac12(x^2 - y^2)"
+     }
+    ],
+    "answer": "$u = \\tfrac12(1 + x^2 - y^2)$; the centre value $\\tfrac12$ is the average of $\\cos^2\\theta$."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 54,
+      "t": 0,
+      "label": "Disc with u(1, theta) = delta(theta)"
+     },
+     {
+      "v": 54,
+      "t": 120,
+      "label": "Even data: cosines only"
+     },
+     {
+      "v": 54,
+      "t": 240,
+      "label": "Coefficients 1/(2pi) and 1/pi"
+     },
+     {
+      "v": 54,
+      "t": 330,
+      "label": "Multiply by r^n and sum"
+     },
+     {
+      "v": 54,
+      "t": 450,
+      "label": "Check on theta = 0"
+     },
+     {
+      "v": 54,
+      "t": 570,
+      "label": "u at the centre is the average"
+     },
+     {
+      "v": 54,
+      "t": 660,
+      "label": "The +1, -1 example"
+     },
+     {
+      "v": 54,
+      "t": 690,
+      "label": "Five-point scheme"
+     }
+    ],
+    "book": [
+     {
+      "printed": 418,
+      "pdf": 430,
+      "label": "Laplace's equation in a circle"
+     },
+     {
+      "printed": 436,
+      "pdf": 448,
+      "label": "Fourier series on the boundary"
+     }
+    ]
+   },
+   "tutorNotes": "Video 54. Unit disc: u(r, theta) = a0 + sum r^n (a_n cos n theta + b_n sin n theta). delta boundary: a0 = 1/(2pi), a_n = 1/pi, u = (1/2pi)(1 - r^2)/(1 + r^2 - 2r cos theta) (Poisson kernel); at theta = 0: (1/2pi)(1 + r)/(1 - r). u(0) = boundary average; maximum principle; five-point scheme averages four neighbours.",
+   "id": "s5",
+   "number": 5
+  },
+  {
+   "nav": "Heat equation",
+   "v": 55,
+   "title": "$u_t = u_{xx}$: each sine mode decays by $e^{-k^2\\pi^2t}$",
+   "summary": "With $u = 0$ at $x = 0$ and $x = 1$, separation $u = e^{\\lambda t}S(x)$ gives $S'' = \\lambda S$, so $S = \\sin k\\pi x$ and $\\lambda = -k^2\\pi^2$. The solution is $u = \\sum B_ke^{-k^2\\pi^2t}\\sin k\\pi x$, with $B_k$ the sine coefficients of the initial temperature. High frequencies die out first.",
+   "time": [
+    0,
+    648
+   ],
+   "goals": [
+    "Separate variables in the heat equation.",
+    "Find the eigenfunctions $\\sin k\\pi x$ and eigenvalues $-k^2\\pi^2$.",
+    "Expand the initial condition $u(0, x) = 1$ in sines."
+   ],
+   "notes": [
+    {
+     "heading": "Separation of variables",
+     "paragraphs": [
+      "Look for $u(t, x) = e^{\\lambda t}S(x)$. Then $u_t = \\lambda u$ and $u_{xx} = e^{\\lambda t}S''$, so $S'' = \\lambda S$: an eigenvalue problem for $d^2/dx^2$. The boundary conditions $S(0) = S(1) = 0$ allow only $S = \\sin k\\pi x$, with $\\lambda = -k^2\\pi^2$."
+     ]
+    },
+    {
+     "heading": "The solution",
+     "paragraphs": [
+      "$u(t, x) = \\sum_{k\\ge1}B_ke^{-k^2\\pi^2t}\\sin k\\pi x$, and at $t = 0$ this must equal the initial temperature: $u(0, x) = \\sum B_k\\sin k\\pi x$, a sine series. Each mode decays at its own rate; the factor $e^{-k^2\\pi^2t}$ kills high $k$ almost at once, so the temperature quickly looks like a single arch $B_1e^{-\\pi^2t}\\sin\\pi x$."
+     ]
+    },
+    {
+     "heading": "A uniform start",
+     "paragraphs": [
+      "For $u(0, x) = 1$ (a hot bar whose ends are suddenly held at $0$), the sine coefficients on $[0, 1]$ are $B_k = 2\\int_0^1\\sin k\\pi x\\,dx = \\tfrac{4}{k\\pi}$ for odd $k$ and $0$ for even $k$, the square wave again."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$u = e^{\\lambda t}S(x)$: $S'' = \\lambda S$.",
+    "$S = \\sin k\\pi x$, $\\lambda = -k^2\\pi^2$.",
+    "$u = \\sum B_ke^{-k^2\\pi^2t}\\sin k\\pi x$.",
+    "$u(0, x) = 1$: $B_k = \\tfrac{4}{k\\pi}$, $k$ odd."
+   ],
+   "example": {
+    "title": "Two modes (authored)",
+    "problem": "Solve $u_t = u_{xx}$, $u(t, 0) = u(t, 1) = 0$, $u(0, x) = \\sin\\pi x + \\tfrac12\\sin 3\\pi x$.",
+    "steps": [
+     {
+      "text": "The initial condition is already a sine series: B1 = 1, B3 = 1/2.",
+      "tex": "u = e^{-\\pi^2t}\\sin\\pi x + \\tfrac12e^{-9\\pi^2t}\\sin 3\\pi x"
+     },
+     {
+      "text": "Compare the decay rates.",
+      "tex": "\\frac{e^{-9\\pi^2t}}{e^{-\\pi^2t}} = e^{-8\\pi^2t}"
+     },
+     {
+      "text": "At t = 0.05 the ratio is already small.",
+      "tex": "e^{-0.4\\pi^2} \\approx 0.019"
+     }
+    ],
+    "answer": "$u = e^{-\\pi^2t}\\sin\\pi x + \\tfrac12e^{-9\\pi^2t}\\sin 3\\pi x$; after $t = 0.05$ the third mode is below $2\\%$ of the first."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 55,
+      "t": 0,
+      "label": "Heat equation u_t = u_xx"
+     },
+     {
+      "v": 55,
+      "t": 60,
+      "label": "Try e^(lambda t) S(x)"
+     },
+     {
+      "v": 55,
+      "t": 120,
+      "label": "S = sin k pi x, lambda = -k^2 pi^2"
+     },
+     {
+      "v": 55,
+      "t": 180,
+      "label": "Sum of modes with B_k"
+     },
+     {
+      "v": 55,
+      "t": 300,
+      "label": "Boundary values zero"
+     },
+     {
+      "v": 55,
+      "t": 360,
+      "label": "Initial temperature u(0, x) = 1"
+     },
+     {
+      "v": 55,
+      "t": 570,
+      "label": "Decay picture"
+     }
+    ],
+    "book": [
+     {
+      "printed": 455,
+      "pdf": 467,
+      "label": "Section 8.3: the heat equation"
+     }
+    ]
+   },
+   "tutorNotes": "Video 55. u_t = u_xx on [0, 1], u = 0 at both ends. u = e^(lambda t) S(x): S'' = lambda S, S = sin(k pi x), lambda = -k^2 pi^2. u = sum B_k e^(-k^2 pi^2 t) sin(k pi x), B_k from the sine series of u(0, x). u(0, x) = 1: B_k = 4/(k pi) for odd k. High frequencies decay fastest.",
+   "id": "s6",
+   "number": 6
+  },
+  {
+   "nav": "Wave equation",
+   "v": 56,
+   "title": "$u_{tt} = c^2u_{xx}$: waves travel and strings vibrate",
+   "summary": "On a whole line the wave equation moves shapes: $u = f(x - ct) + g(x + ct)$, and a delta start splits into two half-deltas moving at speed $c$ (heat would spread it into a Gaussian instead). On a string with fixed ends, released from rest, $u = \\sum d_n\\cos(nct)\\sin nx$ with $d_n$ the sine coefficients of the initial shape.",
+   "time": [
+    0,
+    914
+   ],
+   "goals": [
+    "Contrast the heat equation (smoothing) and the wave equation (travelling).",
+    "Check d'Alembert's solution $f(x - ct) + g(x + ct)$.",
+    "Solve the plucked string with a sine series."
+   ],
+   "notes": [
+    {
+     "heading": "Heat against waves",
+     "paragraphs": [
+      "Start both equations from $u(0, x) = \\delta(x)$ on the whole line. Heat spreads it instantly into the bell curve $\\tfrac{1}{\\sqrt{4\\pi t}}e^{-x^2/4t}$. The wave equation (from rest) keeps the spike sharp and splits it: $\\tfrac12\\delta(x - ct) + \\tfrac12\\delta(x + ct)$, two pulses travelling left and right at speed $c$."
+     ]
+    },
+    {
+     "heading": "d'Alembert",
+     "paragraphs": [
+      "Any $u = f(x - ct) + g(x + ct)$ solves $u_{tt} = c^2u_{xx}$: each piece has $u_{tt} = c^2f''$ and $u_{xx} = f''$. The initial conditions give $f + g = u(0, x)$ and $-cf' + cg' = u_t(0, x)$, which determine $f$ and $g$. A string released from rest ($u_t = 0$) has $f = g = \\tfrac12u(0, x)$."
+     ]
+    },
+    {
+     "heading": "A string with fixed ends",
+     "paragraphs": [
+      "On $0 \\le x \\le \\pi$ with $u = 0$ at both ends, separation gives modes $\\sin nx$ oscillating as $\\cos nct$ and $\\sin nct$. Released from rest, $u(t, x) = \\sum d_n\\cos(nct)\\sin nx$, where $u(0, x) = \\sum d_n\\sin nx$. Unlike heat, nothing decays: every mode keeps its amplitude, and the frequencies $nc$ are the harmonics of the string."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Heat: $\\delta \\to$ Gaussian; wave: $\\delta \\to$ two half-deltas.",
+    "$u = f(x - ct) + g(x + ct)$.",
+    "Fixed string from rest: $\\sum d_n\\cos(nct)\\sin nx$.",
+    "Wave modes do not decay."
+   ],
+   "example": {
+    "title": "A two-mode string (authored)",
+    "problem": "Solve $u_{tt} = u_{xx}$ on $[0, \\pi]$, fixed ends, $u(0, x) = \\sin x + \\tfrac12\\sin 3x$, $u_t(0, x) = 0$.",
+    "steps": [
+     {
+      "text": "c = 1; the sine coefficients are d1 = 1, d3 = 1/2.",
+      "tex": "u = \\cos t\\,\\sin x + \\tfrac12\\cos 3t\\,\\sin 3x"
+     },
+     {
+      "text": "Check d'Alembert: cos(nt) sin(nx) = [sin n(x - t) + sin n(x + t)]/2.",
+      "tex": "u = \\tfrac12\\left[u_0(x - t) + u_0(x + t)\\right]"
+     },
+     {
+      "text": "After t = pi every mode has cos(n pi) = -1 (n odd).",
+      "tex": "u(\\pi, x) = -u(0, x)"
+     }
+    ],
+    "answer": "$u = \\cos t\\sin x + \\tfrac12\\cos 3t\\sin 3x$; at $t = \\pi$ the string is the upside-down initial shape, and at $t = 2\\pi$ it is back."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 56,
+      "t": 0,
+      "label": "Wave equation u_tt = c^2 u_xx"
+     },
+     {
+      "v": 56,
+      "t": 210,
+      "label": "Delta start: heat gives a Gaussian"
+     },
+     {
+      "v": 56,
+      "t": 330,
+      "label": "Wave: two half deltas at x = +-ct"
+     },
+     {
+      "v": 56,
+      "t": 570,
+      "label": "Free line: f(x - ct) + g(x + ct)"
+     },
+     {
+      "v": 56,
+      "t": 660,
+      "label": "Initial position and velocity"
+     },
+     {
+      "v": 56,
+      "t": 690,
+      "label": "String on [0, pi], fixed ends"
+     },
+     {
+      "v": 56,
+      "t": 780,
+      "label": "Released from rest: cos(nct) sin nx"
+     },
+     {
+      "v": 56,
+      "t": 840,
+      "label": "Coefficients d_n from u(0, x)"
+     }
+    ],
+    "book": [
+     {
+      "printed": 463,
+      "pdf": 475,
+      "label": "Section 8.4: the wave equation"
+     }
+    ]
+   },
+   "tutorNotes": "Video 56. u_tt = c^2 u_xx. Delta start: heat gives (1/sqrt(4 pi t)) e^(-x^2/4t); wave (from rest) gives (1/2)[delta(x - ct) + delta(x + ct)]. d'Alembert u = f(x - ct) + g(x + ct); from rest f = g = u(0, x)/2. String on [0, pi], fixed ends, from rest: u = sum d_n cos(nct) sin(nx), d_n = sine coefficients of u(0, x). No decay.",
+   "id": "s7",
+   "number": 7
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q-bvp",
+   "question": "What solves $-y'' = 1$ with $y(0) = y(1) = 0$?",
+   "choices": [
+    {
+     "text": "$y = \\sin\\pi x$",
+     "why": "No. Then $-y'' = \\pi^2\\sin\\pi x$, not $1$."
+    },
+    {
+     "text": "$y = \\tfrac12(x - x^2)$",
+     "why": "Right. $y'' = -1$ and both ends are zero.",
+     "correct": true
+    },
+    {
+     "text": "$y = \\tfrac12x^2$",
+     "why": "No. $y(1) = \\tfrac12 \\neq 0$, and $-y'' = -1$."
+    },
+    {
+     "text": "$y = x - x^2$",
+     "why": "No. Then $-y'' = 2$."
+    }
+   ]
+  },
+  {
+   "id": "q-point",
+   "question": "For $-y'' = \\delta(x - a)$ with fixed ends, what happens to the slope at $x = a$?",
+   "choices": [
+    {
+     "text": "It is continuous.",
+     "why": "No. The point load makes a corner."
+    },
+    {
+     "text": "It rises by $1$.",
+     "why": "No. $-y'' = \\delta$ means $y'$ decreases."
+    },
+    {
+     "text": "The value $y(a)$ jumps by $1$.",
+     "why": "No. $y$ is continuous; only its slope jumps."
+    },
+    {
+     "text": "It drops by exactly $1$.",
+     "why": "Right. Integrating $-y''$ across $a$ gives $-(y'(a^+) - y'(a^-)) = 1$.",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "id": "q-harmonic",
+   "question": "Which function solves $u_{xx} + u_{yy} = 0$?",
+   "choices": [
+    {
+     "text": "$x^3 - 3xy^2$",
+     "why": "Right. $u_{xx} = 6x$, $u_{yy} = -6x$; it is $\\operatorname{Re}(x + iy)^3$.",
+     "correct": true
+    },
+    {
+     "text": "$x^2 + y^2$",
+     "why": "No. $2 + 2 = 4$."
+    },
+    {
+     "text": "$x^3 + y^3$",
+     "why": "No. $6x + 6y \\neq 0$."
+    },
+    {
+     "text": "$xy^2$",
+     "why": "No. $0 + 2x \\neq 0$."
+    }
+   ]
+  },
+  {
+   "id": "q-coef",
+   "question": "How is the Fourier coefficient $a_k$ ($k \\ge 1$) found on $[-\\pi, \\pi]$?",
+   "choices": [
+    {
+     "text": "$a_k = f(k)$",
+     "why": "No. Coefficients come from integrals of $f$."
+    },
+    {
+     "text": "$a_k = \\int f(x)\\sin kx\\,dx$",
+     "why": "No. Sines give $b_k$."
+    },
+    {
+     "text": "$a_k = \\tfrac1\\pi\\int_{-\\pi}^{\\pi}f(x)\\cos kx\\,dx$",
+     "why": "Right. Orthogonality removes every other term, and $\\int\\cos^2kx = \\pi$.",
+     "correct": true
+    },
+    {
+     "text": "$a_k = \\tfrac{1}{2\\pi}\\int f(x)\\cos kx\\,dx$",
+     "why": "No. $\\tfrac{1}{2\\pi}$ is for $a_0$, where $\\int 1\\,dx = 2\\pi$."
+    }
+   ]
+  },
+  {
+   "id": "q-delta",
+   "question": "What are the Fourier cosine coefficients $a_k$ ($k \\ge 1$) of $\\delta(x)$?",
+   "choices": [
+    {
+     "text": "$0$",
+     "why": "No. $\\delta$ is even, so the sines vanish, not the cosines."
+    },
+    {
+     "text": "$\\tfrac{1}{2\\pi}$",
+     "why": "No. That is $a_0$, the average."
+    },
+    {
+     "text": "All equal to $\\tfrac1\\pi$",
+     "why": "Right. $\\tfrac1\\pi\\int\\delta(x)\\cos kx\\,dx = \\tfrac1\\pi\\cos 0$.",
+     "correct": true
+    },
+    {
+     "text": "$\\tfrac{1}{\\pi k}$",
+     "why": "No. That decay would mean a smoother function."
+    }
+   ]
+  },
+  {
+   "id": "q-square",
+   "question": "Which terms appear in the odd square wave's series?",
+   "choices": [
+    {
+     "text": "$\\sin kx$ with coefficients $\\tfrac{4}{\\pi k^2}$",
+     "why": "No. $1/k^2$ belongs to the ramp, which has no jump."
+    },
+    {
+     "text": "$\\sin kx$ for odd $k$, with coefficients $\\tfrac{4}{\\pi k}$",
+     "why": "Right. $b_k = \\tfrac{2}{\\pi k}(1 - \\cos k\\pi)$.",
+     "correct": true
+    },
+    {
+     "text": "$\\cos kx$ for all $k$",
+     "why": "No. An odd function has no cosine terms."
+    },
+    {
+     "text": "$\\sin kx$ for even $k$",
+     "why": "No. $1 - \\cos k\\pi = 0$ for even $k$."
+    }
+   ]
+  },
+  {
+   "id": "q-decay",
+   "question": "Why do the ramp's coefficients decay faster than the square wave's?",
+   "choices": [
+    {
+     "text": "The ramp is odd.",
+     "why": "No. $|x|$ is even."
+    },
+    {
+     "text": "Because the ramp has a larger average.",
+     "why": "No. The average only sets $a_0$."
+    },
+    {
+     "text": "They decay at the same rate.",
+     "why": "No. $1/k$ against $1/k^2$."
+    },
+    {
+     "text": "The ramp has a corner but no jump; integrating divides coefficients by $k$.",
+     "why": "Right. $1/k$ becomes $1/k^2$.",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "id": "q-disc",
+   "question": "Inside the unit disc, what does the boundary term $\\cos 3\\theta$ become?",
+   "choices": [
+    {
+     "text": "$r^3\\cos 3\\theta$",
+     "why": "Right. It is harmonic and equals $\\cos 3\\theta$ at $r = 1$.",
+     "correct": true
+    },
+    {
+     "text": "$\\cos 3\\theta$ unchanged",
+     "why": "No. $\\cos 3\\theta$ alone is not harmonic in the disc."
+    },
+    {
+     "text": "$r^{-3}\\cos 3\\theta$",
+     "why": "No. That blows up at the centre."
+    },
+    {
+     "text": "$e^{-9r}\\cos 3\\theta$",
+     "why": "No. That is not a solution of Laplace's equation."
+    }
+   ]
+  },
+  {
+   "id": "q-heat",
+   "question": "In $u = \\sum B_ke^{-k^2\\pi^2t}\\sin k\\pi x$, which modes survive longest?",
+   "choices": [
+    {
+     "text": "None decay.",
+     "why": "No. That is the wave equation's behaviour."
+    },
+    {
+     "text": "Low $k$: $e^{-k^2\\pi^2t}$ decays slowest for $k = 1$.",
+     "why": "Right. The temperature soon looks like one arch $\\sin\\pi x$.",
+     "correct": true
+    },
+    {
+     "text": "High $k$",
+     "why": "No. High frequencies decay fastest."
+    },
+    {
+     "text": "All decay equally.",
+     "why": "No. The rate is $k^2\\pi^2$."
+    }
+   ]
+  },
+  {
+   "id": "q-wave",
+   "question": "How does the wave equation (from rest) treat a delta start on the whole line?",
+   "choices": [
+    {
+     "text": "It stays at $x = 0$ and oscillates.",
+     "why": "No. Waves travel."
+    },
+    {
+     "text": "It decays to zero everywhere.",
+     "why": "No. The wave equation conserves energy."
+    },
+    {
+     "text": "It splits into two half-deltas moving left and right at speed $c$.",
+     "why": "Right. $u = \\tfrac12[\\delta(x - ct) + \\delta(x + ct)]$.",
+     "correct": true
+    },
+    {
+     "text": "It spreads into a Gaussian.",
+     "why": "No. That is the heat equation."
+    }
+   ]
+  }
+ ]
+}

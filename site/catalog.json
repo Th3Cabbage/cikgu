@@ -145,6 +145,14 @@
      "description": "Positive definite matrices, the five tests and the energy bowl, and the singular value decomposition.",
      "storeKey": "positive-definite-svd-v1",
      "statusApp": "Study_positive_definite_svd"
+    },
+    {
+     "slug": "fourier-pde",
+     "source": "courses/mit-de/fourier-pde/dist",
+     "title": "Unit 10: Boundary Problems, Fourier Series and PDEs",
+     "description": "Boundary value problems, Laplace's equation, Fourier series, and the heat and wave equations.",
+     "storeKey": "fourier-pde-v1",
+     "statusApp": "Study_fourier_pde"
     }
    ]
   }

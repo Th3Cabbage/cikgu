@@ -1,0 +1,613 @@
+{
+ "version": 1,
+ "width": 1280,
+ "height": 720,
+ "fps": 30,
+ "relations": {
+  "define": "Definition / choice",
+  "model": "Modelling step",
+  "classify": "Classification",
+  "diagram": "Picture",
+  "substitute": "Substitution",
+  "identity": "Identity (=)",
+  "equivalent": "Equivalent statement (⇔)",
+  "solve": "Solve",
+  "compute": "Computation",
+  "implies": "Consequence (⇒)",
+  "compare": "Check",
+  "caution": "Caveat",
+  "recap": "Recap"
+ },
+ "sections": {
+  "1": [
+   "point-load"
+  ],
+  "2": [
+   "harmonic-pattern"
+  ],
+  "3": [
+   "orthogonality"
+  ],
+  "4": [
+   "square-wave"
+  ],
+  "5": [
+   "poisson-disc"
+  ],
+  "6": [
+   "heat-modes"
+  ],
+  "7": [
+   "wave-split"
+  ]
+ },
+ "sequences": [
+  {
+   "id": "point-load",
+   "scene": "PointLoadSequence",
+   "section": 1,
+   "title": "A point load: two straight lines and a slope drop",
+   "summary": "Linear on each side, zero at the ends, continuous at $a$, slope drops by $1$.",
+   "initial": {
+    "title": "The problem",
+    "tex": "-y'' = \\delta(x - a),\\quad y(0) = y(1) = 0",
+    "explanation": "A unit load at $x = a$ on a bar fixed at both ends.",
+    "frame": "animations/point-load/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Lines on each side",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "y = Cx\\ (x < a),\\qquad y = E(1 - x)\\ (x > a)",
+     "explanation": "No load away from $a$, so $y'' = 0$; the ends are fixed.",
+     "initialFrame": "animations/point-load/state-00.jpg",
+     "finalFrame": "animations/point-load/state-01.jpg",
+     "transition": {
+      "src": "animations/point-load/step-01.mp4",
+      "duration": 1.7333,
+      "frames": 52,
+      "masterFrames": [
+       8,
+       60
+      ],
+      "bytes": 41256,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Match at $x = a$",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "Ca = E(1 - a),\\qquad -E - C = -1",
+     "explanation": "Continuity, and the slope drops by exactly $1$.",
+     "initialFrame": "animations/point-load/state-01.jpg",
+     "finalFrame": "animations/point-load/state-02.jpg",
+     "transition": {
+      "src": "animations/point-load/step-02.mp4",
+      "duration": 1.9667,
+      "frames": 59,
+      "masterFrames": [
+       59,
+       118
+      ],
+      "bytes": 48815,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "The answer",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "y = (1 - a)x\\ \\ (x \\le a),\\qquad y = a(1 - x)\\ \\ (x \\ge a)",
+     "explanation": "A tent with its corner under the load.",
+     "initialFrame": "animations/point-load/state-02.jpg",
+     "finalFrame": "animations/point-load/state-03.jpg",
+     "transition": {
+      "src": "animations/point-load/step-03.mp4",
+      "duration": 1.4,
+      "frames": 42,
+      "masterFrames": [
+       117,
+       159
+      ],
+      "bytes": 54982,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 5.1,
+   "masterFrames": 159,
+   "renderSeconds": 7.7
+  },
+  {
+   "id": "harmonic-pattern",
+   "scene": "HarmonicPatternSequence",
+   "section": 2,
+   "title": "Solutions of Laplace's equation from $(x + iy)^n$",
+   "summary": "Expand powers of $x + iy$; real and imaginary parts are harmonic; in polar form they are $r^n\\cos n\\theta$, $r^n\\sin n\\theta$.",
+   "initial": {
+    "title": "Laplace's equation",
+    "tex": "u_{xx} + u_{yy} = 0",
+    "explanation": "Which polynomials solve it?",
+    "frame": "animations/harmonic-pattern/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Square",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "(x + iy)^2 = (x^2 - y^2) + i\\,(2xy)",
+     "explanation": "Both parts solve the equation: $2 - 2 = 0$ and $0 + 0 = 0$.",
+     "initialFrame": "animations/harmonic-pattern/state-00.jpg",
+     "finalFrame": "animations/harmonic-pattern/state-01.jpg",
+     "transition": {
+      "src": "animations/harmonic-pattern/step-01.mp4",
+      "duration": 1.9,
+      "frames": 57,
+      "masterFrames": [
+       8,
+       65
+      ],
+      "bytes": 38976,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Cube",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "(x + iy)^3 = (x^3 - 3xy^2) + i\\,(3x^2y - y^3)",
+     "explanation": "$u_{xx} = 6x$, $u_{yy} = -6x$ for the real part.",
+     "initialFrame": "animations/harmonic-pattern/state-01.jpg",
+     "finalFrame": "animations/harmonic-pattern/state-02.jpg",
+     "transition": {
+      "src": "animations/harmonic-pattern/step-02.mp4",
+      "duration": 2.0,
+      "frames": 60,
+      "masterFrames": [
+       64,
+       124
+      ],
+      "bytes": 55546,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Polar form",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "(re^{i\\theta})^n = r^n\\cos n\\theta + i\\,r^n\\sin n\\theta",
+     "explanation": "Two harmonic functions for every $n$.",
+     "initialFrame": "animations/harmonic-pattern/state-02.jpg",
+     "finalFrame": "animations/harmonic-pattern/state-03.jpg",
+     "transition": {
+      "src": "animations/harmonic-pattern/step-03.mp4",
+      "duration": 1.9,
+      "frames": 57,
+      "masterFrames": [
+       123,
+       180
+      ],
+      "bytes": 64944,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 5.8,
+   "masterFrames": 180,
+   "renderSeconds": 6.9
+  },
+  {
+   "id": "orthogonality",
+   "scene": "OrthogonalitySequence",
+   "section": 3,
+   "title": "Isolating $a_k$: multiply by $\\cos kx$ and integrate",
+   "summary": "Every other term integrates to zero; what remains is $\\pi a_k$.",
+   "initial": {
+    "title": "The series",
+    "tex": "f(x) = a_0 + a_1\\cos x + a_2\\cos 2x + \\cdots + b_1\\sin x + \\cdots",
+    "explanation": "Unknown coefficients.",
+    "frame": "animations/orthogonality/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Multiply by $\\cos kx$",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "\\int_{-\\pi}^{\\pi}f\\cos kx\\,dx = \\sum_n a_n\\int\\cos nx\\cos kx\\,dx + \\sum_n b_n\\int\\sin nx\\cos kx\\,dx",
+     "explanation": "Integrate each term over one period.",
+     "initialFrame": "animations/orthogonality/state-00.jpg",
+     "finalFrame": "animations/orthogonality/state-01.jpg",
+     "transition": {
+      "src": "animations/orthogonality/step-01.mp4",
+      "duration": 1.6667,
+      "frames": 50,
+      "masterFrames": [
+       8,
+       58
+      ],
+      "bytes": 195483,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Orthogonality",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "\\int_{-\\pi}^{\\pi}\\cos nx\\cos kx\\,dx = 0\\ (n \\neq k),\\qquad \\int_{-\\pi}^{\\pi}\\cos^2 kx\\,dx = \\pi",
+     "explanation": "Products of different frequencies average to zero.",
+     "initialFrame": "animations/orthogonality/state-01.jpg",
+     "finalFrame": "animations/orthogonality/state-02.jpg",
+     "transition": {
+      "src": "animations/orthogonality/step-02.mp4",
+      "duration": 2.4,
+      "frames": 72,
+      "masterFrames": [
+       57,
+       129
+      ],
+      "bytes": 80888,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "The formula",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "a_k = \\frac{1}{\\pi}\\int_{-\\pi}^{\\pi}f(x)\\cos kx\\,dx",
+     "explanation": "Likewise $b_k$ with $\\sin kx$, and $a_0$ is the average.",
+     "initialFrame": "animations/orthogonality/state-02.jpg",
+     "finalFrame": "animations/orthogonality/state-03.jpg",
+     "transition": {
+      "src": "animations/orthogonality/step-03.mp4",
+      "duration": 1.8,
+      "frames": 54,
+      "masterFrames": [
+       128,
+       182
+      ],
+      "bytes": 82480,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 5.867,
+   "masterFrames": 182,
+   "renderSeconds": 7.6
+  },
+  {
+   "id": "square-wave",
+   "scene": "SquareWaveSequence",
+   "section": 4,
+   "title": "Building the square wave from sines",
+   "summary": "$\\tfrac4\\pi(\\sin x + \\tfrac13\\sin 3x + \\cdots)$: the partial sums approach the square wave, with a persistent overshoot at the jumps.",
+   "initial": {
+    "title": "The target",
+    "tex": "SW(x) = \\pm1",
+    "explanation": "Odd: $+1$ on $(0, \\pi)$, $-1$ on $(-\\pi, 0)$.",
+    "frame": "animations/square-wave/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "One term",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "S_1 = \\tfrac4\\pi\\sin x",
+     "explanation": "$b_1 = 4/\\pi$, a little larger than $1$.",
+     "initialFrame": "animations/square-wave/state-00.jpg",
+     "finalFrame": "animations/square-wave/state-01.jpg",
+     "transition": {
+      "src": "animations/square-wave/step-01.mp4",
+      "duration": 1.5667,
+      "frames": 47,
+      "masterFrames": [
+       8,
+       55
+      ],
+      "bytes": 29039,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Add odd harmonics",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "S_7 = \\tfrac4\\pi\\left(\\sin x + \\tfrac13\\sin 3x + \\tfrac15\\sin 5x + \\tfrac17\\sin 7x\\right)",
+     "explanation": "Even harmonics are zero.",
+     "initialFrame": "animations/square-wave/state-01.jpg",
+     "finalFrame": "animations/square-wave/state-02.jpg",
+     "transition": {
+      "src": "animations/square-wave/step-02.mp4",
+      "duration": 2.7,
+      "frames": 81,
+      "masterFrames": [
+       54,
+       135
+      ],
+      "bytes": 96717,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Many terms: Gibbs",
+     "relation": "caution",
+     "relationLabel": "Caveat",
+     "tex": "\\max S_N \\to 1.179\\ldots",
+     "explanation": "The overshoot near the jump does not shrink; it moves closer to the jump.",
+     "initialFrame": "animations/square-wave/state-02.jpg",
+     "finalFrame": "animations/square-wave/state-03.jpg",
+     "transition": {
+      "src": "animations/square-wave/step-03.mp4",
+      "duration": 2.1667,
+      "frames": 65,
+      "masterFrames": [
+       134,
+       199
+      ],
+      "bytes": 84374,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 6.433,
+   "masterFrames": 199,
+   "renderSeconds": 6.3
+  },
+  {
+   "id": "poisson-disc",
+   "scene": "PoissonDiscSequence",
+   "section": 5,
+   "title": "From delta boundary data to the Poisson kernel",
+   "summary": "Each boundary cosine is damped by $r^n$; the geometric series sums in closed form.",
+   "initial": {
+    "title": "Boundary data",
+    "tex": "u(1, \\theta) = \\delta(\\theta) = \\tfrac{1}{2\\pi} + \\tfrac1\\pi\\sum\\cos n\\theta",
+    "explanation": "Coefficients from Section 3.",
+    "frame": "animations/poisson-disc/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Damp by $r^n$",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "u(r, \\theta) = \\tfrac{1}{2\\pi} + \\tfrac1\\pi\\sum_{n\\ge1} r^n\\cos n\\theta",
+     "explanation": "Each term is harmonic and matches the boundary at $r = 1$.",
+     "initialFrame": "animations/poisson-disc/state-00.jpg",
+     "finalFrame": "animations/poisson-disc/state-01.jpg",
+     "transition": {
+      "src": "animations/poisson-disc/step-01.mp4",
+      "duration": 2.6333,
+      "frames": 79,
+      "masterFrames": [
+       8,
+       87
+      ],
+      "bytes": 53271,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "A geometric series",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "1 + 2\\sum_{n\\ge1}(re^{i\\theta})^n = \\frac{1 + re^{i\\theta}}{1 - re^{i\\theta}}",
+     "explanation": "Take the real part.",
+     "initialFrame": "animations/poisson-disc/state-01.jpg",
+     "finalFrame": "animations/poisson-disc/state-02.jpg",
+     "transition": {
+      "src": "animations/poisson-disc/step-02.mp4",
+      "duration": 1.5,
+      "frames": 45,
+      "masterFrames": [
+       86,
+       131
+      ],
+      "bytes": 53370,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "The kernel",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "u(r, \\theta) = \\frac{1}{2\\pi}\\,\\frac{1 - r^2}{1 + r^2 - 2r\\cos\\theta}",
+     "explanation": "Huge near $\\theta = 0$ on the edge, $\\tfrac{1}{2\\pi}$ (the average) at the centre.",
+     "initialFrame": "animations/poisson-disc/state-02.jpg",
+     "finalFrame": "animations/poisson-disc/state-03.jpg",
+     "transition": {
+      "src": "animations/poisson-disc/step-03.mp4",
+      "duration": 1.9,
+      "frames": 57,
+      "masterFrames": [
+       130,
+       187
+      ],
+      "bytes": 62843,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 6.033,
+   "masterFrames": 187,
+   "renderSeconds": 7.2
+  },
+  {
+   "id": "heat-modes",
+   "scene": "HeatModesSequence",
+   "section": 6,
+   "title": "A hot bar cools: modes decay at rates $k^2\\pi^2$",
+   "summary": "$u(0, x) = 1$ has sine coefficients $\\tfrac{4}{k\\pi}$ (odd $k$); high modes vanish first.",
+   "initial": {
+    "title": "A uniform start",
+    "tex": "u(0, x) = 1,\\quad u(t, 0) = u(t, 1) = 0",
+    "explanation": "A hot bar with cold ends.",
+    "frame": "animations/heat-modes/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Sine series",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "1 = \\frac4\\pi\\left(\\sin\\pi x + \\tfrac13\\sin 3\\pi x + \\tfrac15\\sin 5\\pi x + \\cdots\\right)",
+     "explanation": "The square wave again, on $[0, 1]$.",
+     "initialFrame": "animations/heat-modes/state-00.jpg",
+     "finalFrame": "animations/heat-modes/state-01.jpg",
+     "transition": {
+      "src": "animations/heat-modes/step-01.mp4",
+      "duration": 1.9,
+      "frames": 57,
+      "masterFrames": [
+       8,
+       65
+      ],
+      "bytes": 50769,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Each mode decays",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "u = \\frac4\\pi\\sum_{k\\ \\mathrm{odd}}\\frac{e^{-k^2\\pi^2t}}{k}\\sin k\\pi x",
+     "explanation": "Separation: $\\sin k\\pi x$ with $\\lambda = -k^2\\pi^2$.",
+     "initialFrame": "animations/heat-modes/state-01.jpg",
+     "finalFrame": "animations/heat-modes/state-02.jpg",
+     "transition": {
+      "src": "animations/heat-modes/step-02.mp4",
+      "duration": 2.7667,
+      "frames": 83,
+      "masterFrames": [
+       64,
+       147
+      ],
+      "bytes": 80395,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "One arch remains",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "u \\approx \\tfrac4\\pi e^{-\\pi^2t}\\sin\\pi x",
+     "explanation": "The corners at the ends smooth out almost at once.",
+     "initialFrame": "animations/heat-modes/state-02.jpg",
+     "finalFrame": "animations/heat-modes/state-03.jpg",
+     "transition": {
+      "src": "animations/heat-modes/step-03.mp4",
+      "duration": 1.3333,
+      "frames": 40,
+      "masterFrames": [
+       146,
+       186
+      ],
+      "bytes": 63061,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 6.0,
+   "masterFrames": 186,
+   "renderSeconds": 7.4
+  },
+  {
+   "id": "wave-split",
+   "scene": "WaveSplitSequence",
+   "section": 7,
+   "title": "A plucked string: two half-shapes travel",
+   "summary": "From rest, $u = \\tfrac12[u_0(x - t) + u_0(x + t)]$: half the shape goes each way and reflects (inverted) at the fixed ends.",
+   "initial": {
+    "title": "Pluck the middle",
+    "tex": "u(0, x) = \\text{tent},\\quad u_t(0, x) = 0",
+    "explanation": "String on $[0, \\pi]$ with $c = 1$.",
+    "frame": "animations/wave-split/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Split in two",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "u(t, x) = \\tfrac12u_0(x - t) + \\tfrac12u_0(x + t)",
+     "explanation": "d'Alembert's formula with $f = g = \\tfrac12u_0$ (odd periodic extension).",
+     "initialFrame": "animations/wave-split/state-00.jpg",
+     "finalFrame": "animations/wave-split/state-01.jpg",
+     "transition": {
+      "src": "animations/wave-split/step-01.mp4",
+      "duration": 1.6667,
+      "frames": 50,
+      "masterFrames": [
+       8,
+       58
+      ],
+      "bytes": 51336,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Halves travel",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "t = \\tfrac\\pi4,\\ \\tfrac\\pi2",
+     "explanation": "The two half-tents move apart at speed $1$.",
+     "initialFrame": "animations/wave-split/state-01.jpg",
+     "finalFrame": "animations/wave-split/state-02.jpg",
+     "transition": {
+      "src": "animations/wave-split/step-02.mp4",
+      "duration": 2.9667,
+      "frames": 89,
+      "masterFrames": [
+       57,
+       146
+      ],
+      "bytes": 75083,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Same as the sine series",
+     "relation": "compare",
+     "relationLabel": "Check",
+     "tex": "u = \\sum d_n\\cos(nt)\\sin nx,\\quad d_n = \\frac{8}{\\pi^2n^2}\\sin\\frac{n\\pi}{2}",
+     "explanation": "At $t = \\pi$ the string is the inverted tent.",
+     "initialFrame": "animations/wave-split/state-02.jpg",
+     "finalFrame": "animations/wave-split/state-03.jpg",
+     "transition": {
+      "src": "animations/wave-split/step-03.mp4",
+      "duration": 2.2,
+      "frames": 66,
+      "masterFrames": [
+       145,
+       211
+      ],
+      "bytes": 66307,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 6.833,
+   "masterFrames": 211,
+   "renderSeconds": 6.8
+  }
+ ]
+}

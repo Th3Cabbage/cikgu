@@ -1,0 +1,172 @@
+"""Step-by-step content of the Unit 10 animations, Boundary Problems, Fourier Series and PDEs (pure data).
+
+Each sequence is one ManimGL scene in sequence_scenes.py. State 0 is the opening picture; step k
+is the transition from state k-1 to state k. `tex` is the display formula of the state a step
+reaches. `section` is the course section (1-7). Explanations are original paraphrases of Gilbert
+Strang's MIT Learn Differential Equations videos 50-56 and Strang, Sections 7.3-7.4, 8.1, 8.3-8.4.
+
+The module name is kept from the shared scaffold (ctl_common.py imports it).
+"""
+
+RELATIONS = {
+    "define": "Definition / choice",
+    "model": "Modelling step",
+    "classify": "Classification",
+    "diagram": "Picture",
+    "substitute": "Substitution",
+    "identity": "Identity (=)",
+    "equivalent": "Equivalent statement (⇔)",
+    "solve": "Solve",
+    "compute": "Computation",
+    "implies": "Consequence (⇒)",
+    "compare": "Check",
+    "caution": "Caveat",
+    "recap": "Recap",
+}
+
+SEQUENCES = [
+    {
+        "id": "point-load",
+        "scene": "PointLoadSequence",
+        "section": 1,
+        "title": "A point load: two straight lines and a slope drop",
+        "summary": "Linear on each side, zero at the ends, continuous at $a$, slope drops by $1$.",
+        "initial": {"title": "The problem", "tex": r"-y'' = \delta(x - a),\quad y(0) = y(1) = 0",
+                    "explanation": "A unit load at $x = a$ on a bar fixed at both ends."},
+        "steps": [
+            {"title": "Lines on each side", "relation": "solve",
+             "tex": r"y = Cx\ (x < a),\qquad y = E(1 - x)\ (x > a)",
+             "explanation": "No load away from $a$, so $y'' = 0$; the ends are fixed."},
+            {"title": "Match at $x = a$", "relation": "compute",
+             "tex": r"Ca = E(1 - a),\qquad -E - C = -1",
+             "explanation": "Continuity, and the slope drops by exactly $1$."},
+            {"title": "The answer", "relation": "implies",
+             "tex": r"y = (1 - a)x\ \ (x \le a),\qquad y = a(1 - x)\ \ (x \ge a)",
+             "explanation": "A tent with its corner under the load."},
+        ],
+    },
+    {
+        "id": "harmonic-pattern",
+        "scene": "HarmonicPatternSequence",
+        "section": 2,
+        "title": "Solutions of Laplace's equation from $(x + iy)^n$",
+        "summary": "Expand powers of $x + iy$; real and imaginary parts are harmonic; in polar form they are $r^n\\cos n\\theta$, $r^n\\sin n\\theta$.",
+        "initial": {"title": "Laplace's equation", "tex": r"u_{xx} + u_{yy} = 0",
+                    "explanation": "Which polynomials solve it?"},
+        "steps": [
+            {"title": "Square", "relation": "compute",
+             "tex": r"(x + iy)^2 = (x^2 - y^2) + i\,(2xy)",
+             "explanation": "Both parts solve the equation: $2 - 2 = 0$ and $0 + 0 = 0$."},
+            {"title": "Cube", "relation": "compute",
+             "tex": r"(x + iy)^3 = (x^3 - 3xy^2) + i\,(3x^2y - y^3)",
+             "explanation": "$u_{xx} = 6x$, $u_{yy} = -6x$ for the real part."},
+            {"title": "Polar form", "relation": "identity",
+             "tex": r"(re^{i\theta})^n = r^n\cos n\theta + i\,r^n\sin n\theta",
+             "explanation": "Two harmonic functions for every $n$."},
+        ],
+    },
+    {
+        "id": "orthogonality",
+        "scene": "OrthogonalitySequence",
+        "section": 3,
+        "title": "Isolating $a_k$: multiply by $\\cos kx$ and integrate",
+        "summary": "Every other term integrates to zero; what remains is $\\pi a_k$.",
+        "initial": {"title": "The series", "tex": r"f(x) = a_0 + a_1\cos x + a_2\cos 2x + \cdots + b_1\sin x + \cdots",
+                    "explanation": "Unknown coefficients."},
+        "steps": [
+            {"title": "Multiply by $\\cos kx$", "relation": "substitute",
+             "tex": r"\int_{-\pi}^{\pi}f\cos kx\,dx = \sum_n a_n\int\cos nx\cos kx\,dx + \sum_n b_n\int\sin nx\cos kx\,dx",
+             "explanation": "Integrate each term over one period."},
+            {"title": "Orthogonality", "relation": "identity",
+             "tex": r"\int_{-\pi}^{\pi}\cos nx\cos kx\,dx = 0\ (n \neq k),\qquad \int_{-\pi}^{\pi}\cos^2 kx\,dx = \pi",
+             "explanation": "Products of different frequencies average to zero."},
+            {"title": "The formula", "relation": "solve",
+             "tex": r"a_k = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos kx\,dx",
+             "explanation": "Likewise $b_k$ with $\\sin kx$, and $a_0$ is the average."},
+        ],
+    },
+    {
+        "id": "square-wave",
+        "scene": "SquareWaveSequence",
+        "section": 4,
+        "title": "Building the square wave from sines",
+        "summary": "$\\tfrac4\\pi(\\sin x + \\tfrac13\\sin 3x + \\cdots)$: the partial sums approach the square wave, with a persistent overshoot at the jumps.",
+        "initial": {"title": "The target", "tex": r"SW(x) = \pm1",
+                    "explanation": "Odd: $+1$ on $(0, \\pi)$, $-1$ on $(-\\pi, 0)$."},
+        "steps": [
+            {"title": "One term", "relation": "compute",
+             "tex": r"S_1 = \tfrac4\pi\sin x",
+             "explanation": "$b_1 = 4/\\pi$, a little larger than $1$."},
+            {"title": "Add odd harmonics", "relation": "compute",
+             "tex": r"S_7 = \tfrac4\pi\left(\sin x + \tfrac13\sin 3x + \tfrac15\sin 5x + \tfrac17\sin 7x\right)",
+             "explanation": "Even harmonics are zero."},
+            {"title": "Many terms: Gibbs", "relation": "caution",
+             "tex": r"\max S_N \to 1.179\ldots",
+             "explanation": "The overshoot near the jump does not shrink; it moves closer to the jump."},
+        ],
+    },
+    {
+        "id": "poisson-disc",
+        "scene": "PoissonDiscSequence",
+        "section": 5,
+        "title": "From delta boundary data to the Poisson kernel",
+        "summary": "Each boundary cosine is damped by $r^n$; the geometric series sums in closed form.",
+        "initial": {"title": "Boundary data", "tex": r"u(1, \theta) = \delta(\theta) = \tfrac{1}{2\pi} + \tfrac1\pi\sum\cos n\theta",
+                    "explanation": "Coefficients from Section 3."},
+        "steps": [
+            {"title": "Damp by $r^n$", "relation": "substitute",
+             "tex": r"u(r, \theta) = \tfrac{1}{2\pi} + \tfrac1\pi\sum_{n\ge1} r^n\cos n\theta",
+             "explanation": "Each term is harmonic and matches the boundary at $r = 1$."},
+            {"title": "A geometric series", "relation": "compute",
+             "tex": r"1 + 2\sum_{n\ge1}(re^{i\theta})^n = \frac{1 + re^{i\theta}}{1 - re^{i\theta}}",
+             "explanation": "Take the real part."},
+            {"title": "The kernel", "relation": "implies",
+             "tex": r"u(r, \theta) = \frac{1}{2\pi}\,\frac{1 - r^2}{1 + r^2 - 2r\cos\theta}",
+             "explanation": "Huge near $\\theta = 0$ on the edge, $\\tfrac{1}{2\\pi}$ (the average) at the centre."},
+        ],
+    },
+    {
+        "id": "heat-modes",
+        "scene": "HeatModesSequence",
+        "section": 6,
+        "title": "A hot bar cools: modes decay at rates $k^2\\pi^2$",
+        "summary": "$u(0, x) = 1$ has sine coefficients $\\tfrac{4}{k\\pi}$ (odd $k$); high modes vanish first.",
+        "initial": {"title": "A uniform start", "tex": r"u(0, x) = 1,\quad u(t, 0) = u(t, 1) = 0",
+                    "explanation": "A hot bar with cold ends."},
+        "steps": [
+            {"title": "Sine series", "relation": "compute",
+             "tex": r"1 = \frac4\pi\left(\sin\pi x + \tfrac13\sin 3\pi x + \tfrac15\sin 5\pi x + \cdots\right)",
+             "explanation": "The square wave again, on $[0, 1]$."},
+            {"title": "Each mode decays", "relation": "solve",
+             "tex": r"u = \frac4\pi\sum_{k\ \mathrm{odd}}\frac{e^{-k^2\pi^2t}}{k}\sin k\pi x",
+             "explanation": "Separation: $\\sin k\\pi x$ with $\\lambda = -k^2\\pi^2$."},
+            {"title": "One arch remains", "relation": "implies",
+             "tex": r"u \approx \tfrac4\pi e^{-\pi^2t}\sin\pi x",
+             "explanation": "The corners at the ends smooth out almost at once."},
+        ],
+    },
+    {
+        "id": "wave-split",
+        "scene": "WaveSplitSequence",
+        "section": 7,
+        "title": "A plucked string: two half-shapes travel",
+        "summary": "From rest, $u = \\tfrac12[u_0(x - t) + u_0(x + t)]$: half the shape goes each way and reflects (inverted) at the fixed ends.",
+        "initial": {"title": "Pluck the middle", "tex": r"u(0, x) = \text{tent},\quad u_t(0, x) = 0",
+                    "explanation": "String on $[0, \\pi]$ with $c = 1$."},
+        "steps": [
+            {"title": "Split in two", "relation": "identity",
+             "tex": r"u(t, x) = \tfrac12u_0(x - t) + \tfrac12u_0(x + t)",
+             "explanation": "d'Alembert's formula with $f = g = \\tfrac12u_0$ (odd periodic extension)."},
+            {"title": "Halves travel", "relation": "diagram",
+             "tex": r"t = \tfrac\pi4,\ \tfrac\pi2",
+             "explanation": "The two half-tents move apart at speed $1$."},
+            {"title": "Same as the sine series", "relation": "compare",
+             "tex": r"u = \sum d_n\cos(nt)\sin nx,\quad d_n = \frac{8}{\pi^2n^2}\sin\frac{n\pi}{2}",
+             "explanation": "At $t = \\pi$ the string is the inverted tent."},
+        ],
+    },
+]
+
+SECTION_SEQUENCES = {}
+for _s in SEQUENCES:
+    SECTION_SEQUENCES.setdefault(_s["section"], []).append(_s["id"])
