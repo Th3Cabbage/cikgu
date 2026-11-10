@@ -129,6 +129,14 @@
      "description": "Column space and null space, independence and basis, the four fundamental subspaces, and graphs with their incidence matrices and loops.",
      "storeKey": "linear-algebra-v1",
      "statusApp": "Study_linear_algebra"
+    },
+    {
+     "slug": "eigenvalues-systems",
+     "source": "courses/mit-de/eigenvalues-systems/dist",
+     "title": "Unit 8: Eigenvalues and Linear Systems y' = Ay",
+     "description": "Eigenvalues and eigenvectors, diagonalization and Markov matrices, y' = Ay and e^(At), similar and symmetric matrices, and vibrating systems.",
+     "storeKey": "eigenvalues-systems-v1",
+     "statusApp": "Study_eigenvalues_systems"
     }
    ]
   }

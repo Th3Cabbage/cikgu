@@ -1,0 +1,1185 @@
+{
+ "version": 1,
+ "title": "Eigenvalues and Linear Systems y' = Ay",
+ "subtitle": "Unit 8 of a study companion to MIT Learn Differential Equations (Gilbert Strang), videos 40-47, with Strang's Differential Equations and Linear Algebra, Chapter 6",
+ "video": {
+  "id": "DzqE7tj7eIM",
+  "title": "MIT Learn Differential Equations, videos 40-47",
+  "duration": "2:07:28",
+  "url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63oTpyxCMLKt_JmB0WtSZfG"
+ },
+ "videos": [
+  {
+   "n": 40,
+   "id": "DzqE7tj7eIM",
+   "title": "Eigenvalues and Eigenvectors",
+   "duration": "19:01",
+   "url": "https://www.youtube.com/watch?v=DzqE7tj7eIM"
+  },
+  {
+   "n": 41,
+   "id": "U8R54zOTVLw",
+   "title": "Diagonalizing a Matrix",
+   "duration": "11:37",
+   "url": "https://www.youtube.com/watch?v=U8R54zOTVLw"
+  },
+  {
+   "n": 42,
+   "id": "xtMzTXHO_zA",
+   "title": "Powers of Matrices and Markov Matrices",
+   "duration": "17:54",
+   "url": "https://www.youtube.com/watch?v=xtMzTXHO_zA"
+  },
+  {
+   "n": 43,
+   "id": "iVlHPDER0FA",
+   "title": "Solving Linear Systems",
+   "duration": "15:48",
+   "url": "https://www.youtube.com/watch?v=iVlHPDER0FA"
+  },
+  {
+   "n": 44,
+   "id": "LwSk9M5lJx4",
+   "title": "The Matrix Exponential",
+   "duration": "15:32",
+   "url": "https://www.youtube.com/watch?v=LwSk9M5lJx4"
+  },
+  {
+   "n": 45,
+   "id": "LKMGo8G7-vk",
+   "title": "Similar Matrices",
+   "duration": "14:51",
+   "url": "https://www.youtube.com/watch?v=LKMGo8G7-vk"
+  },
+  {
+   "n": 46,
+   "id": "ZTNniGvY5IQ",
+   "title": "Symmetric Matrices, Real Eigenvalues, Orthogonal Eigenvectors",
+   "duration": "15:55",
+   "url": "https://www.youtube.com/watch?v=ZTNniGvY5IQ"
+  },
+  {
+   "n": 47,
+   "id": "Ku2zZ5Vfpzo",
+   "title": "Second Order Systems",
+   "duration": "16:50",
+   "url": "https://www.youtube.com/watch?v=Ku2zZ5Vfpzo"
+  }
+ ],
+ "book": {
+  "title": "Differential Equations and Linear Algebra",
+  "authors": "Gilbert Strang",
+  "short": "Strang, Ch. 6",
+  "edition": "Wellesley-Cambridge Press, 2014 (Chapter 6)",
+  "onlineUrl": "",
+  "pageNote": "Page references give the printed page and the page of the local PDF (printed page + 12). The book is not freely available online, so only a local copy can be opened."
+ },
+ "attribution": "Course text, diagrams and animations here are original paraphrases and drawings made for this guide; examples marked authored are not from the lectures. They summarize MIT OpenCourseWare's Learn Differential Equations videos (Gilbert Strang, CC BY-NC-SA) and Strang's textbook; for the original wording, watch the videos and read the book. Captions, video and book text are not included in this guide.",
+ "explorer": {
+  "modes": [
+   {
+    "id": "eig",
+    "label": "Ax against x"
+   },
+   {
+    "id": "powers",
+    "label": "Powers u(k+1) = A u(k)"
+   },
+   {
+    "id": "flow",
+    "label": "y' = A y and e^(At)"
+   }
+  ],
+  "defaultMode": "eig",
+  "a": {
+   "min": -3,
+   "max": 6,
+   "step": 0.1,
+   "default": 5
+  },
+  "b": {
+   "min": -3,
+   "max": 6,
+   "step": 0.1,
+   "default": 1
+  },
+  "c": {
+   "min": -3,
+   "max": 6,
+   "step": 0.1,
+   "default": 3
+  },
+  "d": {
+   "min": -3,
+   "max": 6,
+   "step": 0.1,
+   "default": 3
+  },
+  "steps": 12,
+  "tMax": 3,
+  "presets": [
+   {
+    "id": "lec40",
+    "label": "[5 1; 3 3]",
+    "mode": "eig",
+    "a": 5,
+    "b": 1,
+    "c": 3,
+    "d": 3,
+    "note": "Section 1: eigenvalues $6$ and $2$, eigenvectors $(1,1)$ and $(1,-3)$."
+   },
+   {
+    "id": "markov",
+    "label": "Markov [.8 .3; .2 .7]",
+    "mode": "powers",
+    "a": 0.8,
+    "b": 0.3,
+    "c": 0.2,
+    "d": 0.7,
+    "note": "Section 2: $u_k \\to$ a multiple of $(0.6, 0.4)$."
+   },
+   {
+    "id": "lec43",
+    "label": "[-1 2; 1 -2]",
+    "mode": "flow",
+    "a": -1,
+    "b": 2,
+    "c": 1,
+    "d": -2,
+    "note": "Section 3: $\\lambda = 0, -3$; solutions settle on the line through $(2, 1)$."
+   },
+   {
+    "id": "shear",
+    "label": "Defective [0 1; 0 0]",
+    "mode": "flow",
+    "a": 0,
+    "b": 1,
+    "c": 0,
+    "d": 0,
+    "note": "Section 4: $e^{At} = I + At$, only one eigenvector."
+   },
+   {
+    "id": "rot",
+    "label": "Rotation [0 1; -1 0]",
+    "mode": "flow",
+    "a": 0,
+    "b": 1,
+    "c": -1,
+    "d": 0,
+    "note": "Section 4 example: $e^{At}$ is a rotation, $\\lambda = \\pm i$."
+   },
+   {
+    "id": "sym",
+    "label": "Symmetric [3 1; 1 3]",
+    "mode": "eig",
+    "a": 3,
+    "b": 1,
+    "c": 1,
+    "d": 3,
+    "note": "Section 5: perpendicular eigenvectors $(1,1)$, $(1,-1)$."
+   }
+  ],
+  "tutorContext": "Three modes for a 2x2 matrix A = [a b; c d] (entries from -3 to 6). Ax against x: a unit vector x sweeps the circle (animation or angle slider) and Ax is drawn; eigenvectors are where Ax is parallel to x, and the ellipse traced by Ax is shown; readouts give the eigenvalues (real or complex), eigenvectors, trace, determinant, and V, Lambda when A is diagonalizable (otherwise 'defective'). Powers: u_(k+1) = A u_k for k = 0..12 from a chosen u0, with the eigenvector decomposition u_k = sum c_i lambda_i^k x_i. Flow: y' = A y with e^(At) computed in closed form (e^(st)[cosh(qt) I + sinh(qt)/q (A - sI)], s = trace/2, q^2 = s^2 - det, cos/sin when q^2 < 0, I + t(A - sI) when q = 0), trajectories from several starts, and the matrix e^(At) at the chosen time."
+ },
+ "sections": [
+  {
+   "nav": "Eigenvalues and eigenvectors",
+   "v": 40,
+   "title": "$Ax = \\lambda x$: directions that $A$ only stretches",
+   "summary": "For $y' = Ay$, try $y = e^{\\lambda t}x$: the exponential cancels and leaves $Ax = \\lambda x$. An eigenvector keeps its direction under $A$, and $\\lambda$ is the stretching factor. With two eigenvectors the solution is $c_1e^{\\lambda_1t}x_1 + c_2e^{\\lambda_2t}x_2$.",
+   "time": [
+    0,
+    1141
+   ],
+   "goals": [
+    "Derive $Ax = \\lambda x$ from the trial solution $e^{\\lambda t}x$.",
+    "Find eigenvalues and eigenvectors of a $2\\times2$ matrix.",
+    "Write the general solution of $y' = Ay$ and fit $y(0)$.",
+    "Know the eigenvalues of $A^2$, $A^n$ and $A + cI$."
+   ],
+   "notes": [
+    {
+     "heading": "From the equation to Ax = lambda x",
+     "paragraphs": [
+      "A system $y' = Ay$ of $n$ equations couples the unknowns. Try the simplest possible solution, a fixed vector $x$ times a scalar exponential: $y = e^{\\lambda t}x$. Then $y' = \\lambda e^{\\lambda t}x$ and $Ay = e^{\\lambda t}Ax$. Cancel $e^{\\lambda t}$: $Ax = \\lambda x$.",
+      "So the right $x$ is a vector whose direction is unchanged by $A$; $\\lambda$ is how much it is stretched (or shrunk, or reversed if negative)."
+     ]
+    },
+    {
+     "heading": "The lecture's example",
+     "paragraphs": [
+      "$y_1' = 5y_1 + y_2$, $y_2' = 3y_1 + 3y_2$, so $A = \\begin{bmatrix}5 & 1\\\\ 3 & 3\\end{bmatrix}$. The vector $x_1 = (1, 1)$ gives $Ax_1 = (6, 6) = 6x_1$, so $\\lambda_1 = 6$. The vector $x_2 = (1, -3)$ gives $Ax_2 = (2, -6) = 2x_2$, so $\\lambda_2 = 2$. The general solution is $y(t) = c_1e^{6t}(1, 1) + c_2e^{2t}(1, -3)$, and $y(0) = c_1(1,1) + c_2(1,-3)$ fixes the constants."
+     ]
+    },
+    {
+     "heading": "Simple consequences",
+     "paragraphs": [
+      "If $Ax = \\lambda x$ then $A^2x = \\lambda^2x$ and $A^nx = \\lambda^nx$: same eigenvectors, eigenvalues raised to the power ($36$ and $4$ for $A^2$ above). Also $(A + cI)x = (\\lambda + c)x$: shifting by $cI$ shifts every eigenvalue by $c$.",
+      "A caution: the eigenvalues of $A + B$ are usually not the sums of eigenvalues of $A$ and $B$, because their eigenvectors are usually different."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$y = e^{\\lambda t}x$ $\\Rightarrow$ $Ax = \\lambda x$.",
+    "$\\begin{bmatrix}5&1\\\\3&3\\end{bmatrix}$: $\\lambda = 6$, $x = (1,1)$; $\\lambda = 2$, $x = (1,-3)$.",
+    "$y = c_1e^{\\lambda_1t}x_1 + c_2e^{\\lambda_2t}x_2$.",
+    "$A^n$: $\\lambda^n$; $A + cI$: $\\lambda + c$."
+   ],
+   "example": {
+    "title": "Eigenvalues from trace and determinant (authored)",
+    "problem": "Find the eigenvalues and eigenvectors of $A = \\begin{bmatrix}4 & 1\\\\ 2 & 3\\end{bmatrix}$.",
+    "steps": [
+     {
+      "text": "det(A - lambda I) = lambda^2 - 7 lambda + 10.",
+      "tex": "(\\lambda - 5)(\\lambda - 2) = 0"
+     },
+     {
+      "text": "lambda = 5: (A - 5I)x = 0 has rows (-1, 1).",
+      "tex": "x_1 = (1, 1)"
+     },
+     {
+      "text": "lambda = 2: rows (2, 1).",
+      "tex": "x_2 = (1, -2):\\quad A x_2 = (2, -4) = 2x_2"
+     }
+    ],
+    "answer": "$\\lambda = 5$ with $(1, 1)$ and $\\lambda = 2$ with $(1, -2)$; the sum $7$ is the trace and the product $10$ the determinant."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 40,
+      "t": 0,
+      "label": "n equations y' = Ay"
+     },
+     {
+      "v": 40,
+      "t": 60,
+      "label": "Try y = e^(lambda t) x"
+     },
+     {
+      "v": 40,
+      "t": 150,
+      "label": "Cancel e^(lambda t): Ax = lambda x"
+     },
+     {
+      "v": 40,
+      "t": 270,
+      "label": "Example y1' = 5y1 + y2, y2' = 3y1 + 3y2"
+     },
+     {
+      "v": 40,
+      "t": 420,
+      "label": "Eigenvector (1, 1), eigenvalue 6"
+     },
+     {
+      "v": 40,
+      "t": 510,
+      "label": "Eigenvector (1, -3), eigenvalue 2"
+     },
+     {
+      "v": 40,
+      "t": 600,
+      "label": "General solution and y(0)"
+     },
+     {
+      "v": 40,
+      "t": 720,
+      "label": "A squared: eigenvalues 36 and 4"
+     },
+     {
+      "v": 40,
+      "t": 900,
+      "label": "A^n x = lambda^n x"
+     },
+     {
+      "v": 40,
+      "t": 960,
+      "label": "A + cI: eigenvalues lambda + c"
+     },
+     {
+      "v": 40,
+      "t": 1080,
+      "label": "Caution about A + B"
+     }
+    ],
+    "book": [
+     {
+      "printed": 325,
+      "pdf": 337,
+      "label": "Section 6.1: introduction to eigenvalues"
+     }
+    ]
+   },
+   "tutorNotes": "Video 40. y' = Ay, y = e^(lambda t) x gives Ax = lambda x. A = [5 1; 3 3]: lambda 6, x (1, 1); lambda 2, x (1, -3). y = c1 e^(6t)(1, 1) + c2 e^(2t)(1, -3). A^2: 36, 4; A^n x = lambda^n x; A + cI: lambda + c. Eigenvalues of A + B are not sums in general.",
+   "id": "s1",
+   "number": 1
+  },
+  {
+   "nav": "Diagonalizing, powers, Markov",
+   "v": 41,
+   "title": "$A = V\\Lambda V^{-1}$, powers $A^k$, and Markov matrices",
+   "summary": "Put the eigenvectors in the columns of $V$ and the eigenvalues in the diagonal $\\Lambda$: $AV = V\\Lambda$, so $A = V\\Lambda V^{-1}$ and $A^k = V\\Lambda^kV^{-1}$. For $u_{k+1} = Au_k$, write $u_0 = \\sum c_ix_i$; then $u_k = \\sum c_i\\lambda_i^kx_i$. A Markov matrix has $\\lambda = 1$ and its eigenvector is the steady state.",
+   "time": [
+    0,
+    697
+   ],
+   "goals": [
+    "Build $V$ and $\\Lambda$ and check $AV = V\\Lambda$.",
+    "Compute $A^k$ from $V\\Lambda^kV^{-1}$.",
+    "Solve $u_{k+1} = Au_k$ with $c = V^{-1}u_0$.",
+    "Find the steady state of a Markov matrix."
+   ],
+   "notes": [
+    {
+     "heading": "Diagonalization",
+     "paragraphs": [
+      "$A$ times each eigenvector column is $\\lambda$ times that column: $AV = V\\Lambda$ with $V = [x_1\\ x_2\\ \\cdots]$ and $\\Lambda = \\operatorname{diag}(\\lambda_1, \\lambda_2, \\ldots)$. If the $n$ eigenvectors are independent, $V$ is invertible and $V^{-1}AV = \\Lambda$, $A = V\\Lambda V^{-1}$.",
+      "Then $A^2 = V\\Lambda V^{-1}V\\Lambda V^{-1} = V\\Lambda^2V^{-1}$, and $A^k = V\\Lambda^kV^{-1}$. Powers grow when some $|\\lambda| > 1$, decay when every $|\\lambda| < 1$, and $\\lambda = 1$ gives a part that stays fixed. (A matrix without $n$ independent eigenvectors is called defective and cannot be diagonalized.)"
+     ]
+    },
+    {
+     "heading": "Difference equations",
+     "paragraphs": [
+      "$u_{k+1} = Au_k$ is the discrete twin of $y' = Ay$. Expand the start in eigenvectors, $u_0 = c_1x_1 + \\cdots + c_nx_n$ (so $c = V^{-1}u_0$). Each piece is multiplied by its own $\\lambda$ at each step: $u_k = c_1\\lambda_1^kx_1 + \\cdots + c_n\\lambda_n^kx_n$."
+     ]
+    },
+    {
+     "heading": "Markov matrices",
+     "paragraphs": [
+      "$A = \\begin{bmatrix}0.8 & 0.3\\\\ 0.2 & 0.7\\end{bmatrix}$ has nonnegative entries and columns adding to $1$. Its characteristic equation is $\\lambda^2 - 1.5\\lambda + 0.5 = (\\lambda - 1)(\\lambda - \\tfrac12)$. For $\\lambda = 1$: $x_1 = (0.6, 0.4)$ (check: $0.48 + 0.12 = 0.6$). For $\\lambda = \\tfrac12$: $x_2 = (1, -1)$.",
+      "So $u_k = c_1(0.6, 0.4) + c_2(\\tfrac12)^k(1, -1) \\to c_1(0.6, 0.4)$, the steady state. Google's PageRank is the steady state of a giant Markov matrix."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$AV = V\\Lambda$, $A = V\\Lambda V^{-1}$.",
+    "$A^k = V\\Lambda^kV^{-1}$.",
+    "$u_k = \\sum c_i\\lambda_i^kx_i$, $c = V^{-1}u_0$.",
+    "Markov: $\\lambda = 1$ gives the steady state."
+   ],
+   "example": {
+    "title": "Following a Markov chain (authored)",
+    "problem": "For the lecture's Markov matrix, find $u_k$ from $u_0 = (1, 0)$.",
+    "steps": [
+     {
+      "text": "Expand u0 in the eigenvectors.",
+      "tex": "(1, 0) = 1\\cdot(0.6, 0.4) + 0.4\\cdot(1, -1)"
+     },
+     {
+      "text": "Multiply each piece by lambda^k.",
+      "tex": "u_k = (0.6, 0.4) + 0.4\\left(\\tfrac12\\right)^k(1, -1)"
+     },
+     {
+      "text": "Let k grow.",
+      "tex": "u_k \\to (0.6, 0.4)"
+     }
+    ],
+    "answer": "$u_k = (0.6, 0.4) + 0.4(\\tfrac12)^k(1, -1)$; the second part halves each step and the chain settles at $(0.6, 0.4)$."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 41,
+      "t": 0,
+      "label": "AV = V Lambda"
+     },
+     {
+      "v": 41,
+      "t": 270,
+      "label": "V^-1 A V = Lambda"
+     },
+     {
+      "v": 41,
+      "t": 330,
+      "label": "A = V Lambda V^-1"
+     },
+     {
+      "v": 41,
+      "t": 390,
+      "label": "A^2 and A^n"
+     },
+     {
+      "v": 41,
+      "t": 570,
+      "label": "Growth and decay of powers"
+     },
+     {
+      "v": 42,
+      "t": 0,
+      "label": "Need n independent eigenvectors"
+     },
+     {
+      "v": 42,
+      "t": 120,
+      "label": "u_(k+1) = A u_k"
+     },
+     {
+      "v": 42,
+      "t": 240,
+      "label": "Expand u0 in eigenvectors"
+     },
+     {
+      "v": 42,
+      "t": 480,
+      "label": "c = V^-1 u0"
+     },
+     {
+      "v": 42,
+      "t": 630,
+      "label": "Markov matrix [.8 .3; .2 .7]"
+     },
+     {
+      "v": 42,
+      "t": 840,
+      "label": "Steady state (.6, .4)"
+     },
+     {
+      "v": 42,
+      "t": 930,
+      "label": "PageRank"
+     }
+    ],
+    "book": [
+     {
+      "printed": 337,
+      "pdf": 349,
+      "label": "Section 6.2: diagonalizing a matrix"
+     },
+     {
+      "printed": 327,
+      "pdf": 339,
+      "label": "Markov matrices in Section 6.1"
+     }
+    ]
+   },
+   "tutorNotes": "Videos 41-42. AV = V Lambda, A = V Lambda V^-1 (needs n independent eigenvectors), A^k = V Lambda^k V^-1. u_(k+1) = A u_k: u0 = sum c_i x_i, c = V^-1 u0, u_k = sum c_i lambda_i^k x_i. Markov A = [.8 .3; .2 .7]: lambda 1, x (.6, .4); lambda 1/2, x (1, -1); steady state c1 (.6, .4). PageRank.",
+   "id": "s2",
+   "number": 2
+  },
+  {
+   "nav": "Solving y' = Ay",
+   "v": 43,
+   "title": "Solving $y' = Ay$ with eigenvectors",
+   "summary": "$y(t) = c_1e^{\\lambda_1t}x_1 + \\cdots + c_ne^{\\lambda_nt}x_n$ with $c = V^{-1}y(0)$. Stability requires every $\\operatorname{Re}\\lambda < 0$; an eigenvalue $0$ gives a steady state. For $A = \\begin{bmatrix}-1 & 2\\\\ 1 & -2\\end{bmatrix}$, $\\lambda = 0$ and $-3$, and solutions approach a multiple of $(2, 1)$.",
+   "time": [
+    0,
+    948
+   ],
+   "goals": [
+    "Solve $y' = Ay$ from the eigenvalues and eigenvectors.",
+    "Relate stability to the real parts of the eigenvalues.",
+    "Use column sums: if every column of $A$ adds to $s$, then $s$ is an eigenvalue."
+   ],
+   "notes": [
+    {
+     "heading": "The solution",
+     "paragraphs": [
+      "Each eigenvector solution $e^{\\lambda_it}x_i$ solves $y' = Ay$, and so does any combination. Matching $y(0) = c_1x_1 + \\cdots + c_nx_n$ means $Vc = y(0)$. The parts with $\\operatorname{Re}\\lambda < 0$ die out; parts with $\\operatorname{Re}\\lambda > 0$ blow up. Stability needs every real part negative."
+     ]
+    },
+    {
+     "heading": "Example",
+     "paragraphs": [
+      "$A = \\begin{bmatrix}-1 & 2\\\\ 1 & -2\\end{bmatrix}$ has trace $-3$ and determinant $0$, so $\\lambda = 0$ and $\\lambda = -3$. For $\\lambda = 0$: $Ax = 0$ gives $x_1 = (2, 1)$. For $\\lambda = -3$: $x_2 = (1, -1)$. Then $y(t) = c_1(2, 1) + c_2e^{-3t}(1, -1) \\to c_1(2, 1)$: a steady state (as for a Markov process in continuous time)."
+     ]
+    },
+    {
+     "heading": "Column and row sums",
+     "paragraphs": [
+      "Each column of this $A$ adds to $0$. In general, if every column adds to $s$, then $(1, \\ldots, 1)A = s(1, \\ldots, 1)$: $s$ is an eigenvalue of $A^T$, and $A$ and $A^T$ have the same eigenvalues (same determinant of $A - \\lambda I$). If every row adds to $s$, then $A(1, \\ldots, 1) = s(1, \\ldots, 1)$ directly."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$y = \\sum c_ie^{\\lambda_it}x_i$, $Vc = y(0)$.",
+    "Stable $\\Leftrightarrow$ all $\\operatorname{Re}\\lambda_i < 0$.",
+    "$\\lambda = 0$: a steady state.",
+    "Columns sum to $s$ $\\Rightarrow$ $s$ is an eigenvalue."
+   ],
+   "example": {
+    "title": "Fit an initial condition (authored)",
+    "problem": "Solve $y' = Ay$ for $A = \\begin{bmatrix}4 & 1\\\\ 2 & 3\\end{bmatrix}$ with $y(0) = (2, -1)$.",
+    "steps": [
+     {
+      "text": "From Section 1: lambda = 5 with (1, 1), lambda = 2 with (1, -2).",
+      "tex": "y(0) = c_1(1, 1) + c_2(1, -2)"
+     },
+     {
+      "text": "Solve c1 + c2 = 2, c1 - 2c2 = -1.",
+      "tex": "c_1 = 1,\\quad c_2 = 1"
+     },
+     {
+      "text": "Assemble.",
+      "tex": "y(t) = e^{5t}(1, 1) + e^{2t}(1, -2)"
+     }
+    ],
+    "answer": "$y(t) = e^{5t}(1, 1) + e^{2t}(1, -2)$; both eigenvalues are positive, so the system is unstable."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 43,
+      "t": 0,
+      "label": "y' = Ay with n eigenvectors"
+     },
+     {
+      "v": 43,
+      "t": 180,
+      "label": "Stability: real parts negative"
+     },
+     {
+      "v": 43,
+      "t": 210,
+      "label": "Example [-1 2; 1 -2]"
+     },
+     {
+      "v": 43,
+      "t": 300,
+      "label": "lambda = 0 with (2, 1), lambda = -3 with (1, -1)"
+     },
+     {
+      "v": 43,
+      "t": 360,
+      "label": "y = c1 (2, 1) + c2 e^(-3t) (1, -1)"
+     },
+     {
+      "v": 43,
+      "t": 450,
+      "label": "Steady state"
+     },
+     {
+      "v": 43,
+      "t": 570,
+      "label": "Columns adding to the same number"
+     },
+     {
+      "v": 43,
+      "t": 630,
+      "label": "A and A transpose: same eigenvalues"
+     },
+     {
+      "v": 43,
+      "t": 780,
+      "label": "Rows adding to s: eigenvector of ones"
+     }
+    ],
+    "book": [
+     {
+      "printed": 349,
+      "pdf": 361,
+      "label": "Section 6.3: linear systems y' = Ay"
+     }
+    ]
+   },
+   "tutorNotes": "Video 43. y = sum c_i e^(lambda_i t) x_i, Vc = y(0). Stable iff all Re lambda < 0. A = [-1 2; 1 -2]: trace -3, det 0, lambda 0 with (2, 1), lambda -3 with (1, -1); y -> c1 (2, 1). Columns summing to s: s eigenvalue (of A^T, same eigenvalues as A). Rows summing to s: A(1,...,1) = s(1,...,1).",
+   "id": "s3",
+   "number": 3
+  },
+  {
+   "nav": "Matrix exponential, similar matrices",
+   "v": 44,
+   "title": "$e^{At}$, and matrices with the same eigenvalues",
+   "summary": "$e^{At} = I + At + \\tfrac12(At)^2 + \\cdots$ solves $Y' = AY$ with $Y(0) = I$, so $y(t) = e^{At}y(0)$, even for defective $A$. With eigenvectors, $e^{At} = Ve^{\\Lambda t}V^{-1}$. Similar matrices $B = M^{-1}AM$ share eigenvalues; but $e^Ae^B \\neq e^{A+B}$ unless $AB = BA$.",
+   "time": [
+    0,
+    932
+   ],
+   "goals": [
+    "Define $e^{At}$ by its series and differentiate it.",
+    "Compute $e^{At}$ for $A = \\begin{bmatrix}0 & 1\\\\ 0 & 0\\end{bmatrix}$.",
+    "Use $e^{At} = Ve^{\\Lambda t}V^{-1}$ when $A$ has $n$ eigenvectors.",
+    "Explain why similar matrices have the same eigenvalues."
+   ],
+   "notes": [
+    {
+     "heading": "The series",
+     "paragraphs": [
+      "Copy the scalar series: $e^{At} = I + At + \\dfrac{(At)^2}{2} + \\dfrac{(At)^3}{6} + \\cdots$. Differentiating term by term gives $A + A^2t + \\tfrac12A^3t^2 + \\cdots = Ae^{At}$. So $y(t) = e^{At}y(0)$ solves $y' = Ay$ for every square $A$, with or without a full set of eigenvectors."
+     ]
+    },
+    {
+     "heading": "Two ways to compute it",
+     "paragraphs": [
+      "With $A = V\\Lambda V^{-1}$, every power is $V\\Lambda^kV^{-1}$, so the series collapses to $e^{At} = Ve^{\\Lambda t}V^{-1}$, where $e^{\\Lambda t}$ is diagonal with entries $e^{\\lambda_it}$.",
+      "For the defective $A = \\begin{bmatrix}0 & 1\\\\ 0 & 0\\end{bmatrix}$ (double eigenvalue $0$, only one eigenvector $(1, 0)$), $A^2 = 0$ and the series stops: $e^{At} = I + At = \\begin{bmatrix}1 & t\\\\ 0 & 1\\end{bmatrix}$. In equations: $y_2' = 0$ keeps $y_2$ constant and $y_1' = y_2$ grows linearly, the factor $t$ again."
+     ]
+    },
+    {
+     "heading": "Similar matrices",
+     "paragraphs": [
+      "$B = M^{-1}AM$ for an invertible $M$ is similar to $A$. If $Bx = \\lambda x$ then $A(Mx) = \\lambda(Mx)$: the same eigenvalues, with eigenvectors $Mx$. Strang's family $\\begin{bmatrix}2&3\\\\0&4\\end{bmatrix}, \\begin{bmatrix}2&0\\\\0&4\\end{bmatrix}, \\begin{bmatrix}4&0\\\\0&2\\end{bmatrix}, \\begin{bmatrix}0&2\\\\-4&6\\end{bmatrix}$ all have $\\lambda = 2, 4$ (trace $6$, determinant $8$).",
+      "Matrices with a repeated eigenvalue can fail to be similar: $\\begin{bmatrix}2&1\\\\0&2\\end{bmatrix}$ is not similar to $2I$, since $M^{-1}(2I)M = 2I$ always. The best form for a defective matrix is the Jordan form.",
+      "A caution: $e^Ae^B$, $e^Be^A$ and $e^{A+B}$ differ in general; they agree when $AB = BA$. Likewise $y' = a(t)y$ has solution $e^{\\int a}$, but for matrices $y' = A(t)y$ this fails unless the $A(t)$ commute."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$e^{At} = \\sum (At)^k/k!$, $\\tfrac{d}{dt}e^{At} = Ae^{At}$.",
+    "$e^{At} = Ve^{\\Lambda t}V^{-1}$.",
+    "$\\begin{bmatrix}0&1\\\\0&0\\end{bmatrix}$: $e^{At} = \\begin{bmatrix}1&t\\\\0&1\\end{bmatrix}$.",
+    "$B = M^{-1}AM$: same eigenvalues."
+   ],
+   "example": {
+    "title": "A rotation (authored)",
+    "problem": "Compute $e^{At}$ for $A = \\begin{bmatrix}0 & 1\\\\ -1 & 0\\end{bmatrix}$.",
+    "steps": [
+     {
+      "text": "Powers repeat: A^2 = -I, A^3 = -A, A^4 = I.",
+      "tex": "e^{At} = I\\left(1 - \\frac{t^2}{2} + \\cdots\\right) + A\\left(t - \\frac{t^3}{6} + \\cdots\\right)"
+     },
+     {
+      "text": "Recognise the cosine and sine series.",
+      "tex": "e^{At} = \\cos t\\,I + \\sin t\\,A"
+     },
+     {
+      "text": "Write it out.",
+      "tex": "e^{At} = \\begin{bmatrix}\\cos t & \\sin t\\\\ -\\sin t & \\cos t\\end{bmatrix}"
+     }
+    ],
+    "answer": "A rotation matrix: $y(t) = e^{At}y(0)$ turns $y(0)$ clockwise at unit speed; the eigenvalues are $\\pm i$."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 44,
+      "t": 0,
+      "label": "e^(At) by its series"
+     },
+     {
+      "v": 44,
+      "t": 90,
+      "label": "Derivative is A e^(At)"
+     },
+     {
+      "v": 44,
+      "t": 210,
+      "label": "Works even without enough eigenvectors"
+     },
+     {
+      "v": 44,
+      "t": 240,
+      "label": "e^(At) = V e^(Lambda t) V^-1"
+     },
+     {
+      "v": 44,
+      "t": 570,
+      "label": "Example [0 1; 0 0]"
+     },
+     {
+      "v": 44,
+      "t": 690,
+      "label": "e^(At) = I + At"
+     },
+     {
+      "v": 44,
+      "t": 840,
+      "label": "A 3 by 3 example"
+     },
+     {
+      "v": 45,
+      "t": 0,
+      "label": "B = M^-1 A M: similar matrices"
+     },
+     {
+      "v": 45,
+      "t": 180,
+      "label": "A family with eigenvalues 2 and 4"
+     },
+     {
+      "v": 45,
+      "t": 450,
+      "label": "Jordan form [2 1; 0 2]"
+     },
+     {
+      "v": 45,
+      "t": 540,
+      "label": "e^A e^B and e^(A+B)"
+     },
+     {
+      "v": 45,
+      "t": 750,
+      "label": "Matrix y' = A(t) y"
+     }
+    ],
+    "book": [
+     {
+      "printed": 362,
+      "pdf": 374,
+      "label": "Section 6.4: the exponential of a matrix"
+     },
+     {
+      "printed": 365,
+      "pdf": 377,
+      "label": "Similar matrices A and B"
+     }
+    ]
+   },
+   "tutorNotes": "Videos 44-45. e^(At) = I + At + (At)^2/2 + ..., d/dt e^(At) = A e^(At), y = e^(At) y(0) for any A. e^(At) = V e^(Lambda t) V^-1 with n eigenvectors. A = [0 1; 0 0]: A^2 = 0, e^(At) = [1 t; 0 1]. Similar B = M^-1 A M: same eigenvalues, eigenvectors Mx. Family [2 3; 0 4], [2 0; 0 4], [4 0; 0 2], [0 2; -4 6]: lambda 2, 4. [2 1; 0 2] not similar to 2I (Jordan form). e^A e^B != e^(A+B) unless AB = BA.",
+   "id": "s4",
+   "number": 4
+  },
+  {
+   "nav": "Symmetric and complex matrices",
+   "v": 46,
+   "title": "Symmetric $S$: real eigenvalues, orthogonal eigenvectors",
+   "summary": "A symmetric matrix $S = S^T$ has real eigenvalues and perpendicular eigenvectors, so $S = Q\\Lambda Q^T$ with an orthogonal $Q$. Antisymmetric matrices have imaginary eigenvalues; orthogonal matrices have $|\\lambda| = 1$. Complex vectors need the conjugate in the length: $\\|x\\|^2 = \\bar{x}^Tx$.",
+   "time": [
+    0,
+    955
+   ],
+   "goals": [
+    "Find the eigenvalues and orthogonal eigenvectors of $\\begin{bmatrix}3&1\\\\1&3\\end{bmatrix}$.",
+    "Write $S = Q\\Lambda Q^T$.",
+    "Find eigenvalues of antisymmetric and orthogonal matrices.",
+    "Measure complex vectors with $\\bar{x}^Tx$."
+   ],
+   "notes": [
+    {
+     "heading": "Symmetric matrices",
+     "paragraphs": [
+      "$S = \\begin{bmatrix}3 & 1\\\\ 1 & 3\\end{bmatrix}$: $\\lambda = 4$ with $(1, 1)$ and $\\lambda = 2$ with $(1, -1)$. The eigenvalues are real and the eigenvectors are perpendicular: $(1,1)\\cdot(1,-1) = 0$. This holds for every real symmetric matrix. Normalising the eigenvectors to unit length gives an orthogonal $Q$ ($Q^TQ = I$, so $Q^{-1} = Q^T$) and $S = Q\\Lambda Q^T$."
+     ]
+    },
+    {
+     "heading": "Antisymmetric and orthogonal",
+     "paragraphs": [
+      "$A = \\begin{bmatrix}0 & -1\\\\ 1 & 0\\end{bmatrix}$ has $A^T = -A$. Its equation $\\lambda^2 + 1 = 0$ gives $\\lambda = \\pm i$, with eigenvectors $(1, -i)$ and $(1, i)$: purely imaginary eigenvalues. Adding $3I$: $\\begin{bmatrix}3 & -1\\\\ 1 & 3\\end{bmatrix}$ has $\\lambda = 3 \\pm i$.",
+      "The rotation by $45°$, $Q = \\tfrac{1}{\\sqrt2}\\begin{bmatrix}1 & -1\\\\ 1 & 1\\end{bmatrix}$, is orthogonal; its eigenvalues $\\tfrac{1 \\pm i}{\\sqrt2}$ have absolute value $1$, as for every orthogonal matrix: $Q$ preserves lengths, so it cannot stretch an eigenvector."
+     ]
+    },
+    {
+     "heading": "Complex lengths",
+     "paragraphs": [
+      "For $\\lambda = a + ib$, $|\\lambda|^2 = \\lambda\\bar\\lambda = a^2 + b^2$. For a complex vector the length squared is $\\bar{x}^Tx = |x_1|^2 + \\cdots + |x_n|^2$; plain $x^Tx$ can be zero, as for $(1, i)$. Complex matrices with $\\bar{S}^T = S$ (Hermitian) behave like real symmetric ones: real eigenvalues, orthogonal eigenvectors."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$S = S^T$: real $\\lambda$, orthogonal $x$.",
+    "$S = Q\\Lambda Q^T$, $Q^TQ = I$.",
+    "$A^T = -A$: imaginary $\\lambda$; $Q^TQ = I$: $|\\lambda| = 1$.",
+    "Complex length: $\\bar{x}^Tx$."
+   ],
+   "example": {
+    "title": "Spectral form of a symmetric matrix (authored)",
+    "problem": "Write $S = \\begin{bmatrix}2 & 1\\\\ 1 & 2\\end{bmatrix}$ as $Q\\Lambda Q^T$.",
+    "steps": [
+     {
+      "text": "Eigenvalues and eigenvectors.",
+      "tex": "\\lambda = 3:\\ (1, 1),\\qquad \\lambda = 1:\\ (1, -1)"
+     },
+     {
+      "text": "Normalise to unit length.",
+      "tex": "Q = \\frac{1}{\\sqrt2}\\begin{bmatrix}1 & 1\\\\ 1 & -1\\end{bmatrix}"
+     },
+     {
+      "text": "Assemble.",
+      "tex": "S = Q\\begin{bmatrix}3 & 0\\\\ 0 & 1\\end{bmatrix}Q^T"
+     }
+    ],
+    "answer": "$S = Q\\Lambda Q^T$ with $\\Lambda = \\operatorname{diag}(3, 1)$; the columns of $Q$ are perpendicular unit vectors."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 46,
+      "t": 0,
+      "label": "Symmetric, antisymmetric, orthogonal"
+     },
+     {
+      "v": 46,
+      "t": 150,
+      "label": "S = [3 1; 1 3]: eigenvalues 2 and 4"
+     },
+     {
+      "v": 46,
+      "t": 240,
+      "label": "Orthogonal eigenvectors"
+     },
+     {
+      "v": 46,
+      "t": 330,
+      "label": "A = [0 -1; 1 0]: eigenvalues +-i"
+     },
+     {
+      "v": 46,
+      "t": 420,
+      "label": "Add 3I: 3 +- i"
+     },
+     {
+      "v": 46,
+      "t": 480,
+      "label": "Orthogonal Q: |lambda| = 1"
+     },
+     {
+      "v": 46,
+      "t": 570,
+      "label": "|lambda|^2 = a^2 + b^2"
+     },
+     {
+      "v": 46,
+      "t": 660,
+      "label": "Length of a complex vector"
+     }
+    ],
+    "book": [
+     {
+      "printed": 375,
+      "pdf": 387,
+      "label": "Symmetric matrices: real eigenvalues, orthogonal eigenvectors"
+     },
+     {
+      "printed": 377,
+      "pdf": 389,
+      "label": "Complex and Hermitian matrices"
+     }
+    ]
+   },
+   "tutorNotes": "Video 46. S = [3 1; 1 3]: lambda 2 (1, -1), 4 (1, 1), orthogonal; S = Q Lambda Q^T. A = [0 -1; 1 0]: lambda +-i, eigenvectors (1, -i), (1, i). B = [3 -1; 1 3]: 3 +- i. Q = (1/sqrt2)[1 -1; 1 1]: (1 +- i)/sqrt2, |lambda| = 1. |lambda|^2 = a^2 + b^2; complex length x-bar^T x. Hermitian: real eigenvalues.",
+   "id": "s5",
+   "number": 5
+  },
+  {
+   "nav": "Second order systems",
+   "v": 47,
+   "title": "Oscillating systems $My'' + Ky = 0$",
+   "summary": "Masses and springs give $My'' + Ky = 0$. Pure oscillations $y = (\\cos\\omega t)x$ require $Kx = \\omega^2Mx$: the eigenvalues are squared frequencies, and the eigenvectors are the mode shapes. For $y'' + \\tfrac{k}{m}\\begin{bmatrix}2&-1\\\\-1&2\\end{bmatrix}y = 0$ the modes are $(1, 1)$ with $\\omega^2 = k/m$ and $(1, -1)$ with $\\omega^2 = 3k/m$.",
+   "time": [
+    0,
+    1010
+   ],
+   "goals": [
+    "Turn $My'' + Ky = 0$ into the eigenvalue problem $Kx = \\omega^2Mx$.",
+    "Find the two modes of a two-mass system.",
+    "Write the solution from $y(0)$ and $y'(0)$ as a sum of modes."
+   ],
+   "notes": [
+    {
+     "heading": "Modes",
+     "paragraphs": [
+      "Newton's law for $n$ masses connected by springs is $My'' + Ky = 0$, with a diagonal mass matrix $M$ and a symmetric stiffness matrix $K$. Try $y = e^{i\\omega t}x$: $-\\omega^2Mx + Kx = 0$, that is $Kx = \\omega^2Mx$. Each eigenvector $x_i$ is a mode shape, and $\\omega_i$ its frequency.",
+      "Since there are $2n$ initial values ($y(0)$ and $y'(0)$), the solution is $y(t) = \\sum (A_i\\cos\\omega_it + B_i\\sin\\omega_it)\\,x_i$. Starting from rest ($y'(0) = 0$) all $B_i = 0$."
+     ]
+    },
+    {
+     "heading": "Two masses",
+     "paragraphs": [
+      "Equal masses $m$ between three springs $k$ (fixed at both ends): $y'' + \\tfrac{k}{m}\\begin{bmatrix}2 & -1\\\\ -1 & 2\\end{bmatrix}y = 0$. The matrix has trace $4$ and determinant $3$, so its eigenvalues are $1$ and $3$, giving $\\omega^2 = k/m$ and $3k/m$. The slow mode $(1, 1)$ moves both masses together; the fast mode $(1, -1)$ moves them against each other.",
+      "From rest: $y(t) = A_1\\cos\\left(\\sqrt{k/m}\\,t\\right)(1, 1) + A_2\\cos\\left(\\sqrt{3k/m}\\,t\\right)(1, -1)$."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$My'' + Ky = 0$, $y = e^{i\\omega t}x$ $\\Rightarrow$ $Kx = \\omega^2Mx$.",
+    "Eigenvalues = squared frequencies; eigenvectors = mode shapes.",
+    "$\\begin{bmatrix}2&-1\\\\-1&2\\end{bmatrix}$: $1$ with $(1,1)$, $3$ with $(1,-1)$.",
+    "$y = \\sum(A_i\\cos\\omega_it + B_i\\sin\\omega_it)x_i$."
+   ],
+   "example": {
+    "title": "Pull one mass and let go (authored)",
+    "problem": "With $k/m = 1$, solve $y'' + \\begin{bmatrix}2&-1\\\\-1&2\\end{bmatrix}y = 0$ from $y(0) = (1, 0)$, $y'(0) = 0$.",
+    "steps": [
+     {
+      "text": "Expand y(0) in the modes.",
+      "tex": "(1, 0) = \\tfrac12(1, 1) + \\tfrac12(1, -1)"
+     },
+     {
+      "text": "Each mode oscillates at its own frequency (from rest: cosines).",
+      "tex": "\\omega_1 = 1,\\qquad \\omega_2 = \\sqrt3"
+     },
+     {
+      "text": "Assemble.",
+      "tex": "y(t) = \\tfrac12\\cos t\\,(1, 1) + \\tfrac12\\cos\\sqrt3 t\\,(1, -1)"
+     }
+    ],
+    "answer": "$y_1 = \\tfrac12(\\cos t + \\cos\\sqrt3t)$ and $y_2 = \\tfrac12(\\cos t - \\cos\\sqrt3t)$: the energy moves back and forth between the masses."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 47,
+      "t": 0,
+      "label": "M y'' + K y = 0"
+     },
+     {
+      "v": 47,
+      "t": 150,
+      "label": "y = e^(i omega t) x gives K x = omega^2 M x"
+     },
+     {
+      "v": 47,
+      "t": 270,
+      "label": "2n initial conditions"
+     },
+     {
+      "v": 47,
+      "t": 330,
+      "label": "Masses and springs picture"
+     },
+     {
+      "v": 47,
+      "t": 660,
+      "label": "Solution as a sum of modes"
+     },
+     {
+      "v": 47,
+      "t": 690,
+      "label": "Example (k/m)[2 -1; -1 2]"
+     },
+     {
+      "v": 47,
+      "t": 780,
+      "label": "Eigenvalues k/m and 3k/m"
+     },
+     {
+      "v": 47,
+      "t": 870,
+      "label": "Start from rest: cosines"
+     }
+    ],
+    "book": [
+     {
+      "printed": 372,
+      "pdf": 384,
+      "label": "Section 6.5: second order systems and symmetric matrices"
+     }
+    ]
+   },
+   "tutorNotes": "Video 47. M y'' + K y = 0; y = e^(i omega t) x gives K x = omega^2 M x; eigenvalues are omega^2, eigenvectors are mode shapes. y = sum (A_i cos omega_i t + B_i sin omega_i t) x_i; from rest B_i = 0. Example y'' + (k/m)[2 -1; -1 2] y = 0: omega^2 = k/m with (1, 1), 3k/m with (1, -1).",
+   "id": "s6",
+   "number": 6
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q-trial",
+   "question": "Why does $y = e^{\\lambda t}x$ lead to $Ax = \\lambda x$ for $y' = Ay$?",
+   "choices": [
+    {
+     "text": "Because $\\lambda$ is always $1$.",
+     "why": "No. $\\lambda$ is whatever number makes $A - \\lambda I$ singular."
+    },
+    {
+     "text": "$y' = \\lambda e^{\\lambda t}x$ and $Ay = e^{\\lambda t}Ax$; cancelling $e^{\\lambda t}$ leaves $\\lambda x = Ax$.",
+     "why": "Right. The scalar exponential is never zero, so it cancels.",
+     "correct": true
+    },
+    {
+     "text": "Because $A$ is diagonal.",
+     "why": "No. $A$ can be any square matrix."
+    },
+    {
+     "text": "Because $x$ must be the zero vector.",
+     "why": "No. $x = 0$ gives only the zero solution; eigenvectors are nonzero."
+    }
+   ]
+  },
+  {
+   "id": "q-eig",
+   "question": "$A = \\begin{bmatrix}5 & 1\\\\ 3 & 3\\end{bmatrix}$. Which pair is an eigenvalue and eigenvector?",
+   "choices": [
+    {
+     "text": "$\\lambda = 6$, $x = (1, -1)$",
+     "why": "No. $A(1, -1) = (4, 0)$, not a multiple of $(1, -1)$."
+    },
+    {
+     "text": "$\\lambda = 5$, $x = (1, 0)$",
+     "why": "No. $A(1, 0) = (5, 3)$."
+    },
+    {
+     "text": "$\\lambda = 2$, $x = (1, 1)$",
+     "why": "No. $A(1, 1) = (6, 6) = 6(1, 1)$."
+    },
+    {
+     "text": "$\\lambda = 2$, $x = (1, -3)$",
+     "why": "Right. $A(1, -3) = (2, -6) = 2(1, -3)$.",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "id": "q-power",
+   "question": "If $Ax = 3x$, what is $(A^2 + 2I)x$?",
+   "choices": [
+    {
+     "text": "$11x$",
+     "why": "Right. $A^2x = 9x$ and $2Ix = 2x$.",
+     "correct": true
+    },
+    {
+     "text": "$5x$",
+     "why": "No. $A^2$ squares the eigenvalue: $9$, not $3$."
+    },
+    {
+     "text": "$9x$",
+     "why": "No. Add the $2x$ from $2I$."
+    },
+    {
+     "text": "$(3 + 2)^2x$",
+     "why": "No. That would be $(A + 2I)^2$."
+    }
+   ]
+  },
+  {
+   "id": "q-diag",
+   "question": "With $A = V\\Lambda V^{-1}$, what is $A^{10}$?",
+   "choices": [
+    {
+     "text": "$\\Lambda^{10}$",
+     "why": "No. That is $V^{-1}A^{10}V$, not $A^{10}$."
+    },
+    {
+     "text": "$10\\,V\\Lambda V^{-1}$",
+     "why": "No. Powers multiply, they do not add."
+    },
+    {
+     "text": "$V\\Lambda^{10}V^{-1}$",
+     "why": "Right. Inner $V^{-1}V$ pairs cancel.",
+     "correct": true
+    },
+    {
+     "text": "$V^{10}\\Lambda^{10}V^{-10}$",
+     "why": "No. The $V$ and $V^{-1}$ cancel between factors; they are not raised to powers."
+    }
+   ]
+  },
+  {
+   "id": "q-markov",
+   "question": "For the Markov matrix $\\begin{bmatrix}0.8 & 0.3\\\\ 0.2 & 0.7\\end{bmatrix}$, where does $u_k$ go?",
+   "choices": [
+    {
+     "text": "To infinity",
+     "why": "No. No eigenvalue exceeds $1$ in size."
+    },
+    {
+     "text": "It oscillates forever",
+     "why": "No. Both eigenvalues are real and positive."
+    },
+    {
+     "text": "To a multiple of $(0.6, 0.4)$, the eigenvector for $\\lambda = 1$",
+     "why": "Right. The $\\lambda = \\tfrac12$ part shrinks to zero.",
+     "correct": true
+    },
+    {
+     "text": "To zero",
+     "why": "No. The eigenvalue $1$ part stays."
+    }
+   ]
+  },
+  {
+   "id": "q-stable",
+   "question": "Which $y' = Ay$ has every solution approaching $0$?",
+   "choices": [
+    {
+     "text": "Eigenvalues $\\pm 2i$",
+     "why": "No. Pure oscillation does not decay."
+    },
+    {
+     "text": "Eigenvalues $-1$ and $-3$",
+     "why": "Right. Both exponentials decay.",
+     "correct": true
+    },
+    {
+     "text": "Eigenvalues $0$ and $-3$",
+     "why": "No. The $\\lambda = 0$ part stays constant: a steady state, not $0$."
+    },
+    {
+     "text": "Eigenvalues $-1 \\pm 2i$ and $1$",
+     "why": "No. The eigenvalue $1$ grows."
+    }
+   ]
+  },
+  {
+   "id": "q-expm",
+   "question": "What is $e^{At}$ for $A = \\begin{bmatrix}0 & 1\\\\ 0 & 0\\end{bmatrix}$?",
+   "choices": [
+    {
+     "text": "$\\begin{bmatrix}1 & e^t\\\\ 0 & 1\\end{bmatrix}$",
+     "why": "No. Entries of $e^{At}$ are not exponentials of entries of $A$."
+    },
+    {
+     "text": "$\\begin{bmatrix}e^0 & e^t\\\\ e^0 & e^0\\end{bmatrix}$",
+     "why": "No. Same mistake: exponentiate the matrix, not each entry."
+    },
+    {
+     "text": "It does not exist: $A$ has only one eigenvector.",
+     "why": "No. The series defines $e^{At}$ for every square matrix."
+    },
+    {
+     "text": "$\\begin{bmatrix}1 & t\\\\ 0 & 1\\end{bmatrix}$",
+     "why": "Right. $A^2 = 0$, so the series stops at $I + At$.",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "id": "q-similar",
+   "question": "Why do $A$ and $B = M^{-1}AM$ have the same eigenvalues?",
+   "choices": [
+    {
+     "text": "If $Bx = \\lambda x$, then $A(Mx) = \\lambda(Mx)$.",
+     "why": "Right. Multiply $M^{-1}AMx = \\lambda x$ by $M$.",
+     "correct": true
+    },
+    {
+     "text": "Because $M$ is diagonal.",
+     "why": "No. $M$ is any invertible matrix."
+    },
+    {
+     "text": "Because $A = B$.",
+     "why": "No. Similar matrices are usually different."
+    },
+    {
+     "text": "They do not; only the determinants agree.",
+     "why": "No. All eigenvalues agree (and so trace and determinant)."
+    }
+   ]
+  },
+  {
+   "id": "q-sym",
+   "question": "What is true for every real symmetric matrix?",
+   "choices": [
+    {
+     "text": "$|\\lambda| = 1$",
+     "why": "No. That is for orthogonal matrices."
+    },
+    {
+     "text": "Real eigenvalues and perpendicular eigenvectors",
+     "why": "Right. Hence $S = Q\\Lambda Q^T$ with orthogonal $Q$.",
+     "correct": true
+    },
+    {
+     "text": "All eigenvalues positive",
+     "why": "No. $\\begin{bmatrix}0&1\\\\1&0\\end{bmatrix}$ has $\\lambda = \\pm1$; positive eigenvalues define positive definite matrices (Unit 9)."
+    },
+    {
+     "text": "Imaginary eigenvalues",
+     "why": "No. That is for antisymmetric matrices."
+    }
+   ]
+  },
+  {
+   "id": "q-modes",
+   "question": "For $y'' + \\begin{bmatrix}2&-1\\\\-1&2\\end{bmatrix}y = 0$, what are the two frequencies?",
+   "choices": [
+    {
+     "text": "$2$ and $2$",
+     "why": "No. Those are the diagonal entries."
+    },
+    {
+     "text": "$\\sqrt2$ and $\\sqrt2$",
+     "why": "No. The off-diagonal coupling splits the frequencies."
+    },
+    {
+     "text": "$1$ and $\\sqrt3$",
+     "why": "Right. Eigenvalues $1$ and $3$ are $\\omega^2$.",
+     "correct": true
+    },
+    {
+     "text": "$1$ and $3$",
+     "why": "No. The eigenvalues are the squares of the frequencies."
+    }
+   ]
+  }
+ ]
+}

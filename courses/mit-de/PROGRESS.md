@@ -43,7 +43,7 @@ retries. User chose the browser sign-in: `tools/prepare_unit.py ... --cookies-fr
 | 5 | laplace-transform | 3/3, map in source-maps/unit-05.md | done (3 sections) | done: 4 findings fixed | done (5 sequences, 16 steps) | done (2.2 MB) | math 571/571, check_study ok, browser 38/38 | at final review |
 | 6 | phase-plane | 8/8, map in source-maps/unit-06.md | done (6 sections) | done: 3 findings fixed | done (6 sequences, 18 steps) | done (2.2 MB) | math 3070/3070, check_study ok, browser 44/44 | at final review |
 | 7 | linear-algebra | 5/5, map in source-maps/unit-07.md | done (5 sections) | done: 2 findings fixed | done (5 sequences, 15 steps) | done (1.9 MB) | math 1126/1126, check_study ok, browser 38/38 | at final review |
-| 8 | eigenvalues-systems | | | | | | | |
+| 8 | eigenvalues-systems | 8/8, map in source-maps/unit-08.md | done (6 sections) | done: 3 findings fixed | done (6 sequences, 18 steps) | done (2.0 MB) | math 8293/8293, check_study ok, browser 44/44 | at final review |
 | 9 | positive-definite-svd | 2/2, map in source-maps/unit-09.md (check SVD board frame) | | | | | | |
 | 10 | fourier-pde | | | | | | | |
 | 11 | numerical-methods | | | | | | | |
