@@ -37,17 +37,17 @@ retries. User chose the browser sign-in: `tools/prepare_unit.py ... --cookies-fr
 | Unit | Slug | Sources | Plan | Codex 1 | Content | Renders | QA | Codex 2 |
 |---|---|---|---|---|---|---|---|---|
 | 1 | first-order-linear | 10/10 | done (8 sections) | done: maths/quiz clean; 1 tool bug fixed | done (10 sequences, 33 steps; explorer by package-builder, reviewed) | done (4.7 MB) | math 515/515, check_study ok, browser 65/65, site 7/7 + 104/104 | done: no Unit 1 findings |
-| 2 | nonlinear-first-order | 3/3, map in source-maps/unit-02.md | done (3 sections) | done: 3 findings fixed | done (6 sequences, 20 steps; explorer by package-builder) | done (2.6 MB) | math 519/519, check_study ok, browser 43/43 | at final review |
-| 3 | second-order | 6/6, map in source-maps/unit-03.md | done (6 sections) | done: 2 findings fixed | done (6 sequences, 19 steps) | done (2.4 MB) | math 405/405, check_study ok, browser 45/45 | at final review |
-| 4 | networks-and-methods | 4/4, map in source-maps/unit-04.md | done (4 sections) | done: 2 findings fixed | done (5 sequences, 15 steps) | done (2.0 MB) | math 967/967, check_study ok, browser 38/38 | at final review |
-| 5 | laplace-transform | 3/3, map in source-maps/unit-05.md | done (3 sections) | done: 4 findings fixed | done (5 sequences, 16 steps) | done (2.2 MB) | math 571/571, check_study ok, browser 38/38 | at final review |
-| 6 | phase-plane | 8/8, map in source-maps/unit-06.md | done (6 sections) | done: 3 findings fixed | done (6 sequences, 18 steps) | done (2.2 MB) | math 3070/3070, check_study ok, browser 44/44 | at final review |
-| 7 | linear-algebra | 5/5, map in source-maps/unit-07.md | done (5 sections) | done: 2 findings fixed | done (5 sequences, 15 steps) | done (1.9 MB) | math 1126/1126, check_study ok, browser 38/38 | at final review |
-| 8 | eigenvalues-systems | 8/8, map in source-maps/unit-08.md | done (6 sections) | done: 3 findings fixed | done (6 sequences, 18 steps) | done (2.0 MB) | math 8293/8293, check_study ok, browser 44/44 | at final review |
-| 9 | positive-definite-svd | 2/2, map in source-maps/unit-09.md (SVD frame checked) | done (3 sections) | done: 2 findings fixed | done (5 sequences, 15 steps) | done (1.9 MB) | math 3042/3042, check_study ok, browser 37/37 | at final review |
-| 10 | fourier-pde | 7/7, map in source-maps/unit-10.md | done (7 sections) | done: 2 findings fixed | done (7 sequences, 21 steps) | done (2.7 MB) | math 103/103, check_study ok, browser 49/49 | at final review |
-| 11 | numerical-methods | 9/9, map in source-maps/unit-11.md | done (6 sections) | done: 2 findings fixed | done (6 sequences, 18 steps; live explorer by the lead session) | done (1.9 MB) | math 274/274, check_study ok, browser 44/44 | at final review |
-| 12 | applications | 3/3, map in source-maps/unit-12.md | done (3 sections) | done: 1 finding fixed | done (3 sequences, 9 steps; explorer by the lead session) | done (1.3 MB) | math 34/34, check_study ok, browser 29/29 | at final review |
+| 2 | nonlinear-first-order | 3/3, map in source-maps/unit-02.md | done (3 sections) | done: 3 findings fixed | done (6 sequences, 20 steps; explorer by package-builder) | done (2.6 MB) | math 519/519, check_study ok, browser 43/43 | pending (final standard review) |
+| 3 | second-order | 6/6, map in source-maps/unit-03.md | done (6 sections) | done: 2 findings fixed | done (6 sequences, 19 steps) | done (2.4 MB) | math 405/405, check_study ok, browser 45/45 | pending (final standard review) |
+| 4 | networks-and-methods | 4/4, map in source-maps/unit-04.md | done (4 sections) | done: 2 findings fixed | done (5 sequences, 15 steps) | done (2.0 MB) | math 967/967, check_study ok, browser 38/38 | pending (final standard review) |
+| 5 | laplace-transform | 3/3, map in source-maps/unit-05.md | done (3 sections) | done: 4 findings fixed | done (5 sequences, 16 steps) | done (2.2 MB) | math 571/571, check_study ok, browser 38/38 | pending (final standard review) |
+| 6 | phase-plane | 8/8, map in source-maps/unit-06.md | done (6 sections) | done: 3 findings fixed | done (6 sequences, 18 steps) | done (2.2 MB) | math 3070/3070, check_study ok, browser 44/44 | pending (final standard review) |
+| 7 | linear-algebra | 5/5, map in source-maps/unit-07.md | done (5 sections) | done: 2 findings fixed | done (5 sequences, 15 steps) | done (1.9 MB) | math 1126/1126, check_study ok, browser 38/38 | pending (final standard review) |
+| 8 | eigenvalues-systems | 8/8, map in source-maps/unit-08.md | done (6 sections) | done: 3 findings fixed | done (6 sequences, 18 steps) | done (2.0 MB) | math 8293/8293, check_study ok, browser 44/44 | pending (final standard review) |
+| 9 | positive-definite-svd | 2/2, map in source-maps/unit-09.md (SVD frame checked) | done (3 sections) | done: 2 findings fixed | done (5 sequences, 15 steps) | done (1.9 MB) | math 3042/3042, check_study ok, browser 37/37 | pending (final standard review) |
+| 10 | fourier-pde | 7/7, map in source-maps/unit-10.md | done (7 sections) | done: 2 findings fixed | done (7 sequences, 21 steps) | done (2.7 MB) | math 103/103, check_study ok, browser 49/49 | pending (final standard review) |
+| 11 | numerical-methods | 9/9, map in source-maps/unit-11.md | done (6 sections) | done: 2 findings fixed | done (6 sequences, 18 steps; live explorer by the lead session) | done (1.9 MB) | math 274/274, check_study ok, browser 44/44 | pending (final standard review) |
+| 12 | applications | 3/3, map in source-maps/unit-12.md | done (3 sections) | done: 1 finding fixed | done (3 sequences, 9 steps; explorer by the lead session) | done (1.3 MB) | math 34/34, check_study ok, browser 29/29 | pending (final standard review) |
 
 ### Unit 1 plan (draft)
 

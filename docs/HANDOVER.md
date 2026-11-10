@@ -127,7 +127,34 @@ book pages are in `courses/mit-de/units.json`; status, decisions and review resu
 `courses/mit-de/adapt_shell.py` (several videos per unit: sources carry a video number `v` and time
 `t`; Strang's book has no online copy). The local book `docs/DIFFER~1.pdf` is ignored by Git
 (printed page = PDF page - 12); notes are original paraphrases with page references only.
-Unit 1 (videos 1-10, port 8831) is complete; see its README for checks.
+All 12 units are complete (11 November 2026), ports 8831-8842, each with its own README listing
+the checks run and the Codex findings fixed:
+
+| Unit | Slug | Videos | Sections / sequences | Maths QA |
+|---|---|---|---|---|
+| 1 | first-order-linear | 1-10 | 8 / 10 | 515 |
+| 2 | nonlinear-first-order | 11-13 | 3 / 6 | 519 |
+| 3 | second-order | 14-19 | 6 / 6 | 405 |
+| 4 | networks-and-methods | 20-23 | 4 / 5 | 967 |
+| 5 | laplace-transform | 24-26 | 3 / 5 | 571 |
+| 6 | phase-plane | 27-34 | 6 / 6 | 3070 |
+| 7 | linear-algebra | 35-39 | 5 / 5 | 1126 |
+| 8 | eigenvalues-systems | 40-47 | 6 / 6 | 8293 |
+| 9 | positive-definite-svd | 48-49 | 3 / 5 | 3042 |
+| 10 | fourier-pde | 50-56 | 7 / 7 | 103 |
+| 11 | numerical-methods | 57-65 | 6 / 6 | 274 |
+| 12 | applications | 66-68 | 3 / 3 | 34 |
+
+Maths QA scripts are `qa/mit_de_<slug>_math_qa.py`. Every unit passed `tools/check_study.py
+--decode --typeset` and `qa/study_browser_qa.js`; the site build tests (7/7) and site browser
+checks (104/104) pass with all 12 units in `site/catalog.json`. Codex (gpt-6.1-sol, medium)
+reviewed the mathematics of every unit adversarially; all findings were fixed. The final standard
+Codex review of the whole series is still pending. Unit 11's explorer animates each method stage by
+stage (the user's request); the Unit 11 and 12 explorers were written by the lead session because
+the Sonnet agents had reached their usage limit. Helpers: `courses/mit-de/add_to_site.py` (catalog
+entry) and `courses/mit-de/sheet.py` (contact sheet of final animation frames). Lesson learnt:
+write LaTeX into Python files with the Edit tool, not shell heredocs or sed (backslashes such as
+`\t`, `\f`, `\a` were silently turned into control characters several times).
 
 ## Unified study site (19 October 2026)
 
