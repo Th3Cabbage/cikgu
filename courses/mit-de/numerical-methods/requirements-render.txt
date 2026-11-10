@@ -1,0 +1,11 @@
+# Rendering and QA dependencies for the Control Bootcamp companion (tested versions, Python 3.13).
+# Viewing the guide needs none of these: control/server.py uses only the standard library.
+#   .venv\Scripts\python.exe -m pip install -r control\requirements-render.txt
+manimgl==1.7.2
+setuptools<81                      # manimgl 1.7.2 imports pkg_resources
+matplotlib==3.11.2                 # mathtext typesetting (no LaTeX needed)
+numpy==2.5.4
+imageio-ffmpeg==0.6.0              # bundled FFmpeg used for rendering, cutting and probing
+audioop-lts==0.2.2; python_version >= "3.13"   # pydub (a manimgl dependency) needs audioop, removed in 3.13
+scipy==1.18.1                      # QA: reference solutions in qa/control_math_qa.py
+pillow==12.3.0                     # QA: still comparison and contact sheets

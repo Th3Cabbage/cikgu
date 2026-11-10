@@ -153,6 +153,14 @@
      "description": "Boundary value problems, Laplace's equation, Fourier series, and the heat and wave equations.",
      "storeKey": "fourier-pde-v1",
      "statusApp": "Study_fourier_pde"
+    },
+    {
+     "slug": "numerical-methods",
+     "source": "courses/mit-de/numerical-methods/dist",
+     "title": "Unit 11: Numerical Methods for ODEs",
+     "description": "Euler, midpoint and Runge-Kutta, order, ode23/ode45 error control and stiffness, with a live stage-by-stage explorer.",
+     "storeKey": "numerical-methods-v1",
+     "statusApp": "Study_numerical_methods"
     }
    ]
   }

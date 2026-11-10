@@ -46,7 +46,7 @@ retries. User chose the browser sign-in: `tools/prepare_unit.py ... --cookies-fr
 | 8 | eigenvalues-systems | 8/8, map in source-maps/unit-08.md | done (6 sections) | done: 3 findings fixed | done (6 sequences, 18 steps) | done (2.0 MB) | math 8293/8293, check_study ok, browser 44/44 | at final review |
 | 9 | positive-definite-svd | 2/2, map in source-maps/unit-09.md (SVD frame checked) | done (3 sections) | done: 2 findings fixed | done (5 sequences, 15 steps) | done (1.9 MB) | math 3042/3042, check_study ok, browser 37/37 | at final review |
 | 10 | fourier-pde | 7/7, map in source-maps/unit-10.md | done (7 sections) | done: 2 findings fixed | done (7 sequences, 21 steps) | done (2.7 MB) | math 103/103, check_study ok, browser 49/49 | at final review |
-| 11 | numerical-methods | | | | | | | |
+| 11 | numerical-methods | 9/9, map in source-maps/unit-11.md | done (6 sections) | done: 2 findings fixed | done (6 sequences, 18 steps; live explorer by the lead session) | done (1.9 MB) | math 274/274, check_study ok, browser 44/44 | at final review |
 | 12 | applications | | | | | | | |
 
 ### Unit 1 plan (draft)

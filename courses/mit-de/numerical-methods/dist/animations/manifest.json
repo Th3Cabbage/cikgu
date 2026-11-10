@@ -1,0 +1,529 @@
+{
+ "version": 1,
+ "width": 1280,
+ "height": 720,
+ "fps": 30,
+ "relations": {
+  "define": "Definition / choice",
+  "model": "Modelling step",
+  "classify": "Classification",
+  "diagram": "Picture",
+  "substitute": "Substitution",
+  "identity": "Identity (=)",
+  "equivalent": "Equivalent statement (⇔)",
+  "solve": "Solve",
+  "compute": "Computation",
+  "implies": "Consequence (⇒)",
+  "compare": "Check",
+  "caution": "Caveat",
+  "recap": "Recap"
+ },
+ "sections": {
+  "1": [
+   "euler-steps"
+  ],
+  "2": [
+   "rk4-stages"
+  ],
+  "3": [
+   "order-plot"
+  ],
+  "4": [
+   "bs23-control"
+  ],
+  "5": [
+   "stiff-euler"
+  ],
+  "6": [
+   "oscillator-drift"
+  ]
+ },
+ "sequences": [
+  {
+   "id": "euler-steps",
+   "scene": "EulerStepsSequence",
+   "section": 1,
+   "title": "Euler on $y' = 2y$, $y(0) = 10$, $h = 1$",
+   "summary": "Each step follows the tangent at its left end: $30$, $90$, $270$, falling ever further below $10e^{2t}$.",
+   "initial": {
+    "title": "Exact solution",
+    "tex": "y = 10e^{2t}",
+    "explanation": "The values grow fast; Euler will lag behind.",
+    "frame": "animations/euler-steps/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "First step",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "s_1 = 2\\cdot10 = 20,\\quad y_1 = 10 + 1\\cdot20 = 30",
+     "explanation": "Follow the tangent line for one unit of time.",
+     "initialFrame": "animations/euler-steps/state-00.jpg",
+     "finalFrame": "animations/euler-steps/state-01.jpg",
+     "transition": {
+      "src": "animations/euler-steps/step-01.mp4",
+      "duration": 2.0,
+      "frames": 60,
+      "masterFrames": [
+       8,
+       68
+      ],
+      "bytes": 30744,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Two more steps",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "y_2 = 30 + 60 = 90,\\qquad y_3 = 90 + 180 = 270",
+     "explanation": "Each step multiplies by $1 + 2h = 3$.",
+     "initialFrame": "animations/euler-steps/state-01.jpg",
+     "finalFrame": "animations/euler-steps/state-02.jpg",
+     "transition": {
+      "src": "animations/euler-steps/step-02.mp4",
+      "duration": 2.1333,
+      "frames": 64,
+      "masterFrames": [
+       67,
+       131
+      ],
+      "bytes": 45718,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "The error",
+     "relation": "compare",
+     "relationLabel": "Check",
+     "tex": "y(3) = 10e^6 \\approx 4034 \\gg 270",
+     "explanation": "The left-end slope is the smallest slope on each interval of a growing solution.",
+     "initialFrame": "animations/euler-steps/state-02.jpg",
+     "finalFrame": "animations/euler-steps/state-03.jpg",
+     "transition": {
+      "src": "animations/euler-steps/step-03.mp4",
+      "duration": 1.5,
+      "frames": 45,
+      "masterFrames": [
+       130,
+       175
+      ],
+      "bytes": 60470,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 5.633,
+   "masterFrames": 175,
+   "renderSeconds": 18.9
+  },
+  {
+   "id": "rk4-stages",
+   "scene": "RK4StagesSequence",
+   "section": 2,
+   "title": "Midpoint and RK4: better slopes inside the step",
+   "summary": "From $y_0 = 10$ with $h = 1$: midpoint gives $50$, RK4's four slopes $20, 40, 60, 140$ give $70$ (exact $73.9$).",
+   "initial": {
+    "title": "One step of $y' = 2y$",
+    "tex": "y_0 = 10,\\quad h = 1,\\quad y(1) = 10e^2 \\approx 73.9",
+    "explanation": "Compare three ways of choosing the slope.",
+    "frame": "animations/rk4-stages/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Midpoint",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "s_2 = f(\\tfrac12,\\ 10 + \\tfrac12\\cdot20) = 40,\\quad y_1 = 10 + 40 = 50",
+     "explanation": "An Euler half step finds the midpoint; its slope carries the full step.",
+     "initialFrame": "animations/rk4-stages/state-00.jpg",
+     "finalFrame": "animations/rk4-stages/state-01.jpg",
+     "transition": {
+      "src": "animations/rk4-stages/step-01.mp4",
+      "duration": 2.6333,
+      "frames": 79,
+      "masterFrames": [
+       8,
+       87
+      ],
+      "bytes": 47354,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Four RK4 slopes",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "s_1 = 20,\\ s_2 = 40,\\ s_3 = 60,\\ s_4 = 140",
+     "explanation": "Start, midpoint twice (the second using $s_2$), end (using $s_3$).",
+     "initialFrame": "animations/rk4-stages/state-01.jpg",
+     "finalFrame": "animations/rk4-stages/state-02.jpg",
+     "transition": {
+      "src": "animations/rk4-stages/step-02.mp4",
+      "duration": 2.3,
+      "frames": 69,
+      "masterFrames": [
+       86,
+       155
+      ],
+      "bytes": 66163,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Weighted average",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "y_1 = 10 + \\tfrac16(20 + 80 + 120 + 140) = 70",
+     "explanation": "Weights $1, 2, 2, 1$; the closest of the three to $73.9$.",
+     "initialFrame": "animations/rk4-stages/state-02.jpg",
+     "finalFrame": "animations/rk4-stages/state-03.jpg",
+     "transition": {
+      "src": "animations/rk4-stages/step-03.mp4",
+      "duration": 2.0,
+      "frames": 60,
+      "masterFrames": [
+       154,
+       214
+      ],
+      "bytes": 72509,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 6.933,
+   "masterFrames": 214,
+   "renderSeconds": 11.2
+  },
+  {
+   "id": "order-plot",
+   "scene": "OrderPlotSequence",
+   "section": 3,
+   "title": "Reading the order from a log-log plot",
+   "summary": "On $y' = 1/(1+t)^2$, errors at $h = 0.1$ and $0.05$ fall by factors $2$, $4$, $16$: slopes $1$, $2$, $4$.",
+   "initial": {
+    "title": "The experiment",
+    "tex": "\\int_0^1\\frac{dt}{(1+t)^2} = \\frac12",
+    "explanation": "Integrate with $h = 0.1$ and $h = 0.05$ and compare errors.",
+    "frame": "animations/order-plot/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "ODE1",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "0.5390,\\ 0.5191:\\ \\text{ratio} \\approx 2,\\ p = 1",
+     "explanation": "Halving $h$ halves the error.",
+     "initialFrame": "animations/order-plot/state-00.jpg",
+     "finalFrame": "animations/order-plot/state-01.jpg",
+     "transition": {
+      "src": "animations/order-plot/step-01.mp4",
+      "duration": 1.5667,
+      "frames": 47,
+      "masterFrames": [
+       8,
+       55
+      ],
+      "bytes": 43773,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "ODE2",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "0.49927,\\ 0.49982:\\ \\text{ratio} \\approx 4,\\ p = 2",
+     "explanation": "The midpoint error falls by $4$.",
+     "initialFrame": "animations/order-plot/state-01.jpg",
+     "finalFrame": "animations/order-plot/state-02.jpg",
+     "transition": {
+      "src": "animations/order-plot/step-02.mp4",
+      "duration": 1.5667,
+      "frames": 47,
+      "masterFrames": [
+       54,
+       101
+      ],
+      "bytes": 57184,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "ODE4",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "\\text{ratio} \\approx 16,\\ p = 4",
+     "explanation": "On a log-log plot of error against $h$, the slope is the order.",
+     "initialFrame": "animations/order-plot/state-02.jpg",
+     "finalFrame": "animations/order-plot/state-03.jpg",
+     "transition": {
+      "src": "animations/order-plot/step-03.mp4",
+      "duration": 1.5667,
+      "frames": 47,
+      "masterFrames": [
+       100,
+       147
+      ],
+      "bytes": 51442,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 4.7,
+   "masterFrames": 147,
+   "renderSeconds": 9.9
+  },
+  {
+   "id": "bs23-control",
+   "scene": "BS23ControlSequence",
+   "section": 4,
+   "title": "An adaptive step: estimate, test, adjust",
+   "summary": "BS23 computes three slopes, a third-order step, a fourth slope and an error estimate; the step is accepted or rejected and $h$ is rescaled.",
+   "initial": {
+    "title": "BS23 stages",
+    "tex": "s_1,\\ s_2\\ (t + \\tfrac h2),\\ s_3\\ (t + \\tfrac34h)",
+    "explanation": "Three slopes inside the step.",
+    "frame": "animations/bs23-control/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Step and new slope",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "y_{n+1} = y_n + \\tfrac h9(2s_1 + 3s_2 + 4s_3),\\quad s_4 = f(t_{n+1}, y_{n+1})",
+     "explanation": "Third-order result; $s_4$ will be reused (FSAL).",
+     "initialFrame": "animations/bs23-control/state-00.jpg",
+     "finalFrame": "animations/bs23-control/state-01.jpg",
+     "transition": {
+      "src": "animations/bs23-control/step-01.mp4",
+      "duration": 2.1333,
+      "frames": 64,
+      "masterFrames": [
+       8,
+       72
+      ],
+      "bytes": 46433,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Error estimate",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "e = \\tfrac{h}{72}(-5s_1 + 6s_2 + 8s_3 - 9s_4)",
+     "explanation": "The difference from an embedded second-order formula.",
+     "initialFrame": "animations/bs23-control/state-01.jpg",
+     "finalFrame": "animations/bs23-control/state-02.jpg",
+     "transition": {
+      "src": "animations/bs23-control/step-02.mp4",
+      "duration": 1.5,
+      "frames": 45,
+      "masterFrames": [
+       71,
+       116
+      ],
+      "bytes": 57785,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Test and adjust",
+     "relation": "classify",
+     "relationLabel": "Classification",
+     "tex": "\\frac{|e|}{|y|} \\le \\text{tol}:\\ \\text{accept};\\quad h \\leftarrow 0.8\\,h\\left(\\frac{\\text{tol}}{\\text{err}}\\right)^{1/3}",
+     "explanation": "Too large: reject and retry with a smaller $h$; small: accept and grow $h$ (at most $5$ times).",
+     "initialFrame": "animations/bs23-control/state-02.jpg",
+     "finalFrame": "animations/bs23-control/state-03.jpg",
+     "transition": {
+      "src": "animations/bs23-control/step-03.mp4",
+      "duration": 2.0667,
+      "frames": 62,
+      "masterFrames": [
+       115,
+       177
+      ],
+      "bytes": 60535,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 5.7,
+   "masterFrames": 177,
+   "renderSeconds": 7.7
+  },
+  {
+   "id": "stiff-euler",
+   "scene": "StiffEulerSequence",
+   "section": 5,
+   "title": "Stiffness: explicit Euler explodes, implicit Euler decays",
+   "summary": "For $y' = -100y$ with $h = 0.05$: Euler multiplies by $-4$ each step; backward Euler by $\\tfrac16$.",
+   "initial": {
+    "title": "A fast decay",
+    "tex": "y' = -100y,\\quad y(0) = 1,\\quad h = 0.05",
+    "explanation": "The true solution $e^{-100t}$ is essentially zero after $t = 0.05$.",
+    "frame": "animations/stiff-euler/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Explicit Euler",
+     "relation": "caution",
+     "relationLabel": "Caveat",
+     "tex": "y_{n+1} = (1 - 100h)y_n = -4y_n:\\ 1, -4, 16, -64",
+     "explanation": "Alternating and growing: unstable because $|1 + h\\lambda| > 1$.",
+     "initialFrame": "animations/stiff-euler/state-00.jpg",
+     "finalFrame": "animations/stiff-euler/state-01.jpg",
+     "transition": {
+      "src": "animations/stiff-euler/step-01.mp4",
+      "duration": 1.9,
+      "frames": 57,
+      "masterFrames": [
+       8,
+       65
+      ],
+      "bytes": 39711,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Backward Euler",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "y_{n+1} = y_n - 100h\\,y_{n+1}\\ \\Rightarrow\\ y_{n+1} = \\tfrac{1}{6}y_n",
+     "explanation": "The slope at the end of the step; stable for every $h$.",
+     "initialFrame": "animations/stiff-euler/state-01.jpg",
+     "finalFrame": "animations/stiff-euler/state-02.jpg",
+     "transition": {
+      "src": "animations/stiff-euler/step-02.mp4",
+      "duration": 1.6667,
+      "frames": 50,
+      "masterFrames": [
+       64,
+       114
+      ],
+      "bytes": 50844,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "The limit",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "\\text{Euler stable} \\Leftrightarrow h \\le \\frac{2}{|\\lambda|} = 0.02",
+     "explanation": "Stability, not accuracy, limits explicit methods on stiff problems.",
+     "initialFrame": "animations/stiff-euler/state-02.jpg",
+     "finalFrame": "animations/stiff-euler/state-03.jpg",
+     "transition": {
+      "src": "animations/stiff-euler/step-03.mp4",
+      "duration": 1.4,
+      "frames": 42,
+      "masterFrames": [
+       113,
+       155
+      ],
+      "bytes": 59224,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 4.967,
+   "masterFrames": 155,
+   "renderSeconds": 9.6
+  },
+  {
+   "id": "oscillator-drift",
+   "scene": "OscillatorDriftSequence",
+   "section": 6,
+   "title": "A system: Euler spirals off the circle, RK4 stays on it",
+   "summary": "$x'' + x = 0$ as $y' = (y_2, -y_1)$: Euler's radius grows by $\\sqrt{1 + h^2}$ per step.",
+   "initial": {
+    "title": "The oscillator",
+    "tex": "y_1' = y_2,\\quad y_2' = -y_1,\\quad y(0) = (0, 1)",
+    "explanation": "The exact solution goes round the unit circle.",
+    "frame": "animations/oscillator-drift/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Exact circle",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "y = (\\sin t,\\ \\cos t)",
+     "explanation": "Period $2\\pi$.",
+     "initialFrame": "animations/oscillator-drift/state-00.jpg",
+     "finalFrame": "animations/oscillator-drift/state-01.jpg",
+     "transition": {
+      "src": "animations/oscillator-drift/step-01.mp4",
+      "duration": 1.5667,
+      "frames": 47,
+      "masterFrames": [
+       8,
+       55
+      ],
+      "bytes": 32154,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Euler",
+     "relation": "caution",
+     "relationLabel": "Caveat",
+     "tex": "r_{n+1}^2 = (1 + h^2)\\,r_n^2",
+     "explanation": "With $36$ steps per turn the radius grows by about $1.7$ in one turn.",
+     "initialFrame": "animations/oscillator-drift/state-01.jpg",
+     "finalFrame": "animations/oscillator-drift/state-02.jpg",
+     "transition": {
+      "src": "animations/oscillator-drift/step-02.mp4",
+      "duration": 2.4333,
+      "frames": 73,
+      "masterFrames": [
+       54,
+       127
+      ],
+      "bytes": 56890,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "RK4",
+     "relation": "compare",
+     "relationLabel": "Check",
+     "tex": "|r - 1| < 10^{-5} \\text{ after one turn}",
+     "explanation": "Same step size, four slopes per step: indistinguishable from the circle.",
+     "initialFrame": "animations/oscillator-drift/state-02.jpg",
+     "finalFrame": "animations/oscillator-drift/state-03.jpg",
+     "transition": {
+      "src": "animations/oscillator-drift/step-03.mp4",
+      "duration": 1.9,
+      "frames": 57,
+      "masterFrames": [
+       126,
+       183
+      ],
+      "bytes": 54198,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 5.9,
+   "masterFrames": 183,
+   "renderSeconds": 9.9
+  }
+ ]
+}
