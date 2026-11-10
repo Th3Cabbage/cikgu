@@ -121,6 +121,14 @@
      "description": "Direction fields, sources, sinks, saddles, spirals and centers, trace-determinant stability, linearization with the Jacobian, and the tumbling box.",
      "storeKey": "phase-plane-v1",
      "statusApp": "Study_phase_plane"
+    },
+    {
+     "slug": "linear-algebra",
+     "source": "courses/mit-de/linear-algebra/dist",
+     "title": "Unit 7: Column Space, Basis and Graphs",
+     "description": "Column space and null space, independence and basis, the four fundamental subspaces, and graphs with their incidence matrices and loops.",
+     "storeKey": "linear-algebra-v1",
+     "statusApp": "Study_linear_algebra"
     }
    ]
   }

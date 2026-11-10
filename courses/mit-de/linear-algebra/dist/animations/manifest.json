@@ -1,0 +1,445 @@
+{
+ "version": 1,
+ "width": 1280,
+ "height": 720,
+ "fps": 30,
+ "relations": {
+  "define": "Definition / choice",
+  "model": "Modelling step",
+  "classify": "Classification",
+  "diagram": "Picture",
+  "substitute": "Substitution",
+  "identity": "Identity (=)",
+  "equivalent": "Equivalent statement (⇔)",
+  "solve": "Solve",
+  "compute": "Computation",
+  "implies": "Consequence (⇒)",
+  "compare": "Check",
+  "caution": "Caveat",
+  "recap": "Recap"
+ },
+ "sections": {
+  "1": [
+   "column-combination"
+  ],
+  "2": [
+   "independence"
+  ],
+  "3": [
+   "four-subspaces"
+  ],
+  "4": [
+   "incidence"
+  ],
+  "5": [
+   "loops"
+  ]
+ },
+ "sequences": [
+  {
+   "id": "column-combination",
+   "scene": "ColumnCombinationSequence",
+   "section": 1,
+   "title": "$Av$ is a combination of columns",
+   "summary": "Split $Av$ into column pieces, spot column 3 = column 1 + column 2, and read off the null space and a particular solution.",
+   "initial": {
+    "title": "The lecture's matrix",
+    "tex": "A = \\begin{bmatrix}1 & 1 & 2\\\\ 1 & 2 & 3\\\\ 1 & 2 & 3\\end{bmatrix}",
+    "explanation": "Three columns in $\\mathbb{R}^3$.",
+    "frame": "animations/column-combination/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Columns times weights",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "Av = v_1\\begin{bmatrix}1\\\\1\\\\1\\end{bmatrix} + v_2\\begin{bmatrix}1\\\\2\\\\2\\end{bmatrix} + v_3\\begin{bmatrix}2\\\\3\\\\3\\end{bmatrix}",
+     "explanation": "Each $v_j$ multiplies column $j$.",
+     "initialFrame": "animations/column-combination/state-00.jpg",
+     "finalFrame": "animations/column-combination/state-01.jpg",
+     "transition": {
+      "src": "animations/column-combination/step-01.mp4",
+      "duration": 2.8333,
+      "frames": 85,
+      "masterFrames": [
+       8,
+       93
+      ],
+      "bytes": 63308,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "A dependent column",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "\\text{col}_3 = \\text{col}_1 + \\text{col}_2 \\;\\Rightarrow\\; A(-1, -1, 1) = 0",
+     "explanation": "So $C(A)$ is only a plane and $N(A)$ is a line.",
+     "initialFrame": "animations/column-combination/state-01.jpg",
+     "finalFrame": "animations/column-combination/state-02.jpg",
+     "transition": {
+      "src": "animations/column-combination/step-02.mp4",
+      "duration": 2.3,
+      "frames": 69,
+      "masterFrames": [
+       92,
+       161
+      ],
+      "bytes": 123635,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Complete solution",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "Av = (3, 4, 4):\\quad v = (2, 1, 0) + c(-1, -1, 1)",
+     "explanation": "Two of column 1 plus one of column 2 reach $b$; add any null vector.",
+     "initialFrame": "animations/column-combination/state-02.jpg",
+     "finalFrame": "animations/column-combination/state-03.jpg",
+     "transition": {
+      "src": "animations/column-combination/step-03.mp4",
+      "duration": 2.5333,
+      "frames": 76,
+      "masterFrames": [
+       160,
+       236
+      ],
+      "bytes": 72872,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 7.667,
+   "masterFrames": 236,
+   "renderSeconds": 8.9
+  },
+  {
+   "id": "independence",
+   "scene": "IndependenceSequence",
+   "section": 2,
+   "title": "Dependent or independent: $a_3$ in or out of the plane",
+   "summary": "$a_3 = a_1 + a_2$ lies in the plane of $a_1, a_2$; replacing it by $(1, 0, 0)$ gives a basis of $\\mathbb{R}^3$.",
+   "initial": {
+    "title": "Two vectors",
+    "tex": "a_1 = (2, 1, 5),\\quad a_2 = (4, 2, 0)",
+    "explanation": "They span a plane through the origin.",
+    "frame": "animations/independence/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "A third in the plane",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "a_3 = a_1 + a_2 = (6, 3, 5):\\quad a_1 + a_2 - a_3 = 0",
+     "explanation": "A nonzero combination gives zero: dependent.",
+     "initialFrame": "animations/independence/state-00.jpg",
+     "finalFrame": "animations/independence/state-01.jpg",
+     "transition": {
+      "src": "animations/independence/step-01.mp4",
+      "duration": 2.6333,
+      "frames": 79,
+      "masterFrames": [
+       8,
+       87
+      ],
+      "bytes": 52083,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "A third out of the plane",
+     "relation": "classify",
+     "relationLabel": "Classification",
+     "tex": "a_3 = (1, 0, 0):\\quad Av = 0 \\text{ only for } v = 0",
+     "explanation": "Independent: the three columns form a basis.",
+     "initialFrame": "animations/independence/state-01.jpg",
+     "finalFrame": "animations/independence/state-02.jpg",
+     "transition": {
+      "src": "animations/independence/step-02.mp4",
+      "duration": 1.9,
+      "frames": 57,
+      "masterFrames": [
+       86,
+       143
+      ],
+      "bytes": 67099,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Dimension",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "\\dim(\\text{plane}) = 2,\\qquad \\dim \\mathbb{R}^3 = 3",
+     "explanation": "Every basis of a space has the same number of vectors.",
+     "initialFrame": "animations/independence/state-02.jpg",
+     "finalFrame": "animations/independence/state-03.jpg",
+     "transition": {
+      "src": "animations/independence/step-03.mp4",
+      "duration": 1.2333,
+      "frames": 37,
+      "masterFrames": [
+       142,
+       179
+      ],
+      "bytes": 56823,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 5.767,
+   "masterFrames": 179,
+   "renderSeconds": 9.3
+  },
+  {
+   "id": "four-subspaces",
+   "scene": "FourSubspacesSequence",
+   "section": 3,
+   "title": "The big picture for $A = \\begin{bmatrix}1 & 2 & 3\\\\ 4 & 5 & 6\\end{bmatrix}$",
+   "summary": "Row space and null space in $\\mathbb{R}^3$, column space and left null space in $\\mathbb{R}^2$, with dimensions $r, n - r, r, m - r$.",
+   "initial": {
+    "title": "A 2 by 3 matrix",
+    "tex": "A = \\begin{bmatrix}1 & 2 & 3\\\\ 4 & 5 & 6\\end{bmatrix},\\quad r = 2",
+    "explanation": "$m = 2$ rows, $n = 3$ columns.",
+    "frame": "animations/four-subspaces/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Null space",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "A(1, -2, 1) = (1 - 4 + 3,\\ 4 - 10 + 6) = (0, 0)",
+     "explanation": "A line in $\\mathbb{R}^3$, dimension $n - r = 1$.",
+     "initialFrame": "animations/four-subspaces/state-00.jpg",
+     "finalFrame": "animations/four-subspaces/state-01.jpg",
+     "transition": {
+      "src": "animations/four-subspaces/step-01.mp4",
+      "duration": 1.5,
+      "frames": 45,
+      "masterFrames": [
+       8,
+       53
+      ],
+      "bytes": 44550,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Perpendicular to the rows",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "N(A) \\perp C(A^T)",
+     "explanation": "Each row has dot product zero with $(1, -2, 1)$.",
+     "initialFrame": "animations/four-subspaces/state-01.jpg",
+     "finalFrame": "animations/four-subspaces/state-02.jpg",
+     "transition": {
+      "src": "animations/four-subspaces/step-02.mp4",
+      "duration": 2.0,
+      "frames": 60,
+      "masterFrames": [
+       52,
+       112
+      ],
+      "bytes": 58160,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "The four dimensions",
+     "relation": "recap",
+     "relationLabel": "Recap",
+     "tex": "\\dim C(A^T) = 2,\\ \\dim N(A) = 1,\\ \\dim C(A) = 2,\\ \\dim N(A^T) = 0",
+     "explanation": "In general $r$, $n - r$, $r$, $m - r$.",
+     "initialFrame": "animations/four-subspaces/state-02.jpg",
+     "finalFrame": "animations/four-subspaces/state-03.jpg",
+     "transition": {
+      "src": "animations/four-subspaces/step-03.mp4",
+      "duration": 1.8,
+      "frames": 54,
+      "masterFrames": [
+       111,
+       165
+      ],
+      "bytes": 54423,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 5.3,
+   "masterFrames": 165,
+   "renderSeconds": 7.4
+  },
+  {
+   "id": "incidence",
+   "scene": "IncidenceSequence",
+   "section": 4,
+   "title": "Building the incidence matrix edge by edge",
+   "summary": "Each edge gives a row with $-1$ at its start and $+1$ at its end; $Av$ takes potential differences.",
+   "initial": {
+    "title": "Four nodes, five edges",
+    "tex": "1\\to2,\\ 1\\to3,\\ 2\\to3,\\ 1\\to4,\\ 2\\to4",
+    "explanation": "Directed edges; the arrows fix the signs.",
+    "frame": "animations/incidence/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Rows of $A$",
+     "relation": "define",
+     "relationLabel": "Definition / choice",
+     "tex": "A = \\begin{bmatrix}-1&1&0&0\\\\-1&0&1&0\\\\0&-1&1&0\\\\-1&0&0&1\\\\0&-1&0&1\\end{bmatrix}",
+     "explanation": "Row $k$ = edge $k$.",
+     "initialFrame": "animations/incidence/state-00.jpg",
+     "finalFrame": "animations/incidence/state-01.jpg",
+     "transition": {
+      "src": "animations/incidence/step-01.mp4",
+      "duration": 3.2667,
+      "frames": 98,
+      "masterFrames": [
+       8,
+       106
+      ],
+      "bytes": 59899,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Potential differences",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "(Av)_1 = v_2 - v_1,\\ \\ (Av)_2 = v_3 - v_1,\\ \\ldots",
+     "explanation": "Each entry of $Av$ is a difference across an edge.",
+     "initialFrame": "animations/incidence/state-01.jpg",
+     "finalFrame": "animations/incidence/state-02.jpg",
+     "transition": {
+      "src": "animations/incidence/step-02.mp4",
+      "duration": 1.5,
+      "frames": 45,
+      "masterFrames": [
+       105,
+       150
+      ],
+      "bytes": 51400,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Constant potentials",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "A(1, 1, 1, 1) = 0 \\;\\Rightarrow\\; \\operatorname{rank} A = 3",
+     "explanation": "Equal potentials give no differences: the null space is the constants.",
+     "initialFrame": "animations/incidence/state-02.jpg",
+     "finalFrame": "animations/incidence/state-03.jpg",
+     "transition": {
+      "src": "animations/incidence/step-03.mp4",
+      "duration": 1.8,
+      "frames": 54,
+      "masterFrames": [
+       149,
+       203
+      ],
+      "bytes": 53256,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 6.567,
+   "masterFrames": 203,
+   "renderSeconds": 7.5
+  },
+  {
+   "id": "loops",
+   "scene": "LoopsSequence",
+   "section": 5,
+   "title": "Loop currents solve $A^Tw = 0$",
+   "summary": "A current around a loop balances at every node; independent loops number $m - n + 1$.",
+   "initial": {
+    "title": "Kirchhoff's current law",
+    "tex": "A^T w = 0",
+    "explanation": "Net current into each node is zero.",
+    "frame": "animations/loops/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "A loop current",
+     "relation": "define",
+     "relationLabel": "Definition / choice",
+     "tex": "1\\to2\\to4\\to1:\\quad w = (1, 0, 0, -1, 1)",
+     "explanation": "Edge $4$ ($1\\to4$) is travelled backwards, so $w_4 = -1$.",
+     "initialFrame": "animations/loops/state-00.jpg",
+     "finalFrame": "animations/loops/state-01.jpg",
+     "transition": {
+      "src": "animations/loops/step-01.mp4",
+      "duration": 2.2333,
+      "frames": 67,
+      "masterFrames": [
+       8,
+       75
+      ],
+      "bytes": 34891,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Check each node",
+     "relation": "compare",
+     "relationLabel": "Check",
+     "tex": "\\text{node 1: } -w_1 - w_2 - w_4 = -1 - 0 + 1 = 0",
+     "explanation": "The same balance holds at nodes $2$, $3$, $4$.",
+     "initialFrame": "animations/loops/state-01.jpg",
+     "finalFrame": "animations/loops/state-02.jpg",
+     "transition": {
+      "src": "animations/loops/step-02.mp4",
+      "duration": 2.7667,
+      "frames": 83,
+      "masterFrames": [
+       74,
+       157
+      ],
+      "bytes": 80461,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Count the loops",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "\\dim N(A^T) = m - r = 5 - 3 = 2 = m - n + 1",
+     "explanation": "The loop $1\\to3\\to2\\to4\\to1$ is the difference of the two small loop vectors: the shared edge cancels.",
+     "initialFrame": "animations/loops/state-02.jpg",
+     "finalFrame": "animations/loops/state-03.jpg",
+     "transition": {
+      "src": "animations/loops/step-03.mp4",
+      "duration": 1.7333,
+      "frames": 52,
+      "masterFrames": [
+       156,
+       208
+      ],
+      "bytes": 58712,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 6.733,
+   "masterFrames": 208,
+   "renderSeconds": 8.3
+  }
+ ]
+}
