@@ -1,0 +1,441 @@
+{
+ "version": 1,
+ "width": 1280,
+ "height": 720,
+ "fps": 30,
+ "relations": {
+  "define": "Definition / choice",
+  "model": "Modelling step",
+  "classify": "Classification",
+  "diagram": "Picture",
+  "substitute": "Substitution",
+  "identity": "Identity (=)",
+  "equivalent": "Equivalent statement (⇔)",
+  "solve": "Solve",
+  "compute": "Computation",
+  "implies": "Consequence (⇒)",
+  "compare": "Check",
+  "caution": "Caveat",
+  "recap": "Recap"
+ },
+ "sections": {
+  "1": [
+   "ata-nonnegative"
+  ],
+  "2": [
+   "five-tests",
+   "energy-bowl"
+  ],
+  "3": [
+   "svd-geometry",
+   "svd-example"
+  ]
+ },
+ "sequences": [
+  {
+   "id": "ata-nonnegative",
+   "scene": "AtANonnegativeSequence",
+   "section": 1,
+   "title": "Why $A^TA$ has no negative eigenvalues",
+   "summary": "Multiply $A^TAx = \\lambda x$ by $x^T$ and recognise a squared length.",
+   "initial": {
+    "title": "An eigenvector of $A^TA$",
+    "tex": "A^TA\\,x = \\lambda x",
+    "explanation": "$A$ can be any rectangular matrix.",
+    "frame": "animations/ata-nonnegative/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Multiply by $x^T$",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "x^TA^TAx = \\lambda\\,x^Tx",
+     "explanation": "Both sides become numbers.",
+     "initialFrame": "animations/ata-nonnegative/state-00.jpg",
+     "finalFrame": "animations/ata-nonnegative/state-01.jpg",
+     "transition": {
+      "src": "animations/ata-nonnegative/step-01.mp4",
+      "duration": 1.5667,
+      "frames": 47,
+      "masterFrames": [
+       8,
+       55
+      ],
+      "bytes": 68641,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "A squared length",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "x^TA^TAx = (Ax)^T(Ax) = \\|Ax\\|^2",
+     "explanation": "Group the factors in pairs.",
+     "initialFrame": "animations/ata-nonnegative/state-01.jpg",
+     "finalFrame": "animations/ata-nonnegative/state-02.jpg",
+     "transition": {
+      "src": "animations/ata-nonnegative/step-02.mp4",
+      "duration": 2.8,
+      "frames": 84,
+      "masterFrames": [
+       54,
+       138
+      ],
+      "bytes": 116213,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "The sign of $\\lambda$",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "\\lambda = \\frac{\\|Ax\\|^2}{\\|x\\|^2} \\ge 0",
+     "explanation": "Strictly positive when $Ax \\neq 0$, that is, when $A$ has independent columns.",
+     "initialFrame": "animations/ata-nonnegative/state-02.jpg",
+     "finalFrame": "animations/ata-nonnegative/state-03.jpg",
+     "transition": {
+      "src": "animations/ata-nonnegative/step-03.mp4",
+      "duration": 2.0667,
+      "frames": 62,
+      "masterFrames": [
+       137,
+       199
+      ],
+      "bytes": 105012,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 6.433,
+   "masterFrames": 199,
+   "renderSeconds": 7.3
+  },
+  {
+   "id": "five-tests",
+   "scene": "FiveTestsSequence",
+   "section": 2,
+   "title": "Pivots, determinants and energy for $\\begin{bmatrix}4&6\\\\6&10\\end{bmatrix}$",
+   "summary": "Elimination gives pivots $4, 1$; completing the square shows the same pivots in the energy.",
+   "initial": {
+    "title": "The matrix",
+    "tex": "S = \\begin{bmatrix}4 & 6\\\\ 6 & 10\\end{bmatrix}",
+    "explanation": "Symmetric. Is it positive definite?",
+    "frame": "animations/five-tests/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Elimination",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "\\text{row}_2 - \\tfrac32\\,\\text{row}_1:\\quad \\begin{bmatrix}4 & 6\\\\ 0 & 1\\end{bmatrix},\\ \\text{pivots } 4,\\ 1",
+     "explanation": "Both pivots positive.",
+     "initialFrame": "animations/five-tests/state-00.jpg",
+     "finalFrame": "animations/five-tests/state-01.jpg",
+     "transition": {
+      "src": "animations/five-tests/step-01.mp4",
+      "duration": 2.4667,
+      "frames": 74,
+      "masterFrames": [
+       8,
+       82
+      ],
+      "bytes": 51877,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Upper-left determinants",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "\\det[4] = 4,\\qquad \\det S = 40 - 36 = 4",
+     "explanation": "The second determinant is the product of the pivots.",
+     "initialFrame": "animations/five-tests/state-01.jpg",
+     "finalFrame": "animations/five-tests/state-02.jpg",
+     "transition": {
+      "src": "animations/five-tests/step-02.mp4",
+      "duration": 2.0333,
+      "frames": 61,
+      "masterFrames": [
+       81,
+       142
+      ],
+      "bytes": 48493,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Energy",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "x^TSx = 4x_1^2 + 12x_1x_2 + 10x_2^2 = 4\\left(x_1 + \\tfrac32x_2\\right)^2 + 1\\cdot x_2^2",
+     "explanation": "Completing the square puts the pivots in front of the squares: positive for $x \\neq 0$.",
+     "initialFrame": "animations/five-tests/state-02.jpg",
+     "finalFrame": "animations/five-tests/state-03.jpg",
+     "transition": {
+      "src": "animations/five-tests/step-03.mp4",
+      "duration": 3.0333,
+      "frames": 91,
+      "masterFrames": [
+       141,
+       232
+      ],
+      "bytes": 136592,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 7.533,
+   "masterFrames": 232,
+   "renderSeconds": 8.4
+  },
+  {
+   "id": "energy-bowl",
+   "scene": "EnergyBowlSequence",
+   "section": 2,
+   "title": "Level curves: ellipses for a bowl, hyperbolas for a saddle",
+   "summary": "Positive definite energy has elliptic level curves around a minimum; an indefinite matrix gives hyperbolas.",
+   "initial": {
+    "title": "Energy levels",
+    "tex": "x^TSx = c",
+    "explanation": "Draw the curves of equal energy.",
+    "frame": "animations/energy-bowl/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Positive definite",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "4x_1^2 + 12x_1x_2 + 10x_2^2 = c:\\ \\text{ellipses}",
+     "explanation": "Tilted ellipses, axes along the eigenvectors; the minimum is at $0$.",
+     "initialFrame": "animations/energy-bowl/state-00.jpg",
+     "finalFrame": "animations/energy-bowl/state-01.jpg",
+     "transition": {
+      "src": "animations/energy-bowl/step-01.mp4",
+      "duration": 2.1333,
+      "frames": 64,
+      "masterFrames": [
+       8,
+       72
+      ],
+      "bytes": 31464,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Indefinite",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "3x_1^2 + 8x_1x_2 + 5x_2^2 = c:\\ \\text{hyperbolas}",
+     "explanation": "Determinant $-1$: the energy is negative in some directions.",
+     "initialFrame": "animations/energy-bowl/state-01.jpg",
+     "finalFrame": "animations/energy-bowl/state-02.jpg",
+     "transition": {
+      "src": "animations/energy-bowl/step-02.mp4",
+      "duration": 2.1333,
+      "frames": 64,
+      "masterFrames": [
+       71,
+       135
+      ],
+      "bytes": 49803,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "The test",
+     "relation": "classify",
+     "relationLabel": "Classification",
+     "tex": "\\text{bowl} \\Leftrightarrow \\lambda_1, \\lambda_2 > 0 \\Leftrightarrow \\text{pivots} > 0",
+     "explanation": "A negative eigenvalue tilts the bowl into a saddle.",
+     "initialFrame": "animations/energy-bowl/state-02.jpg",
+     "finalFrame": "animations/energy-bowl/state-03.jpg",
+     "transition": {
+      "src": "animations/energy-bowl/step-03.mp4",
+      "duration": 1.3333,
+      "frames": 40,
+      "masterFrames": [
+       134,
+       174
+      ],
+      "bytes": 65413,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 5.6,
+   "masterFrames": 174,
+   "renderSeconds": 7.0
+  },
+  {
+   "id": "svd-geometry",
+   "scene": "SVDGeometrySequence",
+   "section": 3,
+   "title": "Turn, stretch, turn: the unit circle under $U\\Sigma V^T$",
+   "summary": "For $A = \\begin{bmatrix}3&0\\\\4&5\\end{bmatrix}$: $V^T$ turns $v_1, v_2$ to the axes, $\\Sigma$ stretches by $3\\sqrt5, \\sqrt5$, $U$ turns the ellipse into place.",
+   "initial": {
+    "title": "Unit circle",
+    "tex": "\\|x\\| = 1,\\quad v_1 = \\tfrac{1}{\\sqrt2}(1, 1),\\ v_2 = \\tfrac{1}{\\sqrt2}(1, -1)",
+    "explanation": "The right singular vectors are marked.",
+    "frame": "animations/svd-geometry/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Turn by $V^T$",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "V^Tv_1 = e_1,\\qquad V^Tv_2 = e_2",
+     "explanation": "The circle is unchanged; the marked vectors move to the axes.",
+     "initialFrame": "animations/svd-geometry/state-00.jpg",
+     "finalFrame": "animations/svd-geometry/state-01.jpg",
+     "transition": {
+      "src": "animations/svd-geometry/step-01.mp4",
+      "duration": 1.7333,
+      "frames": 52,
+      "masterFrames": [
+       8,
+       60
+      ],
+      "bytes": 42867,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Stretch by $\\Sigma$",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "\\Sigma = \\begin{bmatrix}3\\sqrt5 & 0\\\\ 0 & \\sqrt5\\end{bmatrix}",
+     "explanation": "The circle becomes an ellipse with half-axes $\\sigma_1$, $\\sigma_2$.",
+     "initialFrame": "animations/svd-geometry/state-01.jpg",
+     "finalFrame": "animations/svd-geometry/state-02.jpg",
+     "transition": {
+      "src": "animations/svd-geometry/step-02.mp4",
+      "duration": 1.7333,
+      "frames": 52,
+      "masterFrames": [
+       59,
+       111
+      ],
+      "bytes": 69850,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Turn by $U$",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "Av_i = \\sigma_iu_i:\\quad u_1 = \\tfrac{1}{\\sqrt{10}}(1, 3),\\ u_2 = \\tfrac{1}{\\sqrt{10}}(3, -1)",
+     "explanation": "The final ellipse is $A$ applied to the circle. Here both orthogonal factors are rotations; in general either may be a reflection.",
+     "initialFrame": "animations/svd-geometry/state-02.jpg",
+     "finalFrame": "animations/svd-geometry/state-03.jpg",
+     "transition": {
+      "src": "animations/svd-geometry/step-03.mp4",
+      "duration": 2.1333,
+      "frames": 64,
+      "masterFrames": [
+       110,
+       174
+      ],
+      "bytes": 107217,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 5.6,
+   "masterFrames": 174,
+   "renderSeconds": 9.2
+  },
+  {
+   "id": "svd-example",
+   "scene": "SVDExampleSequence",
+   "section": 3,
+   "title": "The SVD of the singular matrix $\\begin{bmatrix}2&2\\\\1&1\\end{bmatrix}$",
+   "summary": "$A^TA$ gives $\\sigma = \\sqrt{10}, 0$ and $V$; $u_1 = Av_1/\\sigma_1$; one rank-one piece rebuilds $A$.",
+   "initial": {
+    "title": "A rank-one matrix",
+    "tex": "A = \\begin{bmatrix}2 & 2\\\\ 1 & 1\\end{bmatrix}",
+    "explanation": "The second row is half the first.",
+    "frame": "animations/svd-example/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "$A^TA$",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "A^TA = \\begin{bmatrix}5 & 5\\\\ 5 & 5\\end{bmatrix}:\\ \\sigma_1^2 = 10,\\ \\sigma_2^2 = 0",
+     "explanation": "Eigenvectors $(1, 1)/\\sqrt2$ and $(1, -1)/\\sqrt2$.",
+     "initialFrame": "animations/svd-example/state-00.jpg",
+     "finalFrame": "animations/svd-example/state-01.jpg",
+     "transition": {
+      "src": "animations/svd-example/step-01.mp4",
+      "duration": 2.2,
+      "frames": 66,
+      "masterFrames": [
+       8,
+       74
+      ],
+      "bytes": 53421,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Left singular vector",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "u_1 = \\frac{Av_1}{\\sigma_1} = \\frac{(4, 2)/\\sqrt2}{\\sqrt{10}} = \\frac{(2, 1)}{\\sqrt5}",
+     "explanation": "The board shows $-1$ in $U$ from an earlier version; for this $A$, $u_1 = (2, 1)/\\sqrt5$.",
+     "initialFrame": "animations/svd-example/state-01.jpg",
+     "finalFrame": "animations/svd-example/state-02.jpg",
+     "transition": {
+      "src": "animations/svd-example/step-02.mp4",
+      "duration": 2.1667,
+      "frames": 65,
+      "masterFrames": [
+       73,
+       138
+      ],
+      "bytes": 61187,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "One piece is enough",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "A = \\sigma_1u_1v_1^T = \\sqrt{10}\\,\\frac{(2, 1)}{\\sqrt5}\\,\\frac{(1, 1)^T}{\\sqrt2}",
+     "explanation": "$\\sigma_2 = 0$, so the second piece is zero.",
+     "initialFrame": "animations/svd-example/state-02.jpg",
+     "finalFrame": "animations/svd-example/state-03.jpg",
+     "transition": {
+      "src": "animations/svd-example/step-03.mp4",
+      "duration": 2.2333,
+      "frames": 67,
+      "masterFrames": [
+       137,
+       204
+      ],
+      "bytes": 78050,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 6.6,
+   "masterFrames": 204,
+   "renderSeconds": 8.2
+  }
+ ]
+}

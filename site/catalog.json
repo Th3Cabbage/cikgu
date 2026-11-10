@@ -137,6 +137,14 @@
      "description": "Eigenvalues and eigenvectors, diagonalization and Markov matrices, y' = Ay and e^(At), similar and symmetric matrices, and vibrating systems.",
      "storeKey": "eigenvalues-systems-v1",
      "statusApp": "Study_eigenvalues_systems"
+    },
+    {
+     "slug": "positive-definite-svd",
+     "source": "courses/mit-de/positive-definite-svd/dist",
+     "title": "Unit 9: Positive Definite Matrices and the SVD",
+     "description": "Positive definite matrices, the five tests and the energy bowl, and the singular value decomposition.",
+     "storeKey": "positive-definite-svd-v1",
+     "statusApp": "Study_positive_definite_svd"
     }
    ]
   }

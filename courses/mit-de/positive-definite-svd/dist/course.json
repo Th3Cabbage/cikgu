@@ -1,0 +1,728 @@
+{
+ "version": 1,
+ "title": "Positive Definite Matrices and the SVD",
+ "subtitle": "Unit 9 of a study companion to MIT Learn Differential Equations (Gilbert Strang), videos 48-49, with Strang's Differential Equations and Linear Algebra, Section 7.2",
+ "video": {
+  "id": "ojUQk_GNQbQ",
+  "title": "MIT Learn Differential Equations, videos 48-49",
+  "duration": "35:52",
+  "url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63oTpyxCMLKt_JmB0WtSZfG"
+ },
+ "videos": [
+  {
+   "n": 48,
+   "id": "ojUQk_GNQbQ",
+   "title": "Positive Definite Matrices",
+   "duration": "21:41",
+   "url": "https://www.youtube.com/watch?v=ojUQk_GNQbQ"
+  },
+  {
+   "n": 49,
+   "id": "mBcLRGuAFUk",
+   "title": "Singular Value Decomposition (the SVD)",
+   "duration": "14:11",
+   "url": "https://www.youtube.com/watch?v=mBcLRGuAFUk"
+  }
+ ],
+ "book": {
+  "title": "Differential Equations and Linear Algebra",
+  "authors": "Gilbert Strang",
+  "short": "Strang, 7.2",
+  "edition": "Wellesley-Cambridge Press, 2014 (Section 7.2)",
+  "onlineUrl": "",
+  "pageNote": "Page references give the printed page and the page of the local PDF (printed page + 12). The book is not freely available online, so only a local copy can be opened."
+ },
+ "attribution": "Course text, diagrams and animations here are original paraphrases and drawings made for this guide; examples marked authored are not from the lectures. They summarize MIT OpenCourseWare's Learn Differential Equations videos (Gilbert Strang, CC BY-NC-SA) and Strang's textbook; for the original wording, watch the videos and read the book. Captions, video and book text are not included in this guide.",
+ "explorer": {
+  "modes": [
+   {
+    "id": "pd",
+    "label": "Positive definite tests and energy"
+   },
+   {
+    "id": "svd",
+    "label": "SVD: rotate or reflect, stretch, rotate or reflect"
+   }
+  ],
+  "defaultMode": "pd",
+  "s11": {
+   "min": -2,
+   "max": 10,
+   "step": 0.5,
+   "default": 4
+  },
+  "s12": {
+   "min": -8,
+   "max": 8,
+   "step": 0.5,
+   "default": 6
+  },
+  "s22": {
+   "min": -2,
+   "max": 12,
+   "step": 0.5,
+   "default": 10
+  },
+  "a": {
+   "min": -4,
+   "max": 4,
+   "step": 0.5,
+   "default": 2
+  },
+  "b": {
+   "min": -4,
+   "max": 4,
+   "step": 0.5,
+   "default": 2
+  },
+  "c": {
+   "min": -4,
+   "max": 4,
+   "step": 0.5,
+   "default": 1
+  },
+  "d": {
+   "min": -4,
+   "max": 4,
+   "step": 0.5,
+   "default": 1
+  },
+  "presets": [
+   {
+    "id": "lec48",
+    "label": "[4 6; 6 10]",
+    "mode": "pd",
+    "s11": 4,
+    "s12": 6,
+    "s22": 10,
+    "note": "Section 2: pivots $4, 1$; determinants $4, 4$; a bowl."
+   },
+   {
+    "id": "fail",
+    "label": "[3 4; 4 5]",
+    "mode": "pd",
+    "s11": 3,
+    "s12": 4,
+    "s22": 5,
+    "note": "Section 2 example: determinant $-1$, a saddle."
+   },
+   {
+    "id": "semi",
+    "label": "[1 2; 2 4] (semidefinite)",
+    "mode": "pd",
+    "s11": 1,
+    "s12": 2,
+    "s22": 4,
+    "note": "Determinant $0$: a trough, eigenvalue $0$ along $(2, -1)$."
+   },
+   {
+    "id": "lec49",
+    "label": "SVD of [2 2; 1 1]",
+    "mode": "svd",
+    "a": 2,
+    "b": 2,
+    "c": 1,
+    "d": 1,
+    "note": "Section 3: $\\sigma = \\sqrt{10}, 0$; the circle collapses to a segment."
+   },
+   {
+    "id": "inv",
+    "label": "SVD of [3 0; 4 5]",
+    "mode": "svd",
+    "a": 3,
+    "b": 0,
+    "c": 4,
+    "d": 5,
+    "note": "Section 3 example: $\\sigma = 3\\sqrt5, \\sqrt5$."
+   }
+  ],
+  "tutorContext": "Two modes. Positive definite: a symmetric 2x2 S = [s11 s12; s12 s22]; the explorer shows the five tests (eigenvalues, pivots s11 and s22 - s12^2/s11, upper-left determinants s11 and det S, a factor A with S = A^T A from Cholesky when positive definite, and the energy x^T S x), the classification (positive definite, positive semidefinite, indefinite, negative (semi)definite), and a contour plot of the energy over [-2, 2]^2 with the eigenvector axes. SVD: a 2x2 A = [a b; c d]; it shows U, Sigma, V from the eigen-decomposition of A^T A (u_i = A v_i / sigma_i, completed orthonormally when sigma = 0), and animates the unit circle under V^T (rotation or reflection), Sigma (stretch) and U (rotation or reflection) to the ellipse A(circle), plus the rank-one pieces sigma_i u_i v_i^T."
+ },
+ "sections": [
+  {
+   "nav": "Positive definite matrices",
+   "v": 48,
+   "title": "Symmetric matrices with positive eigenvalues; $S = A^TA$",
+   "summary": "Oscillation $y'' + Sy = 0$ needs the eigenvalues $\\lambda = \\omega^2$ of the symmetric $S$ to be nonnegative. $S$ is positive definite when all its eigenvalues are positive, semidefinite when they are $\\ge 0$. Every $A^TA$ is at least semidefinite, because $x^TA^TAx = \\|Ax\\|^2$.",
+   "time": [
+    0,
+    270
+   ],
+   "goals": [
+    "Explain why $y'' + Sy = 0$ needs $\\lambda \\ge 0$.",
+    "Define positive definite and positive semidefinite.",
+    "Show that the eigenvalues of $A^TA$ are $\\ge 0$."
+   ],
+   "notes": [
+    {
+     "heading": "Why positive eigenvalues matter",
+     "paragraphs": [
+      "In $y'' + Sy = 0$, try $y = e^{i\\omega t}x$: $-\\omega^2x + Sx = 0$, so $Sx = \\omega^2x$. A real frequency $\\omega$ needs $\\lambda = \\omega^2 \\ge 0$. A negative eigenvalue would give $e^{\\pm\\sqrt{-\\lambda}t}$, exponential growth instead of oscillation.",
+      "$S$ is positive definite if it is symmetric and every eigenvalue is positive; positive semidefinite if every eigenvalue is $\\ge 0$ (zero allowed)."
+     ]
+    },
+    {
+     "heading": "Every A transpose A",
+     "paragraphs": [
+      "$S = A^TA$ is symmetric for any rectangular $A$. If $Sx = \\lambda x$, multiply by $x^T$: $x^TA^TAx = \\lambda x^Tx$. The left side is $(Ax)^T(Ax) = \\|Ax\\|^2 \\ge 0$ and $x^Tx > 0$, so $\\lambda \\ge 0$. If the columns of $A$ are independent, $Ax \\neq 0$ for $x \\neq 0$ and every $\\lambda > 0$: $A^TA$ is positive definite."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$y'' + Sy = 0$: $\\lambda = \\omega^2 \\ge 0$.",
+    "Positive definite: $S = S^T$, all $\\lambda > 0$.",
+    "$x^TA^TAx = \\|Ax\\|^2 \\ge 0$.",
+    "Independent columns $\\Rightarrow$ $A^TA$ positive definite."
+   ],
+   "example": {
+    "title": "A transpose A (authored)",
+    "problem": "For $A = \\begin{bmatrix}1 & 2\\\\ 0 & 1\\\\ 1 & 0\\end{bmatrix}$, find $S = A^TA$ and its eigenvalues.",
+    "steps": [
+     {
+      "text": "Dot products of the columns (1, 0, 1) and (2, 1, 0).",
+      "tex": "S = \\begin{bmatrix}2 & 2\\\\ 2 & 5\\end{bmatrix}"
+     },
+     {
+      "text": "Trace 7, determinant 6.",
+      "tex": "\\lambda^2 - 7\\lambda + 6 = 0 \\;\\Rightarrow\\; \\lambda = 1,\\ 6"
+     },
+     {
+      "text": "Both positive, as the independent columns guarantee.",
+      "tex": "S \\text{ is positive definite}"
+     }
+    ],
+    "answer": "$S = \\begin{bmatrix}2&2\\\\2&5\\end{bmatrix}$ with eigenvalues $1$ and $6$."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 48,
+      "t": 0,
+      "label": "y'' + Sy = 0 needs lambda = omega^2 >= 0"
+     },
+     {
+      "v": 48,
+      "t": 60,
+      "label": "Positive definite and semidefinite"
+     },
+     {
+      "v": 48,
+      "t": 90,
+      "label": "S = A transpose A"
+     },
+     {
+      "v": 48,
+      "t": 150,
+      "label": "x^T A^T A x = ||Ax||^2"
+     }
+    ],
+    "book": [
+     {
+      "printed": 396,
+      "pdf": 408,
+      "label": "Section 7.2: positive definite matrices and the SVD"
+     }
+    ]
+   },
+   "tutorNotes": "Video 48, first part. y'' + Sy = 0, y = e^(i omega t) x: Sx = omega^2 x, need lambda >= 0. Positive definite: symmetric, all lambda > 0; semidefinite: lambda >= 0. S = A^T A: x^T A^T A x = ||Ax||^2 >= 0 so lambda >= 0; independent columns give lambda > 0.",
+   "id": "s1",
+   "number": 1
+  },
+  {
+   "nav": "Five tests and the energy",
+   "v": 48,
+   "title": "Five equivalent tests, and the energy bowl $x^TSx$",
+   "summary": "For symmetric $S$ these are equivalent: all eigenvalues $> 0$; all pivots $> 0$; all upper-left determinants $> 0$; $S = A^TA$ with independent columns; energy $x^TSx > 0$ for every $x \\neq 0$. For $S = \\begin{bmatrix}4&6\\\\6&10\\end{bmatrix}$ the energy $4x_1^2 + 12x_1x_2 + 10x_2^2$ is a bowl with its minimum at the origin.",
+   "time": [
+    270,
+    1301
+   ],
+   "goals": [
+    "Apply all five tests to a $2\\times2$ matrix.",
+    "Write the energy $x^TSx$ as a quadratic.",
+    "Picture positive definite energy as a bowl.",
+    "Test a $3\\times3$ correlation matrix with determinants."
+   ],
+   "notes": [
+    {
+     "heading": "Five tests",
+     "paragraphs": [
+      "$S = \\begin{bmatrix}4 & 6\\\\ 6 & 10\\end{bmatrix}$. (1) Eigenvalues: trace $14$, determinant $4$, both roots positive. (2) Pivots: elimination subtracts $\\tfrac32$ of row 1 from row 2, leaving pivots $4$ and $10 - 9 = 1$. (3) Upper-left determinants: $4$ and $40 - 36 = 4$. (4) $S = A^TA$ for an $A$ with independent columns, for instance from elimination ($S = LDL^T$ gives $A = \\sqrt{D}L^T$). (5) Energy: $x^TSx > 0$ for $x \\neq 0$.",
+      "The tests agree for every symmetric matrix; use whichever is easiest. In practice the pivots (elimination) are the fastest."
+     ]
+    },
+    {
+     "heading": "Energy",
+     "paragraphs": [
+      "$x^TSx = 4x_1^2 + 12x_1x_2 + 10x_2^2$ (the off-diagonal $6$ appears twice). At $x = (1, 1)$: $4 + 12 + 10 = 26$; at $x = (1, -1)$: $4 - 12 + 10 = 2$. Completing the square, $4(x_1 + \\tfrac32x_2)^2 + x_2^2$: the pivots $4$ and $1$ appear as the coefficients, and both squares are positive.",
+      "The graph of the energy is a bowl opening upward with its minimum at $x = 0$; its level curves are ellipses whose axes are the eigenvectors. This is the second-derivative test for a minimum in two variables."
+     ]
+    },
+    {
+     "heading": "A 3 by 3 test",
+     "paragraphs": [
+      "A correlation matrix $\\begin{bmatrix}1 & a & b\\\\ a & 1 & c\\\\ b & c & 1\\end{bmatrix}$ is positive definite when its upper-left determinants are positive: $1 > 0$, $1 - a^2 > 0$, and $1 + 2abc - a^2 - b^2 - c^2 > 0$."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "Tests: $\\lambda > 0$; pivots $> 0$; leading determinants $> 0$; $S = A^TA$; $x^TSx > 0$.",
+    "$\\begin{bmatrix}4&6\\\\6&10\\end{bmatrix}$: pivots $4, 1$; determinants $4, 4$.",
+    "Energy $= 4(x_1 + \\tfrac32x_2)^2 + x_2^2$.",
+    "Positive definite energy: a bowl, elliptic level curves."
+   ],
+   "example": {
+    "title": "A matrix that fails (authored)",
+    "problem": "Is $S = \\begin{bmatrix}3 & 4\\\\ 4 & 5\\end{bmatrix}$ positive definite? Find an $x$ with negative energy.",
+    "steps": [
+     {
+      "text": "Upper-left determinants.",
+      "tex": "3 > 0,\\qquad 15 - 16 = -1 < 0"
+     },
+     {
+      "text": "Pivots: 3 and 5 - 16/3.",
+      "tex": "5 - \\tfrac{16}{3} = -\\tfrac13 < 0"
+     },
+     {
+      "text": "Energy at x = (4, -3).",
+      "tex": "3\\cdot16 - 2\\cdot4\\cdot12 + 5\\cdot9 = 48 - 96 + 45 = -3"
+     }
+    ],
+    "answer": "No: the determinant and the second pivot are negative, and $x = (4, -3)$ has energy $-3$. The energy surface is a saddle, not a bowl."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 48,
+      "t": 270,
+      "label": "Five tests on S = [4 6; 6 10]"
+     },
+     {
+      "v": 48,
+      "t": 390,
+      "label": "Eigenvalues positive"
+     },
+     {
+      "v": 48,
+      "t": 450,
+      "label": "Pivots 4 and 1"
+     },
+     {
+      "v": 48,
+      "t": 510,
+      "label": "Upper-left determinants 4 and 4"
+     },
+     {
+      "v": 48,
+      "t": 570,
+      "label": "S = A transpose A"
+     },
+     {
+      "v": 48,
+      "t": 660,
+      "label": "Energy x^T S x > 0"
+     },
+     {
+      "v": 48,
+      "t": 720,
+      "label": "4x1^2 + 12 x1 x2 + 10 x2^2"
+     },
+     {
+      "v": 48,
+      "t": 840,
+      "label": "x = (1, 1) gives 26"
+     },
+     {
+      "v": 48,
+      "t": 930,
+      "label": "The bowl and its minimum"
+     },
+     {
+      "v": 48,
+      "t": 1020,
+      "label": "Correlation matrix test"
+     }
+    ],
+    "book": [
+     {
+      "printed": 397,
+      "pdf": 409,
+      "label": "Tests for positive definite matrices"
+     },
+     {
+      "printed": 396,
+      "pdf": 408,
+      "label": "Energy x^T S x"
+     }
+    ]
+   },
+   "tutorNotes": "Video 48. Five equivalent tests for symmetric S: eigenvalues > 0, pivots > 0, upper-left determinants > 0, S = A^T A with independent columns, energy x^T S x > 0 for x != 0. S = [4 6; 6 10]: trace 14, det 4, pivots 4 and 1, determinants 4 and 4; energy 4x1^2 + 12x1x2 + 10x2^2 = 4(x1 + 1.5 x2)^2 + x2^2; x = (1,1) gives 26, (1,-1) gives 2. Bowl, elliptic level curves. Correlation matrix [1 a b; a 1 c; b c 1]: 1 - a^2 > 0, 1 + 2abc - a^2 - b^2 - c^2 > 0.",
+   "id": "s2",
+   "number": 2
+  },
+  {
+   "nav": "The SVD",
+   "v": 49,
+   "title": "The singular value decomposition $A = U\\Sigma V^T$",
+   "summary": "Every matrix, even rectangular, factors as $A = U\\Sigma V^T$: rotate or reflect ($V^T$), stretch ($\\Sigma$, the singular values $\\sigma_i \\ge 0$), rotate ($U$). The $v$'s are eigenvectors of $A^TA$, the $u$'s eigenvectors of $AA^T$, and $\\sigma_i^2$ are their eigenvalues. $A = \\sigma_1u_1v_1^T + \\sigma_2u_2v_2^T + \\cdots$, and the first piece carries the most information.",
+   "time": [
+    0,
+    851
+   ],
+   "goals": [
+    "Describe $A = U\\Sigma V^T$ as rotate (or reflect), stretch, rotate (or reflect).",
+    "Find $V$ and $\\sigma$ from $A^TA$, and $U$ from $Av_i = \\sigma_iu_i$.",
+    "Compute the SVD of a singular $2\\times2$ matrix.",
+    "Write $A$ as a sum of rank-one pieces and explain their use for data."
+   ],
+   "notes": [
+    {
+     "heading": "Rotate, stretch, rotate (or reflect)",
+     "paragraphs": [
+      "Eigenvectors need a square matrix and may fail to be orthogonal. The SVD works for every $m\\times n$ matrix with orthogonal matrices on both sides: $A = U\\Sigma V^T$ with $U$ ($m\\times m$) and $V$ ($n\\times n$) orthogonal and $\\Sigma$ ($m\\times n$) diagonal with $\\sigma_1 \\ge \\sigma_2 \\ge \\cdots \\ge 0$. Geometrically, $A$ turns the unit circle into an ellipse: $V^T$ turns the plane, $\\Sigma$ stretches along the axes, $U$ turns it again. Each orthogonal factor is a rotation or a reflection: for $A = \\mathrm{diag}(1, -1)$, which flips the plane, no pair of rotations can do it, and $U$ (or $V$) must be a reflection."
+     ]
+    },
+    {
+     "heading": "Where U, Sigma and V come from",
+     "paragraphs": [
+      "$A^TA = V\\Sigma^TU^TU\\Sigma V^T = V(\\Sigma^T\\Sigma)V^T$: this is the diagonalization of the symmetric semidefinite $A^TA$. So the $v$'s are its orthonormal eigenvectors and $\\sigma_i^2$ its eigenvalues. Likewise $AA^T = U(\\Sigma\\Sigma^T)U^T$ gives the $u$'s. In practice, find $v_i$ and $\\sigma_i$ from $A^TA$ and then $u_i = Av_i/\\sigma_i$ for $\\sigma_i > 0$."
+     ]
+    },
+    {
+     "heading": "The lecture's example",
+     "paragraphs": [
+      "$A = \\begin{bmatrix}2 & 2\\\\ 1 & 1\\end{bmatrix}$ is singular (rank $1$). $A^TA = \\begin{bmatrix}5 & 5\\\\ 5 & 5\\end{bmatrix}$ has eigenvalues $10$ and $0$, so $\\sigma_1 = \\sqrt{10}$, $\\sigma_2 = 0$, with $v_1 = (1, 1)/\\sqrt2$, $v_2 = (1, -1)/\\sqrt2$. Then $u_1 = Av_1/\\sigma_1 = (2, 1)/\\sqrt5$, and $u_2 = (-1, 2)/\\sqrt5$ completes an orthonormal basis.",
+      "Note: on the board the matrix is first written with a $-1$ and then corrected to make it singular; the lower-left entry of $U$ keeps the old sign there. For the singular $A$, $u_1 = (2, 1)/\\sqrt5$."
+     ]
+    },
+    {
+     "heading": "Rank-one pieces and data",
+     "paragraphs": [
+      "Multiplying out, $A = \\sigma_1u_1v_1^T + \\sigma_2u_2v_2^T + \\cdots$, a sum of rank-one matrices ordered by importance. For a data matrix (say, gene expressions: genes $\\times$ people), the first piece $\\sigma_1u_1v_1^T$ captures the strongest pattern linking a combination of genes to a combination of people. Keeping only the largest few pieces is principal component analysis."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$A = U\\Sigma V^T$: rotate or reflect, stretch, rotate or reflect.",
+    "$A^TA = V\\Sigma^T\\Sigma V^T$: $\\sigma_i^2$ are its eigenvalues.",
+    "$u_i = Av_i/\\sigma_i$.",
+    "$A = \\sum\\sigma_iu_iv_i^T$; $\\sigma_1u_1v_1^T$ is the most important piece."
+   ],
+   "example": {
+    "title": "SVD of an invertible matrix (authored)",
+    "problem": "Find the SVD of $A = \\begin{bmatrix}3 & 0\\\\ 4 & 5\\end{bmatrix}$.",
+    "steps": [
+     {
+      "text": "A^T A and its eigenvalues.",
+      "tex": "A^TA = \\begin{bmatrix}25 & 20\\\\ 20 & 25\\end{bmatrix}:\\ \\sigma_1^2 = 45,\\ \\sigma_2^2 = 5"
+     },
+     {
+      "text": "Right singular vectors.",
+      "tex": "v_1 = \\tfrac{1}{\\sqrt2}(1, 1),\\qquad v_2 = \\tfrac{1}{\\sqrt2}(1, -1)"
+     },
+     {
+      "text": "Left singular vectors u = Av / sigma.",
+      "tex": "u_1 = \\tfrac{1}{\\sqrt{10}}(1, 3),\\qquad u_2 = \\tfrac{1}{\\sqrt{10}}(3, -1)"
+     }
+    ],
+    "answer": "$\\sigma_1 = 3\\sqrt5$, $\\sigma_2 = \\sqrt5$; their product $15 = |\\det A|$."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 49,
+      "t": 0,
+      "label": "A = U Sigma V^T for any matrix"
+     },
+     {
+      "v": 49,
+      "t": 60,
+      "label": "Rotate, stretch, rotate"
+     },
+     {
+      "v": 49,
+      "t": 180,
+      "label": "A^T A = V Sigma^T Sigma V^T"
+     },
+     {
+      "v": 49,
+      "t": 300,
+      "label": "Sigma squared are eigenvalues of A^T A"
+     },
+     {
+      "v": 49,
+      "t": 330,
+      "label": "A A^T gives U"
+     },
+     {
+      "v": 49,
+      "t": 390,
+      "label": "Example [2 2; 1 1]"
+     },
+     {
+      "v": 49,
+      "t": 480,
+      "label": "Singular values sqrt 10 and 0"
+     },
+     {
+      "v": 49,
+      "t": 540,
+      "label": "Data matrices: genes and people"
+     },
+     {
+      "v": 49,
+      "t": 660,
+      "label": "The first rank-one piece"
+     }
+    ],
+    "book": [
+     {
+      "printed": 398,
+      "pdf": 410,
+      "label": "The singular value decomposition"
+     },
+     {
+      "printed": 399,
+      "pdf": 411,
+      "label": "Rank-one pieces and principal components"
+     }
+    ]
+   },
+   "tutorNotes": "Video 49. A = U Sigma V^T for any m x n A: U, V orthogonal, Sigma diagonal sigma1 >= sigma2 >= ... >= 0; rotate/reflect-stretch-rotate. A^T A = V Sigma^T Sigma V^T (v's, sigma^2), A A^T = U Sigma Sigma^T U^T (u's); u_i = A v_i / sigma_i. Example A = [2 2; 1 1] (singular; board first had a -1): sigma = sqrt10, 0; v1 = (1,1)/sqrt2, v2 = (1,-1)/sqrt2; u1 = (2,1)/sqrt5, u2 = (-1,2)/sqrt5. A = sum sigma_i u_i v_i^T; first piece most important (gene expression data, PCA).",
+   "id": "s3",
+   "number": 3
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q-why",
+   "question": "Why does $y'' + Sy = 0$ oscillate only when the eigenvalues of $S$ are $\\ge 0$?",
+   "choices": [
+    {
+     "text": "Because $y''$ is always positive.",
+     "why": "No. $y''$ changes sign as $y$ oscillates."
+    },
+    {
+     "text": "$Sx = \\omega^2x$, and a real frequency $\\omega$ needs $\\omega^2 \\ge 0$.",
+     "why": "Right. A negative eigenvalue gives exponential growth $e^{\\sqrt{-\\lambda}t}$.",
+     "correct": true
+    },
+    {
+     "text": "Because $S$ must be diagonal.",
+     "why": "No. Any symmetric $S$ works."
+    },
+    {
+     "text": "Because $\\det S$ must be $1$.",
+     "why": "No. Only the signs of the eigenvalues matter."
+    }
+   ]
+  },
+  {
+   "id": "q-ata",
+   "question": "Why are the eigenvalues of $A^TA$ never negative?",
+   "choices": [
+    {
+     "text": "Because $A^TA$ is diagonal.",
+     "why": "No. $A^TA$ is symmetric, not usually diagonal."
+    },
+    {
+     "text": "Because $A$ has positive entries.",
+     "why": "No. Entries of any sign give the same conclusion."
+    },
+    {
+     "text": "Because $\\det(A^TA) = 1$.",
+     "why": "No. Its determinant is $(\\det A)^2$ for square $A$, which can be anything $\\ge 0$."
+    },
+    {
+     "text": "$x^TA^TAx = \\|Ax\\|^2 \\ge 0$, and this equals $\\lambda\\|x\\|^2$ for an eigenvector.",
+     "why": "Right. A squared length cannot be negative.",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "id": "q-pivots",
+   "question": "What are the pivots of $\\begin{bmatrix}4 & 6\\\\ 6 & 10\\end{bmatrix}$?",
+   "choices": [
+    {
+     "text": "$4$ and $1$",
+     "why": "Right. $10 - \\tfrac{6}{4}\\cdot6 = 1$.",
+     "correct": true
+    },
+    {
+     "text": "$4$ and $10$",
+     "why": "No. Elimination changes the second diagonal entry."
+    },
+    {
+     "text": "$4$ and $4$",
+     "why": "No. $4$ and $4$ are the upper-left determinants."
+    },
+    {
+     "text": "$2$ and $12$",
+     "why": "No. Those are close to the eigenvalues ($7 \\pm 3\\sqrt5$), not pivots."
+    }
+   ]
+  },
+  {
+   "id": "q-energy",
+   "question": "For $S = \\begin{bmatrix}4 & 6\\\\ 6 & 10\\end{bmatrix}$, what is the energy at $x = (1, -1)$?",
+   "choices": [
+    {
+     "text": "$-2$",
+     "why": "No. Positive definite energy is never negative."
+    },
+    {
+     "text": "$14$",
+     "why": "No. The cross term $12x_1x_2$ is $-12$ here."
+    },
+    {
+     "text": "$2$",
+     "why": "Right. $4 - 12 + 10$.",
+     "correct": true
+    },
+    {
+     "text": "$26$",
+     "why": "No. That is at $x = (1, 1)$."
+    }
+   ]
+  },
+  {
+   "id": "q-fail",
+   "question": "Which symmetric matrix is NOT positive definite?",
+   "choices": [
+    {
+     "text": "$\\begin{bmatrix}4 & 6\\\\ 6 & 10\\end{bmatrix}$",
+     "why": "No. Pivots $4$ and $1$."
+    },
+    {
+     "text": "$\\begin{bmatrix}1 & 0\\\\ 0 & 5\\end{bmatrix}$",
+     "why": "No. A diagonal matrix with positive entries."
+    },
+    {
+     "text": "$\\begin{bmatrix}3 & 4\\\\ 4 & 5\\end{bmatrix}$",
+     "why": "Right. Its determinant is $15 - 16 = -1$.",
+     "correct": true
+    },
+    {
+     "text": "$\\begin{bmatrix}2 & 1\\\\ 1 & 2\\end{bmatrix}$",
+     "why": "No. Determinants $2$ and $3$, eigenvalues $1$ and $3$."
+    }
+   ]
+  },
+  {
+   "id": "q-bowl",
+   "question": "What does the graph of a positive definite energy $x^TSx$ look like?",
+   "choices": [
+    {
+     "text": "A bowl with its maximum at the origin",
+     "why": "No. That would be negative definite."
+    },
+    {
+     "text": "A bowl with its minimum at the origin, elliptic level curves",
+     "why": "Right. Positive in every direction away from $0$.",
+     "correct": true
+    },
+    {
+     "text": "A saddle",
+     "why": "No. A saddle has negative energy in some direction (indefinite $S$)."
+    },
+    {
+     "text": "A plane",
+     "why": "No. The energy is quadratic, not linear."
+    }
+   ]
+  },
+  {
+   "id": "q-svd",
+   "question": "Which describes $A = U\\Sigma V^T$?",
+   "choices": [
+    {
+     "text": "Stretch, rotate, stretch",
+     "why": "No. Only $\\Sigma$ stretches."
+    },
+    {
+     "text": "It exists only for square symmetric matrices.",
+     "why": "No. Every matrix, even rectangular, has an SVD."
+    },
+    {
+     "text": "$U = V$ always",
+     "why": "No. $U = V$ only when $A$ is symmetric positive semidefinite."
+    },
+    {
+     "text": "Rotate or reflect by $V^T$, stretch by $\\Sigma$, rotate or reflect by $U$",
+     "why": "Right. Orthogonal, diagonal, orthogonal; an orthogonal factor can be a reflection, as for $A = \\mathrm{diag}(1, -1)$.",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "id": "q-sigma",
+   "question": "Where do the singular values come from?",
+   "choices": [
+    {
+     "text": "$\\sigma_i^2$ are the eigenvalues of $A^TA$.",
+     "why": "Right. $A^TA = V\\Sigma^T\\Sigma V^T$.",
+     "correct": true
+    },
+    {
+     "text": "$\\sigma_i$ are the eigenvalues of $A$.",
+     "why": "No. For nonsymmetric $A$ they differ; $[2\\ 2;\\ 1\\ 1]$ has eigenvalues $3, 0$ but $\\sigma = \\sqrt{10}, 0$."
+    },
+    {
+     "text": "$\\sigma_i$ are the diagonal entries of $A$.",
+     "why": "No. They come from $A^TA$."
+    },
+    {
+     "text": "$\\sigma_i^2$ are the pivots of $A$.",
+     "why": "No. Pivots are a different factorization."
+    }
+   ]
+  },
+  {
+   "id": "q-example",
+   "question": "What are the singular values of $\\begin{bmatrix}2 & 2\\\\ 1 & 1\\end{bmatrix}$?",
+   "choices": [
+    {
+     "text": "$2$ and $1$",
+     "why": "No. Those are entries of $A$."
+    },
+    {
+     "text": "$\\sqrt{10}$ and $0$",
+     "why": "Right. $A^TA = \\begin{bmatrix}5&5\\\\5&5\\end{bmatrix}$ has eigenvalues $10$ and $0$.",
+     "correct": true
+    },
+    {
+     "text": "$3$ and $0$",
+     "why": "No. $3$ and $0$ are the eigenvalues of $A$."
+    },
+    {
+     "text": "$10$ and $0$",
+     "why": "No. Take square roots of the eigenvalues of $A^TA$."
+    }
+   ]
+  },
+  {
+   "id": "q-rank1",
+   "question": "In $A = \\sigma_1u_1v_1^T + \\sigma_2u_2v_2^T + \\cdots$, which piece matters most for a data matrix?",
+   "choices": [
+    {
+     "text": "All pieces matter equally.",
+     "why": "No. Their sizes are the singular values."
+    },
+    {
+     "text": "The piece with the largest entry of $u$",
+     "why": "No. Every $u_i$ is a unit vector; $\\sigma_i$ measures the size."
+    },
+    {
+     "text": "$\\sigma_1u_1v_1^T$, with the largest singular value",
+     "why": "Right. It captures the strongest pattern; keeping the top pieces is principal component analysis.",
+     "correct": true
+    },
+    {
+     "text": "The last piece",
+     "why": "No. It has the smallest $\\sigma$."
+    }
+   ]
+  }
+ ]
+}
