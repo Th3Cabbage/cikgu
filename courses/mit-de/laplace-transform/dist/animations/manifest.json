@@ -1,0 +1,462 @@
+{
+ "version": 1,
+ "width": 1280,
+ "height": 720,
+ "fps": 30,
+ "relations": {
+  "define": "Definition / choice",
+  "model": "Modelling step",
+  "classify": "Classification",
+  "diagram": "Picture",
+  "substitute": "Substitution",
+  "identity": "Identity (=)",
+  "equivalent": "Equivalent statement (⇔)",
+  "solve": "Solve",
+  "compute": "Computation",
+  "implies": "Consequence (⇒)",
+  "compare": "Check",
+  "caution": "Caveat",
+  "recap": "Recap"
+ },
+ "sections": {
+  "1": [
+   "transform-exp",
+   "derivative-rule",
+   "solve-first"
+  ],
+  "2": [
+   "cos-transform"
+  ],
+  "3": [
+   "convolution"
+  ]
+ },
+ "sequences": [
+  {
+   "id": "transform-exp",
+   "scene": "TransformExpSequence",
+   "section": 1,
+   "title": "The transform of $e^{at}$ has a pole at $s = a$",
+   "summary": "Combine the exponentials, integrate, and evaluate the limits; the exponent becomes the pole.",
+   "initial": {
+    "title": "Definition",
+    "tex": "F(s) = \\int_0^\\infty f(t)\\,e^{-st}\\,dt",
+    "explanation": "Weight $f$ by $e^{-st}$ and integrate over all $t \\ge 0$.",
+    "frame": "animations/transform-exp/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Put in $f = e^{at}$",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "\\int_0^\\infty e^{at}e^{-st}\\,dt = \\int_0^\\infty e^{(a - s)t}\\,dt",
+     "explanation": "Exponents add.",
+     "initialFrame": "animations/transform-exp/state-00.jpg",
+     "finalFrame": "animations/transform-exp/state-01.jpg",
+     "transition": {
+      "src": "animations/transform-exp/step-01.mp4",
+      "duration": 2.7667,
+      "frames": 83,
+      "masterFrames": [
+       8,
+       91
+      ],
+      "bytes": 95941,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Integrate and evaluate",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "\\left[\\frac{e^{(a-s)t}}{a - s}\\right]_0^\\infty = 0 - \\frac{1}{a - s} = \\frac{1}{s - a}",
+     "explanation": "For $s > a$ the upper limit vanishes.",
+     "initialFrame": "animations/transform-exp/state-01.jpg",
+     "finalFrame": "animations/transform-exp/state-02.jpg",
+     "transition": {
+      "src": "animations/transform-exp/step-02.mp4",
+      "duration": 3.1,
+      "frames": 93,
+      "masterFrames": [
+       90,
+       183
+      ],
+      "bytes": 95132,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "The pole",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "F(s) = \\frac{1}{s - a}\\ \\text{ is infinite at } s = a",
+     "explanation": "Exponent $a$ in time becomes a pole at $a$ in the $s$-plane.",
+     "initialFrame": "animations/transform-exp/state-02.jpg",
+     "finalFrame": "animations/transform-exp/state-03.jpg",
+     "transition": {
+      "src": "animations/transform-exp/step-03.mp4",
+      "duration": 1.9,
+      "frames": 57,
+      "masterFrames": [
+       182,
+       239
+      ],
+      "bytes": 55913,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 7.767,
+   "masterFrames": 239,
+   "renderSeconds": 6.9
+  },
+  {
+   "id": "derivative-rule",
+   "scene": "DerivativeRuleSequence",
+   "section": 1,
+   "title": "Integration by parts: $\\mathcal{L}[y'] = sY - y(0)$",
+   "summary": "Move the derivative from $y$ onto $e^{-st}$; the boundary term brings in $y(0)$.",
+   "initial": {
+    "title": "Transform of a derivative",
+    "tex": "\\mathcal{L}[y'] = \\int_0^\\infty y'\\,e^{-st}\\,dt",
+    "explanation": "We want it in terms of $Y(s)$.",
+    "frame": "animations/derivative-rule/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Integrate by parts",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "= \\Big[\\,y\\,e^{-st}\\Big]_0^\\infty - \\int_0^\\infty y\\,(-s)e^{-st}\\,dt",
+     "explanation": "$\\int u\\,dv = uv - \\int v\\,du$ with $u = e^{-st}$, $dv = y'dt$.",
+     "initialFrame": "animations/derivative-rule/state-00.jpg",
+     "finalFrame": "animations/derivative-rule/state-01.jpg",
+     "transition": {
+      "src": "animations/derivative-rule/step-01.mp4",
+      "duration": 2.3,
+      "frames": 69,
+      "masterFrames": [
+       8,
+       77
+      ],
+      "bytes": 101541,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Boundary term",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "\\Big[\\,y\\,e^{-st}\\Big]_0^\\infty = 0 - y(0)",
+     "explanation": "At infinity $e^{-st}$ wins (for large enough $s$); at $0$ it equals $1$.",
+     "initialFrame": "animations/derivative-rule/state-01.jpg",
+     "finalFrame": "animations/derivative-rule/state-02.jpg",
+     "transition": {
+      "src": "animations/derivative-rule/step-02.mp4",
+      "duration": 2.0667,
+      "frames": 62,
+      "masterFrames": [
+       76,
+       138
+      ],
+      "bytes": 74625,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "The rule",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "\\mathcal{L}[y'] = s\\,Y(s) - y(0)",
+     "explanation": "The remaining integral is $s$ times $Y(s)$. Derivatives become multiplication by $s$.",
+     "initialFrame": "animations/derivative-rule/state-02.jpg",
+     "finalFrame": "animations/derivative-rule/state-03.jpg",
+     "transition": {
+      "src": "animations/derivative-rule/step-03.mp4",
+      "duration": 2.6667,
+      "frames": 80,
+      "masterFrames": [
+       137,
+       217
+      ],
+      "bytes": 112006,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 7.033,
+   "masterFrames": 217,
+   "renderSeconds": 7.3
+  },
+  {
+   "id": "solve-first",
+   "scene": "SolveFirstSequence",
+   "section": 1,
+   "title": "Transform, solve, split, invert: $y' - ay = e^{ct}$",
+   "summary": "The differential equation becomes algebra; partial fractions turn each pole back into an exponential.",
+   "initial": {
+    "title": "The equation",
+    "tex": "y' - a\\,y = e^{ct}",
+    "explanation": "Constant rate $a$, exponential input.",
+    "frame": "animations/solve-first/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Transform",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "s\\,Y - y(0) - a\\,Y = \\frac{1}{s - c}",
+     "explanation": "Use the derivative rule and $\\mathcal{L}[e^{ct}] = 1/(s - c)$.",
+     "initialFrame": "animations/solve-first/state-00.jpg",
+     "finalFrame": "animations/solve-first/state-01.jpg",
+     "transition": {
+      "src": "animations/solve-first/step-01.mp4",
+      "duration": 2.1667,
+      "frames": 65,
+      "masterFrames": [
+       8,
+       73
+      ],
+      "bytes": 75825,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Solve for $Y$",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "Y = \\frac{y(0)}{s - a} + \\frac{1}{(s - a)(s - c)}",
+     "explanation": "Algebra only. Two poles: $a$ (null) and $c$ (input).",
+     "initialFrame": "animations/solve-first/state-01.jpg",
+     "finalFrame": "animations/solve-first/state-02.jpg",
+     "transition": {
+      "src": "animations/solve-first/step-02.mp4",
+      "duration": 1.5667,
+      "frames": 47,
+      "masterFrames": [
+       72,
+       119
+      ],
+      "bytes": 101628,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Partial fractions",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "\\frac{1}{(s - a)(s - c)} = \\frac{1}{c - a}\\left(\\frac{1}{s - c} - \\frac{1}{s - a}\\right)",
+     "explanation": "Combine the right side to check.",
+     "initialFrame": "animations/solve-first/state-02.jpg",
+     "finalFrame": "animations/solve-first/state-03.jpg",
+     "transition": {
+      "src": "animations/solve-first/step-03.mp4",
+      "duration": 2.2,
+      "frames": 66,
+      "masterFrames": [
+       118,
+       184
+      ],
+      "bytes": 70365,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 4,
+     "title": "Invert",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "y = y(0)\\,e^{at} + \\frac{e^{ct} - e^{at}}{c - a}",
+     "explanation": "Each $1/(s - p)$ is the transform of $e^{pt}$.",
+     "initialFrame": "animations/solve-first/state-03.jpg",
+     "finalFrame": "animations/solve-first/state-04.jpg",
+     "transition": {
+      "src": "animations/solve-first/step-04.mp4",
+      "duration": 2.2333,
+      "frames": 67,
+      "masterFrames": [
+       183,
+       250
+      ],
+      "bytes": 115326,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 8.167,
+   "masterFrames": 250,
+   "renderSeconds": 7.9
+  },
+  {
+   "id": "cos-transform",
+   "scene": "CosTransformSequence",
+   "section": 2,
+   "title": "$\\mathcal{L}[\\cos\\omega t]$ from $e^{i\\omega t}$",
+   "summary": "Multiply $1/(s - i\\omega)$ by its conjugate; the real part is the cosine transform, the imaginary part the sine.",
+   "initial": {
+    "title": "Complex exponential",
+    "tex": "\\mathcal{L}[e^{i\\omega t}] = \\frac{1}{s - i\\omega}",
+    "explanation": "The rule for $e^{at}$ with $a = i\\omega$.",
+    "frame": "animations/cos-transform/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Multiply by the conjugate",
+     "relation": "identity",
+     "relationLabel": "Identity (=)",
+     "tex": "\\frac{1}{s - i\\omega}\\cdot\\frac{s + i\\omega}{s + i\\omega} = \\frac{s + i\\omega}{s^2 + \\omega^2}",
+     "explanation": "$(s - i\\omega)(s + i\\omega) = s^2 + \\omega^2$ is real.",
+     "initialFrame": "animations/cos-transform/state-00.jpg",
+     "finalFrame": "animations/cos-transform/state-01.jpg",
+     "transition": {
+      "src": "animations/cos-transform/step-01.mp4",
+      "duration": 2.7333,
+      "frames": 82,
+      "masterFrames": [
+       8,
+       90
+      ],
+      "bytes": 48637,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Real and imaginary parts",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "\\mathcal{L}[\\cos\\omega t] = \\frac{s}{s^2 + \\omega^2},\\qquad \\mathcal{L}[\\sin\\omega t] = \\frac{\\omega}{s^2 + \\omega^2}",
+     "explanation": "$e^{i\\omega t} = \\cos\\omega t + i\\sin\\omega t$, and the transform is linear.",
+     "initialFrame": "animations/cos-transform/state-01.jpg",
+     "finalFrame": "animations/cos-transform/state-02.jpg",
+     "transition": {
+      "src": "animations/cos-transform/step-02.mp4",
+      "duration": 2.5667,
+      "frames": 77,
+      "masterFrames": [
+       89,
+       166
+      ],
+      "bytes": 102827,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Poles at $\\pm i\\omega$",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "s^2 + \\omega^2 = 0 \\;\\Rightarrow\\; s = \\pm i\\omega",
+     "explanation": "Oscillation in time means poles on the imaginary axis.",
+     "initialFrame": "animations/cos-transform/state-02.jpg",
+     "finalFrame": "animations/cos-transform/state-03.jpg",
+     "transition": {
+      "src": "animations/cos-transform/step-03.mp4",
+      "duration": 1.7333,
+      "frames": 52,
+      "masterFrames": [
+       165,
+       217
+      ],
+      "bytes": 40023,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 7.033,
+   "masterFrames": 217,
+   "renderSeconds": 7.8
+  },
+  {
+   "id": "convolution",
+   "scene": "ConvolutionSequence",
+   "section": 3,
+   "title": "Convolution reproduces the partial-fraction answer",
+   "summary": "For $G = 1/(s - a)$ and $F = 1/(s - c)$, $\\int_0^t e^{a(t-T)}e^{cT}dT$ equals the inverse of $GF$.",
+   "initial": {
+    "title": "Product of transforms",
+    "tex": "Y = G\\,F = \\frac{1}{s - a}\\cdot\\frac{1}{s - c}",
+    "explanation": "From rest: output transform = transfer function times input transform.",
+    "frame": "animations/convolution/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Convolution integral",
+     "relation": "define",
+     "relationLabel": "Definition / choice",
+     "tex": "y(t) = \\int_0^t g(t - T)\\,f(T)\\,dT = \\int_0^t e^{a(t - T)}\\,e^{cT}\\,dT",
+     "explanation": "Each input at time $T$ grows by $e^{a(t - T)}$.",
+     "initialFrame": "animations/convolution/state-00.jpg",
+     "finalFrame": "animations/convolution/state-01.jpg",
+     "transition": {
+      "src": "animations/convolution/step-01.mp4",
+      "duration": 2.1667,
+      "frames": 65,
+      "masterFrames": [
+       8,
+       73
+      ],
+      "bytes": 57083,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Pull out $e^{at}$",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "= e^{at}\\int_0^t e^{(c - a)T}\\,dT = e^{at}\\,\\frac{e^{(c - a)t} - 1}{c - a}",
+     "explanation": "One exponential integral.",
+     "initialFrame": "animations/convolution/state-01.jpg",
+     "finalFrame": "animations/convolution/state-02.jpg",
+     "transition": {
+      "src": "animations/convolution/step-02.mp4",
+      "duration": 2.6333,
+      "frames": 79,
+      "masterFrames": [
+       72,
+       151
+      ],
+      "bytes": 146942,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Same answer",
+     "relation": "compare",
+     "relationLabel": "Check",
+     "tex": "y = \\frac{e^{ct} - e^{at}}{c - a}",
+     "explanation": "Identical to the partial-fraction result with $y(0) = 0$.",
+     "initialFrame": "animations/convolution/state-02.jpg",
+     "finalFrame": "animations/convolution/state-03.jpg",
+     "transition": {
+      "src": "animations/convolution/step-03.mp4",
+      "duration": 2.2333,
+      "frames": 67,
+      "masterFrames": [
+       150,
+       217
+      ],
+      "bytes": 96044,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 7.033,
+   "masterFrames": 217,
+   "renderSeconds": 8.3
+  }
+ ]
+}

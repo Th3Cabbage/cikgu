@@ -40,7 +40,7 @@ retries. User chose the browser sign-in: `tools/prepare_unit.py ... --cookies-fr
 | 2 | nonlinear-first-order | 3/3, map in source-maps/unit-02.md | done (3 sections) | done: 3 findings fixed | done (6 sequences, 20 steps; explorer by package-builder) | done (2.6 MB) | math 519/519, check_study ok, browser 43/43 | at final review |
 | 3 | second-order | 6/6, map in source-maps/unit-03.md | done (6 sections) | done: 2 findings fixed | done (6 sequences, 19 steps) | done (2.4 MB) | math 405/405, check_study ok, browser 45/45 | at final review |
 | 4 | networks-and-methods | 4/4, map in source-maps/unit-04.md | done (4 sections) | done: 2 findings fixed | done (5 sequences, 15 steps) | done (2.0 MB) | math 967/967, check_study ok, browser 38/38 | at final review |
-| 5 | laplace-transform | | | | | | | |
+| 5 | laplace-transform | 3/3, map in source-maps/unit-05.md | done (3 sections) | done: 4 findings fixed | done (5 sequences, 16 steps) | done (2.2 MB) | math 571/571, check_study ok, browser 38/38 | at final review |
 | 6 | phase-plane | | | | | | | |
 | 7 | linear-algebra | 5/5, map in source-maps/unit-07.md | | | | | | |
 | 8 | eigenvalues-systems | | | | | | | |

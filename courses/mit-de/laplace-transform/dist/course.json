@@ -1,0 +1,835 @@
+{
+ "version": 1,
+ "title": "The Laplace Transform",
+ "subtitle": "Unit 5 of a study companion to MIT Learn Differential Equations (Gilbert Strang), videos 24-26, with Strang's Differential Equations and Linear Algebra, Sections 2.7 and 8.5-8.6",
+ "video": {
+  "id": "9RJml41PFnc",
+  "title": "MIT Learn Differential Equations, videos 24-26",
+  "duration": "49:38",
+  "url": "https://www.youtube.com/playlist?list=PLUl4u3cNGP63oTpyxCMLKt_JmB0WtSZfG"
+ },
+ "videos": [
+  {
+   "n": 24,
+   "id": "9RJml41PFnc",
+   "title": "Laplace Transform: First Order Equation",
+   "duration": "22:38",
+   "url": "https://www.youtube.com/watch?v=9RJml41PFnc"
+  },
+  {
+   "n": 25,
+   "id": "kcLc4FsshO4",
+   "title": "Laplace Transform: Second Order Equation",
+   "duration": "16:31",
+   "url": "https://www.youtube.com/watch?v=kcLc4FsshO4"
+  },
+  {
+   "n": 26,
+   "id": "WZMQdLW4COQ",
+   "title": "Laplace Transforms and Convolution",
+   "duration": "10:29",
+   "url": "https://www.youtube.com/watch?v=WZMQdLW4COQ"
+  }
+ ],
+ "book": {
+  "title": "Differential Equations and Linear Algebra",
+  "authors": "Gilbert Strang",
+  "short": "Strang, 2.7, 8.5-8.6",
+  "edition": "Wellesley-Cambridge Press, 2014 (Sections 2.7, 8.5-8.6)",
+  "onlineUrl": "",
+  "pageNote": "Page references give the printed page and the page of the local PDF (printed page + 12). The book is not freely available online, so only a local copy can be opened."
+ },
+ "attribution": "Course text, diagrams and animations here are original paraphrases and drawings made for this guide; examples marked authored are not from the lectures. They summarize MIT OpenCourseWare's Learn Differential Equations videos (Gilbert Strang, CC BY-NC-SA) and Strang's textbook; for the original wording, watch the videos and read the book. Captions, video and book text are not included in this guide.",
+ "explorer": {
+  "orders": [
+   {
+    "id": "first",
+    "label": "First order  y' − a y = f"
+   },
+   {
+    "id": "second",
+    "label": "Second order  y'' + B y' + C y = f"
+   }
+  ],
+  "defaultOrder": "second",
+  "inputs": [
+   {
+    "id": "none",
+    "label": "0"
+   },
+   {
+    "id": "delta",
+    "label": "δ(t)"
+   },
+   {
+    "id": "step",
+    "label": "1 (step)"
+   },
+   {
+    "id": "exp",
+    "label": "e^(ct)"
+   },
+   {
+    "id": "cos",
+    "label": "cos ωt"
+   },
+   {
+    "id": "sin",
+    "label": "sin ωt"
+   }
+  ],
+  "defaultInput": "cos",
+  "a": {
+   "min": -3,
+   "max": 2,
+   "step": 0.25,
+   "default": 2
+  },
+  "B": {
+   "min": 0,
+   "max": 5,
+   "step": 0.25,
+   "default": 1
+  },
+  "C": {
+   "min": 0.25,
+   "max": 9,
+   "step": 0.25,
+   "default": 2
+  },
+  "c": {
+   "min": -3,
+   "max": 2,
+   "step": 0.25,
+   "default": -1
+  },
+  "omega": {
+   "min": 0.25,
+   "max": 4,
+   "step": 0.25,
+   "default": 1
+  },
+  "y0": {
+   "min": -2,
+   "max": 2,
+   "step": 0.25,
+   "default": 0
+  },
+  "v0": {
+   "min": -2,
+   "max": 2,
+   "step": 0.25,
+   "default": 0
+  },
+  "tMax": 10,
+  "presets": [
+   {
+    "id": "first",
+    "label": "y' − 2y = e^(−t)",
+    "order": "first",
+    "a": 2,
+    "input": "exp",
+    "c": -1,
+    "y0": 1,
+    "note": "Section 1 example: poles $2$ and $-1$; $y = \\tfrac43e^{2t} - \\tfrac13e^{-t}$."
+   },
+   {
+    "id": "double",
+    "label": "Double pole",
+    "order": "first",
+    "a": -1,
+    "input": "exp",
+    "c": -1,
+    "y0": 0,
+    "note": "$c = a$: $Y = 1/(s+1)^2$ and $y = te^{-t}$."
+   },
+   {
+    "id": "impulse",
+    "label": "Impulse response",
+    "order": "second",
+    "B": 3,
+    "C": 2,
+    "input": "delta",
+    "y0": 0,
+    "v0": 0,
+    "note": "Section 2: $G = 1/((s+1)(s+2))$, $g = e^{-t} - e^{-2t}$."
+   },
+   {
+    "id": "step",
+    "label": "Step response",
+    "order": "second",
+    "B": 3,
+    "C": 2,
+    "input": "step",
+    "y0": 0,
+    "v0": 0,
+    "note": "Section 2 example: poles $0, -1, -2$."
+   },
+   {
+    "id": "cos",
+    "label": "Cosine input",
+    "order": "second",
+    "B": 1,
+    "C": 2,
+    "input": "cos",
+    "omega": 1,
+    "y0": 0,
+    "v0": 0,
+    "note": "Four poles: transients at $s_{1,2}$, steady oscillation at $\\pm i$."
+   },
+   {
+    "id": "res",
+    "label": "Undamped resonance",
+    "order": "second",
+    "B": 0,
+    "C": 1,
+    "input": "cos",
+    "omega": 1,
+    "y0": 0,
+    "v0": 0,
+    "note": "Double poles at $\\pm i$: the response $\\tfrac12 t\\sin t$ grows."
+   }
+  ],
+  "tutorContext": "The explorer builds Y(s) for y' - a y = f (first order) or y'' + B y' + C y = f (second order) with initial values y(0-) = y0, y'(0-) = v0 taken just before t = 0 (for the impulse input the delta adds 1 to y in the first order case, so y(0+) = y0 + 1, and adds 1 to y' in the second order case, so y'(0+) = v0 + 1) and f = 0, delta(t), 1, e^(ct), cos(omega t) or sin(omega t): Y = [F(s) + y0] / (s - a) or Y = [F(s) + (s + B) y0 + v0] / (s^2 + B s + C). It shows the poles of the reduced Y(s) in the complex s-plane (system poles and input poles, with multiplicities; a pole cancelled by the numerator is removed; poles closer than 1e-5 are merged into one repeated pole for a stable evaluation), the partial-fraction terms with their residues (higher coefficients for repeated poles), and plots y(t) = sum of residue * t^j e^(p t) / j! (real part) against a numerical solution for t in [0, 10]."
+ },
+ "sections": [
+  {
+   "nav": "First order by Laplace",
+   "v": 24,
+   "title": "The transform $F(s) = \\int_0^\\infty f(t)e^{-st}\\,dt$ and $y' - ay = f$",
+   "summary": "The Laplace transform turns $e^{at}$ into $1/(s - a)$ and the derivative $y'$ into $sY - y(0)$. A differential equation becomes algebra: transform, solve for $Y(s)$, split into partial fractions, and read each $1/(s - p)$ back as $e^{pt}$.",
+   "time": [
+    0,
+    1358
+   ],
+   "goals": [
+    "Compute the transform of $e^{at}$ and see its pole at $s = a$.",
+    "Derive $\\mathcal{L}[y'] = sY(s) - y(0)$ by integration by parts.",
+    "Solve $y' - ay = e^{ct}$ by transforming, solving and inverting.",
+    "Split $\\dfrac{1}{(s-a)(s-c)}$ into partial fractions."
+   ],
+   "notes": [
+    {
+     "heading": "The transform",
+     "paragraphs": [
+      "The Laplace transform takes a function of time $f(t)$, $t \\ge 0$, to a function of $s$: $F(s) = \\displaystyle\\int_0^\\infty f(t)\\,e^{-st}\\,dt$. Capital letters denote transforms: $y(t) \\to Y(s)$.",
+      "The key example is $f = e^{at}$: $\\displaystyle\\int_0^\\infty e^{(a - s)t}\\,dt = \\left[\\frac{e^{(a-s)t}}{a - s}\\right]_0^\\infty = \\frac{1}{s - a}$, valid for $s > a$ so that the upper limit gives zero. The transform has a pole at $s = a$: the exponent of the function becomes the location of the pole. With $a = 0$, $\\mathcal{L}[1] = 1/s$."
+     ]
+    },
+    {
+     "heading": "The derivative rule",
+     "paragraphs": [
+      "Integrate by parts: $\\displaystyle\\int_0^\\infty y'\\,e^{-st}\\,dt = \\Big[y\\,e^{-st}\\Big]_0^\\infty + s\\int_0^\\infty y\\,e^{-st}\\,dt = sY(s) - y(0).$ Differentiation in $t$ becomes multiplication by $s$, and the initial value enters automatically. Applied twice: $\\mathcal{L}[y''] = s^2Y - sy(0) - y'(0)$."
+     ]
+    },
+    {
+     "heading": "Transform, solve, invert",
+     "paragraphs": [
+      "For $y' - ay = 0$: $sY - y(0) - aY = 0$, so $Y = \\dfrac{y(0)}{s - a}$ and $y = y(0)e^{at}$.",
+      "For $y' - ay = e^{ct}$: $(s - a)Y - y(0) = \\dfrac{1}{s - c}$, so $Y = \\dfrac{y(0)}{s - a} + \\dfrac{1}{(s - a)(s - c)}$. Two poles, at $a$ and $c$: the null exponent and the input exponent."
+     ]
+    },
+    {
+     "heading": "Partial fractions",
+     "paragraphs": [
+      "To invert, split the product: $\\dfrac{1}{(s - a)(s - c)} = \\dfrac{1}{c - a}\\left(\\dfrac{1}{s - c} - \\dfrac{1}{s - a}\\right)$ (check by combining the right side). Each simple fraction inverts to an exponential:",
+      "$y(t) = y(0)e^{at} + \\dfrac{e^{ct} - e^{at}}{c - a},$ exactly the Unit 1 answer. If $c = a$ the two poles merge into a double pole $1/(s - a)^2$, whose inverse is $te^{at}$: resonance again."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$\\mathcal{L}[e^{at}] = \\dfrac{1}{s - a}$: exponent $\\to$ pole.",
+    "$\\mathcal{L}[y'] = sY - y(0)$.",
+    "Transform, solve for $Y$, partial fractions, invert.",
+    "$\\dfrac{1}{(s-a)(s-c)} = \\dfrac{1}{c-a}\\left(\\dfrac{1}{s-c} - \\dfrac{1}{s-a}\\right)$."
+   ],
+   "example": {
+    "title": "Two poles (authored)",
+    "problem": "Solve $y' - 2y = e^{-t}$, $y(0) = 1$, by the Laplace transform.",
+    "steps": [
+     {
+      "text": "Transform both sides.",
+      "tex": "(s - 2)Y - 1 = \\frac{1}{s + 1}"
+     },
+     {
+      "text": "Solve for Y and split the product (c = -1, a = 2).",
+      "tex": "Y = \\frac{1}{s - 2} + \\frac{1}{3}\\left(\\frac{1}{s - 2} - \\frac{1}{s + 1}\\right)"
+     },
+     {
+      "text": "Invert each fraction.",
+      "tex": "y = \\tfrac43 e^{2t} - \\tfrac13 e^{-t}"
+     }
+    ],
+    "answer": "$y = \\tfrac43e^{2t} - \\tfrac13e^{-t}$; check $y(0) = 1$ and $y' - 2y = e^{-t}$."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 24,
+      "t": 0,
+      "label": "Plan: f(t) to F(s), y(t) to Y(s)"
+     },
+     {
+      "v": 24,
+      "t": 30,
+      "label": "Definition: integral of f e^(-st)"
+     },
+     {
+      "v": 24,
+      "t": 90,
+      "label": "Transform of e^(at) is 1/(s - a)"
+     },
+     {
+      "v": 24,
+      "t": 240,
+      "label": "Pole at s = a"
+     },
+     {
+      "v": 24,
+      "t": 300,
+      "label": "Transform of the derivative"
+     },
+     {
+      "v": 24,
+      "t": 480,
+      "label": "Integration by parts: sY - y(0)"
+     },
+     {
+      "v": 24,
+      "t": 570,
+      "label": "Strategy: transform, solve, invert"
+     },
+     {
+      "v": 24,
+      "t": 630,
+      "label": "y' - ay = 0 gives Y = y(0)/(s - a)"
+     },
+     {
+      "v": 24,
+      "t": 810,
+      "label": "Input e^(ct): two poles"
+     },
+     {
+      "v": 24,
+      "t": 1050,
+      "label": "Partial fractions"
+     },
+     {
+      "v": 24,
+      "t": 1230,
+      "label": "Back to e^(ct) and e^(at)"
+     }
+    ],
+    "book": [
+     {
+      "printed": 139,
+      "pdf": 151,
+      "label": "Section 2.7: Laplace transforms Y(s) and F(s)"
+     },
+     {
+      "printed": 141,
+      "pdf": 153,
+      "label": "Table of transforms; transform of the derivative"
+     },
+     {
+      "printed": 143,
+      "pdf": 155,
+      "label": "Partial fractions"
+     }
+    ]
+   },
+   "tutorNotes": "Video 24. F(s) = integral_0^inf f(t) e^(-st) dt. L[e^(at)] = 1/(s - a) for s > a, pole at a. L[y'] = sY - y(0) by parts; L[y''] = s^2 Y - s y(0) - y'(0). y' - ay = e^(ct): Y = y(0)/(s - a) + 1/((s - a)(s - c)); partial fractions 1/((s-a)(s-c)) = (1/(c - a))(1/(s - c) - 1/(s - a)); y = y(0) e^(at) + (e^(ct) - e^(at))/(c - a). Double pole 1/(s-a)^2 -> t e^(at).",
+   "id": "s1",
+   "number": 1
+  },
+  {
+   "nav": "Second order by Laplace",
+   "v": 25,
+   "title": "Transfer function $G(s) = 1/(s^2 + Bs + C)$ and cosine inputs",
+   "summary": "For $y'' + By' + Cy = \\delta(t)$ from rest, $\\mathcal{L}[\\delta] = 1$ gives $(s^2 + Bs + C)G = 1$: the transfer function. Partial fractions return the impulse response $g = \\dfrac{e^{s_1t} - e^{s_2t}}{s_1 - s_2}$. A cosine input has $\\mathcal{L}[\\cos\\omega t] = \\dfrac{s}{s^2 + \\omega^2}$, adding poles at $\\pm i\\omega$.",
+   "time": [
+    0,
+    991
+   ],
+   "goals": [
+    "Use $\\mathcal{L}[\\delta] = 1$ to find the transfer function.",
+    "Invert $G(s)$ by partial fractions to get $g(t)$.",
+    "Find $\\mathcal{L}[\\cos\\omega t]$ and $\\mathcal{L}[\\sin\\omega t]$ from $e^{i\\omega t}$.",
+    "Predict the partial-fraction form for a cosine input and name each part."
+   ],
+   "notes": [
+    {
+     "heading": "The impulse and the transfer function",
+     "paragraphs": [
+      "The delta function at $t = 0$ has transform $\\displaystyle\\int_0^\\infty \\delta(t)e^{-st}\\,dt = e^0 = 1$. Initial values here mean values just before the impulse ($t = 0^-$); the impulse itself makes $g'$ jump from $0$ to $1$. With zero initial conditions the equation $g'' + Bg' + Cg = \\delta$ becomes $(s^2 + Bs + C)\\,G(s) = 1$, so $G(s) = \\dfrac{1}{s^2 + Bs + C}$.",
+      "This is the transfer function: it multiplies the input's transform to give the output's transform. Its poles $s_1, s_2$ are the roots of $s^2 + Bs + C$, the null exponents."
+     ]
+    },
+    {
+     "heading": "Back to the impulse response",
+     "paragraphs": [
+      "For distinct roots, $G = \\dfrac{1}{(s - s_1)(s - s_2)} = \\dfrac{1}{s_1 - s_2}\\left(\\dfrac{1}{s - s_1} - \\dfrac{1}{s - s_2}\\right)$, and inverting gives $g(t) = \\dfrac{e^{s_1t} - e^{s_2t}}{s_1 - s_2}$, the formula of Unit 3, found now by algebra."
+     ]
+    },
+    {
+     "heading": "Cosine and sine",
+     "paragraphs": [
+      "$\\cos\\omega t$ is the real part of $e^{i\\omega t}$, whose transform is $\\dfrac{1}{s - i\\omega}$. Multiply top and bottom by $s + i\\omega$: $\\dfrac{s + i\\omega}{s^2 + \\omega^2}$. The real and imaginary parts give $\\mathcal{L}[\\cos\\omega t] = \\dfrac{s}{s^2 + \\omega^2}$ and $\\mathcal{L}[\\sin\\omega t] = \\dfrac{\\omega}{s^2 + \\omega^2}$."
+     ]
+    },
+    {
+     "heading": "A cosine input",
+     "paragraphs": [
+      "From rest, $y'' + By' + Cy = \\cos\\omega t$ gives $Y = \\dfrac{s}{(s^2 + Bs + C)(s^2 + \\omega^2)}$: four poles. When the four poles are distinct, partial fractions have the shape $\\dfrac{A_1}{s - s_1} + \\dfrac{A_2}{s - s_2} + \\dfrac{Ms + N\\omega}{s^2 + \\omega^2}$. The first two terms are null solutions; with damping ($B > 0$) they decay, so they are transients. The last term is the steady oscillation $M\\cos\\omega t + N\\sin\\omega t$ of Unit 3. The lecture stops at the shape; the explorer computes the numbers.",
+      "Repeated poles change the shape. Critical damping ($s_1 = s_2$) gives a term $\\dfrac{A}{(s - s_1)^2}$, whose inverse is $te^{s_1t}$. Without damping and with $\\omega = \\omega_n$, the poles $\\pm i\\omega$ are double: $Y = \\dfrac{s}{(s^2 + \\omega^2)^2}$ inverts to $\\dfrac{t\\sin\\omega t}{2\\omega}$, which grows. That is resonance, not a steady oscillation, and with $B = 0$ nothing is transient."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "$\\mathcal{L}[\\delta] = 1$.",
+    "$G(s) = 1/(s^2 + Bs + C)$, poles $s_1, s_2$.",
+    "$\\mathcal{L}[\\cos\\omega t] = \\dfrac{s}{s^2+\\omega^2}$, $\\mathcal{L}[\\sin\\omega t] = \\dfrac{\\omega}{s^2+\\omega^2}$.",
+    "Cosine input: transient poles $s_1, s_2$ plus steady poles $\\pm i\\omega$."
+   ],
+   "example": {
+    "title": "A step input from rest (authored)",
+    "problem": "Solve $y'' + 3y' + 2y = 1$ for $t > 0$, $y(0) = y'(0) = 0$.",
+    "steps": [
+     {
+      "text": "L[1] = 1/s, and s^2 + 3s + 2 = (s + 1)(s + 2).",
+      "tex": "Y = \\frac{1}{s(s + 1)(s + 2)}"
+     },
+     {
+      "text": "Cover-up: the residue at each pole is the rest of the fraction evaluated there.",
+      "tex": "Y = \\frac{1/2}{s} - \\frac{1}{s + 1} + \\frac{1/2}{s + 2}"
+     },
+     {
+      "text": "Invert term by term.",
+      "tex": "y = \\tfrac12 - e^{-t} + \\tfrac12e^{-2t}"
+     }
+    ],
+    "answer": "$y = \\tfrac12 - e^{-t} + \\tfrac12e^{-2t}$, the step response of Unit 3."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 25,
+      "t": 0,
+      "label": "y'' + By' + Cy = delta, zero initial conditions"
+     },
+     {
+      "v": 25,
+      "t": 30,
+      "label": "Transform of delta is 1"
+     },
+     {
+      "v": 25,
+      "t": 90,
+      "label": "(s^2 + Bs + C) G = 1"
+     },
+     {
+      "v": 25,
+      "t": 150,
+      "label": "G(s) is the transfer function"
+     },
+     {
+      "v": 25,
+      "t": 210,
+      "label": "Partial fractions give g(t)"
+     },
+     {
+      "v": 25,
+      "t": 390,
+      "label": "Cosine input: real part of e^(i omega t)"
+     },
+     {
+      "v": 25,
+      "t": 600,
+      "label": "Multiply by s + i omega"
+     },
+     {
+      "v": 25,
+      "t": 660,
+      "label": "Transforms of cos and sin"
+     },
+     {
+      "v": 25,
+      "t": 720,
+      "label": "Y for the cosine input"
+     },
+     {
+      "v": 25,
+      "t": 870,
+      "label": "Form of the partial fractions"
+     }
+    ],
+    "book": [
+     {
+      "printed": 141,
+      "pdf": 153,
+      "label": "Transforms of delta, cos and sin"
+     },
+     {
+      "printed": 144,
+      "pdf": 156,
+      "label": "Second order equations and the transfer function"
+     }
+    ]
+   },
+   "tutorNotes": "Video 25. L[delta] = 1. g'' + B g' + C g = delta from rest: (s^2 + Bs + C) G = 1, G = transfer function. G = 1/((s - s1)(s - s2)) = (1/(s1 - s2))(1/(s - s1) - 1/(s - s2)), g = (e^(s1 t) - e^(s2 t))/(s1 - s2). L[cos wt] = s/(s^2 + w^2), L[sin wt] = w/(s^2 + w^2) from 1/(s - iw) = (s + iw)/(s^2 + w^2). Cosine input from rest: Y = s/((s^2 + Bs + C)(s^2 + w^2)) = A1/(s - s1) + A2/(s - s2) + (Ms + Nw)/(s^2 + w^2) when the four poles are distinct; the s1, s2 terms are transients only when B > 0. Repeated poles: critical damping gives t e^(s1 t); B = 0 with w = w_n gives double poles at +-iw and t sin(wt)/(2w) (resonance).",
+   "id": "s2",
+   "number": 2
+  },
+  {
+   "nav": "Convolution",
+   "v": 26,
+   "title": "Products of transforms are convolutions: $Y = GF \\Leftrightarrow y = g * f$",
+   "summary": "With zero initial conditions $Y(s) = G(s)F(s)$. Multiplying transforms corresponds to convolving functions: $y(t) = (g * f)(t) = \\int_0^t g(t - T)\\,f(T)\\,dT$, the formula found by variation of parameters in Unit 4.",
+   "time": [
+    0,
+    629
+   ],
+   "goals": [
+    "Write the output transform as $G(s)F(s)$.",
+    "Define the convolution $g * f$ and read it as superposed impulse responses.",
+    "Check the rule on $y' - ay = e^{ct}$."
+   ],
+   "notes": [
+    {
+     "heading": "Multiply transforms",
+     "paragraphs": [
+      "From rest, $y'' + By' + Cy = f(t)$ transforms to $(s^2 + Bs + C)Y = F$, so $Y(s) = G(s)\\,F(s)$. The question is what function has the transform $G\\cdot F$. It is not $g(t)f(t)$."
+     ]
+    },
+    {
+     "heading": "The convolution rule",
+     "paragraphs": [
+      "The answer is the convolution $(g * f)(t) = \\displaystyle\\int_0^t g(t - T)\\,f(T)\\,dT$. Each input $f(T)\\,dT$ at time $T$ starts an impulse response that has run for time $t - T$; adding them gives $y$. The book proves the rule by exchanging the order of the two integrals; the lecture states it."
+     ]
+    },
+    {
+     "heading": "A check",
+     "paragraphs": [
+      "For $y' - ay = e^{ct}$ from rest: $G = 1/(s - a)$ so $g = e^{at}$, and $F = 1/(s - c)$. The convolution is $\\displaystyle\\int_0^t e^{a(t - T)}e^{cT}\\,dT = e^{at}\\int_0^t e^{(c - a)T}\\,dT = \\frac{e^{ct} - e^{at}}{c - a}$, which agrees with partial fractions in Section 1."
+     ]
+    }
+   ],
+   "keyIdeas": [
+    "From rest: $Y = G(s)F(s)$.",
+    "$(g * f)(t) = \\int_0^t g(t - T)f(T)\\,dT$.",
+    "$\\mathcal{L}[g * f] = G\\cdot F$, not $\\mathcal{L}[gf]$.",
+    "$e^{at} * e^{ct} = \\dfrac{e^{ct} - e^{at}}{c - a}$."
+   ],
+   "example": {
+    "title": "Convolving a step with a sine (authored)",
+    "problem": "Compute $1 * \\sin t$ directly and check it with transforms.",
+    "steps": [
+     {
+      "text": "Direct integral (g = 1, f = sin).",
+      "tex": "\\int_0^t 1\\cdot\\sin T\\,dT = 1 - \\cos t"
+     },
+     {
+      "text": "Product of transforms.",
+      "tex": "\\frac{1}{s}\\cdot\\frac{1}{s^2 + 1}"
+     },
+     {
+      "text": "Partial fractions of the product.",
+      "tex": "\\frac{1}{s(s^2 + 1)} = \\frac{1}{s} - \\frac{s}{s^2 + 1} = \\mathcal{L}[1 - \\cos t]"
+     }
+    ],
+    "answer": "$1 * \\sin t = 1 - \\cos t$, and its transform is $\\dfrac{1}{s}\\cdot\\dfrac{1}{s^2+1}$."
+   },
+   "sources": {
+    "video": [
+     {
+      "v": 26,
+      "t": 0,
+      "label": "Y = G(s) F(s)"
+     },
+     {
+      "v": 26,
+      "t": 60,
+      "label": "What function has transform G times F?"
+     },
+     {
+      "v": 26,
+      "t": 150,
+      "label": "Convolution integral"
+     },
+     {
+      "v": 26,
+      "t": 270,
+      "label": "Multiply transforms, convolve functions"
+     },
+     {
+      "v": 26,
+      "t": 330,
+      "label": "Proof is in the book"
+     },
+     {
+      "v": 26,
+      "t": 360,
+      "label": "Example: y' - ay = e^(ct)"
+     },
+     {
+      "v": 26,
+      "t": 480,
+      "label": "Same answer as partial fractions"
+     }
+    ],
+    "book": [
+     {
+      "printed": 141,
+      "pdf": 153,
+      "label": "Convolution in Section 2.7"
+     },
+     {
+      "printed": 476,
+      "pdf": 488,
+      "label": "Section 8.5: the convolution rule"
+     },
+     {
+      "printed": 479,
+      "pdf": 491,
+      "label": "Section 8.6: convolution, Fourier and Laplace"
+     }
+    ]
+   },
+   "tutorNotes": "Video 26. From rest Y = G F. y = g * f = integral_0^t g(t - T) f(T) dT. L[g * f] = G F. Example y' - ay = e^(ct): g = e^(at), f = e^(ct), convolution = (e^(ct) - e^(at))/(c - a).",
+   "id": "s3",
+   "number": 3
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q-exp",
+   "question": "What is $\\mathcal{L}[e^{-3t}]$?",
+   "choices": [
+    {
+     "text": "$e^{-3s}$",
+     "why": "No. $e^{-sT}$ is the transform of a delayed delta, not of an exponential."
+    },
+    {
+     "text": "$\\dfrac{1}{s + 3}$",
+     "why": "Right. $\\mathcal{L}[e^{at}] = 1/(s - a)$ with $a = -3$.",
+     "correct": true
+    },
+    {
+     "text": "$\\dfrac{1}{s - 3}$",
+     "why": "No. That is the transform of $e^{3t}$."
+    },
+    {
+     "text": "$\\dfrac{-3}{s}$",
+     "why": "No. The exponent becomes the pole location."
+    }
+   ]
+  },
+  {
+   "id": "q-deriv",
+   "question": "What is the transform of $y'$?",
+   "choices": [
+    {
+     "text": "$sY(s)$",
+     "why": "No. The initial value appears from the boundary term."
+    },
+    {
+     "text": "$Y(s)/s$",
+     "why": "No. Dividing by $s$ corresponds to integrating."
+    },
+    {
+     "text": "$Y'(s)$",
+     "why": "No. $-Y'(s)$ is the transform of $t\\,y(t)$."
+    },
+    {
+     "text": "$sY(s) - y(0)$",
+     "why": "Right. Integration by parts gives the boundary term $-y(0)$.",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "id": "q-pole",
+   "question": "A transform $Y(s)$ has poles at $s = -1$ and $s = 2$ (both simple). Which functions appear in $y(t)$?",
+   "choices": [
+    {
+     "text": "$e^{-t}$ and $e^{2t}$",
+     "why": "Right. Each simple pole $p$ contributes a multiple of $e^{pt}$.",
+     "correct": true
+    },
+    {
+     "text": "$e^{t}$ and $e^{-2t}$",
+     "why": "No. The signs do not flip: the pole is the exponent."
+    },
+    {
+     "text": "$\\sin t$ and $\\sin 2t$",
+     "why": "No. Sines come from imaginary poles $\\pm i\\omega$."
+    },
+    {
+     "text": "$t$ and $t^2$",
+     "why": "No. Powers of $t$ come from a pole at $0$ of higher order."
+    }
+   ]
+  },
+  {
+   "id": "q-pf",
+   "question": "Which split is correct?",
+   "choices": [
+    {
+     "text": "$\\dfrac{1}{(s-a)(s-c)} = \\dfrac{1}{s-a}\\cdot\\dfrac{1}{s-c}$, already split",
+     "why": "No. A product is not a sum; the inverse of a product is a convolution."
+    },
+    {
+     "text": "$\\dfrac{1}{(s-a)(s-c)} = \\dfrac{1}{a-c}\\left(\\dfrac{1}{s-c} - \\dfrac{1}{s-a}\\right)$",
+     "why": "No. The sign of the factor is reversed."
+    },
+    {
+     "text": "$\\dfrac{1}{(s-a)(s-c)} = \\dfrac{1}{c-a}\\left(\\dfrac{1}{s-c} - \\dfrac{1}{s-a}\\right)$",
+     "why": "Right. Combining the right side gives $\\dfrac{(s - a) - (s - c)}{(c - a)(s-a)(s-c)} = \\dfrac{1}{(s-a)(s-c)}$.",
+     "correct": true
+    },
+    {
+     "text": "$\\dfrac{1}{(s-a)(s-c)} = \\dfrac{1}{s-a} + \\dfrac{1}{s-c}$",
+     "why": "No. Combining gives $\\dfrac{2s - a - c}{(s-a)(s-c)}$."
+    }
+   ]
+  },
+  {
+   "id": "q-delta",
+   "question": "What is $\\mathcal{L}[\\delta(t)]$?",
+   "choices": [
+    {
+     "text": "$1/s$",
+     "why": "No. That is the transform of the step function, the integral of delta."
+    },
+    {
+     "text": "$s$",
+     "why": "No. Multiplying by $s$ would mean differentiating the step a second time."
+    },
+    {
+     "text": "$1$",
+     "why": "Right. The integral picks out $e^{-s\\cdot 0} = 1$.",
+     "correct": true
+    },
+    {
+     "text": "$0$",
+     "why": "No. The delta has total integral $1$."
+    }
+   ]
+  },
+  {
+   "id": "q-transfer",
+   "question": "For $y'' + 4y' + 3y$ from rest, what is the transfer function?",
+   "choices": [
+    {
+     "text": "$\\dfrac{s}{s^2 + 4s + 3}$",
+     "why": "No. There is no $s$ on top for a delta input from rest."
+    },
+    {
+     "text": "$\\dfrac{1}{(s + 1)(s + 3)}$",
+     "why": "Right. $s^2 + 4s + 3 = (s + 1)(s + 3)$.",
+     "correct": true
+    },
+    {
+     "text": "$(s + 1)(s + 3)$",
+     "why": "No. The transfer function is the reciprocal: $Y = GF$."
+    },
+    {
+     "text": "$\\dfrac{1}{(s - 1)(s - 3)}$",
+     "why": "No. The roots of $s^2 + 4s + 3$ are $-1$ and $-3$."
+    }
+   ]
+  },
+  {
+   "id": "q-cos",
+   "question": "What is $\\mathcal{L}[\\cos 2t]$?",
+   "choices": [
+    {
+     "text": "$\\dfrac{2}{s^2 + 4}$",
+     "why": "No. That is $\\mathcal{L}[\\sin 2t]$."
+    },
+    {
+     "text": "$\\dfrac{1}{s - 2i}$",
+     "why": "No. That is $\\mathcal{L}[e^{2it}]$; take the real part."
+    },
+    {
+     "text": "$\\dfrac{s}{s^2 - 4}$",
+     "why": "No. That is $\\mathcal{L}[\\cosh 2t]$."
+    },
+    {
+     "text": "$\\dfrac{s}{s^2 + 4}$",
+     "why": "Right. $s/(s^2 + \\omega^2)$ with $\\omega = 2$.",
+     "correct": true
+    }
+   ]
+  },
+  {
+   "id": "q-transient",
+   "question": "For a cosine input $\\cos\\omega t$ into a damped system from rest, which poles of $Y$ give the steady oscillation?",
+   "choices": [
+    {
+     "text": "$\\pm i\\omega$",
+     "why": "Right. They come from $s^2 + \\omega^2$, the input's transform.",
+     "correct": true
+    },
+    {
+     "text": "$s_1$ and $s_2$",
+     "why": "No. Those are the system's poles; with damping their terms decay (transients)."
+    },
+    {
+     "text": "$s = 0$",
+     "why": "No. A pole at $0$ would give a constant."
+    },
+    {
+     "text": "There are no poles for an oscillation.",
+     "why": "No. Imaginary poles give oscillations."
+    }
+   ]
+  },
+  {
+   "id": "q-conv",
+   "question": "From rest, $Y(s) = G(s)F(s)$. What is $y(t)$?",
+   "choices": [
+    {
+     "text": "$\\int_0^\\infty g(T)f(T)\\,dT$",
+     "why": "No. That is a single number, not a function of $t$."
+    },
+    {
+     "text": "$\\int_0^t g(t - T)\\,f(T)\\,dT$",
+     "why": "Right. A product of transforms is the transform of a convolution.",
+     "correct": true
+    },
+    {
+     "text": "$g(t)\\,f(t)$",
+     "why": "No. Products of functions do not correspond to products of transforms."
+    },
+    {
+     "text": "$g(t) + f(t)$",
+     "why": "No. Sums correspond to sums, not products."
+    }
+   ]
+  },
+  {
+   "id": "q-conv-ex",
+   "question": "What is $e^{at} * e^{ct}$ for $a \\neq c$?",
+   "choices": [
+    {
+     "text": "$\\dfrac{e^{ct} + e^{at}}{c + a}$",
+     "why": "No. Check $t = 0$: a convolution from $0$ to $0$ is zero."
+    },
+    {
+     "text": "$te^{at}$",
+     "why": "No. That is the case $c = a$, the double pole."
+    },
+    {
+     "text": "$\\dfrac{e^{ct} - e^{at}}{c - a}$",
+     "why": "Right. $e^{at}\\int_0^t e^{(c-a)T}dT$; also the inverse of $\\dfrac{1}{(s-a)(s-c)}$.",
+     "correct": true
+    },
+    {
+     "text": "$e^{(a + c)t}$",
+     "why": "No. That would be the product $e^{at}e^{ct}$."
+    }
+   ]
+  }
+ ]
+}

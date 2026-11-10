@@ -105,6 +105,14 @@
      "description": "RLC loops and complex impedance, undetermined coefficients with resonance, and variation of parameters leading to the impulse-response integral.",
      "storeKey": "networks-and-methods-v1",
      "statusApp": "Study_networks_and_methods"
+    },
+    {
+     "slug": "laplace-transform",
+     "source": "courses/mit-de/laplace-transform/dist",
+     "title": "Unit 5: The Laplace Transform and Convolution",
+     "description": "Transforms of exponentials and derivatives, partial fractions, the transfer function and poles, and convolution.",
+     "storeKey": "laplace-transform-v1",
+     "statusApp": "Study_laplace_transform"
     }
    ]
   }
