@@ -1,0 +1,529 @@
+{
+ "version": 1,
+ "width": 1280,
+ "height": 720,
+ "fps": 30,
+ "relations": {
+  "define": "Definition / choice",
+  "model": "Modelling step",
+  "classify": "Classification",
+  "diagram": "Picture",
+  "substitute": "Substitution",
+  "identity": "Identity (=)",
+  "equivalent": "Equivalent statement (⇔)",
+  "solve": "Solve",
+  "compute": "Computation",
+  "implies": "Consequence (⇒)",
+  "compare": "Check",
+  "caution": "Caveat",
+  "recap": "Recap"
+ },
+ "sections": {
+  "1": [
+   "direction-field"
+  ],
+  "2": [
+   "source-sink-saddle"
+  ],
+  "3": [
+   "spiral-center"
+  ],
+  "4": [
+   "trace-determinant"
+  ],
+  "5": [
+   "jacobian-predprey"
+  ],
+  "6": [
+   "tumbling-box"
+  ]
+ },
+ "sequences": [
+  {
+   "id": "direction-field",
+   "scene": "DirectionFieldSequence",
+   "section": 1,
+   "title": "Arrows first, then solutions: $y' = 2 - y$",
+   "summary": "Rows of arrows with slopes $2, 1, 0, -2$; solutions follow them to the steady line $y = 2$.",
+   "initial": {
+    "title": "The equation",
+    "tex": "\\frac{dy}{dt} = 2 - y",
+    "explanation": "The slope depends only on the height $y$.",
+    "frame": "animations/direction-field/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Arrows along rows",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "y = 0:\\ 2,\\quad y = 1:\\ 1,\\quad y = 2:\\ 0,\\quad y = 4:\\ -2",
+     "explanation": "Each arrow has slope $2 - y$.",
+     "initialFrame": "animations/direction-field/state-00.jpg",
+     "finalFrame": "animations/direction-field/state-01.jpg",
+     "transition": {
+      "src": "animations/direction-field/step-01.mp4",
+      "duration": 2.5333,
+      "frames": 76,
+      "masterFrames": [
+       8,
+       84
+      ],
+      "bytes": 82261,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "The steady line",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "y = 2:\\ \\ y' = 0",
+     "explanation": "Flat arrows: a constant solution.",
+     "initialFrame": "animations/direction-field/state-01.jpg",
+     "finalFrame": "animations/direction-field/state-02.jpg",
+     "transition": {
+      "src": "animations/direction-field/step-02.mp4",
+      "duration": 1.2333,
+      "frames": 37,
+      "masterFrames": [
+       83,
+       120
+      ],
+      "bytes": 43491,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Solutions follow the arrows",
+     "relation": "solve",
+     "relationLabel": "Solve",
+     "tex": "y = 2 + C e^{-t}",
+     "explanation": "From above and below, every solution approaches $2$.",
+     "initialFrame": "animations/direction-field/state-02.jpg",
+     "finalFrame": "animations/direction-field/state-03.jpg",
+     "transition": {
+      "src": "animations/direction-field/step-03.mp4",
+      "duration": 2.7,
+      "frames": 81,
+      "masterFrames": [
+       119,
+       200
+      ],
+      "bytes": 68364,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 6.467,
+   "masterFrames": 200,
+   "renderSeconds": 7.9
+  },
+  {
+   "id": "source-sink-saddle",
+   "scene": "SourceSinkSaddleSequence",
+   "section": 2,
+   "title": "Straight-line solutions in the $(y, y')$ plane",
+   "summary": "Real roots give lines $y' = sy$; their signs make a source, a sink or a saddle.",
+   "initial": {
+    "title": "Phase plane",
+    "tex": "y'' - 3y' + 2y = 0,\\qquad s = 1,\\ 2",
+    "explanation": "Axes $y$ and $y'$; time is hidden.",
+    "frame": "animations/source-sink-saddle/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Two lines",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "y = c_1e^{t}:\\ y' = y,\\qquad y = c_2e^{2t}:\\ y' = 2y",
+     "explanation": "A pure exponential keeps $y'/y = s$ fixed.",
+     "initialFrame": "animations/source-sink-saddle/state-00.jpg",
+     "finalFrame": "animations/source-sink-saddle/state-01.jpg",
+     "transition": {
+      "src": "animations/source-sink-saddle/step-01.mp4",
+      "duration": 2.0333,
+      "frames": 61,
+      "masterFrames": [
+       8,
+       69
+      ],
+      "bytes": 31321,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "A source",
+     "relation": "classify",
+     "relationLabel": "Classification",
+     "tex": "y = e^{t} + e^{2t}:\\ (2, 3) \\text{ at } t = 0",
+     "explanation": "Leaves the origin along slope $1$, turns to slope $2$: everything moves out.",
+     "initialFrame": "animations/source-sink-saddle/state-01.jpg",
+     "finalFrame": "animations/source-sink-saddle/state-02.jpg",
+     "transition": {
+      "src": "animations/source-sink-saddle/step-02.mp4",
+      "duration": 3.1667,
+      "frames": 95,
+      "masterFrames": [
+       68,
+       163
+      ],
+      "bytes": 66186,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "A saddle: $y'' = 4y$",
+     "relation": "classify",
+     "relationLabel": "Classification",
+     "tex": "s = \\pm 2:\\ \\text{in along } y' = -2y,\\ \\text{out along } y' = 2y",
+     "explanation": "Opposite signs: trajectories come in, then leave. Unstable.",
+     "initialFrame": "animations/source-sink-saddle/state-02.jpg",
+     "finalFrame": "animations/source-sink-saddle/state-03.jpg",
+     "transition": {
+      "src": "animations/source-sink-saddle/step-03.mp4",
+      "duration": 3.6,
+      "frames": 108,
+      "masterFrames": [
+       162,
+       270
+      ],
+      "bytes": 90545,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 8.8,
+   "masterFrames": 270,
+   "renderSeconds": 9.7
+  },
+  {
+   "id": "spiral-center",
+   "scene": "SpiralCenterSequence",
+   "section": 3,
+   "title": "Complex roots: ellipse, then spirals",
+   "summary": "Pure imaginary roots close the curve; a real part makes it spiral in or out.",
+   "initial": {
+    "title": "No damping",
+    "tex": "y'' + 4y = 0,\\qquad s = \\pm 2i",
+    "explanation": "$y = \\cos 2t$, $y' = -2\\sin 2t$.",
+    "frame": "animations/spiral-center/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "A center",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "y^2 + \\left(\\frac{y'}{2}\\right)^2 = 1",
+     "explanation": "The point goes round an ellipse twice as tall as wide.",
+     "initialFrame": "animations/spiral-center/state-00.jpg",
+     "finalFrame": "animations/spiral-center/state-01.jpg",
+     "transition": {
+      "src": "animations/spiral-center/step-01.mp4",
+      "duration": 3.2333,
+      "frames": 97,
+      "masterFrames": [
+       8,
+       105
+      ],
+      "bytes": 34951,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Damping: a spiral sink",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "y'' + 2y' + 2y = 0,\\quad s = -1 \\pm i",
+     "explanation": "Rotation times $e^{-t}$: the curve winds into the origin.",
+     "initialFrame": "animations/spiral-center/state-01.jpg",
+     "finalFrame": "animations/spiral-center/state-02.jpg",
+     "transition": {
+      "src": "animations/spiral-center/step-02.mp4",
+      "duration": 3.9,
+      "frames": 117,
+      "masterFrames": [
+       104,
+       221
+      ],
+      "bytes": 57214,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Six pictures",
+     "relation": "classify",
+     "relationLabel": "Classification",
+     "tex": "\\text{source, sink, saddle, spiral source, spiral sink, center}",
+     "explanation": "Real roots give the first three, complex roots the last three.",
+     "initialFrame": "animations/spiral-center/state-02.jpg",
+     "finalFrame": "animations/spiral-center/state-03.jpg",
+     "transition": {
+      "src": "animations/spiral-center/step-03.mp4",
+      "duration": 1.5,
+      "frames": 45,
+      "masterFrames": [
+       220,
+       265
+      ],
+      "bytes": 61654,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 8.633,
+   "masterFrames": 265,
+   "renderSeconds": 9.4
+  },
+  {
+   "id": "trace-determinant",
+   "scene": "TraceDeterminantSequence",
+   "section": 4,
+   "title": "Stability from the trace and the determinant",
+   "summary": "$\\lambda^2 - T\\lambda + D = 0$ places every $2\\times2$ matrix in the $(T, D)$ plane.",
+   "initial": {
+    "title": "A 2 by 2 system",
+    "tex": "\\mathbf{z}' = A\\mathbf{z},\\qquad A = \\begin{bmatrix}a & b\\\\ c & d\\end{bmatrix}",
+    "explanation": "Try $\\mathbf{z} = e^{\\lambda t}\\mathbf{x}$.",
+    "frame": "animations/trace-determinant/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Characteristic equation",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "\\det(A - \\lambda I) = \\lambda^2 - (a + d)\\lambda + (ad - bc) = 0",
+     "explanation": "Sum of eigenvalues $T = a + d$; product $D = ad - bc$.",
+     "initialFrame": "animations/trace-determinant/state-00.jpg",
+     "finalFrame": "animations/trace-determinant/state-01.jpg",
+     "transition": {
+      "src": "animations/trace-determinant/step-01.mp4",
+      "duration": 2.1333,
+      "frames": 64,
+      "masterFrames": [
+       8,
+       72
+      ],
+      "bytes": 81837,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "The $(T, D)$ plane",
+     "relation": "diagram",
+     "relationLabel": "Picture",
+     "tex": "D < 0:\\ \\text{saddle};\\quad T^2 < 4D:\\ \\text{spiral};\\quad T^2 > 4D > 0:\\ \\text{node}",
+     "explanation": "The parabola $T^2 = 4D$ separates real from complex eigenvalues.",
+     "initialFrame": "animations/trace-determinant/state-01.jpg",
+     "finalFrame": "animations/trace-determinant/state-02.jpg",
+     "transition": {
+      "src": "animations/trace-determinant/step-02.mp4",
+      "duration": 2.6,
+      "frames": 78,
+      "masterFrames": [
+       71,
+       149
+      ],
+      "bytes": 50277,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "The stable quarter",
+     "relation": "implies",
+     "relationLabel": "Consequence (⇒)",
+     "tex": "\\text{stable} \\;\\Leftrightarrow\\; T < 0 \\text{ and } D > 0",
+     "explanation": "Example $\\begin{bmatrix}1 & 2\\\\ -3 & -4\\end{bmatrix}$: $T = -3$, $D = 2$, a sink.",
+     "initialFrame": "animations/trace-determinant/state-02.jpg",
+     "finalFrame": "animations/trace-determinant/state-03.jpg",
+     "transition": {
+      "src": "animations/trace-determinant/step-03.mp4",
+      "duration": 2.2,
+      "frames": 66,
+      "masterFrames": [
+       148,
+       214
+      ],
+      "bytes": 76744,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 6.933,
+   "masterFrames": 214,
+   "renderSeconds": 8.3
+  },
+  {
+   "id": "jacobian-predprey",
+   "scene": "JacobianPredPreySequence",
+   "section": 5,
+   "title": "Linearizing predator-prey with the Jacobian",
+   "summary": "Partial derivatives, then the matrix at each critical point.",
+   "initial": {
+    "title": "Rabbits and foxes",
+    "tex": "y' = y - yz,\\qquad z' = yz - z",
+    "explanation": "Critical points: $(0, 0)$ and $(1, 1)$.",
+    "frame": "animations/jacobian-predprey/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Partial derivatives",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "J = \\begin{bmatrix}1 - z & -y\\\\ z & y - 1\\end{bmatrix}",
+     "explanation": "Row 1 differentiates $f = y - yz$, row 2 $g = yz - z$.",
+     "initialFrame": "animations/jacobian-predprey/state-00.jpg",
+     "finalFrame": "animations/jacobian-predprey/state-01.jpg",
+     "transition": {
+      "src": "animations/jacobian-predprey/step-01.mp4",
+      "duration": 2.6,
+      "frames": 78,
+      "masterFrames": [
+       8,
+       86
+      ],
+      "bytes": 61756,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "At $(0, 0)$",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "J = \\begin{bmatrix}1 & 0\\\\ 0 & -1\\end{bmatrix}:\\ \\lambda = 1, -1\\ \\ \\text{(saddle)}",
+     "explanation": "Rabbits alone grow, foxes alone die.",
+     "initialFrame": "animations/jacobian-predprey/state-01.jpg",
+     "finalFrame": "animations/jacobian-predprey/state-02.jpg",
+     "transition": {
+      "src": "animations/jacobian-predprey/step-02.mp4",
+      "duration": 2.0,
+      "frames": 60,
+      "masterFrames": [
+       85,
+       145
+      ],
+      "bytes": 64067,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "At $(1, 1)$",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "J = \\begin{bmatrix}0 & -1\\\\ 1 & 0\\end{bmatrix}:\\ \\lambda = \\pm i\\ \\ \\text{(center)}",
+     "explanation": "The populations cycle around $(1, 1)$.",
+     "initialFrame": "animations/jacobian-predprey/state-02.jpg",
+     "finalFrame": "animations/jacobian-predprey/state-03.jpg",
+     "transition": {
+      "src": "animations/jacobian-predprey/step-03.mp4",
+      "duration": 2.1333,
+      "frames": 64,
+      "masterFrames": [
+       144,
+       208
+      ],
+      "bytes": 91152,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 6.733,
+   "masterFrames": 208,
+   "renderSeconds": 7.5
+  },
+  {
+   "id": "tumbling-box",
+   "scene": "TumblingBoxSequence",
+   "section": 6,
+   "title": "The tumbling box: a sphere and a saddle",
+   "summary": "Multiply and add to find the sphere; the Jacobian at the middle axis has eigenvalues $0, \\pm1$.",
+   "initial": {
+    "title": "Euler's equations (simplest form)",
+    "tex": "x' = yz,\\quad y' = -2xz,\\quad z' = xy",
+    "explanation": "Spins about the short, middle and long axes.",
+    "frame": "animations/tumbling-box/state-00.jpg"
+   },
+   "steps": [
+    {
+     "index": 1,
+     "title": "Conserved length",
+     "relation": "compute",
+     "relationLabel": "Computation",
+     "tex": "xx' + yy' + zz' = xyz - 2xyz + xyz = 0",
+     "explanation": "So $x^2 + y^2 + z^2$ is constant: motion on a sphere.",
+     "initialFrame": "animations/tumbling-box/state-00.jpg",
+     "finalFrame": "animations/tumbling-box/state-01.jpg",
+     "transition": {
+      "src": "animations/tumbling-box/step-01.mp4",
+      "duration": 2.9,
+      "frames": 87,
+      "masterFrames": [
+       8,
+       95
+      ],
+      "bytes": 104272,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 2,
+     "title": "Jacobian at $(1, 0, 0)$",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "\\lambda = 0,\\ \\pm i\\sqrt2\\quad\\text{(steady spin)}",
+     "explanation": "Imaginary eigenvalues: a center.",
+     "initialFrame": "animations/tumbling-box/state-01.jpg",
+     "finalFrame": "animations/tumbling-box/state-02.jpg",
+     "transition": {
+      "src": "animations/tumbling-box/step-02.mp4",
+      "duration": 1.8,
+      "frames": 54,
+      "masterFrames": [
+       94,
+       148
+      ],
+      "bytes": 61613,
+      "codec": "h264"
+     }
+    },
+    {
+     "index": 3,
+     "title": "Jacobian at $(0, 1, 0)$",
+     "relation": "substitute",
+     "relationLabel": "Substitution",
+     "tex": "J = \\begin{bmatrix}0 & 0 & 1\\\\ 0 & 0 & 0\\\\ 1 & 0 & 0\\end{bmatrix}:\\ \\lambda = 0,\\ 1,\\ -1",
+     "explanation": "A saddle: the middle-axis spin tumbles.",
+     "initialFrame": "animations/tumbling-box/state-02.jpg",
+     "finalFrame": "animations/tumbling-box/state-03.jpg",
+     "transition": {
+      "src": "animations/tumbling-box/step-03.mp4",
+      "duration": 1.9667,
+      "frames": 59,
+      "masterFrames": [
+       147,
+       206
+      ],
+      "bytes": 59925,
+      "codec": "h264"
+     }
+    }
+   ],
+   "totalDuration": 6.667,
+   "masterFrames": 206,
+   "renderSeconds": 7.5
+  }
+ ]
+}

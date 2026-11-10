@@ -113,6 +113,14 @@
      "description": "Transforms of exponentials and derivatives, partial fractions, the transfer function and poles, and convolution.",
      "storeKey": "laplace-transform-v1",
      "statusApp": "Study_laplace_transform"
+    },
+    {
+     "slug": "phase-plane",
+     "source": "courses/mit-de/phase-plane/dist",
+     "title": "Unit 6: Phase Plane, Linearization and Stability",
+     "description": "Direction fields, sources, sinks, saddles, spirals and centers, trace-determinant stability, linearization with the Jacobian, and the tumbling box.",
+     "storeKey": "phase-plane-v1",
+     "statusApp": "Study_phase_plane"
     }
    ]
   }
